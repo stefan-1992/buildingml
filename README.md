@@ -1,11 +1,84 @@
-# BuildingML
+<h1 align="center">BuildingML</h1>
 
-A domain-specific language (DSL) for describing Building Information Models (BIM) in a markdown-inspired format. BuildingML bridges LLM-generated text and IFC (Industry Foundation Classes) building standards.
-**Status**: V0.1 complete (Phases 1–5), V0.2 nearly complete (~90%, Phases 7a–7j), V0.3 planning started (Phases 8a–8g: refactoring, LLM features, spec-to-check generation, regulation libraries). Features: tree-sitter grammar, parser, semantic analysis, IFC codegen (all 15 element types with proper geometry, property sets, pitched roofs, curved walls, polygon holes), CLI (compile, lint, check, decompile, analyze, lsp, preview, scene, model, render, serve), WASM bindings, LSP server with VS Code extension (3D/2D/IFC preview with shared renderer, IFC export command), compliance checking engine, 3D scene graph generator, React web app with WebGL viewer and interactive 2D floorplan editor (hierarchical element tree, bi-directional BML<->2D sync, CodeMirror 6 code editor with syntax highlighting, unified undo/redo), 3D element selection (click-to-pick with raycasting/color-buffer picking, highlight shader, metadata properties panel, TransformControls gizmo), SVG rendering, section cut feature, DataProvider adapter pattern, floor templates, elevator type, auto-ID generation, space zones, furniture asset system with geometry primitives, IFC import coverage analysis, chatbot integration with LLM-powered building design assistant, IFC export & preview via web-ifc WASM parser, and responsive mobile design (phone/tablet/desktop breakpoints, bottom sheet panels, bottom navigation, long-press context menu, touch gestures).
+<p align="center">
+  A markdown-inspired language for building information models that compiles to IFC4.<br>
+  Written to be read and edited by people and LLM agents alike.
+</p>
+
+<p align="center">
+  <a href="https://github.com/stefan-1992/buildingml/actions/workflows/ci.yml"><img src="https://github.com/stefan-1992/buildingml/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
+  <a href="https://doi.org/10.1201/9781042025374-6"><img src="https://img.shields.io/badge/paper-10.1201%2F9781042025374--6-informational.svg" alt="Paper DOI"></a>
+</p>
+
+<p align="center">
+  <img src="docs/images/campus_fluid.png" alt="Forum Nord university building, fluid LOD 350 version, rendered from BuildingML" width="900">
+</p>
+
+BuildingML describes a building as plain text files: heading levels map to the IFC spatial hierarchy (site, building, storey, space), elements are `Type: ID` blocks with indented properties, and compliance rules live next to the model as `Check:` blocks. A Rust compiler turns it into IFC4, a 3D scene or a compliance report, and decompiles IFC back to BuildingML.
+
+- **Compiler and CLI**: tree-sitter grammar, semantic analysis, IFC4 writer, IFC decompiler with mesh fitting, linter, compliance checker (JSON/HTML/SARIF), SVG floorplans
+- **Editors**: LSP server with a VS Code extension (diagnostics, completion, hover, 3D/2D preview, IFC export) and a React web app with a 3D viewer, a 2D floorplan editor, a code editor and an LLM chat panel
+- **Element types**: walls (straight, curved, curtain walls), slabs, roofs, stairs, ramps, railings, doors, windows, columns, beams, members, plates, coverings, footings, furniture assets and building services (ducts, pipes, cable trays, terminals, equipment)
+
+## Example buildings
+
+### Forum Nord university building
+
+A fictitious 5-level university building with a mensa, a fan-shaped Audimax, lecture and seminar rooms, office floors, a library pavilion and a roof with an atrium skylight. It exists in four levels of detail, each a multi-file project in `tests/fixtures/` with the compiled `.ifc` next to it:
+
+| Project | Content |
+|---------|---------|
+| [`university_campus_fluid_project/`](tests/fixtures/university_campus_fluid_project/) | LOD 350 with plan curves (`smooth` points): wave curtain wall, flowing slab edges, pebble-shaped atrium, oval Audimax (image above) |
+| [`university_campus_lod350_project/`](tests/fixtures/university_campus_lod350_project/) | LOD 300 plus routed services: ventilation, sprinkler, heating, water, waste water, power and lighting, with generated openings, sleeves and hangers |
+| [`university_campus_lod300_project/`](tests/fixtures/university_campus_lod300_project/) | Layered build-ups, curtain wall grids, u-shaped stairs, suspended ceilings, footings |
+| [`university_campus_project/`](tests/fixtures/university_campus_project/) | Base massing model with spaces, walls, slabs, windows and doors |
+
+<p align="center">
+  <img src="docs/images/campus_lod350.png" alt="LOD 350 version cut above level 1" width="49%">
+  <img src="docs/images/campus_lod300.png" alt="LOD 300 version from the north-east" width="49%">
+</p>
+<p align="center"><em>Left: LOD 350, cut above the first floor. Right: LOD 300 from the north-east.</em></p>
+
+### Six-storey residential building
+
+[`six_storey_residential.bml`](tests/fixtures/six_storey_residential.bml) is the earlier reference model and covers every v0.2 feature: floor templates with variable substitution, auto-IDs, an elevator, zones and balconies. [`six_storey_residential_project/`](tests/fixtures/six_storey_residential_project/) is the same building split into storey, check and asset files.
+
+<p align="center">
+  <img src="docs/images/six_storey_residential.png" alt="Six-storey residential building" width="600">
+</p>
+
+### LLM-generated buildings (Text2BIM prompts)
+
+[`eval/`](eval/) holds the BuildingML models an LLM generated for the ten natural-language prompts of Text2BIM (Du et al., 2026, [doi:10.1061/JCCEE5.CPENG-6386](https://doi.org/10.1061/JCCEE5.CPENG-6386)), produced with [`eval/chat_run.ts`](eval/chat_run.ts), which sends each prompt with the web app's chat context to Claude through the `claude` CLI. Three of them are discussed in the paper below.
+
+<p align="center">
+  <img src="docs/images/text2bim_evals.png" alt="Ten LLM-generated buildings for the Text2BIM prompts">
+</p>
+
+## Paper
+
+BuildingML is the case study of:
+
+> S. Fuchs, Y. Li, C. Du and A. Borrmann (2026). An Agent Harness with Integrated Compliance Checking for Generative Design. In J. Fauth et al. (Eds.), *Digital Building Permitting* (pp. 62-75). CRC Press. [doi:10.1201/9781042025374-6](https://doi.org/10.1201/9781042025374-6)
+
+```bibtex
+@incollection{fuchs2026agentharness,
+  author    = {Fuchs, S. and Li, Y. and Du, C. and Borrmann, A.},
+  title     = {An Agent Harness with Integrated Compliance Checking for Generative Design},
+  booktitle = {Digital Building Permitting},
+  editor    = {Fauth, Judith and Fuchs, Stefan and Amor, Robert and Kim, Yonghan and Fischer, Simon and Wu, Jiabin and Tekavec, Jernej and Weinkauf, Ronny and Noardo, Francesca},
+  publisher = {CRC Press},
+  address   = {London},
+  year      = {2026},
+  pages     = {62--75},
+  doi       = {10.1201/9781042025374-6}
+}
+```
 
 ## Why BuildingML?
 
-IFC files are notoriously verbose and complex (STEP format, deeply nested entity graphs). A simple wall can be hundreds of lines in IFC. In BuildingML, it's 5 lines. This makes it feasible for LLMs to generate building descriptions, and for humans to read and edit them — while still producing standards-compliant IFC output for industry tools.
+IFC files are notoriously verbose and complex (STEP format, deeply nested entity graphs). A simple wall can be hundreds of lines in IFC. In BuildingML, it's 5 lines. This makes it feasible for LLMs to generate building descriptions, and for humans to read and edit them - while still producing standards-compliant IFC output for industry tools.
 
 ## How It Works
 
@@ -110,13 +183,13 @@ Point lists take plan curves (`Specs_V0_3.md` §28): a `smooth` point puts a cub
   file    viewer    report
 ```
 
-The **IR (SemanticModel) is the single source of truth** — IFC generation, 3D visualization, and compliance checking all consume the same resolved model. Write once, get three outputs.
+The **IR (SemanticModel) is the single source of truth** - IFC generation, 3D visualization, and compliance checking all consume the same resolved model. Write once, get three outputs.
 
 ## Prerequisites
 
-- **Rust** (stable toolchain) — install via [rustup](https://rustup.rs/)
-- **C compiler** — required for the tree-sitter C parser (included with Xcode CLT on macOS, `build-essential` on Ubuntu)
-- **wasi-sdk** — only needed if building the WASM target (not required for native builds)
+- **Rust** (stable toolchain) - install via [rustup](https://rustup.rs/)
+- **C compiler** - required for the tree-sitter C parser (included with Xcode CLT on macOS, `build-essential` on Ubuntu)
+- **wasi-sdk** - only needed if building the WASM target (not required for native builds)
 
 ## Getting Started
 
@@ -208,11 +281,11 @@ The VS Code extension provides full language support: syntax highlighting, diagn
    npm run compile
    ```
 
-   If Review Pannnel needs updatting, run `cargo install --path crates/bml-cli` and then restart the vscode. shift + comd + p and select "Developer: Reload Window"
+   If the preview panel needs updating, run `cargo install --path crates/bml-cli` again and reload VS Code (`Cmd+Shift+P` → "Developer: Reload Window").
 
-3. **Install in VS Code** — choose one:
+3. **Install in VS Code** - choose one:
 
-   - **Symlink** (recommended for development — picks up recompiles automatically):
+   - **Symlink** (recommended for development - picks up recompiles automatically):
      ```bash
      ln -s "$(pwd)/editors/vscode" ~/.vscode/extensions/buildingml
      ```
@@ -239,8 +312,8 @@ Find your path with `which buildingml`.
 | Completions | Type `#` (headings), `Wall:` (elements), or property names |
 | Hover docs | Hover over any type, property, or unit |
 | Go-to-definition | `Cmd+Click` on material, element, or storey references |
-| Diagnostics | Automatic on save — syntax and semantic errors |
-| Formatting | `Shift+Alt+F` — normalizes indentation |
+| Diagnostics | Automatic on save - syntax and semantic errors |
+| Formatting | `Shift+Alt+F` - normalizes indentation |
 | Code actions | Quick fixes for missing properties, unresolved materials |
 | 3D/2D/IFC Preview | Preview button in editor title bar, or `Cmd+Shift+P` → "BuildingML: Open 3D Preview". Toggle 3D/2D/IFC in the preview. IFC mode renders the compiled IFC file via `web-ifc` for independent verification. 2D view auto-follows cursor to show the storey you're editing. |
 | Element inspector | Click any element in the 3D preview to see its surface material (with colour swatch), identity (IFC type, name, GlobalId) and its IFC property sets and quantities, grouped by set |
@@ -255,7 +328,7 @@ Find your path with `which buildingml`.
 | Section cuts | `Plan` (horizontal) and `Section` (vertical) sliders in the 3D view, both off by default so the full model is always visible on open. A cut you set is remembered as a proportion of the model, so it stays where you put it when you switch to a building of a different size |
 | IFC preview | Preview also works on a raw `.ifc` file, read by the native `buildingml ifc-scene` reader |
 | Hide / isolate | `Hide` and `Isolate` on the inspector; `Filter` in the toolbar toggles whole IFC categories or storeys on and off, with a `Show all` reset |
-| Export to IFC | `Cmd+Shift+P` → "BuildingML: Export to IFC" — compiles BML to IFC and saves to a file |
+| Export to IFC | `Cmd+Shift+P` → "BuildingML: Export to IFC" - compiles BML to IFC and saves to a file |
 | Document outline | Spatial hierarchy in the sidebar |
 
 ## Project Structure
@@ -294,32 +367,32 @@ prototypes/
 
 ### Crate Details
 
-**`tree-sitter-buildingml`** — A [tree-sitter](https://tree-sitter.github.io/) grammar (`grammar.js`) with a custom C external scanner (`scanner.c`) for indentation handling. Provides incremental parsing and error recovery.
+**`tree-sitter-buildingml`** - A [tree-sitter](https://tree-sitter.github.io/) grammar (`grammar.js`) with a custom C external scanner (`scanner.c`) for indentation handling. Provides incremental parsing and error recovery.
 
-**`bml-core`** — The core library with several stages:
-- `parser/` — Converts tree-sitter CST to typed Rust AST structs (`Site`, `Building`, `Wall`, etc.)
-- `semantic/` — Type checking, reference resolution, spatial containment validation → produces `SemanticModel` IR
-- `codegen/` — IR → IFC4 STEP file via an own STEP writer (maps elements to IFC entities, properties to property sets, geometry to extruded solids)
-- `checker/` — Compliance checking engine for first-class `Check:` blocks (building codes, fire safety, accessibility rules) with JSON/HTML/SARIF reports
-- `scene/` — 3D scene graph generator (triangle meshes with box/polygon extrusion, per-face normals, material colours shared with the IFC preview)
-- `render/` — SVG rendering: 2D floorplans with architectural conventions, 3D orthographic projections, section clipping
-- `decompile/` — IFC → BuildingML reverse compiler; `mesh_fit.rs` fits walls, beams, columns or prisms to each element's mesh so the recompiled IFC matches the original
+**`bml-core`** - The core library with several stages:
+- `parser/` - Converts tree-sitter CST to typed Rust AST structs (`Site`, `Building`, `Wall`, etc.)
+- `semantic/` - Type checking, reference resolution, spatial containment validation → produces `SemanticModel` IR
+- `codegen/` - IR → IFC4 STEP file via an own STEP writer (maps elements to IFC entities, properties to property sets, geometry to extruded solids)
+- `checker/` - Compliance checking engine for first-class `Check:` blocks (building codes, fire safety, accessibility rules) with JSON/HTML/SARIF reports
+- `scene/` - 3D scene graph generator (triangle meshes with box/polygon extrusion, per-face normals, material colours shared with the IFC preview)
+- `render/` - SVG rendering: 2D floorplans with architectural conventions, 3D orthographic projections, section clipping
+- `decompile/` - IFC → BuildingML reverse compiler; `mesh_fit.rs` fits walls, beams, columns or prisms to each element's mesh so the recompiled IFC matches the original
 
-**`bml-lsp`** — Full LSP server: diagnostics, completion, hover, go-to-definition, references, document symbols, semantic tokens, formatting, code actions, and live 3D preview via VS Code webview panel.
+**`bml-lsp`** - Full LSP server: diagnostics, completion, hover, go-to-definition, references, document symbols, semantic tokens, formatting, code actions, and live 3D preview via VS Code webview panel.
 
-**`bml-wasm`** — Compiles the full compiler to WebAssembly for browser use. Powers the web playground where you can write BML and see 3D output with no server.
+**`bml-wasm`** - Compiles the full compiler to WebAssembly for browser use. Powers the web playground where you can write BML and see 3D output with no server.
 
 ## Preview Server
 
 The `preview` command starts a local server with two modes:
 
 **React app** (with `--web-dir web/dist`):
-- **Unified app** (`http://localhost:8080/`) — React web app with 3D viewer, 2D floorplan editor, and code editor. Switch between views via toolbar. Section cut slider, wireframe toggle, undo/redo.
-- **Example selector** — Add `--examples-dir tests/fixtures/` to serve a dropdown of `.bml` example files. The hosted version loads `six_storey_residential.bml` by default.
+- **Unified app** (`http://localhost:8080/`) - React web app with 3D viewer, 2D floorplan editor, and code editor. Switch between views via toolbar. Section cut slider, wireframe toggle, undo/redo.
+- **Example selector** - Add `--examples-dir tests/fixtures/` to serve a dropdown of `.bml` example files. The hosted version loads `six_storey_residential.bml` by default.
 
 **Legacy mode** (without `--web-dir`):
-- **3D Viewer** (`http://localhost:8080/`) — WebGL renderer with orbit camera, wireframe mode, and live editing.
-- **Floorplan Editor** (`http://localhost:8080/floorplan`) — Interactive 2D editor for drawing walls, placing doors/windows/columns/slabs.
+- **3D Viewer** (`http://localhost:8080/`) - WebGL renderer with orbit camera, wireframe mode, and live editing.
+- **Floorplan Editor** (`http://localhost:8080/floorplan`) - Interactive 2D editor for drawing walls, placing doors/windows/columns/slabs.
 
 Legacy routes are always available at `/legacy/viewer` and `/legacy/floorplan`.
 
@@ -345,7 +418,7 @@ Legacy routes are always available at `/legacy/viewer` and `/legacy/floorplan`.
 
 ## SVG Rendering
 
-The `render` command generates SVG files — architectural floorplans and 3D orthographic views — without a browser or GPU.
+The `render` command generates SVG files - architectural floorplans and 3D orthographic views - without a browser or GPU.
 
 ```bash
 # All floorplans + all 3D views
@@ -391,34 +464,41 @@ cargo fmt                      # Format code
 - **3D Rendering**: Custom WebGL + Three.js (switchable at runtime)
 - **Testing**: insta (snapshot testing), vitest (web frontend)
 
-## V0.2 Roadmap
+## Roadmap
+
+<details>
+<summary>V0.2 and V0.3 phases</summary>
+
+### V0.2
 
 V0.2 (Phases 7a–7h) focuses on bringing BuildingML from a working compiler to a full web-based building design platform. See `Specs_V0_2.md` for the complete specification.
 
-- **7a: IFC Codegen Hardening** — Proper geometry for all element types (columns, beams, stairs, doors, roofs)
-- **7a': Language Improvements** — Floor templates (define once, stamp across storeys), storey-level elements, elevator/shaft type, auto-IDs (bare `Type:` without ID), `zone:` property for space grouping, extended usage enums
-- **7b: Web Architecture** (~95%) — Web frontend modularized (React + Vite, shared modules, DataProvider pattern), CodeMirror 6 code editor (BML syntax highlighting, line numbers), mobile responsive design (read-only mode with touch pan/pinch-zoom, compact toolbar, full-screen chat overlay)
-- **7c: Enhanced Geometry** — Arbitrary polygon spaces, curved walls, polygon holes, tessellated cylinders
-- **7d: Furniture Asset System** ✅ — Define reusable multi-part geometry assets (`AssetLibrary`/`Asset`/`Part` headings), geometry primitives (`box()`, `cylinder()`, `extrude()`), place instances via `asset:` property on Furniture elements
-- **7e: Real IFC Import** ✅ — Decompiler rewritten for real-world Revit IFC files, all 15 BML element types, spatial containment, unit conversion, property extraction, `buildingml analyze` CLI for coverage reporting
-- **7f: Interactive Editing** (~95%) — Hierarchical element tree (Storey→Space→Elements), CodeMirror 6 BML code editor with bi-directional sync, property editing from 2D selection, unified undo/redo, VS Code 2D preview (3D/2D toggle, cursor-driven storey selection), 3D element selection (raycasting + color-buffer picking), selection highlight shader, metadata properties panel, TransformControls gizmo, 3D↔BML bi-directional sync
-- **7g: Chatbot Integration** ✅ — Collapsible chat panel with LLM assistant that reads/writes BML while the user edits visually. Context-aware prompting (current storey, selected element, diagnostics), OpenAI-compatible API proxy with streaming, automatic BML extraction and application from responses. Configure via `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_MODEL` environment variables.
-- **7h: Compiler Quality** ✅ — "Did you mean?" suggestions for unknown properties/element types (Levenshtein edit distance), codegen warning system (geometry approximations, skipped elements), multi-file diagnostic reporting. Remaining items completed in Phase 8a.
-- **7j: Additional IFC Elements** ✅ — Proxy (IfcBuildingElementProxy), Member (IfcMember), Plate (IfcPlate) — full pipeline support for each
+- **7a: IFC Codegen Hardening** - Proper geometry for all element types (columns, beams, stairs, doors, roofs)
+- **7a': Language Improvements** - Floor templates (define once, stamp across storeys), storey-level elements, elevator/shaft type, auto-IDs (bare `Type:` without ID), `zone:` property for space grouping, extended usage enums
+- **7b: Web Architecture** (~95%) - Web frontend modularized (React + Vite, shared modules, DataProvider pattern), CodeMirror 6 code editor (BML syntax highlighting, line numbers), mobile responsive design (read-only mode with touch pan/pinch-zoom, compact toolbar, full-screen chat overlay)
+- **7c: Enhanced Geometry** - Arbitrary polygon spaces, curved walls, polygon holes, tessellated cylinders
+- **7d: Furniture Asset System** ✅ - Define reusable multi-part geometry assets (`AssetLibrary`/`Asset`/`Part` headings), geometry primitives (`box()`, `cylinder()`, `extrude()`), place instances via `asset:` property on Furniture elements
+- **7e: Real IFC Import** ✅ - Decompiler rewritten for real-world Revit IFC files, all 15 BML element types, spatial containment, unit conversion, property extraction, `buildingml analyze` CLI for coverage reporting
+- **7f: Interactive Editing** (~95%) - Hierarchical element tree (Storey→Space→Elements), CodeMirror 6 BML code editor with bi-directional sync, property editing from 2D selection, unified undo/redo, VS Code 2D preview (3D/2D toggle, cursor-driven storey selection), 3D element selection (raycasting + color-buffer picking), selection highlight shader, metadata properties panel, TransformControls gizmo, 3D↔BML bi-directional sync
+- **7g: Chatbot Integration** ✅ - Collapsible chat panel with LLM assistant that reads/writes BML while the user edits visually. Context-aware prompting (current storey, selected element, diagnostics), OpenAI-compatible API proxy with streaming, automatic BML extraction and application from responses. Configure via `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_MODEL` environment variables.
+- **7h: Compiler Quality** ✅ - "Did you mean?" suggestions for unknown properties/element types (Levenshtein edit distance), codegen warning system (geometry approximations, skipped elements), multi-file diagnostic reporting. Remaining items completed in Phase 8a.
+- **7j: Additional IFC Elements** ✅ - Proxy (IfcBuildingElementProxy), Member (IfcMember), Plate (IfcPlate) - full pipeline support for each
 
-## V0.3 Roadmap
+### V0.3
 
 V0.3 (Phases 8a–8g) focuses on refactoring, LLM features, and compliance automation. See `Specs_V0_3.md` for the complete specification.
 
-- **8a: Compiler Quality** ✅ — Fuzzy storey matching (Levenshtein + word-prefix), opening overflow validation, Opening/Grid element types (full pipeline), cross-storey reference validation, coordinate bounds checking (IQR outlier detection), linting rules (8 rules + TOML config, incl. coincident/duplicate wall detection), file_id in Span/Diagnostic, multi-location diagnostics
-- **8b: Refactoring & Architecture** — Element type registry (`ElementTypeDescriptor` pattern to reduce 15-file changes to 1), codegen module decomposition, test infrastructure improvements
-- **8c: LLM Evaluation & Benchmarks** — Token efficiency analysis (BML vs ifcJSON vs STEP), LLM generation success rate across models, edit distance analysis, benchmark infrastructure
-- **8d: Spec-to-Check Generation** — LLM reads design specifications and auto-generates `Check:` blocks, validation pipeline, chat integration for spec upload and check review
-- **8e: Regulation-to-Check Library** — Curated compliance checks from German MBO, International IBC, and Eurocode; check import mechanism; computed property extensions
-- **8f: LLM Prompt & Context Improvements** — Semantic model context, compliance results in chat, few-shot examples, auto-retry on parse errors, structured output mode
-- **8g: VS Code & Editor Polish** — VS Code 2D preview tab, quick fix code actions, compliance dashboard, regulation browser
+- **8a: Compiler Quality** ✅ - Fuzzy storey matching (Levenshtein + word-prefix), opening overflow validation, Opening/Grid element types (full pipeline), cross-storey reference validation, coordinate bounds checking (IQR outlier detection), linting rules (8 rules + TOML config, incl. coincident/duplicate wall detection), file_id in Span/Diagnostic, multi-location diagnostics
+- **8b: Refactoring & Architecture** - Element type registry (`ElementTypeDescriptor` pattern to reduce 15-file changes to 1), codegen module decomposition, test infrastructure improvements
+- **8c: LLM Evaluation & Benchmarks** - Token efficiency analysis (BML vs ifcJSON vs STEP), LLM generation success rate across models, edit distance analysis, benchmark infrastructure
+- **8d: Spec-to-Check Generation** - LLM reads design specifications and auto-generates `Check:` blocks, validation pipeline, chat integration for spec upload and check review
+- **8e: Regulation-to-Check Library** - Curated compliance checks from German MBO, International IBC, and Eurocode; check import mechanism; computed property extensions
+- **8f: LLM Prompt & Context Improvements** - Semantic model context, compliance results in chat, few-shot examples, auto-retry on parse errors, structured output mode
+- **8g: VS Code & Editor Polish** - VS Code 2D preview tab, quick fix code actions, compliance dashboard, regulation browser
 
 Research: NVIDIA's open-source USD BRep kernel is being evaluated as an optional geometry backend. A prototype (`prototypes/usd_brep/`) builds exact BRep solids with boolean openings from BML. See `Specs_V0_3.md` §14.
+
+</details>
 
 ## Language Specification
 
@@ -426,6 +506,6 @@ See `Specs.md` for the v0.1 language specification, including all syntax rules, 
 
 ## License
 
-MIT License — Copyright (c) 2026 Stefan Fuchs
+MIT License - Copyright (c) 2026 Stefan Fuchs
 
 The Revit IFC test models `tests/fixtures/model_1.ifc`, `model_2.ifc` and `model_3.ifc` come from the GNI BIM Dataset (Wang et al., 2026, [doi:10.5281/zenodo.19722012](https://doi.org/10.5281/zenodo.19722012)) and are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
