@@ -1,0 +1,325 @@
+// Ground Floor ?Lobby, Services, Parking
+// elevation: 0.0 m, height: 3.50 m
+// Demonstrates: zones, extended usage enums, auto-IDs, elevator, storey-level elements
+
+# Site: Parkview Residences
+
+## Building: Block A
+
+### Storey: Ground Floor
+  elevation: 0 m
+  height: 3.5 m
+
+#### Space: Space 1
+  area: 16 m2
+
+  Wall: W-GF-I4
+    from: (24, 0) to: (24, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+
+  Wall: W-GF-I6
+    from: (24, 0) to: (28, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-I7
+    from: (28, 0) to: (28, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+
+  Wall: W-GF-I8
+    from: (28, 4) to: (24, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-05
+      offset: 0.5 m
+      width: 0.9 m
+      height: 2.1 m
+
+  Column: COL-GF-003
+    position: (24, 0)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+#### Space: Space 2
+  area: 16 m2
+
+  Wall: W-GF-I9
+    from: (28, 0) to: (32, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-I10
+    from: (32, 0) to: (32, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+
+  Wall: W-GF-I11
+    from: (32, 4) to: (28, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-06
+      offset: 0.5 m
+      width: 1.2 m
+      height: 2.1 m
+
+#### Space: Space 3
+  area: 18 m2
+
+  Wall: W-GF-E1
+    from: (40, 6) to: (40, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-SW4
+    from: (37, 6) to: (40, 6)
+    height: 3.5 m
+    thickness: 0.25 m
+    Door: D-GF-11
+      offset: 0.5 m
+      width: 1 m
+      height: 2.1 m
+
+  Wall: W-GF-SW3
+    from: (37, 6) to: (37, 0)
+    height: 3.5 m
+    thickness: 0.25 m
+
+  Wall: W-GF-S5
+    from: (37, 0) to: (40, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+    Door: D-GF-EAST
+      offset: 0.5 m
+      width: 1 m
+      height: 2.1 m
+
+#### Space: Space 4
+  area: 18 m2
+
+  Wall: W-GF-SW1
+    from: (2.75, 0) to: (2.75, 6)
+    height: 3.5 m
+    thickness: 0.25 m
+
+  Wall: W-GF-SW2
+    from: (-0.25, 6) to: (2.75, 6)
+    height: 3.5 m
+    thickness: 0.25 m
+    Door: D-GF-10
+      offset: 0.5 m
+      width: 1 m
+      height: 2.1 m
+
+  Wall: W-GF-W1
+    from: (-0.25, 0) to: (-0.25, 6)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-S4
+    from: (-0.25, 0) to: (2.75, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+    Door: D-GF-WEST
+      offset: 0.5 m
+      width: 1 m
+      height: 2.1 m
+
+#### Space: Space 5
+  area: 72 m2
+
+  Wall: W-GF-S1
+    from: (8, 0) to: (20, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+    Door: D-MAIN-01
+      offset: 3 m
+      width: 1.8 m
+      height: 2.4 m
+    Window: WIN-GF-01
+      offset: 6.5 m
+      width: 2 m
+      height: 2 m
+      sill_height: 0.5 m
+    Window: WIN-GF-02
+      offset: 9.5 m
+      width: 2 m
+      height: 2 m
+      sill_height: 0.5 m
+
+  Wall: W-GF-I3
+    from: (20, 0) to: (20, 6)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-03
+      offset: 1 m
+      width: 0.9 m
+      height: 2.1 m
+
+  Wall: W-GF-I2
+    from: (8, 0) to: (8, 6)
+    height: 3.5 m
+    thickness: 0.2 m
+
+  Column: COL-GF-001
+    position: (8, 0)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-002
+    position: (16, 0)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+#### Space: Space 6
+  area: 583 m2
+
+  Wall: W-GF-S2
+    from: (20, 0) to: (24, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-I5
+    from: (24, 4) to: (20, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-04
+      offset: 0.5 m
+      width: 0.9 m
+      height: 2.1 m
+
+  Wall: W-GF-I13
+    from: (37, 4) to: (32, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-07
+      offset: 0.5 m
+      width: 0.9 m
+      height: 2.1 m
+
+  Wall: W-GF-I12
+    from: (32, 0) to: (37, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-I16
+    from: (2.75, 6) to: (37, 6)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-12
+      offset: 8 m
+      width: 1 m
+      height: 2.1 m
+
+    Door: D-GF-09
+      offset: 1 m
+      width: 0.9 m
+      height: 2.1 m
+
+    Door: D-GF-01
+      offset: 10.25 m
+      width: 1.2 m
+      height: 2.1 m
+
+  Wall: W-GF-S3
+    from: (2.75, 0) to: (8, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+    Door: D-GF-08
+      offset: 1.5 m
+      width: 1.5 m
+      height: 2.1 m
+
+  Wall: W-GF-E2
+    from: (40, 6) to: (40, 18)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-N2
+    from: (22, 18) to: (40, 18)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-N3
+    from: (16, 18) to: (22, 18)
+    height: 3.5 m
+    thickness: 0.3 m
+    Door: D-RAMP
+      offset: 0 m
+      width: 5.5 m
+      height: 3 m
+
+  Wall: W-GF-N1
+    from: (0, 18) to: (16, 18)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-W2
+    from: (0, 18) to: (-0.25, 6)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Column: COL-GF-004
+    position: (32, 0)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-005
+    position: (8, 9)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-006
+    position: (16, 9)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-007
+    position: (24, 9)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-008
+    position: (32, 9)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Wall: W-17
+    from: (-0.25, 5) to: (-5, 5)
+    height: 3.5 m
+    thickness: 0.24 m
+
+  Wall: W-18
+    from: (-5, 5) to: (-5, 0)
+    height: 3.5 m
+    thickness: 0.24 m
+
+  Wall: W-19
+    from: (-5, 0) to: (-0.25, 0)
+    height: 3.5 m
+    thickness: 0.24 m
+
+  Slab: SLAB-GF
+    boundary: [(-0.25,0.15), (39.85,0.15), (39.85,17.85), (0.15,17.85)]
+    thickness: 0.3 m
+
+  Column: COL-GF-009
+    position: (8, 18)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-010
+    position: (16, 18)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-011
+    position: (24, 18)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-012
+    position: (32, 18)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)

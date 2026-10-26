@@ -1,0 +1,1940 @@
+// The building is a six-storey reinforced concrete residential structure comprising 48 dwelling units distributed across five upper floors above a ground-level common area and parking level. The building footprint is approximately 40 m × 18 m, oriented along an east-west axis.
+// The ground floor accommodates a lobby and reception area, a central mail room, two elevators, an enclosed stairwell at each end of the building, a bicycle storage room, building services and plant rooms (including electrical switchboard, water metering, and telecommunications), and an enclosed parking garage with 52 spaces accessed via a ramp from the northern facade.
+// Floors one through five each contain eight to ten apartments arranged along a central corridor. The unit mix includes studio apartments (approximately 35 m²), one-bedroom units (approximately 55 m²), two-bedroom units (approximately 75 m²), and a smaller number of three-bedroom corner units (approximately 95 m²). Each unit includes an open-plan kitchen and living area, a separate bathroom with shower, and private balconies ranging from 6 to 12 m² accessible from the living area.
+// The structural system consists of a flat slab concrete frame with shear walls at the elevator and stair cores providing lateral stability. External walls are clad with an insulated rendered facade system. The roof is a flat roof with a bituminous membrane waterproofing layer, incorporating drainage to internal downpipes. A communal rooftop terrace occupies approximately one third of the roof area.
+// Shared facilities include a laundry room on the ground floor, a waste management room with separated recycling streams, and landscaped communal outdoor space to the south of the building. The building is served by a central hot water system, individual heat pump units per dwelling for heating and cooling, mechanical ventilation with heat recovery in all units, and a fire sprinkler system throughout.
+// The building is designed to comply with applicable accessibility requirements, with step-free access to all common areas and a minimum of 10% of units designed as fully accessible dwellings.
+
+// Six-storey reinforced concrete residential building
+// 48 dwelling units across 5 upper floors + ground-level common areas and parking
+// Footprint: 40m x 18m, oriented east-west
+//
+// Layout key:
+//   x-axis: 0 (west) to 40 (east)
+//   y-axis: 0 (south, main entrance) to 18 (north, parking ramp)
+//   Central corridor: y=8 to y=10 on residential floors
+//   West stair core: x=0 to x=3
+//   East stair core: x=37 to x=40
+//   Elevator core: x=19 to x=21
+
+// =========================================================================
+// Material Definitions
+// =========================================================================
+
+Material: reinforced_concrete
+  category: concrete
+  grade: C30
+  density: 2400 kg/m3
+
+Material: exterior_insulated
+  category: concrete
+  density: 1800 kg/m3
+
+Material: interior_partition
+  category: concrete
+  density: 1200 kg/m3
+
+Material: shear_wall_concrete
+  category: concrete
+  grade: C30
+  density: 2400 kg/m3
+
+// =========================================================================
+// Site
+// =========================================================================
+
+# Site: Parkview Residences
+  location: 48.1351, 11.5820
+  address: "Lindenstrasse 42, 80331 Munich"
+
+## Building: Block A
+  type: residential
+  gross_floor_area: 4320.0 m2
+
+// =========================================================================
+// Ground Floor ?Lobby, Services, Parking
+// elevation: 0.0 m, height: 3.50 m
+// =========================================================================
+
+### Storey: Ground Floor
+  elevation: 0 m
+  height: 3.5 m
+
+#### Space: Space 1
+  area: 16 m2
+
+  Wall: W-GF-I4
+    from: (24, 0) to: (24, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+
+  Wall: W-GF-I6
+    from: (24, 0) to: (28, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-I7
+    from: (28, 0) to: (28, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+
+  Wall: W-GF-I8
+    from: (28, 4) to: (24, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-05
+      offset: 0.5 m
+      width: 0.9 m
+      height: 2.1 m
+
+  Column: COL-GF-03
+    position: (24, 0)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+#### Space: Space 2
+  area: 16 m2
+
+  Wall: W-GF-I9
+    from: (28, 0) to: (32, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-I10
+    from: (32, 0) to: (32, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+
+  Wall: W-GF-I11
+    from: (32, 4) to: (28, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-06
+      offset: 0.5 m
+      width: 1.2 m
+      height: 2.1 m
+
+#### Space: Space 3
+  area: 18 m2
+
+  Wall: W-GF-E1
+    from: (40, 6) to: (40, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-SW4
+    from: (37, 6) to: (40, 6)
+    height: 3.5 m
+    thickness: 0.25 m
+    Door: D-GF-11
+      offset: 0.5 m
+      width: 1 m
+      height: 2.1 m
+
+  Wall: W-GF-SW3
+    from: (37, 6) to: (37, 0)
+    height: 3.5 m
+    thickness: 0.25 m
+
+  Wall: W-GF-S5
+    from: (37, 0) to: (40, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+    Door: D-GF-EAST
+      offset: 0.5 m
+      width: 1 m
+      height: 2.1 m
+
+#### Space: Space 4
+  area: 48 m2
+
+  Wall: W-GF-I2
+    from: (8, 0) to: (8, 6)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-02
+      offset: 1 m
+      width: 0.9 m
+      height: 2.1 m
+
+  Wall: W-GF-I15
+    from: (3, 6) to: (8, 6)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-09
+      offset: 1 m
+      width: 0.9 m
+      height: 2.1 m
+
+  Wall: W-GF-SW1
+    from: (3, 0) to: (3, 6)
+    height: 3.5 m
+    thickness: 0.25 m
+
+  Wall: W-GF-SW2
+    from: (0, 6) to: (3, 6)
+    height: 3.5 m
+    thickness: 0.25 m
+    Door: D-GF-10
+      offset: 0.5 m
+      width: 1 m
+      height: 2.1 m
+
+  Wall: W-GF-W1
+    from: (0, 0) to: (0, 6)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-S4
+    from: (0, 0) to: (3, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+    Door: D-GF-WEST
+      offset: 0.5 m
+      width: 1 m
+      height: 2.1 m
+
+  Wall: W-GF-S3
+    from: (3, 0) to: (8, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+    Door: D-GF-08
+      offset: 1.5 m
+      width: 1.5 m
+      height: 2.1 m
+
+#### Space: Space 5
+  area: 70 m2
+
+  Wall: W-GF-I3
+    from: (20, 0) to: (20, 6)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-03
+      offset: 1 m
+      width: 0.9 m
+      height: 2.1 m
+
+  Wall: W-GF-S2
+    from: (20, 0) to: (24, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-I5
+    from: (24, 4) to: (20, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-04
+      offset: 0.5 m
+      width: 0.9 m
+      height: 2.1 m
+
+  Wall: W-GF-I13
+    from: (37, 4) to: (32, 4)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-07
+      offset: 0.5 m
+      width: 0.9 m
+      height: 2.1 m
+
+  Wall: W-GF-I12
+    from: (32, 0) to: (37, 0)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-I16
+    from: (8, 6) to: (37, 6)
+    height: 3.5 m
+    thickness: 0.2 m
+    Door: D-GF-12
+      offset: 3 m
+      width: 1 m
+      height: 2.1 m
+
+    Door: D-GF-01
+      offset: 5 m
+      width: 1.2 m
+      height: 2.1 m
+
+  Column: COL-GF-04
+    position: (32, 0)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+#### Space: Space 6
+  area: 72 m2
+
+  Wall: W-GF-S1
+    from: (8, -6) to: (20, -6)
+    height: 3.5 m
+    thickness: 0.3 m
+    Door: D-MAIN-01
+      offset: 3 m
+      width: 1.8 m
+      height: 2.4 m
+    Window: WIN-GF-01
+      offset: 6.5 m
+      width: 2 m
+      height: 2 m
+      sill_height: 0.5 m
+    Window: WIN-GF-02
+      offset: 9.5 m
+      width: 2 m
+      height: 2 m
+      sill_height: 0.5 m
+
+  Wall: W-17
+    from: (20, -6) to: (20, 0)
+    height: 3.5 m
+    thickness: 0.2 m
+
+  Wall: W-18
+    from: (8, 0) to: (20, 0)
+    height: 3.5 m
+    thickness: 0.2 m
+
+  Wall: W-19
+    from: (8, -6) to: (8, 0)
+    height: 3.5 m
+    thickness: 0.2 m
+
+  Column: COL-GF-01
+    position: (8, -6)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-02
+    position: (16, -6)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+#### Space: Space 7
+  area: 72 m2
+
+#### Space: Space 7
+  area: 480 m2
+
+  Wall: W-GF-E2
+    from: (40, 6) to: (40, 18)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-N2
+    from: (22, 18) to: (40, 18)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-N3
+    from: (16, 18) to: (22, 18)
+    height: 3.5 m
+    thickness: 0.3 m
+    Door: D-RAMP
+      offset: 0 m
+      width: 5.5 m
+      height: 3 m
+
+  Wall: W-GF-N1
+    from: (0, 18) to: (16, 18)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Wall: W-GF-W2
+    from: (0, 18) to: (0, 6)
+    height: 3.5 m
+    thickness: 0.3 m
+
+  Column: COL-GF-05
+    position: (8, 9)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-06
+    position: (16, 9)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-07
+    position: (24, 9)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-08
+    position: (32, 9)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Slab: SLAB-GF
+    boundary: [(0,0), (40,0), (40,18), (0,18)]
+    thickness: 0.3 m
+
+  Column: COL-GF-09
+    position: (8, 18)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-10
+    position: (16, 18)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-11
+    position: (24, 18)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+  Column: COL-GF-12
+    position: (32, 18)
+    height: 3.5 m
+    profile: rectangle(0.4, 0.4)
+
+### Storey: Floor 1
+  elevation: 3.50 m
+  height: 3.00 m
+
+//// Exterior Walls ?Floor 1 ////
+
+#### Space: Central Corridor F1
+  usage: corridor
+  area: 72.0 m2
+  boundary: [(3, 8), (37, 8), (37, 10), (3, 10)]
+
+//// South Apartments ////
+
+/// Three-bedroom corner unit at southwest
+#### Space: Unit 101
+  usage: living
+  area: 95.0 m2
+
+  // South exterior wall
+  Wall: W-F1-101-S
+    from: (0, 0) to: (12, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-101-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F1-101-02
+      offset: 4.5 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F1-101-03
+      offset: 8.0 m
+      width: 1.5 m
+      height: 1.4 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // West exterior wall
+  Wall: W-F1-101-W
+    from: (0, 8) to: (0, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-101-04
+      offset: 1.5 m
+      width: 1.8 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    // Balcony door
+    Door: D-F1-101-B
+      offset: 4.5 m
+      width: 1.80 m
+      height: 2.20 m
+      type: sliding
+
+  // East partition wall
+  Wall: W-F1-101-E
+    from: (12, 0) to: (12, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  // Entry door from corridor
+  Wall: W-F1-101-N
+    from: (3, 8) to: (12, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F1-101
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+  Railing: RL-F1-101
+    height: 1.10 m
+    length: 4.0 m
+
+/// One-bedroom unit, south centre-left
+#### Space: Unit 102
+  usage: living
+  area: 55.0 m2
+
+  // South exterior wall
+  Wall: W-F1-102-S
+    from: (12, 0) to: (19, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-102-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    // Balcony door
+    Door: D-F1-102-B
+      offset: 4.0 m
+      width: 1.50 m
+      height: 2.20 m
+      type: sliding
+
+  // East partition
+  Wall: W-F1-102-E
+    from: (19, 0) to: (19, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  // North wall (corridor side)
+  Wall: W-F1-102-N
+    from: (12, 8) to: (19, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F1-102
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+  Railing: RL-F1-102
+    height: 1.10 m
+    length: 3.0 m
+
+/// One-bedroom unit, south centre-right
+#### Space: Unit 103
+  usage: living
+  area: 55.0 m2
+
+  // South exterior wall
+  Wall: W-F1-103-S
+    from: (21, 0) to: (28, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-103-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Door: D-F1-103-B
+      offset: 4.0 m
+      width: 1.50 m
+      height: 2.20 m
+      type: sliding
+
+  Wall: W-F1-103-W
+    from: (21, 8) to: (21, 0)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  Wall: W-F1-103-E
+    from: (28, 0) to: (28, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  Wall: W-F1-103-N
+    from: (21, 8) to: (28, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F1-103
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+  Railing: RL-F1-103
+    height: 1.10 m
+    length: 3.0 m
+
+/// Three-bedroom corner unit at southeast
+#### Space: Unit 104
+  usage: living
+  area: 95.0 m2
+
+  // South exterior wall
+  Wall: W-F1-104-S
+    from: (28, 0) to: (40, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-104-01
+      offset: 1.5 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F1-104-02
+      offset: 5.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F1-104-03
+      offset: 8.5 m
+      width: 1.5 m
+      height: 1.4 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // East exterior wall
+  Wall: W-F1-104-E
+    from: (40, 0) to: (40, 8)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-104-04
+      offset: 1.5 m
+      width: 1.8 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Door: D-F1-104-B
+      offset: 4.5 m
+      width: 1.80 m
+      height: 2.20 m
+      type: sliding
+
+  // Corridor-side wall
+  Wall: W-F1-104-N
+    from: (28, 8) to: (37, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F1-104
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+  Railing: RL-F1-104
+    height: 1.10 m
+    length: 4.0 m
+
+//// North Apartments ////
+
+/// Two-bedroom unit, northwest
+#### Space: Unit 105
+  usage: living
+  area: 78.0 m2
+
+  // North exterior wall
+  Wall: W-F1-105-N
+    from: (10, 18) to: (0, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-105-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F1-105-02
+      offset: 5.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // West exterior wall
+  Wall: W-F1-105-W
+    from: (0, 18) to: (0, 10)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-105-03
+      offset: 2.0 m
+      width: 1.4 m
+      height: 1.4 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // East partition
+  Wall: W-F1-105-E
+    from: (10, 10) to: (10, 18)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  // Corridor side
+  Wall: W-F1-105-S
+    from: (3, 10) to: (10, 10)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F1-105
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+  Railing: RL-F1-105
+    height: 1.10 m
+    length: 3.0 m
+
+/// Studio apartment, north centre-left
+#### Space: Unit 106
+  usage: living
+  area: 38.0 m2
+
+  Wall: W-F1-106-N
+    from: (15, 18) to: (10, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-106-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F1-106-E
+    from: (15, 10) to: (15, 18)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  Wall: W-F1-106-S
+    from: (10, 10) to: (15, 10)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F1-106
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+/// Two-bedroom unit, north centre
+#### Space: Unit 107
+  usage: living
+  area: 78.0 m2
+
+  Wall: W-F1-107-N
+    from: (25, 18) to: (15, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-107-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F1-107-02
+      offset: 5.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F1-107-E
+    from: (25, 10) to: (25, 18)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  Wall: W-F1-107-S
+    from: (15, 10) to: (25, 10)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F1-107
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+  Railing: RL-F1-107
+    height: 1.10 m
+    length: 3.0 m
+
+/// Studio apartment, north centre-right
+#### Space: Unit 108
+  usage: living
+  area: 38.0 m2
+
+  Wall: W-F1-108-N
+    from: (30, 18) to: (25, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-108-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F1-108-E
+    from: (30, 10) to: (30, 18)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  Wall: W-F1-108-S
+    from: (25, 10) to: (30, 10)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F1-108
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+/// Two-bedroom unit, northeast
+#### Space: Unit 109
+  usage: living
+  area: 78.0 m2
+
+  Wall: W-F1-109-N
+    from: (40, 18) to: (30, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-109-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F1-109-02
+      offset: 5.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // East exterior wall
+  Wall: W-F1-109-E
+    from: (40, 10) to: (40, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-109-03
+      offset: 2.0 m
+      width: 1.4 m
+      height: 1.4 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F1-109-S
+    from: (30, 10) to: (37, 10)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F1-109
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+  Railing: RL-F1-109
+    height: 1.10 m
+    length: 3.0 m
+
+//// Elevator Core ?Floor 1 ////
+
+/// Accessible unit (adapted, south-facing)
+#### Space: Unit 110
+  usage: living
+  area: 55.0 m2
+  boundary: [(19, 0), (21, 0), (21, 8), (19, 8)]
+
+  // South exterior wall (in elevator core gap between x=19-21)
+  Wall: W-F1-110-S
+    from: (19, 0) to: (21, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F1-110-01
+      offset: 0.25 m
+      width: 1.2 m
+      height: 1.6 m
+      sill_height: 0.60 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F1-110-N
+    from: (19, 8) to: (21, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F1-110
+      offset: 0.1 m
+      width: 1.00 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+//// West Stairwell ?Floor 1 ////
+
+#### Space: West Stairwell F1
+  usage: circulation
+  area: 24.0 m2
+
+  Wall: W-F1-WS-W
+    from: (0, 10) to: (0, 8)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Wall: W-F1-WS-E
+    from: (3, 0) to: (3, 10)
+    height: 3.00 m
+    thickness: 0.25 m
+    material: shear_wall_concrete
+    is_external: false
+    load_bearing: true
+    fire_rating: REI90
+
+    Door: D-F1-WS
+      offset: 6.0 m
+      width: 1.00 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+  Stair: ST-F1-W
+    from_storey: Floor 1
+    to_storey: Floor 2
+    type: u_shaped
+    position: (1.5, 2.0)
+    width: 1.20 m
+    riser_count: 18
+    riser_height: 0.167 m
+    tread_depth: 0.27 m
+
+//// East Stairwell ?Floor 1 ////
+
+#### Space: East Stairwell F1
+  usage: circulation
+  area: 24.0 m2
+
+  Wall: W-F1-ES-E
+    from: (40, 8) to: (40, 10)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Wall: W-F1-ES-W
+    from: (37, 10) to: (37, 0)
+    height: 3.00 m
+    thickness: 0.25 m
+    material: shear_wall_concrete
+    is_external: false
+    load_bearing: true
+    fire_rating: REI90
+
+    Door: D-F1-ES
+      offset: 6.0 m
+      width: 1.00 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+  Stair: ST-F1-E
+    from_storey: Floor 1
+    to_storey: Floor 2
+    type: u_shaped
+    position: (38.5, 2.0)
+    width: 1.20 m
+    riser_count: 18
+    riser_height: 0.167 m
+    tread_depth: 0.27 m
+
+  // Floor 1 slab
+  Slab: SLAB-F1
+    boundary: [(0,0), (40,0), (40,18), (0,18)]
+    thickness: 0.25 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  // Structural columns ?Floor 1
+  Column: COL-F1-01
+    position: (8.0, 0.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F1-02
+    position: (16.0, 0.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F1-03
+    position: (24.0, 0.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F1-04
+    position: (32.0, 0.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F1-05
+    position: (8.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F1-06
+    position: (16.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F1-07
+    position: (24.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F1-08
+    position: (32.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F1-09
+    position: (8.0, 18.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F1-10
+    position: (16.0, 18.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F1-11
+    position: (24.0, 18.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F1-12
+    position: (32.0, 18.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Beam: B-F1-01
+    from: (8, 0) to: (8, 18)
+    profile: rectangle(0.35, 0.55)
+    material: reinforced_concrete
+
+  Beam: B-F1-02
+    from: (16, 0) to: (16, 18)
+    profile: rectangle(0.35, 0.55)
+    material: reinforced_concrete
+
+  Beam: B-F1-03
+    from: (24, 0) to: (24, 18)
+    profile: rectangle(0.35, 0.55)
+    material: reinforced_concrete
+
+  Beam: B-F1-04
+    from: (32, 0) to: (32, 18)
+    profile: rectangle(0.35, 0.55)
+    material: reinforced_concrete
+
+// =========================================================================
+// Floor 2 ?Residential (10 units, same layout as Floor 1)
+// elevation: 6.50 m, height: 3.00 m
+// =========================================================================
+
+### Storey: Floor 2
+  elevation: 6.50 m
+  height: 3.00 m
+
+#### Space: Central Corridor F2
+  usage: corridor
+  area: 72.0 m2
+
+#### Space: Unit 201
+  usage: living
+  area: 95.0 m2
+
+  Wall: W-F2-201-S
+    from: (0, 0) to: (12, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F2-201-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F2-201-02
+      offset: 4.5 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F2-201-W
+    from: (0, 8) to: (0, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+#### Space: Unit 202
+  usage: living
+  area: 55.0 m2
+
+#### Space: Unit 203
+  usage: living
+  area: 55.0 m2
+
+#### Space: Unit 204
+  usage: living
+  area: 95.0 m2
+
+  Wall: W-F2-204-S
+    from: (28, 0) to: (40, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F2-204-01
+      offset: 1.5 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F2-204-E
+    from: (40, 0) to: (40, 8)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+#### Space: Unit 205
+  usage: living
+  area: 78.0 m2
+
+  Wall: W-F2-205-N
+    from: (10, 18) to: (0, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Wall: W-F2-205-W
+    from: (0, 18) to: (0, 10)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+#### Space: Unit 206
+  usage: living
+  area: 38.0 m2
+
+#### Space: Unit 207
+  usage: living
+  area: 78.0 m2
+
+  Wall: W-F2-207-N
+    from: (25, 18) to: (15, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+#### Space: Unit 208
+  usage: living
+  area: 38.0 m2
+
+#### Space: Unit 209
+  usage: living
+  area: 78.0 m2
+
+  Wall: W-F2-209-N
+    from: (40, 18) to: (30, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Wall: W-F2-209-E
+    from: (40, 10) to: (40, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+#### Space: Unit 210
+  usage: living
+  area: 55.0 m2
+
+#### Space: West Stairwell F2
+  usage: circulation
+  area: 24.0 m2
+
+  Stair: ST-F2-W
+    from_storey: Floor 2
+    to_storey: Floor 3
+    type: u_shaped
+    position: (1.5, 2.0)
+    width: 1.20 m
+    riser_count: 18
+    riser_height: 0.167 m
+    tread_depth: 0.27 m
+
+#### Space: East Stairwell F2
+  usage: circulation
+  area: 24.0 m2
+
+  Stair: ST-F2-E
+    from_storey: Floor 2
+    to_storey: Floor 3
+    type: u_shaped
+    position: (38.5, 2.0)
+    width: 1.20 m
+    riser_count: 18
+    riser_height: 0.167 m
+    tread_depth: 0.27 m
+
+  Slab: SLAB-F2
+    boundary: [(0,0), (40,0), (40,18), (0,18)]
+    thickness: 0.25 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  Column: COL-F2-01
+    position: (8.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F2-02
+    position: (16.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F2-03
+    position: (24.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F2-04
+    position: (32.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Beam: B-F2-01
+    from: (0, 9) to: (40, 9)
+    profile: rectangle(0.35, 0.55)
+    material: reinforced_concrete
+
+// =========================================================================
+// Floor 3 ?Residential (10 units)
+// elevation: 9.50 m, height: 3.00 m
+// =========================================================================
+
+### Storey: Floor 3
+  elevation: 9.50 m
+  height: 3.00 m
+
+#### Space: Central Corridor F3
+  usage: corridor
+  area: 72.0 m2
+
+#### Space: Unit 301
+  usage: living
+  area: 95.0 m2
+
+#### Space: Unit 302
+  usage: living
+  area: 55.0 m2
+
+#### Space: Unit 303
+  usage: living
+  area: 55.0 m2
+
+#### Space: Unit 304
+  usage: living
+  area: 95.0 m2
+
+#### Space: Unit 305
+  usage: living
+  area: 78.0 m2
+
+#### Space: Unit 306
+  usage: living
+  area: 38.0 m2
+
+#### Space: Unit 307
+  usage: living
+  area: 78.0 m2
+
+#### Space: Unit 308
+  usage: living
+  area: 38.0 m2
+
+#### Space: Unit 309
+  usage: living
+  area: 78.0 m2
+
+#### Space: Unit 310
+  usage: living
+  area: 55.0 m2
+
+#### Space: West Stairwell F3
+  usage: circulation
+  area: 24.0 m2
+
+  Stair: ST-F3-W
+    from_storey: Floor 3
+    to_storey: Floor 4
+    type: u_shaped
+    position: (1.5, 2.0)
+    width: 1.20 m
+    riser_count: 18
+    riser_height: 0.167 m
+    tread_depth: 0.27 m
+
+#### Space: East Stairwell F3
+  usage: circulation
+  area: 24.0 m2
+
+  Stair: ST-F3-E
+    from_storey: Floor 3
+    to_storey: Floor 4
+    type: u_shaped
+    position: (38.5, 2.0)
+    width: 1.20 m
+    riser_count: 18
+    riser_height: 0.167 m
+    tread_depth: 0.27 m
+
+  // South exterior wall (full length)
+  Wall: W-F3-EXT-S
+    from: (0, 0) to: (40, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  // North exterior wall
+  Wall: W-F3-EXT-N
+    from: (40, 18) to: (0, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  // West exterior wall
+  Wall: W-F3-EXT-W
+    from: (0, 18) to: (0, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  // East exterior wall
+  Wall: W-F3-EXT-E
+    from: (40, 0) to: (40, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Slab: SLAB-F3
+    boundary: [(0,0), (40,0), (40,18), (0,18)]
+    thickness: 0.25 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  Column: COL-F3-01
+    position: (8.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F3-02
+    position: (16.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F3-03
+    position: (24.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F3-04
+    position: (32.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Beam: B-F3-01
+    from: (0, 9) to: (40, 9)
+    profile: rectangle(0.35, 0.55)
+    material: reinforced_concrete
+
+// =========================================================================
+// Floor 4 ?Residential (10 units)
+// elevation: 12.50 m, height: 3.00 m
+// =========================================================================
+
+### Storey: Floor 4
+  elevation: 12.50 m
+  height: 3.00 m
+
+#### Space: Central Corridor F4
+  usage: corridor
+  area: 72.0 m2
+
+#### Space: Unit 401
+  usage: living
+  area: 95.0 m2
+
+#### Space: Unit 402
+  usage: living
+  area: 55.0 m2
+
+#### Space: Unit 403
+  usage: living
+  area: 55.0 m2
+
+#### Space: Unit 404
+  usage: living
+  area: 95.0 m2
+
+#### Space: Unit 405
+  usage: living
+  area: 78.0 m2
+
+#### Space: Unit 406
+  usage: living
+  area: 38.0 m2
+
+#### Space: Unit 407
+  usage: living
+  area: 78.0 m2
+
+#### Space: Unit 408
+  usage: living
+  area: 38.0 m2
+
+#### Space: Unit 409
+  usage: living
+  area: 78.0 m2
+
+#### Space: Unit 410
+  usage: living
+  area: 55.0 m2
+
+#### Space: West Stairwell F4
+  usage: circulation
+  area: 24.0 m2
+
+  Stair: ST-F4-W
+    from_storey: Floor 4
+    to_storey: Floor 5
+    type: u_shaped
+    position: (1.5, 2.0)
+    width: 1.20 m
+    riser_count: 18
+    riser_height: 0.167 m
+    tread_depth: 0.27 m
+
+#### Space: East Stairwell F4
+  usage: circulation
+  area: 24.0 m2
+
+  Stair: ST-F4-E
+    from_storey: Floor 4
+    to_storey: Floor 5
+    type: u_shaped
+    position: (38.5, 2.0)
+    width: 1.20 m
+    riser_count: 18
+    riser_height: 0.167 m
+    tread_depth: 0.27 m
+
+  Wall: W-F4-EXT-S
+    from: (0, 0) to: (40, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Wall: W-F4-EXT-N
+    from: (40, 18) to: (0, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Wall: W-F4-EXT-W
+    from: (0, 18) to: (0, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Wall: W-F4-EXT-E
+    from: (40, 0) to: (40, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Slab: SLAB-F4
+    boundary: [(0,0), (40,0), (40,18), (0,18)]
+    thickness: 0.25 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  Column: COL-F4-01
+    position: (8.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F4-02
+    position: (16.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F4-03
+    position: (24.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F4-04
+    position: (32.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Beam: B-F4-01
+    from: (0, 9) to: (40, 9)
+    profile: rectangle(0.35, 0.55)
+    material: reinforced_concrete
+
+// =========================================================================
+// Floor 5 ?Top Residential Floor (8 larger units)
+// elevation: 15.50 m, height: 3.00 m
+// =========================================================================
+
+### Storey: Floor 5
+  elevation: 15.50 m
+  height: 3.00 m
+
+#### Space: Central Corridor F5
+  usage: corridor
+  area: 72.0 m2
+
+#### Space: Unit 501
+  usage: living
+  area: 95.0 m2
+
+#### Space: Unit 502
+  usage: living
+  area: 75.0 m2
+
+#### Space: Unit 503
+  usage: living
+  area: 75.0 m2
+
+#### Space: Unit 504
+  usage: living
+  area: 95.0 m2
+
+#### Space: Unit 505
+  usage: living
+  area: 95.0 m2
+
+#### Space: Unit 506
+  usage: living
+  area: 78.0 m2
+
+#### Space: Unit 507
+  usage: living
+  area: 78.0 m2
+
+#### Space: Unit 508
+  usage: living
+  area: 95.0 m2
+
+#### Space: West Stairwell F5
+  usage: circulation
+  area: 24.0 m2
+
+#### Space: East Stairwell F5
+  usage: circulation
+  area: 24.0 m2
+
+  Wall: W-F5-EXT-S
+    from: (0, 0) to: (40, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Wall: W-F5-EXT-N
+    from: (40, 18) to: (0, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Wall: W-F5-EXT-W
+    from: (0, 18) to: (0, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Wall: W-F5-EXT-E
+    from: (40, 0) to: (40, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Slab: SLAB-F5
+    boundary: [(0,0), (40,0), (40,18), (0,18)]
+    thickness: 0.25 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  Column: COL-F5-01
+    position: (8.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F5-02
+    position: (16.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F5-03
+    position: (24.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column: COL-F5-04
+    position: (32.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Beam: B-F5-01
+    from: (0, 9) to: (40, 9)
+    profile: rectangle(0.35, 0.55)
+    material: reinforced_concrete
+
+// =========================================================================
+// Roof Level ?Flat Roof + Rooftop Terrace
+// elevation: 18.50 m
+// =========================================================================
+
+### Storey: Roof
+  elevation: 18.50 m
+
+  Roof: RF-01
+    type: flat
+    boundary: [(-0.3, -0.3), (40.3, -0.3), (40.3, 18.3), (-0.3, 18.3)]
+    ridge_height: 0.3 m
+
+  // Rooftop terrace slab (~1/3 of roof, south side)
+  Slab: SLAB-TERRACE
+    boundary: [(0,0), (40,0), (40,6), (0,6)]
+    thickness: 0.15 m
+    material: reinforced_concrete
+    slab_type: roof
+
+  // Terrace railing ?south
+  Railing: RL-TERRACE-S
+    height: 1.10 m
+    length: 40.0 m
+
+  // Terrace railing ?east
+  Railing: RL-TERRACE-E
+    height: 1.10 m
+    length: 6.0 m
+
+  // Terrace railing ?west
+  Railing: RL-TERRACE-W
+    height: 1.10 m
+    length: 6.0 m
+
+// =========================================================================
+// Compliance Checks
+// =========================================================================
+
+// Accessibility: doors must be minimum 0.90 m
+Check: min_door_width
+  description: "All doors must be at least 0.90 m wide for accessibility"
+  applies_to: Door
+  assert: width >= 0.90
+
+// Fire safety suite
+CheckSuite: fire_safety
+  description: "Fire safety compliance for residential buildings"
+  jurisdiction: DE
+  version: "2024"
+  section: "Section 4.2"
+
+  Check: ext_wall_fire_rating
+    description: "External load-bearing walls require REI90 fire rating"
+    applies_to: Wall
+    where: is_external == true
+    assert: fire_rating in [REI30, REI60, REI90, REI120]
+
+  Check: fire_door_rating
+    description: "External doors and stairwell doors need fire rating"
+    applies_to: Door
+    where: is_external == true
+    assert: fire_rating in [T30, T60, T90]
+
+  Check: stairwell_width
+    description: "Stairwells must be at least 1.20 m wide"
+    applies_to: Stair
+    assert: width >= 1.20

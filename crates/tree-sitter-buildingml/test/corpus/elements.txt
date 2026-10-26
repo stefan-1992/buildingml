@@ -1,0 +1,284 @@
+================================================================================
+Wall element with properties
+================================================================================
+
+### Storey: Ground Floor
+  Wall: W-01
+    height: 2.80 m
+    thickness: 0.24 m
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (element_declaration
+      (element_type)
+      (element_id)
+      (property
+        (simple_property
+          key: (property_key)
+          value: (number_with_unit
+            (number)
+            (unit))))
+      (property
+        (simple_property
+          key: (property_key)
+          value: (number_with_unit
+            (number)
+            (unit)))))))
+
+================================================================================
+Element with boolean property
+================================================================================
+
+### Storey: Ground Floor
+  Wall: W-01
+    is_external: true
+    load_bearing: false
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (element_declaration
+      (element_type)
+      (element_id)
+      (property
+        (simple_property
+          key: (property_key)
+          value: (boolean)))
+      (property
+        (simple_property
+          key: (property_key)
+          value: (boolean))))))
+
+================================================================================
+Nested elements (Window inside Wall)
+================================================================================
+
+### Storey: Ground Floor
+  Wall: W-01
+    height: 2.80 m
+    Window: WIN-01
+      width: 1.2 m
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (element_declaration
+      (element_type)
+      (element_id)
+      (property
+        (simple_property
+          key: (property_key)
+          value: (number_with_unit
+            (number)
+            (unit))))
+      (element_declaration
+        (element_type)
+        (element_id)
+        (property
+          (simple_property
+            key: (property_key)
+            value: (number_with_unit
+              (number)
+              (unit))))))))
+
+================================================================================
+Axis property
+================================================================================
+
+### Storey: Ground Floor
+  Wall: W-01
+    from: (0, 0) to: (6, 0)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (element_declaration
+      (element_type)
+      (element_id)
+      (property
+        (simple_property
+          key: (property_key)
+          value: (axis_value
+            from: (point
+              (number)
+              (number))
+            to: (point
+              (number)
+              (number))))))))
+
+================================================================================
+Polygon value (slab boundary)
+================================================================================
+
+### Storey: Ground Floor
+  Slab: S-01
+    boundary: [(0,0), (6,0), (6,5), (0,5)]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (element_declaration
+      (element_type)
+      (element_id)
+      (property
+        (simple_property
+          key: (property_key)
+          value: (polygon
+            (point
+              (number)
+              (number))
+            (point
+              (number)
+              (number))
+            (point
+              (number)
+              (number))
+            (point
+              (number)
+              (number))))))))
+
+================================================================================
+Profile value
+================================================================================
+
+### Storey: Ground Floor
+  Column: C-01
+    profile: rectangle(0.3, 0.3)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (element_declaration
+      (element_type)
+      (element_id)
+      (property
+        (simple_property
+          key: (property_key)
+          value: (profile
+            (profile_type)
+            (number)
+            (number)))))))
+
+================================================================================
+String value
+================================================================================
+
+# Site: Test
+  address: "Marktplatz 1, 92507 Nabburg"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (property
+      (simple_property
+        key: (property_key)
+        value: (string)))))
+
+================================================================================
+Identifier value (material reference)
+================================================================================
+
+### Storey: Ground Floor
+  Wall: W-01
+    material: reinforced_concrete
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (element_declaration
+      (element_type)
+      (element_id)
+      (property
+        (simple_property
+          key: (property_key)
+          value: (identifier))))))
+
+================================================================================
+List property (material layers)
+================================================================================
+
+Material: partition_100
+  layers:
+    - gypsum_board: 0.0125 m
+    // insulation core
+    - mineral-wool: 0.075 m
+  fire_rating: EI30
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (material_definition
+    (material_id)
+    (property
+      (list_property
+        key: (property_key)
+        (list_item
+          key: (identifier)
+          value: (number_with_unit
+            (number)
+            (unit)))
+        (comment)
+        (list_item
+          key: (element_ref)
+          value: (number_with_unit
+            (number)
+            (unit)))))
+    (property
+      (simple_property
+        key: (property_key)
+        value: (identifier)))))
+
+================================================================================
+Number list
+================================================================================
+
+Wall: CW-01
+  transoms: [1.1 m, 2]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (element_declaration
+    (element_type)
+    (element_id)
+    (property
+      (simple_property
+        key: (property_key)
+        value: (number_list
+          (number_with_unit
+            (number)
+            (unit))
+          (number))))))

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BuildingML Viewer</title>
+<style>
+:root {
+  --bg: #1e1e2e;
+  --surface: #252536;
+  --border: #383850;
+  --text: #cdd6f4;
+  --text-dim: #6c7086;
+  --accent: #89b4fa;
+  --error: #f38ba8;
+  --warning: #fab387;
+  --success: #a6e3a1;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+}
+#app {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 40px 1fr 200px;
+  height: 100vh;
+  gap: 1px;
+  background: var(--border);
+}
+#toolbar {
+  grid-column: 1 / -1;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 12px;
+}
+#toolbar h1 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+}
+#toolbar button {
+  background: var(--border);
+  border: none;
+  color: var(--text);
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+}
+#toolbar button:hover { background: var(--accent); color: var(--bg); }
+#toolbar .status {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+#editor-panel {
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+}
+#editor-panel .panel-header {
+  padding: 6px 12px;
+  font-size: 11px;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#editor {
+  flex: 1;
+  background: var(--bg);
+  color: var(--text);
+  border: none;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+  tab-size: 2;
+}
+#viewer-panel {
+  background: #000;
+  position: relative;
+}
+#canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+#viewer-overlay {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  pointer-events: none;
+}
+#diagnostics-panel {
+  grid-column: 1 / -1;
+  background: var(--surface);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+#diagnostics-panel .panel-header {
+  padding: 6px 12px;
+  font-size: 11px;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+}
+#diagnostics {
+  padding: 8px 12px;
+  font-size: 12px;
+  flex: 1;
+  overflow-y: auto;
+}
+.diag-error { color: var(--error); }
+.diag-warning { color: var(--warning); }
+.diag-info { color: var(--accent); }
+.diag-ok { color: var(--success); }
+.diag-item { padding: 2px 0; }
+#element-info {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(30,30,46,0.85);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 11px;
+  display: none;
+  max-width: 250px;
+}
+#element-info.visible { display: block; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="toolbar">
+    <h1>BuildingML</h1>
+    <a href="/floorplan" style="background:var(--border);color:var(--text);padding:4px 12px;border-radius:4px;font-size:12px;text-decoration:none;font-family:inherit;">Floorplan</a>
+    <button onclick="buildScene()">Build</button>
+    <button onclick="resetCamera()">Reset View</button>
+    <button onclick="toggleWireframe()">Wireframe</button>
+    <span class="status" id="status">Ready</span>
+  </div>
+  <div id="editor-panel">
+    <div class="panel-header">editor.bml</div>
+    <textarea id="editor" spellcheck="false"># Site: Example Residence
+  location: 49.4521, 12.1803
+
+## Building: House
+  type: residential
+
+### Storey: Ground Floor
+  elevation: 0.0 m
+  height: 2.80 m
+
+#### Space: Living Room
+  area: 30 m2
+
+  Wall: W-01
+    from: (0, 0) to: (6, 0)
+    height: 2.80 m
+    thickness: 0.24 m
+    Window: WIN-01
+      offset: 1.5 m
+      width: 1.8 m
+      height: 1.4 m
+      sill_height: 0.8 m
+
+  Wall: W-02
+    from: (6, 0) to: (6, 5)
+    height: 2.80 m
+    thickness: 0.24 m
+    Door: D-01
+      offset: 1.0 m
+      width: 0.9 m
+      height: 2.1 m
+
+  Wall: W-03
+    from: (6, 5) to: (0, 5)
+    height: 2.80 m
+    thickness: 0.24 m
+    Window: WIN-02
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.8 m
+
+  Wall: W-04
+    from: (0, 5) to: (0, 0)
+    height: 2.80 m
+    thickness: 0.24 m
+
+  Slab: SLAB-GF
+    boundary: [(0,0), (6,0), (6,5), (0,5)]
+    thickness: 0.22 m
+
+  Column: COL-01
+    position: (3, 2.5)
+    height: 2.80 m
+    profile: rectangle(0.3, 0.3)
+
+  Beam: B-01
+    from: (0, 2.5) to: (6, 2.5)
+    profile: rectangle(0.3, 0.4)
+</textarea>
+  </div>
+  <div id="viewer-panel">
+    <canvas id="canvas"></canvas>
+    <div id="viewer-overlay">Drag to rotate | Scroll to zoom | Shift+drag to pan</div>
+    <div id="element-info"></div>
+  </div>
+  <div id="diagnostics-panel">
+    <div class="panel-header">Diagnostics</div>
+    <div id="diagnostics"><span class="diag-ok">Ready. Press Build or Ctrl+Enter to render.</span></div>
+  </div>
+</div>
+
+<script>
+// ============================================================================
+// WebGL 3D Viewer
+// ============================================================================
+
+const canvas = document.getElementById('canvas');
+const gl = canvas.getContext('webgl', { antialias: true, alpha: false });
+
+if (!gl) {
+  document.getElementById('diagnostics').innerHTML =
+    '<span class="diag-error">WebGL not available in this browser.</span>';
+}
+
+// Shader sources
+const vsSource = `
+  attribute vec3 aPosition;
+  attribute vec3 aNormal;
+  uniform mat4 uProjection;
+  uniform mat4 uView;
+  uniform mat4 uModel;
+  varying vec3 vNormal;
+  varying vec3 vPosition;
+  void main() {
+    vec4 worldPos = uModel * vec4(aPosition, 1.0);
+    vPosition = worldPos.xyz;
+    vNormal = mat3(uModel) * aNormal;
+    gl_Position = uProjection * uView * worldPos;
+  }
+`;
+
+const fsSource = `
+  precision mediump float;
+  varying vec3 vNormal;
+  varying vec3 vPosition;
+  uniform vec4 uColor;
+  uniform vec3 uLightDir;
+  uniform vec3 uCameraPos;
+  void main() {
+    vec3 normal = normalize(vNormal);
+    // Ensure normals face the camera (two-sided lighting)
+    vec3 viewDir = normalize(uCameraPos - vPosition);
+    if (dot(normal, viewDir) < 0.0) normal = -normal;
+
+    float ambient = 0.25;
+    float diffuse = max(dot(normal, normalize(uLightDir)), 0.0) * 0.55;
+    // Secondary fill light from below-left
+    float fill = max(dot(normal, normalize(vec3(-0.5, -0.3, 0.4))), 0.0) * 0.2;
+    float lighting = ambient + diffuse + fill;
+    gl_FragColor = vec4(uColor.rgb * lighting, uColor.a);
+  }
+`;
+
+function createShader(gl, type, source) {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    console.error(gl.getShaderInfoLog(shader));
+    gl.deleteShader(shader);
+    return null;
+  }
+  return shader;
+}
+
+function createProgram(gl, vs, fs) {
+  const program = gl.createProgram();
+  gl.attachShader(program, vs);
+  gl.attachShader(program, fs);
+  gl.linkProgram(program);
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    console.error(gl.getProgramInfoLog(program));
+    return null;
+  }
+  return program;
+}
+
+const vs = createShader(gl, gl.VERTEX_SHADER, vsSource);
+const fs = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+const program = createProgram(gl, vs, fs);
+
+const locs = {
+  aPosition: gl.getAttribLocation(program, 'aPosition'),
+  aNormal: gl.getAttribLocation(program, 'aNormal'),
+  uProjection: gl.getUniformLocation(program, 'uProjection'),
+  uView: gl.getUniformLocation(program, 'uView'),
+  uModel: gl.getUniformLocation(program, 'uModel'),
+  uColor: gl.getUniformLocation(program, 'uColor'),
+  uLightDir: gl.getUniformLocation(program, 'uLightDir'),
+  uCameraPos: gl.getUniformLocation(program, 'uCameraPos'),
+};
+
+// Scene data
+let sceneMeshes = [];
+let wireframeMode = false;
+
+// Camera state (orbit camera)
+let camDist = 15;
+let camRotX = 0.6; // pitch
+let camRotY = 0.8;  // yaw
+let camTarget = [3, 2.5, 1.4]; // look-at point
+
+// ============================================================================
+// Matrix math (minimal, no dependencies)
+// ============================================================================
+
+function mat4Perspective(fov, aspect, near, far) {
+  const f = 1.0 / Math.tan(fov / 2);
+  const nf = 1 / (near - far);
+  return new Float32Array([
+    f / aspect, 0, 0, 0,
+    0, f, 0, 0,
+    0, 0, (far + near) * nf, -1,
+    0, 0, 2 * far * near * nf, 0
+  ]);
+}
+
+function mat4LookAt(eye, center, up) {
+  // z = normalize(eye - center) — points away from target
+  const zx = eye[0] - center[0], zy = eye[1] - center[1], zz = eye[2] - center[2];
+  let len = Math.hypot(zx, zy, zz);
+  const z = [zx/len, zy/len, zz/len];
+  // x (right) = normalize(cross(up, z))
+  const xx = up[1]*z[2] - up[2]*z[1], xy = up[2]*z[0] - up[0]*z[2], xz = up[0]*z[1] - up[1]*z[0];
+  len = Math.hypot(xx, xy, xz);
+  const x = [xx/len, xy/len, xz/len];
+  // y (view up) = cross(z, x) — not cross(x, z) — matches GLU convention
+  const y = [z[1]*x[2] - z[2]*x[1], z[2]*x[0] - z[0]*x[2], z[0]*x[1] - z[1]*x[0]];
+  return new Float32Array([
+    x[0], y[0], z[0], 0,
+    x[1], y[1], z[1], 0,
+    x[2], y[2], z[2], 0,
+    -(x[0]*eye[0]+x[1]*eye[1]+x[2]*eye[2]),
+    -(y[0]*eye[0]+y[1]*eye[1]+y[2]*eye[2]),
+    -(z[0]*eye[0]+z[1]*eye[1]+z[2]*eye[2]),
+    1
+  ]);
+}
+
+function mat4Identity() {
+  return new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1]);
+}
+
+function getCameraPos() {
+  const x = camTarget[0] + camDist * Math.cos(camRotX) * Math.sin(camRotY);
+  const y = camTarget[1] + camDist * Math.cos(camRotX) * Math.cos(camRotY);
+  const z = camTarget[2] + camDist * Math.sin(camRotX);
+  return [x, y, z];
+}
+
+// ============================================================================
+// Rendering
+// ============================================================================
+
+function resizeCanvas() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  canvas.style.width = rect.width + 'px';
+  canvas.style.height = rect.height + 'px';
+  gl.viewport(0, 0, canvas.width, canvas.height);
+}
+
+function render() {
+  resizeCanvas();
+
+  gl.clearColor(0.08, 0.08, 0.12, 1.0);
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  gl.enable(gl.DEPTH_TEST);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+  gl.useProgram(program);
+
+  const aspect = canvas.width / canvas.height;
+  const projection = mat4Perspective(Math.PI / 4, aspect, 0.1, 500);
+  const eye = getCameraPos();
+  const view = mat4LookAt(eye, camTarget, [0, 0, 1]);
+  const model = mat4Identity();
+
+  gl.uniformMatrix4fv(locs.uProjection, false, projection);
+  gl.uniformMatrix4fv(locs.uView, false, view);
+  gl.uniformMatrix4fv(locs.uModel, false, model);
+  gl.uniform3fv(locs.uLightDir, [0.5, 0.3, 0.8]);
+  gl.uniform3fv(locs.uCameraPos, eye);
+
+  // Sort: opaque first, then transparent
+  const opaque = sceneMeshes.filter(m => m.color[3] >= 1.0);
+  const transparent = sceneMeshes.filter(m => m.color[3] < 1.0);
+
+  for (const mesh of [...opaque, ...transparent]) {
+    if (mesh.color[3] < 1.0) {
+      gl.depthMask(false);
+    }
+    gl.uniform4fv(locs.uColor, mesh.color);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, mesh.vbo);
+    gl.enableVertexAttribArray(locs.aPosition);
+    gl.vertexAttribPointer(locs.aPosition, 3, gl.FLOAT, false, 24, 0);
+    gl.enableVertexAttribArray(locs.aNormal);
+    gl.vertexAttribPointer(locs.aNormal, 3, gl.FLOAT, false, 24, 12);
+
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, mesh.ibo);
+
+    if (wireframeMode) {
+      // Draw wireframe using LINE_STRIP per triangle
+      for (let i = 0; i < mesh.indexCount; i += 3) {
+        gl.drawElements(gl.LINE_LOOP, 3, gl.UNSIGNED_SHORT, i * 2);
+      }
+    } else {
+      gl.drawElements(gl.TRIANGLES, mesh.indexCount, gl.UNSIGNED_SHORT, 0);
+    }
+
+    if (mesh.color[3] < 1.0) {
+      gl.depthMask(true);
+    }
+  }
+
+  requestAnimationFrame(render);
+}
+
+// ============================================================================
+// Scene loading
+// ============================================================================
+
+function loadScene(sceneData) {
+  // Clean up old meshes
+  for (const mesh of sceneMeshes) {
+    gl.deleteBuffer(mesh.vbo);
+    gl.deleteBuffer(mesh.ibo);
+  }
+  sceneMeshes = [];
+
+  function loadNode(node) {
+    const verts = node.mesh.vertices;
+    const idxs = node.mesh.indices;
+    const color = node.mesh.color;
+
+    // Pack vertices into interleaved buffer: [px, py, pz, nx, ny, nz]
+    const vertData = new Float32Array(verts.length * 6);
+    for (let i = 0; i < verts.length; i++) {
+      vertData[i*6+0] = verts[i].position[0];
+      vertData[i*6+1] = verts[i].position[1];
+      vertData[i*6+2] = verts[i].position[2];
+      vertData[i*6+3] = verts[i].normal[0];
+      vertData[i*6+4] = verts[i].normal[1];
+      vertData[i*6+5] = verts[i].normal[2];
+    }
+    const idxData = new Uint16Array(idxs);
+
+    const vbo = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+    gl.bufferData(gl.ARRAY_BUFFER, vertData, gl.STATIC_DRAW);
+
+    const ibo = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, idxData, gl.STATIC_DRAW);
+
+    sceneMeshes.push({
+      id: node.id,
+      elementType: node.element_type,
+      label: node.label,
+      vbo, ibo,
+      indexCount: idxs.length,
+      color: new Float32Array(color),
+    });
+
+    // Load child nodes (windows, doors)
+    if (node.children) {
+      for (const child of node.children) {
+        loadNode(child);
+      }
+    }
+  }
+
+  for (const node of sceneData.nodes) {
+    loadNode(node);
+  }
+
+  // Auto-fit camera to scene bounds
+  fitCamera(sceneData);
+}
+
+function fitCamera(sceneData) {
+  let minX = Infinity, minY = Infinity, minZ = Infinity;
+  let maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
+
+  function scanNode(node) {
+    for (const v of node.mesh.vertices) {
+      minX = Math.min(minX, v.position[0]);
+      minY = Math.min(minY, v.position[1]);
+      minZ = Math.min(minZ, v.position[2]);
+      maxX = Math.max(maxX, v.position[0]);
+      maxY = Math.max(maxY, v.position[1]);
+      maxZ = Math.max(maxZ, v.position[2]);
+    }
+    if (node.children) node.children.forEach(scanNode);
+  }
+  sceneData.nodes.forEach(scanNode);
+
+  if (minX === Infinity) return;
+
+  camTarget = [
+    (minX + maxX) / 2,
+    (minY + maxY) / 2,
+    (minZ + maxZ) / 2,
+  ];
+
+  const dx = maxX - minX, dy = maxY - minY, dz = maxZ - minZ;
+  camDist = Math.max(dx, dy, dz) * 1.5;
+  camRotX = 0.5;
+  camRotY = 0.8;
+}
+
+// ============================================================================
+// Build (compile BML source to scene)
+// ============================================================================
+
+let buildTimeout = null;
+const API_BASE = (window.location.pathname.includes('/preview') || window.location.port)
+  ? '' : null;
+
+async function buildScene() {
+  const source = document.getElementById('editor').value;
+  const diagEl = document.getElementById('diagnostics');
+  const statusEl = document.getElementById('status');
+
+  statusEl.textContent = 'Building...';
+  diagEl.innerHTML = '';
+
+  try {
+    let sceneData;
+
+    if (API_BASE !== null) {
+      // Server mode: POST to /api/scene
+      const resp = await fetch('/api/scene', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: source,
+      });
+      if (!resp.ok) {
+        const err = await resp.text();
+        throw new Error(err);
+      }
+      sceneData = await resp.json();
+    } else if (typeof window.bml_generate_scene === 'function') {
+      // WASM mode
+      const json = window.bml_generate_scene(source);
+      sceneData = JSON.parse(json);
+    } else {
+      throw new Error('No backend available. Run via `buildingml preview` or load WASM module.');
+    }
+
+    loadScene(sceneData);
+
+    const nodeCount = sceneData.nodes.length;
+    let triCount = 0;
+    function countTris(node) {
+      triCount += node.mesh.indices.length / 3;
+      if (node.children) node.children.forEach(countTris);
+    }
+    sceneData.nodes.forEach(countTris);
+
+    statusEl.textContent = `${nodeCount} elements, ${triCount} triangles`;
+    diagEl.innerHTML = `<span class="diag-ok">Build successful: ${nodeCount} elements rendered.</span>`;
+  } catch (e) {
+    statusEl.textContent = 'Build failed';
+    diagEl.innerHTML = `<span class="diag-error">${escapeHtml(e.message)}</span>`;
+  }
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ============================================================================
+// Diagnostics (lint on type)
+// ============================================================================
+
+async function lintSource() {
+  const source = document.getElementById('editor').value;
+  const diagEl = document.getElementById('diagnostics');
+
+  try {
+    let diagnostics;
+
+    if (API_BASE !== null) {
+      const resp = await fetch('/api/lint', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: source,
+      });
+      diagnostics = await resp.json();
+    } else if (typeof window.bml_lint === 'function') {
+      diagnostics = JSON.parse(window.bml_lint(source));
+    } else {
+      return; // No backend
+    }
+
+    if (diagnostics.length === 0) {
+      diagEl.innerHTML = '<span class="diag-ok">No issues found.</span>';
+    } else {
+      diagEl.innerHTML = diagnostics.map(d => {
+        const cls = d.severity === 'error' ? 'diag-error' :
+                    d.severity === 'warning' ? 'diag-warning' : 'diag-info';
+        const loc = d.line ? `L${d.line}:${d.column || 0}` : '';
+        return `<div class="diag-item ${cls}">[${d.code}] ${loc} ${escapeHtml(d.message)}</div>`;
+      }).join('');
+    }
+  } catch (e) {
+    // Lint errors are non-fatal
+  }
+}
+
+// ============================================================================
+// Camera controls
+// ============================================================================
+
+let isDragging = false;
+let isPanning = false;
+let lastMouse = [0, 0];
+
+canvas.addEventListener('mousedown', (e) => {
+  isDragging = true;
+  isPanning = e.shiftKey;
+  lastMouse = [e.clientX, e.clientY];
+  e.preventDefault();
+});
+
+window.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  const dx = e.clientX - lastMouse[0];
+  const dy = e.clientY - lastMouse[1];
+  lastMouse = [e.clientX, e.clientY];
+
+  if (isPanning) {
+    // Pan: move target
+    const panSpeed = camDist * 0.002;
+    const cosY = Math.cos(camRotY), sinY = Math.sin(camRotY);
+    camTarget[0] -= (dx * cosY) * panSpeed;
+    camTarget[1] += (dx * sinY) * panSpeed;
+    camTarget[2] += dy * panSpeed;
+  } else {
+    // Orbit: rotate camera
+    camRotY -= dx * 0.005;
+    camRotX -= dy * 0.005;
+    camRotX = Math.max(-Math.PI / 2 + 0.01, Math.min(Math.PI / 2 - 0.01, camRotX));
+  }
+});
+
+window.addEventListener('mouseup', () => { isDragging = false; isPanning = false; });
+
+canvas.addEventListener('wheel', (e) => {
+  camDist *= e.deltaY > 0 ? 1.1 : 0.9;
+  camDist = Math.max(0.5, Math.min(200, camDist));
+  e.preventDefault();
+}, { passive: false });
+
+function resetCamera() {
+  camDist = 15;
+  camRotX = 0.5;
+  camRotY = 0.8;
+  camTarget = [3, 2.5, 1.4];
+}
+
+function toggleWireframe() {
+  wireframeMode = !wireframeMode;
+}
+
+// ============================================================================
+// Keyboard shortcuts
+// ============================================================================
+
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+    e.preventDefault();
+    buildScene();
+  }
+});
+
+// Auto-lint on input (debounced)
+document.getElementById('editor').addEventListener('input', () => {
+  if (buildTimeout) clearTimeout(buildTimeout);
+  buildTimeout = setTimeout(lintSource, 500);
+});
+
+// ============================================================================
+// Init
+// ============================================================================
+
+requestAnimationFrame(render);
+
+// Auto-build on load if server is available
+if (API_BASE !== null) {
+  setTimeout(async () => {
+    try {
+      const resp = await fetch('/api/source');
+      if (resp.ok) {
+        const source = await resp.text();
+        if (source.length > 0) {
+          document.getElementById('editor').value = source;
+        }
+      }
+    } catch (e) {
+      // Ignore fetch errors, fall back to default textarea content
+    }
+    buildScene();
+  }, 100);
+}
+</script>
+</body>
+</html>

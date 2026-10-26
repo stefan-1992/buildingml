@@ -1,0 +1,704 @@
+// Level 4 - Library pavilion and roof terrace
+// elevation 15.7 m, height 3.6 m
+// A twisted, fully glazed library pavilion sits on the office block. The rest
+// of the slab is a roof terrace with glass railings and planters. The east stair
+// core continues as a closed box on the terrace.
+
+import materials from "../materials.bml"
+import assets from "../assets/furniture.bml"
+
+# Site: Campus Nord
+
+## Building: Forum Nord
+
+### Storey: Level 4
+  elevation: 15.7 m
+  height: 3.6 m
+
+  Railing: RL-L4-E-STAIR
+    from: (41.725, 19.415) to: (43.675, 19.415)
+    height: 1.1 m
+    thickness: 0.05 m
+    material: stainless_steel
+
+  Wall: W-L4-E-EYE
+    from: (43.8, 19.175) to: (43.8, 21.875)
+    height: 1.1 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    is_external: false
+    load_bearing: false
+    fire_rating: REI90
+
+  Railing: RL-L4-W-STAIR
+    from: (0.175, 19.74) to: (1.8, 19.74)
+    height: 1.1 m
+    thickness: 0.05 m
+    material: stainless_steel
+
+  Wall: W-L4-W-EYE
+    from: (1.925, 19.5) to: (1.925, 22.2)
+    height: 1.1 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    is_external: false
+    load_bearing: false
+    fire_rating: REI90
+
+  // ------------------------------------------------------------------
+  // Floor slab / terrace with voids
+  // ------------------------------------------------------------------
+
+  Slab: SL-L4
+    boundary: { outer: [(36, 1.5), (37.49, 23.85), (0, 23.85), (0, 4)], holes: [[(23, 14.5), (34.5, 15), (35, 8.5), (24, 9)], [(5, 23.8), (7.7, 23.8), (7.7, 21), (5, 21)], [(3.675, 19.75), (2.05, 19.75), (2.05, 19.5), (1.8, 19.5), (1.8, 19.77), (0.175, 19.77), (0.175, 23.825), (3.675, 23.825)]] }
+    thickness: 0.41 m
+    material: floor_410
+    slab_type: floor
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Slab: SL-L4-CORE-E
+    boundary: { outer: [(46, 16), (46, 23.85), (38, 23.85), (38, 16)], holes: [[(45.875, 19.425), (43.925, 19.425), (43.925, 19.175), (43.675, 19.175), (43.675, 19.445), (41.725, 19.445), (41.725, 23.825), (45.875, 23.825)], [(38.2, 23.8), (40.9, 23.8), (40.9, 21), (38.2, 21)]] }
+    thickness: 0.41 m
+    material: floor_410
+    slab_type: floor
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Slab: SL-L4-TERRACE
+    boundary: [(44.038, 0.15), (43.844, 0.2), (49.757, 23.85), (46, 23.85), (46, 16), (38, 16), (38, 23.85), (37.49, 23.85), (36, 1.5), (0, 4), (0, 23.85), (-3.8, 23.85), (-3.8, 0.15)]
+    thickness: 0.41 m
+    material: terrace_410
+    slab_type: floor
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.18
+
+  // ------------------------------------------------------------------
+  // Pavilion glazing
+  // ------------------------------------------------------------------
+
+  Wall: CW-L4-S
+    from: (-0.04, 4.003) to: (36.04, 1.497)
+    height: 3.6 m
+    thickness: 0.08 m
+    mullions: [0, 1.458, 2.916, 4.375, 5.833, 7.291, 8.749, 10.207, 11.665, 13.124, 14.582, 16.04, 18.04, 19.55, 21.061, 22.572, 24.082, 25.592, 27.103, 28.613, 30.124, 31.634, 33.145, 34.655, 36.166]
+    transoms: [2.8 m]
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+    Door: D-L4-TERRACE-S
+      offset: 16.04 m
+      width: 2 m
+      height: 2.6 m
+      thermal_transmittance: 1.3
+      type: double_leaf
+
+  Wall: CW-L4-E
+    from: (36.013, 1.701) to: (37.486, 23.786)
+    height: 3.6 m
+    thickness: 0.08 m
+    mullions: [0, 1.266, 2.533, 3.799, 5.799, 7.284, 8.769, 10.254, 11.739, 13.224, 14.709, 16.194, 17.679, 19.164, 20.649, 22.134]
+    transoms: [2.8 m]
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+    Door: D-L4-TERRACE-E
+      offset: 3.799 m
+      width: 2 m
+      height: 2.6 m
+      thermal_transmittance: 1.3
+      type: double_leaf
+
+  Wall: CW-L4-N
+    from: (37.54, 24) to: (8, 24)
+    height: 3.6 m
+    thickness: 0.08 m
+    mullions: 1.5 m
+    transoms: [2.8 m]
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+  Wall: CW-L4-W
+    from: (0, 14) to: (0, 4.203)
+    height: 3.6 m
+    thickness: 0.08 m
+    mullions: [0, 1.333, 2.667, 4, 6, 7.266, 8.531, 9.797]
+    transoms: [2.8 m]
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+    Door: D-L4-TERRACE-W
+      offset: 4 m
+      width: 2 m
+      height: 2.6 m
+      thermal_transmittance: 1.3
+      type: double_leaf
+
+  Wall: W-L4-CORE-N
+    from: (8, 24) to: (0.15, 24)
+    height: 3.6 m
+    thickness: 0.3 m
+    material: ew_etics
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.26
+    acoustic_rating: 53
+
+  // ------------------------------------------------------------------
+  // West core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-L4-CW1
+    from: (0.2, 14) to: (7.875, 14)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L4-CW-LOBBY
+      offset: 4.8 m
+      width: 1.8 m
+      height: 2.3 m
+      fire_rating: T30
+      type: double_leaf
+
+  Wall: W-L4-CW2
+    from: (3.8, 14.125) to: (3.8, 23.85)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L4-CW-STAIR
+      offset: 0.375 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+      type: single_leaf
+
+  Wall: W-L4-CW3
+    from: (3.925, 20.8) to: (7.875, 20.8)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L4-CW-LIFT
+      offset: 1.475 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: EI30
+      type: single_leaf
+
+  Wall: W-L4-CW4
+    from: (8, 13.875) to: (8, 23.8)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-L4-CW5
+    from: (0, 24.15) to: (0, 14)
+    height: 3.6 m
+    thickness: 0.3 m
+    material: ew_etics
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.26
+    acoustic_rating: 53
+
+  // ------------------------------------------------------------------
+  // East core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-L4-CE1
+    from: (37.875, 16) to: (46.125, 16)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L4-CE-LOBBY
+      offset: 1.025 m
+      width: 1.6 m
+      height: 2.3 m
+      fire_rating: T30
+      type: double_leaf
+
+  Wall: W-L4-CE2
+    from: (46, 16.125) to: (46, 23.85)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-L4-CE3
+    from: (38, 16.125) to: (38, 23.85)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-L4-CE4
+    from: (41.6, 16.125) to: (41.6, 23.85)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L4-CE-STAIR
+      offset: 0.375 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+      type: single_leaf
+
+  Wall: W-L4-CE5
+    from: (38.125, 20.8) to: (41.475, 20.8)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L4-CE-LIFT
+      offset: 1.075 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: EI30
+      type: single_leaf
+
+  Wall: W-L4-CE6
+    from: (46.125, 24) to: (37.875, 24)
+    height: 3.6 m
+    thickness: 0.3 m
+    material: ew_etics
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.26
+    acoustic_rating: 53
+
+  // ------------------------------------------------------------------
+  // Group study rooms (glass boxes)
+  // ------------------------------------------------------------------
+
+  Wall: W-L4-STUDY-S
+    from: (8.125, 18) to: (36.897, 18)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glass_partition
+    load_bearing: false
+    acoustic_rating: 37
+
+    Door: D-L4-ST1
+      offset: 2.675 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-L4-ST2
+      offset: 9.675 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-L4-ST3
+      offset: 16.675 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-L4-ST4
+      offset: 23.675 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+  Wall: W-L4-STUDY-P1
+    from: (15, 18.04) to: (15, 23.8)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glass_partition
+    load_bearing: false
+    acoustic_rating: 37
+
+  Wall: W-L4-STUDY-P2
+    from: (22, 18.04) to: (22, 23.8)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glass_partition
+    load_bearing: false
+    acoustic_rating: 37
+
+  Wall: W-L4-STUDY-P3
+    from: (29, 18.04) to: (29, 23.8)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glass_partition
+    load_bearing: false
+    acoustic_rating: 37
+
+  Railing: RL-L4-ATR-1
+    from: (24, 9) to: (35, 8.5)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-L4-ATR-2
+    from: (35, 8.5) to: (34.5, 15)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-L4-ATR-3
+    from: (34.5, 15) to: (23, 14.5)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-L4-ATR-4
+    from: (23, 14.5) to: (24, 9)
+    height: 1.1 m
+    material: glazing
+
+  // ------------------------------------------------------------------
+  // Terrace: glass railings along the slab edge, planters
+  // ------------------------------------------------------------------
+
+  Railing: RL-L4-EDGE-S
+    from: (-4, 0) to: (44, 0)
+    height: 1.1 m
+    material: glazing
+    is_external: true
+
+  Railing: RL-L4-EDGE-E
+    from: (44, 0) to: (50, 24)
+    height: 1.1 m
+    material: glazing
+    is_external: true
+
+  Railing: RL-L4-EDGE-N1
+    from: (50, 24) to: (46.126, 24)
+    height: 1.1 m
+    material: glazing
+    is_external: true
+
+  Railing: RL-L4-EDGE-N2
+    from: (-0.151, 24) to: (-4, 24)
+    height: 1.1 m
+    material: glazing
+    is_external: true
+
+  Railing: RL-L4-EDGE-W
+    from: (-4, 24) to: (-4, 0)
+    height: 1.1 m
+    material: glazing
+    is_external: true
+
+  Proxy: PX-L4-PLANTER-1
+    boundary: [(-3, 0.4), (0, 0.4), (0, 1.1), (-3, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-2
+    boundary: [(3, 0.4), (6, 0.4), (6, 1.1), (3, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-3
+    boundary: [(9, 0.4), (12, 0.4), (12, 1.1), (9, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-4
+    boundary: [(15, 0.4), (18, 0.4), (18, 1.1), (15, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-5
+    boundary: [(21, 0.4), (24, 0.4), (24, 1.1), (21, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-6
+    boundary: [(27, 0.4), (30, 0.4), (30, 1.1), (27, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-7
+    boundary: [(38, 0.4), (41, 0.4), (41, 1.1), (38, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-W1
+    boundary: [(-3.4, 5), (-2.6, 5), (-2.6, 8), (-3.4, 8)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-W2
+    boundary: [(-3.4, 10), (-2.6, 10), (-2.6, 13), (-3.4, 13)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-W3
+    boundary: [(-3.4, 15), (-2.6, 15), (-2.6, 18), (-3.4, 18)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+#### Space: Group Study 4.11
+  usage: classroom
+  area: 42 m2
+  zone: library
+  boundary: [(8, 18), (15, 18), (15, 24), (8, 24)]
+
+  Covering: CL-GROUP-STUDY-4-11
+    predefined_type: ceiling
+    z_offset: 3.17 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-L4-ST1
+    asset: MeetingTable
+    position: (10, 19.8)
+
+#### Space: Group Study 4.12
+  usage: classroom
+  area: 42 m2
+  zone: library
+  boundary: [(15, 18), (22, 18), (22, 24), (15, 24)]
+
+  Covering: CL-GROUP-STUDY-4-12
+    predefined_type: ceiling
+    z_offset: 3.17 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-L4-ST2
+    asset: MeetingTable
+    position: (17, 19.8)
+
+#### Space: Group Study 4.13
+  usage: classroom
+  area: 42 m2
+  zone: library
+  boundary: [(22, 18), (29, 18), (29, 24), (22, 24)]
+
+  Covering: CL-GROUP-STUDY-4-13
+    predefined_type: ceiling
+    z_offset: 3.17 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-L4-ST3
+    asset: MeetingTable
+    position: (24, 19.8)
+
+#### Space: Group Study 4.14
+  usage: classroom
+  area: 49.8 m2
+  zone: library
+  boundary: [(29, 18), (37.1, 18), (37.5, 24), (29, 24)]
+
+  Covering: CL-GROUP-STUDY-4-14
+    predefined_type: ceiling
+    z_offset: 3.17 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-L4-ST4
+    asset: MeetingTable
+    position: (31, 19.8)
+
+#### Space: Library Reading Room
+  usage: classroom
+  area: 458.6 m2
+  zone: library
+  boundary: [(0, 4), (36, 1.5), (37.1, 18), (8, 18), (8, 14), (0, 14)]
+
+  Proxy: PX-L4-SHELF-01
+    boundary: [(9.5, 5.5), (11.5, 5.5), (11.5, 5.95), (9.5, 5.95)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-02
+    boundary: [(9.5, 8), (11.5, 8), (11.5, 8.45), (9.5, 8.45)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-03
+    boundary: [(12, 5.5), (14, 5.5), (14, 5.95), (12, 5.95)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-04
+    boundary: [(12, 8), (14, 8), (14, 8.45), (12, 8.45)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-05
+    boundary: [(14.5, 5.5), (16.5, 5.5), (16.5, 5.95), (14.5, 5.95)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-06
+    boundary: [(14.5, 8), (16.5, 8), (16.5, 8.45), (14.5, 8.45)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-07
+    boundary: [(17, 5.5), (19, 5.5), (19, 5.95), (17, 5.95)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-08
+    boundary: [(17, 8), (19, 8), (19, 8.45), (17, 8.45)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-09
+    boundary: [(19.5, 5.5), (21.5, 5.5), (21.5, 5.95), (19.5, 5.95)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-10
+    boundary: [(19.5, 8), (21.5, 8), (21.5, 8.45), (19.5, 8.45)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Furniture: FU-L4-RT01
+    asset: CafeTable
+    position: (10, 11)
+
+  Furniture: FU-L4-RT02
+    asset: CafeTable
+    position: (13, 11)
+
+  Furniture: FU-L4-RT03
+    asset: CafeTable
+    position: (16, 11)
+
+  Furniture: FU-L4-RT04
+    asset: CafeTable
+    position: (19, 11)
+
+  Furniture: FU-L4-RT05
+    asset: CafeTable
+    position: (25, 4)
+
+  Furniture: FU-L4-RT06
+    asset: CafeTable
+    position: (29, 4)
+
+  Furniture: FU-L4-RT07
+    asset: CafeTable
+    position: (33, 4)
+
+  Furniture: FU-L4-RT08
+    asset: CafeTable
+    position: (36, 8)
+
+  Furniture: FU-L4-RT09
+    asset: CafeTable
+    position: (36.24, 12)
+
+  Furniture: FU-L4-RT10
+    asset: CafeTable
+    position: (24, 16.2)
+
+  Furniture: FU-L4-RT11
+    asset: CafeTable
+    position: (28, 16.2)
+
+  Furniture: FU-L4-RT12
+    asset: CafeTable
+    position: (32, 16.2)
+
+  Furniture: FU-L4-RT13
+    asset: CafeTable
+    position: (2, 7)
+
+  Furniture: FU-L4-RT14
+    asset: CafeTable
+    position: (2, 10)
+
+#### Space: Roof Terrace
+  usage: terrace
+  area: 285.1 m2
+  zone: outdoor
+  boundary: [(-4, 0), (44, 0), (46.5, 10), (36.567, 10), (36, 1.5), (0, 4), (0, 24), (-4, 24)]
+
+  Furniture: FU-L4-TERR-1
+    asset: LoungeBench
+    position: (6.5, 1.6)
+
+  Furniture: FU-L4-TERR-2
+    asset: LoungeBench
+    position: (18.5, 1.6)
+
+  Furniture: FU-L4-TERR-3
+    asset: LoungeBench
+    position: (30.5, 2.02)
+
+#### Space: West Core L4
+  usage: staircase
+  area: 80 m2
+  zone: circulation
+  boundary: [(0, 14), (8, 14), (8, 24), (0, 24)]
+
+#### Space: East Core L4
+  usage: staircase
+  area: 64 m2
+  zone: circulation
+  boundary: [(38, 16), (46, 16), (46, 24), (38, 24)]

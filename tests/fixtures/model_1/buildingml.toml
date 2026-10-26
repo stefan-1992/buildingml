@@ -1,0 +1,9 @@
+buildingml_version = "0.1"
+ifc_version = "IFC4"
+output_format = "step"
+entry = "project.bml"
+
+[units]
+length = "m"
+area = "m2"
+angle = "deg"

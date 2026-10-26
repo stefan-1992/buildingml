@@ -1,0 +1,148 @@
+/// Common Furniture Test Fixture
+/// Instantiates all 25 standard assets grouped by category
+/// Layout: 6 rows × up to 5 columns, each row = one category
+
+import assets from "../../assets/common-furniture.bml"
+
+# Site: Furniture Test Site
+  location: 0, 0
+
+## Building: Showroom
+
+### Storey: Ground Floor
+  elevation: 0 m
+  height: 5.0 m
+
+  Wall: W-N
+    from: (0, 0) to: (20, 0)
+    height: 5.0 m
+    thickness: 0.2
+
+  Wall: W-E
+    from: (20, 0) to: (20, 26)
+    height: 5.0 m
+    thickness: 0.2
+
+  Wall: W-S
+    from: (20, 26) to: (0, 26)
+    height: 5.0 m
+    thickness: 0.2
+
+  Wall: W-W
+    from: (0, 26) to: (0, 0)
+    height: 5.0 m
+    thickness: 0.2
+
+  Slab: SLAB-TEST
+    boundary: [(0,0), (20,0), (20,26), (0,26)]
+    thickness: 0.2 m
+
+#### Space: Showroom Gallery
+  area: 520 m2
+  usage: lobby
+
+  // --- Bedroom (y=1): SingleBed, DoubleBed, KingBed, Wardrobe, Nightstand ---
+  Furniture: SINGLE_BED
+    asset: SingleBed
+    position: (1, 1)
+
+  Furniture: DOUBLE_BED
+    asset: DoubleBed
+    position: (4, 1)
+
+  Furniture: KING_BED
+    asset: KingBed
+    position: (7, 1)
+
+  Furniture: WARDROBE
+    asset: Wardrobe
+    position: (11, 1)
+
+  Furniture: NIGHTSTAND
+    asset: Nightstand
+    position: (14, 1)
+
+  // --- Living Room (y=6): Sofa, CoffeeTable, Bookshelf, Bench, Planter ---
+  Furniture: SOFA
+    asset: Sofa
+    position: (1, 6)
+
+  Furniture: COFFEE_TABLE
+    asset: CoffeeTable
+    position: (4, 6)
+
+  Furniture: BOOKSHELF
+    asset: Bookshelf
+    position: (7, 6)
+
+  Furniture: BENCH
+    asset: Bench
+    position: (10, 6)
+
+  Furniture: PLANTER
+    asset: Planter
+    position: (14, 6)
+
+  // --- Dining (y=11): DiningTable, DiningChair ---
+  Furniture: DINING_TABLE
+    asset: DiningTable
+    position: (1, 11)
+
+  Furniture: DINING_CHAIR
+    asset: DiningChair
+    position: (5, 11)
+
+  // --- Kitchen (y=14): KitchenCounter, Refrigerator, StoveOven, SinkUnit ---
+  Furniture: KITCHEN_COUNTER
+    asset: KitchenCounter
+    position: (1, 14)
+
+  Furniture: REFRIGERATOR
+    asset: Refrigerator
+    position: (3, 14)
+
+  Furniture: STOVE_OVEN
+    asset: StoveOven
+    position: (5, 14)
+
+  Furniture: SINK_UNIT
+    asset: SinkUnit
+    position: (7, 14)
+
+  // --- Bathroom (y=18): Toilet, Bathtub, ShowerTray, Washbasin ---
+  Furniture: TOILET
+    asset: Toilet
+    position: (1, 18)
+
+  Furniture: BATHTUB
+    asset: Bathtub
+    position: (3, 18)
+
+  Furniture: SHOWER_TRAY
+    asset: ShowerTray
+    position: (7, 18)
+
+  Furniture: WASHBASIN
+    asset: Washbasin
+    position: (10, 18)
+
+  // --- Office (y=22): OfficeDesk, OfficeChair, MeetingTable, FilingCabinet, MonitorStand ---
+  Furniture: DESK
+    asset: OfficeDesk
+    position: (1, 22)
+
+  Furniture: OFFICE_CHAIR
+    asset: OfficeChair
+    position: (4, 22)
+
+  Furniture: MEETING_TABLE
+    asset: MeetingTable
+    position: (6, 22)
+
+  Furniture: FILING_CABINET
+    asset: FilingCabinet
+    position: (11, 22)
+
+  Furniture: MONITOR_STAND
+    asset: MonitorStand
+    position: (13, 22)

@@ -1,0 +1,52 @@
+// Furniture asset library for residential building
+// Reusable furniture definitions
+
+# AssetLibrary: Residential Furniture
+
+## Asset: BasicDesk
+  category: office
+  width: 1.2 m
+  depth: 0.6 m
+  height: 0.75 m
+
+### Part: DeskTop
+  geometry: box(1.2, 0.6, 0.03)
+  position: (0, 0, 0.72)
+
+### Part: LeftLeg
+  geometry: box(0.05, 0.5, 0.72)
+  position: (0.05, 0.05, 0)
+
+### Part: RightLeg
+  geometry: box(0.05, 0.5, 0.72)
+  position: (1.1, 0.05, 0)
+
+## Asset: BasicChair
+  category: seating
+  width: 0.5 m
+  depth: 0.5 m
+  height: 0.85 m
+
+### Part: Seat
+  geometry: box(0.45, 0.45, 0.05)
+  position: (0.025, 0.025, 0.42)
+
+### Part: Backrest
+  geometry: box(0.45, 0.05, 0.40)
+  position: (0.025, 0.0, 0.47)
+
+### Part: FrontLeftLeg
+  geometry: cylinder(0.02, 0.42)
+  position: (0.07, 0.4, 0)
+
+### Part: FrontRightLeg
+  geometry: cylinder(0.02, 0.42)
+  position: (0.43, 0.4, 0)
+
+### Part: RearLeftLeg
+  geometry: cylinder(0.02, 0.42)
+  position: (0.07, 0.07, 0)
+
+### Part: RearRightLeg
+  geometry: cylinder(0.02, 0.42)
+  position: (0.43, 0.07, 0)

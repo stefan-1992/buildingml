@@ -1,0 +1,1275 @@
+[
+  {
+    "type": "axis_value",
+    "named": true,
+    "fields": {
+      "from": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "point",
+            "named": true
+          },
+          {
+            "type": "point3d",
+            "named": true
+          }
+        ]
+      },
+      "to": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "point",
+            "named": true
+          },
+          {
+            "type": "point3d",
+            "named": true
+          }
+        ]
+      },
+      "via": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "point",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "check_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "check_declaration",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "doc_comment",
+          "named": true
+        },
+        {
+          "type": "element_declaration",
+          "named": true
+        },
+        {
+          "type": "element_id",
+          "named": true
+        },
+        {
+          "type": "property",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "check_suite_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "check_declaration",
+          "named": true
+        },
+        {
+          "type": "check_suite_name",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "doc_comment",
+          "named": true
+        },
+        {
+          "type": "property",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "check_suite_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "comment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "comparison_expression",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "number_with_unit",
+            "named": true
+          },
+          {
+            "type": "path_expression",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "number_with_unit",
+            "named": true
+          },
+          {
+            "type": "path_expression",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "comparison_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "doc_comment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "element_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "check_declaration",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "doc_comment",
+          "named": true
+        },
+        {
+          "type": "element_declaration",
+          "named": true
+        },
+        {
+          "type": "element_id",
+          "named": true
+        },
+        {
+          "type": "element_type",
+          "named": true
+        },
+        {
+          "type": "property",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "element_ref",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_call",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "number_with_unit",
+          "named": true
+        },
+        {
+          "type": "path_expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "geometry_primitive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "geometry_type",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "polygon",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "check_declaration",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "doc_comment",
+          "named": true
+        },
+        {
+          "type": "element_declaration",
+          "named": true
+        },
+        {
+          "type": "heading_marker",
+          "named": true
+        },
+        {
+          "type": "heading_name",
+          "named": true
+        },
+        {
+          "type": "property",
+          "named": true
+        },
+        {
+          "type": "spatial_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "import_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "path": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "in_expression",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "number_with_unit",
+            "named": true
+          },
+          {
+            "type": "path_expression",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enum_list",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "list_item",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "element_ref",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "axis_value",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "comparison_expression",
+            "named": true
+          },
+          {
+            "type": "element_ref",
+            "named": true
+          },
+          {
+            "type": "enum_list",
+            "named": true
+          },
+          {
+            "type": "geometry_primitive",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "in_expression",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "number_list",
+            "named": true
+          },
+          {
+            "type": "number_pair",
+            "named": true
+          },
+          {
+            "type": "number_with_unit",
+            "named": true
+          },
+          {
+            "type": "path_expression",
+            "named": true
+          },
+          {
+            "type": "point",
+            "named": true
+          },
+          {
+            "type": "point3d",
+            "named": true
+          },
+          {
+            "type": "polygon",
+            "named": true
+          },
+          {
+            "type": "polygon_with_holes",
+            "named": true
+          },
+          {
+            "type": "profile",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "list_property",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "property_key",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "list_item",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "material_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "check_declaration",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "doc_comment",
+          "named": true
+        },
+        {
+          "type": "element_declaration",
+          "named": true
+        },
+        {
+          "type": "material_id",
+          "named": true
+        },
+        {
+          "type": "property",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "number_array",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "number_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "number_with_unit",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "number_pair",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "number_with_unit",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "unit",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "nurbs",
+    "named": true,
+    "fields": {
+      "degree": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      },
+      "knots": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "number_array",
+            "named": true
+          }
+        ]
+      },
+      "weights": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "number_array",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "point",
+          "named": true
+        },
+        {
+          "type": "point3d",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "path_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "point",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "point3d",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "polygon",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "nurbs",
+          "named": true
+        },
+        {
+          "type": "point",
+          "named": true
+        },
+        {
+          "type": "point3d",
+          "named": true
+        },
+        {
+          "type": "smooth_point",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "polygon_with_holes",
+    "named": true,
+    "fields": {
+      "holes": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "polygon",
+            "named": true
+          }
+        ]
+      },
+      "outer": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "polygon",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "profile",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "profile_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "property",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "list_property",
+          "named": true
+        },
+        {
+          "type": "simple_property",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "simple_property",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "property_key",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "axis_value",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "comparison_expression",
+            "named": true
+          },
+          {
+            "type": "element_ref",
+            "named": true
+          },
+          {
+            "type": "enum_list",
+            "named": true
+          },
+          {
+            "type": "geometry_primitive",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "in_expression",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "number_list",
+            "named": true
+          },
+          {
+            "type": "number_pair",
+            "named": true
+          },
+          {
+            "type": "number_with_unit",
+            "named": true
+          },
+          {
+            "type": "path_expression",
+            "named": true
+          },
+          {
+            "type": "point",
+            "named": true
+          },
+          {
+            "type": "point3d",
+            "named": true
+          },
+          {
+            "type": "polygon",
+            "named": true
+          },
+          {
+            "type": "polygon_with_holes",
+            "named": true
+          },
+          {
+            "type": "profile",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "smooth_point",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "point",
+          "named": true
+        },
+        {
+          "type": "point3d",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "check_declaration",
+          "named": true
+        },
+        {
+          "type": "check_suite_declaration",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "doc_comment",
+          "named": true
+        },
+        {
+          "type": "element_declaration",
+          "named": true
+        },
+        {
+          "type": "heading",
+          "named": true
+        },
+        {
+          "type": "import_statement",
+          "named": true
+        },
+        {
+          "type": "material_definition",
+          "named": true
+        },
+        {
+          "type": "template_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "template_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "check_declaration",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "doc_comment",
+          "named": true
+        },
+        {
+          "type": "element_declaration",
+          "named": true
+        },
+        {
+          "type": "property",
+          "named": true
+        },
+        {
+          "type": "template_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
+    "named": false
+  },
+  {
+    "type": ".",
+    "named": false
+  },
+  {
+    "type": "//",
+    "named": false
+  },
+  {
+    "type": "///",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": "Check",
+    "named": false
+  },
+  {
+    "type": "CheckSuite",
+    "named": false
+  },
+  {
+    "type": "Material",
+    "named": false
+  },
+  {
+    "type": "Template",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "boolean",
+    "named": true
+  },
+  {
+    "type": "comparison_op",
+    "named": true
+  },
+  {
+    "type": "degree",
+    "named": false
+  },
+  {
+    "type": "element_id",
+    "named": true
+  },
+  {
+    "type": "element_ref",
+    "named": true
+  },
+  {
+    "type": "element_type",
+    "named": true
+  },
+  {
+    "type": "from",
+    "named": false
+  },
+  {
+    "type": "geometry_type",
+    "named": true
+  },
+  {
+    "type": "heading_marker",
+    "named": true
+  },
+  {
+    "type": "holes",
+    "named": false
+  },
+  {
+    "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "import",
+    "named": false
+  },
+  {
+    "type": "in",
+    "named": false
+  },
+  {
+    "type": "knots",
+    "named": false
+  },
+  {
+    "type": "material_id",
+    "named": true
+  },
+  {
+    "type": "number",
+    "named": true
+  },
+  {
+    "type": "nurbs",
+    "named": false
+  },
+  {
+    "type": "outer",
+    "named": false
+  },
+  {
+    "type": "points",
+    "named": false
+  },
+  {
+    "type": "profile_type",
+    "named": true
+  },
+  {
+    "type": "property_key",
+    "named": true
+  },
+  {
+    "type": "smooth",
+    "named": false
+  },
+  {
+    "type": "spatial_type",
+    "named": true
+  },
+  {
+    "type": "string",
+    "named": true
+  },
+  {
+    "type": "template_id",
+    "named": true
+  },
+  {
+    "type": "to",
+    "named": false
+  },
+  {
+    "type": "unit",
+    "named": true
+  },
+  {
+    "type": "via",
+    "named": false
+  },
+  {
+    "type": "weights",
+    "named": false
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  }
+]

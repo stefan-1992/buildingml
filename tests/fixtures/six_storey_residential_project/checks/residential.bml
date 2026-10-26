@@ -1,0 +1,32 @@
+// Compliance checks for residential building
+// Accessibility and fire safety rules
+
+// Accessibility: doors must be minimum 0.90 m
+Check: min_door_width
+  description: "All doors must be at least 0.90 m wide for accessibility"
+  applies_to: Door
+  assert: width >= 0.90
+
+// Fire safety suite
+CheckSuite: fire_safety
+  description: "Fire safety compliance for residential buildings"
+  jurisdiction: DE
+  version: "2024"
+  section: "Section 4.2"
+
+  Check: ext_wall_fire_rating
+    description: "External load-bearing walls require REI90 fire rating"
+    applies_to: Wall
+    where: is_external == true
+    assert: fire_rating in [REI30, REI60, REI90, REI120]
+
+  Check: fire_door_rating
+    description: "External doors and stairwell doors need fire rating"
+    applies_to: Door
+    where: is_external == true
+    assert: fire_rating in [T30, T60, T90]
+
+  Check: stairwell_width
+    description: "Stairwells must be at least 1.20 m wide"
+    applies_to: Stair
+    assert: width >= 1.20

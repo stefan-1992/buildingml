@@ -1,0 +1,111 @@
+{
+  "name": "buildingml",
+  "displayName": "BuildingML",
+  "description": "Language support for BuildingML — Building Information Modeling in a markdown-inspired DSL",
+  "version": "0.1.9",
+  "publisher": "buildingml",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stefan-1992/buildingml"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:buildingml"
+  ],
+  "main": "./out/extension.js",
+  "extensionKind": ["workspace"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "buildingml",
+        "aliases": [
+          "BuildingML",
+          "BML"
+        ],
+        "extensions": [
+          ".bml"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "buildingml",
+        "scopeName": "source.bml",
+        "path": "./syntaxes/buildingml.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "buildingml.restartServer",
+        "title": "BuildingML: Restart Language Server"
+      },
+      {
+        "command": "buildingml.preview",
+        "title": "BuildingML: Open 3D Preview",
+        "icon": "$(preview)"
+      },
+      {
+        "command": "buildingml.exportIfc",
+        "title": "BuildingML: Export to IFC",
+        "icon": "$(export)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "resourceLangId == buildingml || resourceExtname == .ifc",
+          "command": "buildingml.preview",
+          "group": "navigation"
+        },
+        {
+          "when": "resourceLangId == buildingml",
+          "command": "buildingml.exportIfc",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "BuildingML",
+      "properties": {
+        "buildingml.server.path": {
+          "type": "string",
+          "default": "buildingml",
+          "description": "Path to the BuildingML language server binary"
+        },
+        "buildingml.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the BuildingML language server"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build:shared && npm run compile",
+    "build:shared": "cd ../../web && npm run build:lib",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.75.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

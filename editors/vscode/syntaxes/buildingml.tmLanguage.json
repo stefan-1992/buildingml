@@ -1,0 +1,143 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "BuildingML",
+  "scopeName": "source.bml",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#imports" },
+    { "include": "#headings" },
+    { "include": "#material-definition" },
+    { "include": "#element-declaration" },
+    { "include": "#properties" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.documentation.bml",
+          "match": "///.*$"
+        },
+        {
+          "name": "comment.line.double-slash.bml",
+          "match": "//.*$"
+        }
+      ]
+    },
+    "imports": {
+      "match": "^(import)\\s+(\\w+)\\s+(from)\\s+(\"[^\"]*\")",
+      "captures": {
+        "1": { "name": "keyword.control.import.bml" },
+        "2": { "name": "entity.name.module.bml" },
+        "3": { "name": "keyword.control.from.bml" },
+        "4": { "name": "string.quoted.double.bml" }
+      }
+    },
+    "headings": {
+      "patterns": [
+        {
+          "match": "^(#{1,4})\\s+(Site|Building|Storey|Space)(:)\\s*(.*)",
+          "captures": {
+            "1": { "name": "markup.heading.bml punctuation.definition.heading.bml" },
+            "2": { "name": "storage.type.spatial.bml" },
+            "3": { "name": "punctuation.separator.colon.bml" },
+            "4": { "name": "entity.name.section.bml" }
+          }
+        }
+      ]
+    },
+    "material-definition": {
+      "match": "^(Material)(:)\\s*(\\S+)",
+      "captures": {
+        "1": { "name": "storage.type.material.bml" },
+        "2": { "name": "punctuation.separator.colon.bml" },
+        "3": { "name": "entity.name.type.material.bml" }
+      }
+    },
+    "element-declaration": {
+      "match": "^\\s*(Wall|Slab|Column|Beam|Window|Door|Roof|Stair|Railing|Ramp|Furniture|Grid|Dimension|Check|CheckSuite)(:)\\s*(\\S+)",
+      "captures": {
+        "1": { "name": "storage.type.element.bml" },
+        "2": { "name": "punctuation.separator.colon.bml" },
+        "3": { "name": "entity.name.tag.element-id.bml" }
+      }
+    },
+    "properties": {
+      "patterns": [
+        { "include": "#axis-property" },
+        { "include": "#simple-property" }
+      ]
+    },
+    "axis-property": {
+      "match": "^\\s*(from)(:)\\s*(\\([^)]+\\))\\s+(to)(:)\\s*(\\([^)]+\\))",
+      "captures": {
+        "1": { "name": "variable.other.property.bml" },
+        "2": { "name": "punctuation.separator.colon.bml" },
+        "3": { "name": "constant.numeric.point.bml" },
+        "4": { "name": "keyword.operator.to.bml" },
+        "5": { "name": "punctuation.separator.colon.bml" },
+        "6": { "name": "constant.numeric.point.bml" }
+      }
+    },
+    "simple-property": {
+      "begin": "^\\s*(\\w+)(:)\\s*",
+      "beginCaptures": {
+        "1": { "name": "variable.other.property.bml" },
+        "2": { "name": "punctuation.separator.colon.bml" }
+      },
+      "end": "$",
+      "patterns": [
+        { "include": "#values" }
+      ]
+    },
+    "values": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.bml",
+          "match": "\"[^\"]*\""
+        },
+        {
+          "name": "keyword.other.curve.bml",
+          "match": "\\b(smooth|nurbs)\\b"
+        },
+        {
+          "name": "constant.language.boolean.bml",
+          "match": "\\b(true|false)\\b"
+        },
+        {
+          "match": "(\\d+\\.?\\d*)\\s+(m2|m3|m|cm|mm|ft|in|W/m2K|dB|kg/m3|deg)",
+          "captures": {
+            "1": { "name": "constant.numeric.bml" },
+            "2": { "name": "keyword.other.unit.bml" }
+          }
+        },
+        {
+          "name": "constant.numeric.bml",
+          "match": "-?\\d+\\.?\\d*"
+        },
+        {
+          "match": "(rectangle|circle|i_profile)(\\()",
+          "captures": {
+            "1": { "name": "support.function.profile.bml" },
+            "2": { "name": "punctuation.section.parens.begin.bml" }
+          }
+        },
+        {
+          "name": "constant.numeric.point.bml",
+          "match": "\\([^)]+\\)"
+        },
+        {
+          "name": "constant.other.polygon.bml",
+          "match": "\\[[^\\]]+\\]"
+        },
+        {
+          "name": "constant.other.enum.bml",
+          "match": "\\b(residential|commercial|industrial|educational|healthcare|mixed_use|living|bedroom|kitchen|bathroom|office|classroom|corridor|staircase|escape_route|circulation|storage|garage|utility|single_glazed|double_glazed|triple_glazed|fixed|casement|sliding|single_leaf|double_leaf|revolving|folding|straight|l_shaped|u_shaped|spiral|gable|hip|flat|mansard|shed|floor|roof|landing|REI30|REI60|REI90|REI120|T30|T60|T90)\\b"
+        },
+        {
+          "name": "variable.other.reference.bml",
+          "match": "[a-zA-Z][a-zA-Z0-9_-]*"
+        }
+      ]
+    }
+  }
+}

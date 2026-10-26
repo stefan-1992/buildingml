@@ -1,0 +1,58 @@
+// Plan curves written to IFC as exact curves: smooth outlines, a NURBS
+// outline, spline walls, and smooth railing, beam and duct paths.
+
+# Site: CurveSite
+
+## Building: CurveBuilding
+
+### Storey: Ground Floor
+  elevation: 0 m
+  height: 3.5 m
+
+  Slab: SL-01
+    boundary: { outer: [(0, 0), smooth (10, -2), (20, 0), (20, 15), smooth (10, 18), (0, 15)], holes: [[smooth (8, 6), smooth (11, 5), smooth (12, 8), smooth (9, 9)]] }
+    thickness: 0.25 m
+
+  Wall: W-01
+    path: [(1, 1), smooth (5, 2.5), smooth (9, 2), (13, 4)]
+    height: 3 m
+    thickness: 0.3 m
+
+    Door: D-01
+      offset: 2 m
+      width: 1 m
+      height: 2.1 m
+
+    Window: WIN-01
+      offset: 6 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+  Footing: FT-01
+    under: [W-01]
+    width: 0.6 m
+    depth: 0.4 m
+
+  Wall: CW-01
+    path: [(2, 14), smooth (8, 12.5), smooth (14, 13.5), (18, 12)]
+    height: 3 m
+    thickness: 0.05 m
+    mullions: 1.5 m
+
+  Railing: RL-01
+    path: [(3, 8), smooth (5, 10), smooth (8, 10.5), (10, 11.5)]
+    height: 1 m
+
+  Beam: B-01
+    path: [(1, 6), smooth (6, 7), (11, 6)]
+    profile: rectangle(0.3, 0.5)
+    z_offset: 3 m
+
+  Duct: SA-01
+    diameter: 0.25 m
+    path: [(14, 3, 2.8), smooth (16, 5, 2.8), smooth (17, 8, 2.8), (19, 10, 2.8)]
+
+#### Space: Hall
+  boundary: [(14, 1), nurbs { degree: 3, points: [(14, 1), (16, -1), (18, 1), (19, 1)], weights: [1, 2, 1, 1], knots: [0, 0, 0, 0, 1, 1, 1, 1] }, (19, 6), (14, 6)]
+  height: 3 m

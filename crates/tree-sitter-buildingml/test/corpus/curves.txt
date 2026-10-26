@@ -1,0 +1,222 @@
+================================================================================
+Smooth point in a boundary
+================================================================================
+
+### Storey: L1
+  Slab: SL-L1
+    boundary: [(0, 0), smooth (10, -2), (20, 0), (20, 15), smooth (10, 18), (0, 15)]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (element_declaration
+      (element_type)
+      (element_id)
+      (property
+        (simple_property
+          (property_key)
+          (polygon
+            (point
+              (number)
+              (number))
+            (smooth_point
+              (point
+                (number)
+                (number)))
+            (point
+              (number)
+              (number))
+            (point
+              (number)
+              (number))
+            (smooth_point
+              (point
+                (number)
+                (number)))
+            (point
+              (number)
+              (number))))))))
+
+================================================================================
+Smooth run in a path
+================================================================================
+
+### Storey: L1
+  Wall: W-FACADE
+    path: [(0, 0), smooth (6, 2), smooth (12, 1), (18, 5)]
+    thickness: 0.3 m
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (element_declaration
+      (element_type)
+      (element_id)
+      (property
+        (simple_property
+          (property_key)
+          (polygon
+            (point
+              (number)
+              (number))
+            (smooth_point
+              (point
+                (number)
+                (number)))
+            (smooth_point
+              (point
+                (number)
+                (number)))
+            (point
+              (number)
+              (number)))))
+      (property
+        (simple_property
+          (property_key)
+          (number_with_unit
+            (number)
+            (unit)))))))
+
+================================================================================
+Smooth 3D path
+================================================================================
+
+### Storey: L1
+  Duct: SA-FLEX
+    path: [(0, 0, 3), smooth (2, 1, 3), (4, 0, 3.2)]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (element_declaration
+      (element_type)
+      (element_id)
+      (property
+        (simple_property
+          (property_key)
+          (polygon
+            (point3d
+              (number)
+              (number)
+              (number))
+            (smooth_point
+              (point3d
+                (number)
+                (number)
+                (number)))
+            (point3d
+              (number)
+              (number)
+              (number))))))))
+
+================================================================================
+Nurbs segment in a boundary
+================================================================================
+
+### Storey: L1
+  Slab: SL-L1
+    boundary: [(0, 0), nurbs { degree: 3, points: [(0, 0), (4, -3), (16, -3), (20, 0)], weights: [1, 1, 1, 1], knots: [0, 0, 0, 0, 1, 1, 1, 1] }, (20, 15), (0, 15)]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (element_declaration
+      (element_type)
+      (element_id)
+      (property
+        (simple_property
+          (property_key)
+          (polygon
+            (point
+              (number)
+              (number))
+            (nurbs
+              (number)
+              (point
+                (number)
+                (number))
+              (point
+                (number)
+                (number))
+              (point
+                (number)
+                (number))
+              (point
+                (number)
+                (number))
+              (number_array
+                (number)
+                (number)
+                (number)
+                (number))
+              (number_array
+                (number)
+                (number)
+                (number)
+                (number)
+                (number)
+                (number)
+                (number)
+                (number)))
+            (point
+              (number)
+              (number))
+            (point
+              (number)
+              (number))))))))
+
+================================================================================
+Nurbs without weights and knots
+================================================================================
+
+### Storey: L1
+  Slab: SL-L1
+    boundary: [(0, 0), nurbs { degree: 2, points: [(0, 0), (4, 3), (8, 0)] }, (8, 5)]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (element_declaration
+      (element_type)
+      (element_id)
+      (property
+        (simple_property
+          (property_key)
+          (polygon
+            (point
+              (number)
+              (number))
+            (nurbs
+              (number)
+              (point
+                (number)
+                (number))
+              (point
+                (number)
+                (number))
+              (point
+                (number)
+                (number)))
+            (point
+              (number)
+              (number))))))))

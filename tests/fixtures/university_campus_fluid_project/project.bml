@@ -1,0 +1,52 @@
+// Forum Nord - fictitious university building (multi-file project), fluid version
+//
+// Same building as university_campus_lod350_project/ (LOD 350, services included),
+// with plan curves (smooth through-points) replacing many right angles:
+//   - south curtain wall on levels 0-1 as a wave, mullions spaced along the curve
+//   - each upper slab with its own flowing south edge and smooth glass railings
+//   - pebble-shaped atrium void with closed smooth railings, skylight lantern on
+//     the roof as one closed curtain wall
+//   - Audimax as an oval drum (one spline wall), tiers and roof following it
+//   - library pavilion on level 4 with a closed smooth outline, roof eave 1 m out
+//   - round supply main on level 0 curving along the wave facade, flexible drops
+//     to the diffusers
+//   - clash check: only touching pairs left, furniture included
+//
+// Five levels plus roof, gross floor area about 6,900 m2:
+//   Level 0  Mensa with curved glazed bulge, foyer, kitchen, Audimax (double height)
+//   Level 1  Lecture rooms, seminar rooms, gallery around the atrium
+//   Level 2  Offices (template OfficeFloor), cantilever 4 m west
+//   Level 3  Offices (template OfficeFloor)
+//   Level 4  Glazed library pavilion with smooth outline + roof terrace
+//   Roof     Flat roof, skylight lantern over the atrium, PV array
+//
+// Layout key:
+//   x-axis: west -> east, y-axis: south (campus square) -> north
+//   Main block (0,0)-(44,0)-(50,24)-(0,24); east facade slanted
+//   Office floors extend to x = -4 (cantilever)
+//   Atrium void: pebble outline within x 23.9..34.3, y 9.1..14.4, levels 1-4, skylight on the roof
+//   West core x 0..8, y 14..24; east core x 38..46, y 16..24
+//   Audimax: oval drum east of the main block (one spline wall)
+
+import materials from "./materials.bml"
+import level0 from "./storeys/level-0.bml"
+import level1 from "./storeys/level-1.bml"
+import offices from "./storeys/level-2-3-offices.bml"
+import level4 from "./storeys/level-4.bml"
+import roof from "./storeys/roof.bml"
+import checks from "./checks/university.bml"
+import assets from "./assets/furniture.bml"
+import systems from "./services/systems.bml"
+import services_l23 from "./services/level-2-3.bml"
+import services_l0 from "./services/level-0.bml"
+import services_l1 from "./services/level-1.bml"
+import services_l4 from "./services/level-4.bml"
+import services_roof from "./services/roof.bml"
+
+# Site: Campus Nord
+  location: 48.2650, 11.6710
+  address: "Forumsplatz 1, 85748 Garching (fictitious)"
+
+## Building: Forum Nord
+  type: educational
+  year: 2028

@@ -1,0 +1,1490 @@
+// Levels 2-3 - Offices (template OfficeFloor, applied twice)
+// elevation 8.5 m / 12.1 m, height 3.6 m
+// The office floors cantilever 4 m west over the entrance plaza and sit above
+// the Audimax roof. Anthracite metal facade with ribbon windows and aluminium
+// sun fins to the south; full-height glazing on the west end and slanted east facade.
+// Variable: {f} = level code (L2, L3).
+// 
+// Template must be in the same file as its apply_template directives.
+
+import materials from "../materials.bml"
+import assets from "../assets/furniture.bml"
+
+Template: OfficeFloor
+
+  // ------------------------------------------------------------------
+  // Floor slab (cantilever x = -4..0) with atrium, stair and lift voids
+  // ------------------------------------------------------------------
+
+  Slab: SL-{f}
+    boundary: { outer: [(-4, 0), (44, 0), (50, 24), (-4, 24)], holes: [[(24, 9), (35, 8.5), (34.5, 15), (23, 14.5)], [(0.2, 14.3), (3.6, 14.3), (3.6, 23.7), (0.2, 23.7)], [(5, 21), (7.7, 21), (7.7, 23.8), (5, 23.8)], [(41.8, 16.2), (45.8, 16.2), (45.8, 23.8), (41.8, 23.8)], [(38.2, 21), (40.9, 21), (40.9, 23.8), (38.2, 23.8)]] }
+    thickness: 0.3 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  // ------------------------------------------------------------------
+  // Facades
+  // ------------------------------------------------------------------
+
+  Wall: W-{f}-S
+    from: (-4, 0) to: (44, 0)
+    height: 3.6 m
+    thickness: 0.3 m
+    material: facade_metal_anthracite
+    is_external: true
+    Window: WIN-{f}-S01
+      offset: 0.3 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-S02
+      offset: 4.3 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-S03
+      offset: 8.3 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-S04
+      offset: 12.3 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-S05
+      offset: 16.3 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-S06
+      offset: 20.3 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-S07
+      offset: 24.3 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-S08
+      offset: 28.3 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-S09
+      offset: 32.3 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-S10
+      offset: 36.3 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-S11
+      offset: 40.3 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-S12
+      offset: 44.3 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+
+  Member: FIN-{f}-S-01
+    boundary: [(-3.54, -0.66), (-3.46, -0.66), (-3.46, -0.16), (-3.54, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-02
+    boundary: [(-2.54, -0.66), (-2.46, -0.66), (-2.46, -0.16), (-2.54, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-03
+    boundary: [(-1.54, -0.66), (-1.46, -0.66), (-1.46, -0.16), (-1.54, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-04
+    boundary: [(-0.54, -0.66), (-0.46, -0.66), (-0.46, -0.16), (-0.54, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-05
+    boundary: [(0.46, -0.66), (0.54, -0.66), (0.54, -0.16), (0.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-06
+    boundary: [(1.46, -0.66), (1.54, -0.66), (1.54, -0.16), (1.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-07
+    boundary: [(2.46, -0.66), (2.54, -0.66), (2.54, -0.16), (2.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-08
+    boundary: [(3.46, -0.66), (3.54, -0.66), (3.54, -0.16), (3.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-09
+    boundary: [(4.46, -0.66), (4.54, -0.66), (4.54, -0.16), (4.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-10
+    boundary: [(5.46, -0.66), (5.54, -0.66), (5.54, -0.16), (5.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-11
+    boundary: [(6.46, -0.66), (6.54, -0.66), (6.54, -0.16), (6.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-12
+    boundary: [(7.46, -0.66), (7.54, -0.66), (7.54, -0.16), (7.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-13
+    boundary: [(8.46, -0.66), (8.54, -0.66), (8.54, -0.16), (8.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-14
+    boundary: [(9.46, -0.66), (9.54, -0.66), (9.54, -0.16), (9.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-15
+    boundary: [(10.46, -0.66), (10.54, -0.66), (10.54, -0.16), (10.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-16
+    boundary: [(11.46, -0.66), (11.54, -0.66), (11.54, -0.16), (11.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-17
+    boundary: [(12.46, -0.66), (12.54, -0.66), (12.54, -0.16), (12.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-18
+    boundary: [(13.46, -0.66), (13.54, -0.66), (13.54, -0.16), (13.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-19
+    boundary: [(14.46, -0.66), (14.54, -0.66), (14.54, -0.16), (14.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-20
+    boundary: [(15.46, -0.66), (15.54, -0.66), (15.54, -0.16), (15.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-21
+    boundary: [(16.46, -0.66), (16.54, -0.66), (16.54, -0.16), (16.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-22
+    boundary: [(17.46, -0.66), (17.54, -0.66), (17.54, -0.16), (17.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-23
+    boundary: [(18.46, -0.66), (18.54, -0.66), (18.54, -0.16), (18.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-24
+    boundary: [(19.46, -0.66), (19.54, -0.66), (19.54, -0.16), (19.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-25
+    boundary: [(20.46, -0.66), (20.54, -0.66), (20.54, -0.16), (20.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-26
+    boundary: [(21.46, -0.66), (21.54, -0.66), (21.54, -0.16), (21.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-27
+    boundary: [(22.46, -0.66), (22.54, -0.66), (22.54, -0.16), (22.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-28
+    boundary: [(23.46, -0.66), (23.54, -0.66), (23.54, -0.16), (23.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-29
+    boundary: [(24.46, -0.66), (24.54, -0.66), (24.54, -0.16), (24.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-30
+    boundary: [(25.46, -0.66), (25.54, -0.66), (25.54, -0.16), (25.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-31
+    boundary: [(26.46, -0.66), (26.54, -0.66), (26.54, -0.16), (26.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-32
+    boundary: [(27.46, -0.66), (27.54, -0.66), (27.54, -0.16), (27.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-33
+    boundary: [(28.46, -0.66), (28.54, -0.66), (28.54, -0.16), (28.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-34
+    boundary: [(29.46, -0.66), (29.54, -0.66), (29.54, -0.16), (29.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-35
+    boundary: [(30.46, -0.66), (30.54, -0.66), (30.54, -0.16), (30.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-36
+    boundary: [(31.46, -0.66), (31.54, -0.66), (31.54, -0.16), (31.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-37
+    boundary: [(32.46, -0.66), (32.54, -0.66), (32.54, -0.16), (32.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-38
+    boundary: [(33.46, -0.66), (33.54, -0.66), (33.54, -0.16), (33.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-39
+    boundary: [(34.46, -0.66), (34.54, -0.66), (34.54, -0.16), (34.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-40
+    boundary: [(35.46, -0.66), (35.54, -0.66), (35.54, -0.16), (35.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-41
+    boundary: [(36.46, -0.66), (36.54, -0.66), (36.54, -0.16), (36.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-42
+    boundary: [(37.46, -0.66), (37.54, -0.66), (37.54, -0.16), (37.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-43
+    boundary: [(38.46, -0.66), (38.54, -0.66), (38.54, -0.16), (38.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-44
+    boundary: [(39.46, -0.66), (39.54, -0.66), (39.54, -0.16), (39.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-45
+    boundary: [(40.46, -0.66), (40.54, -0.66), (40.54, -0.16), (40.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-46
+    boundary: [(41.46, -0.66), (41.54, -0.66), (41.54, -0.16), (41.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-47
+    boundary: [(42.46, -0.66), (42.54, -0.66), (42.54, -0.16), (42.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-48
+    boundary: [(43.46, -0.66), (43.54, -0.66), (43.54, -0.16), (43.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Wall: CW-{f}-E
+    from: (44, 0) to: (50, 24)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glazing
+    is_external: true
+
+  Member: MU-CW-{f}-E-01
+    boundary: [(44.465, 1.447), (44.479, 1.505), (44.285, 1.553), (44.271, 1.495)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-02
+    boundary: [(44.84, 2.947), (44.854, 3.005), (44.66, 3.053), (44.646, 2.995)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-03
+    boundary: [(45.215, 4.447), (45.229, 4.505), (45.035, 4.553), (45.021, 4.495)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-04
+    boundary: [(45.59, 5.947), (45.604, 6.005), (45.41, 6.053), (45.396, 5.995)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-05
+    boundary: [(45.965, 7.447), (45.979, 7.505), (45.785, 7.553), (45.771, 7.495)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-06
+    boundary: [(46.34, 8.947), (46.354, 9.005), (46.16, 9.053), (46.146, 8.995)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-07
+    boundary: [(46.715, 10.447), (46.729, 10.505), (46.535, 10.553), (46.521, 10.495)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-08
+    boundary: [(47.09, 11.947), (47.104, 12.005), (46.91, 12.053), (46.896, 11.995)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-09
+    boundary: [(47.465, 13.447), (47.479, 13.505), (47.285, 13.553), (47.271, 13.495)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-10
+    boundary: [(47.84, 14.947), (47.854, 15.005), (47.66, 15.053), (47.646, 14.995)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-11
+    boundary: [(48.215, 16.447), (48.229, 16.505), (48.035, 16.553), (48.021, 16.495)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-12
+    boundary: [(48.59, 17.947), (48.604, 18.005), (48.41, 18.053), (48.396, 17.995)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-13
+    boundary: [(48.965, 19.447), (48.979, 19.505), (48.785, 19.553), (48.771, 19.495)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-14
+    boundary: [(49.34, 20.947), (49.354, 21.005), (49.16, 21.053), (49.146, 20.995)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-E-15
+    boundary: [(49.715, 22.447), (49.729, 22.505), (49.535, 22.553), (49.521, 22.495)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: TR-CW-{f}-E
+    boundary: [(44.078, -0.019), (50.078, 23.981), (49.922, 24.019), (43.922, 0.019)]
+    height: 0.12 m
+    z_offset: 2.8 m
+    type: "transom"
+    material: aluminium_mullion
+
+  Wall: W-{f}-N
+    from: (50, 24) to: (-4, 24)
+    height: 3.6 m
+    thickness: 0.3 m
+    material: facade_metal_anthracite
+    is_external: true
+    Window: WIN-{f}-N00
+      offset: 1 m
+      width: 2 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-N01
+      offset: 38.65 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-N02
+      offset: 34.9 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-N03
+      offset: 31.15 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-N04
+      offset: 27.4 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-N05
+      offset: 23.65 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-N06
+      offset: 19.9 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-N07
+      offset: 16.15 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+    Window: WIN-{f}-N08
+      offset: 12.4 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+
+
+  Wall: CW-{f}-W
+    from: (-4, 24) to: (-4, 0)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glazing
+    is_external: true
+
+  Member: MU-CW-{f}-W-01
+    boundary: [(-4.1, 22.53), (-4.1, 22.47), (-3.9, 22.47), (-3.9, 22.53)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-02
+    boundary: [(-4.1, 21.03), (-4.1, 20.97), (-3.9, 20.97), (-3.9, 21.03)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-03
+    boundary: [(-4.1, 19.53), (-4.1, 19.47), (-3.9, 19.47), (-3.9, 19.53)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-04
+    boundary: [(-4.1, 18.03), (-4.1, 17.97), (-3.9, 17.97), (-3.9, 18.03)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-05
+    boundary: [(-4.1, 16.53), (-4.1, 16.47), (-3.9, 16.47), (-3.9, 16.53)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-06
+    boundary: [(-4.1, 15.03), (-4.1, 14.97), (-3.9, 14.97), (-3.9, 15.03)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-07
+    boundary: [(-4.1, 13.53), (-4.1, 13.47), (-3.9, 13.47), (-3.9, 13.53)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-08
+    boundary: [(-4.1, 12.03), (-4.1, 11.97), (-3.9, 11.97), (-3.9, 12.03)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-09
+    boundary: [(-4.1, 10.53), (-4.1, 10.47), (-3.9, 10.47), (-3.9, 10.53)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-10
+    boundary: [(-4.1, 9.03), (-4.1, 8.97), (-3.9, 8.97), (-3.9, 9.03)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-11
+    boundary: [(-4.1, 7.53), (-4.1, 7.47), (-3.9, 7.47), (-3.9, 7.53)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-12
+    boundary: [(-4.1, 6.03), (-4.1, 5.97), (-3.9, 5.97), (-3.9, 6.03)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-13
+    boundary: [(-4.1, 4.53), (-4.1, 4.47), (-3.9, 4.47), (-3.9, 4.53)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-14
+    boundary: [(-4.1, 3.03), (-4.1, 2.97), (-3.9, 2.97), (-3.9, 3.03)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-{f}-W-15
+    boundary: [(-4.1, 1.53), (-4.1, 1.47), (-3.9, 1.47), (-3.9, 1.53)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: TR-CW-{f}-W
+    boundary: [(-4.08, 24), (-4.08, 0), (-3.92, 0), (-3.92, 24)]
+    height: 0.12 m
+    z_offset: 2.8 m
+    type: "transom"
+    material: aluminium_mullion
+
+  // ------------------------------------------------------------------
+  // South office row (4 m modules) and corridor
+  // ------------------------------------------------------------------
+
+  Wall: W-{f}-SP01
+    from: (0, 0) to: (0, 5.5)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-SP02
+    from: (4, 0) to: (4, 5.5)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-SP03
+    from: (8, 0) to: (8, 5.5)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-SP04
+    from: (12, 0) to: (12, 5.5)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-SP05
+    from: (16, 0) to: (16, 5.5)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-SP06
+    from: (20, 0) to: (20, 5.5)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-SP07
+    from: (24, 0) to: (24, 5.5)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-SP08
+    from: (28, 0) to: (28, 5.5)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-SP09
+    from: (32, 0) to: (32, 5.5)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-SP10
+    from: (36, 0) to: (36, 5.5)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-SP11
+    from: (40, 0) to: (40, 5.5)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-CORR-S
+    from: (-4, 5.5) to: (45.375, 5.5)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+    Door: D-{f}-S01
+      offset: 2.6 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-S02
+      offset: 6.6 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-S03
+      offset: 10.6 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-S04
+      offset: 14.6 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-S05
+      offset: 18.6 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-S06
+      offset: 22.6 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-S07
+      offset: 26.6 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-S08
+      offset: 30.6 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-S09
+      offset: 34.6 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-S10
+      offset: 38.6 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-S11
+      offset: 42.6 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-S12
+      offset: 46.6 m
+      width: 1 m
+      height: 2.2 m
+
+
+  // ------------------------------------------------------------------
+  // North office row (3.75 m modules)
+  // ------------------------------------------------------------------
+
+  Wall: W-{f}-CORR-N
+    from: (8, 17) to: (38, 17)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+    Door: D-{f}-N01
+      offset: 2.4 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-N02
+      offset: 6.15 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-N03
+      offset: 9.9 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-N04
+      offset: 13.65 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-N05
+      offset: 17.4 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-N06
+      offset: 21.15 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-N07
+      offset: 24.9 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-{f}-N08
+      offset: 28.65 m
+      width: 1 m
+      height: 2.2 m
+
+
+  Wall: W-{f}-NP01
+    from: (11.75, 17) to: (11.75, 24)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-NP02
+    from: (15.5, 17) to: (15.5, 24)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-NP03
+    from: (19.25, 17) to: (19.25, 24)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-NP04
+    from: (23, 17) to: (23, 24)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-NP05
+    from: (26.75, 17) to: (26.75, 24)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-NP06
+    from: (30.5, 17) to: (30.5, 24)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  Wall: W-{f}-NP07
+    from: (34.25, 17) to: (34.25, 24)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+
+  // ------------------------------------------------------------------
+  // Glazed meeting rooms and copy room
+  // ------------------------------------------------------------------
+
+  Wall: W-{f}-MA1
+    from: (-4, 7.5) to: (4, 7.5)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glass_partition
+    Door: D-{f}-MA
+      offset: 6.2 m
+      width: 1 m
+      height: 2.2 m
+
+
+  Wall: W-{f}-MA2
+    from: (4, 7.5) to: (4, 13)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glass_partition
+
+  Wall: W-{f}-MA3
+    from: (4, 13) to: (-4, 13)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glass_partition
+
+  Wall: W-{f}-PANO
+    from: (-4, 14) to: (0, 14)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glass_partition
+    Door: D-{f}-PANO
+      offset: 2.6 m
+      width: 1 m
+      height: 2.2 m
+
+
+  Wall: W-{f}-COPY
+    from: (46, 16) to: (48, 16)
+    height: 3.6 m
+    thickness: 0.12 m
+    material: drywall
+    Door: D-{f}-COPY
+      offset: 0.5 m
+      width: 1 m
+      height: 2.2 m
+
+
+  // ------------------------------------------------------------------
+  // West core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-{f}-CW1
+    from: (0, 14) to: (8, 14)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-{f}-CW-LOBBY
+      offset: 2.8 m
+      width: 1.8 m
+      height: 2.3 m
+
+
+  Wall: W-{f}-CW2
+    from: (3.8, 14) to: (3.8, 24)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-{f}-CW-STAIR
+      offset: 0.5 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+
+
+  Wall: W-{f}-CW3
+    from: (3.8, 20.8) to: (8, 20.8)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-{f}-CW-LIFT
+      offset: 1.6 m
+      width: 1.1 m
+      height: 2.2 m
+
+
+  Wall: W-{f}-CW4
+    from: (8, 14) to: (8, 24)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+
+  Wall: W-{f}-CW5
+    from: (0, 24) to: (0, 14)
+    height: 3.6 m
+    thickness: 0.3 m
+    material: reinforced_concrete
+
+  // ------------------------------------------------------------------
+  // East core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-{f}-CE1
+    from: (38, 16) to: (46, 16)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-{f}-CE-LOBBY
+      offset: 0.9 m
+      width: 1.6 m
+      height: 2.3 m
+
+
+  Wall: W-{f}-CE2
+    from: (46, 16) to: (46, 24)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+
+  Wall: W-{f}-CE3
+    from: (38, 16) to: (38, 24)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+
+  Wall: W-{f}-CE4
+    from: (41.6, 16) to: (41.6, 24)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-{f}-CE-STAIR
+      offset: 0.5 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+
+
+  Wall: W-{f}-CE5
+    from: (38, 20.8) to: (41.6, 20.8)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-{f}-CE-LIFT
+      offset: 1.2 m
+      width: 1.1 m
+      height: 2.2 m
+
+
+  Railing: RL-{f}-ATR-1
+    from: (24, 9) to: (35, 8.5)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-{f}-ATR-2
+    from: (35, 8.5) to: (34.5, 15)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-{f}-ATR-3
+    from: (34.5, 15) to: (23, 14.5)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-{f}-ATR-4
+    from: (23, 14.5) to: (24, 9)
+    height: 1.1 m
+    material: glazing
+
+#### Space: Office {f}.S01
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(-4, 0), (0, 0), (0, 5.5), (-4, 5.5)]
+
+  Furniture: FU-{f}-S01A
+    asset: OfficeWorkstation
+    position: (-3.6, 1)
+
+  Furniture: FU-{f}-S01B
+    asset: OfficeWorkstation
+    position: (-2, 1)
+
+#### Space: Office {f}.S02
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(0, 0), (4, 0), (4, 5.5), (0, 5.5)]
+
+  Furniture: FU-{f}-S02A
+    asset: OfficeWorkstation
+    position: (0.4, 1)
+
+  Furniture: FU-{f}-S02B
+    asset: OfficeWorkstation
+    position: (2, 1)
+
+#### Space: Office {f}.S03
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(4, 0), (8, 0), (8, 5.5), (4, 5.5)]
+
+  Furniture: FU-{f}-S03A
+    asset: OfficeWorkstation
+    position: (4.4, 1)
+
+  Furniture: FU-{f}-S03B
+    asset: OfficeWorkstation
+    position: (6, 1)
+
+#### Space: Office {f}.S04
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(8, 0), (12, 0), (12, 5.5), (8, 5.5)]
+
+  Furniture: FU-{f}-S04A
+    asset: OfficeWorkstation
+    position: (8.4, 1)
+
+  Furniture: FU-{f}-S04B
+    asset: OfficeWorkstation
+    position: (10, 1)
+
+#### Space: Office {f}.S05
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(12, 0), (16, 0), (16, 5.5), (12, 5.5)]
+
+  Furniture: FU-{f}-S05A
+    asset: OfficeWorkstation
+    position: (12.4, 1)
+
+  Furniture: FU-{f}-S05B
+    asset: OfficeWorkstation
+    position: (14, 1)
+
+#### Space: Office {f}.S06
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(16, 0), (20, 0), (20, 5.5), (16, 5.5)]
+
+  Furniture: FU-{f}-S06A
+    asset: OfficeWorkstation
+    position: (16.4, 1)
+
+  Furniture: FU-{f}-S06B
+    asset: OfficeWorkstation
+    position: (18, 1)
+
+#### Space: Office {f}.S07
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(20, 0), (24, 0), (24, 5.5), (20, 5.5)]
+
+  Furniture: FU-{f}-S07A
+    asset: OfficeWorkstation
+    position: (20.4, 1)
+
+  Furniture: FU-{f}-S07B
+    asset: OfficeWorkstation
+    position: (22, 1)
+
+#### Space: Office {f}.S08
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(24, 0), (28, 0), (28, 5.5), (24, 5.5)]
+
+  Furniture: FU-{f}-S08A
+    asset: OfficeWorkstation
+    position: (24.4, 1)
+
+  Furniture: FU-{f}-S08B
+    asset: OfficeWorkstation
+    position: (26, 1)
+
+#### Space: Office {f}.S09
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(28, 0), (32, 0), (32, 5.5), (28, 5.5)]
+
+  Furniture: FU-{f}-S09A
+    asset: OfficeWorkstation
+    position: (28.4, 1)
+
+  Furniture: FU-{f}-S09B
+    asset: OfficeWorkstation
+    position: (30, 1)
+
+#### Space: Office {f}.S10
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(32, 0), (36, 0), (36, 5.5), (32, 5.5)]
+
+  Furniture: FU-{f}-S10A
+    asset: OfficeWorkstation
+    position: (32.4, 1)
+
+  Furniture: FU-{f}-S10B
+    asset: OfficeWorkstation
+    position: (34, 1)
+
+#### Space: Office {f}.S11
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(36, 0), (40, 0), (40, 5.5), (36, 5.5)]
+
+  Furniture: FU-{f}-S11A
+    asset: OfficeWorkstation
+    position: (36.4, 1)
+
+  Furniture: FU-{f}-S11B
+    asset: OfficeWorkstation
+    position: (38, 1)
+
+#### Space: Office {f}.S12
+  usage: office
+  area: 25.8 m2
+  zone: administration
+  boundary: [(40, 0), (44, 0), (45.375, 5.5), (40, 5.5)]
+
+  Furniture: FU-{f}-S12A
+    asset: OfficeWorkstation
+    position: (40.4, 1)
+
+  Furniture: FU-{f}-S12B
+    asset: OfficeWorkstation
+    position: (42, 1)
+
+#### Space: Office {f}.N01
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(8, 17), (11.75, 17), (11.75, 24), (8, 24)]
+
+  Furniture: FU-{f}-N01
+    asset: OfficeWorkstation
+    position: (9, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N02
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(11.75, 17), (15.5, 17), (15.5, 24), (11.75, 24)]
+
+  Furniture: FU-{f}-N02
+    asset: OfficeWorkstation
+    position: (12.75, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N03
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(15.5, 17), (19.25, 17), (19.25, 24), (15.5, 24)]
+
+  Furniture: FU-{f}-N03
+    asset: OfficeWorkstation
+    position: (16.5, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N04
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(19.25, 17), (23, 17), (23, 24), (19.25, 24)]
+
+  Furniture: FU-{f}-N04
+    asset: OfficeWorkstation
+    position: (20.25, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N05
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(23, 17), (26.75, 17), (26.75, 24), (23, 24)]
+
+  Furniture: FU-{f}-N05
+    asset: OfficeWorkstation
+    position: (24, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N06
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(26.75, 17), (30.5, 17), (30.5, 24), (26.75, 24)]
+
+  Furniture: FU-{f}-N06
+    asset: OfficeWorkstation
+    position: (27.75, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N07
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(30.5, 17), (34.25, 17), (34.25, 24), (30.5, 24)]
+
+  Furniture: FU-{f}-N07
+    asset: OfficeWorkstation
+    position: (31.5, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N08
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(34.25, 17), (38, 17), (38, 24), (34.25, 24)]
+
+  Furniture: FU-{f}-N08
+    asset: OfficeWorkstation
+    position: (35.25, 22.4)
+    rotation: 180
+
+#### Space: Meeting Room {f}.01
+  usage: office
+  area: 44 m2
+  zone: administration
+  boundary: [(-4, 7.5), (4, 7.5), (4, 13), (-4, 13)]
+
+  Furniture: FU-{f}-MA
+    asset: MeetingTable
+    position: (-1.5, 9)
+
+#### Space: Panorama Room {f}.02
+  usage: office
+  area: 40 m2
+  zone: administration
+  boundary: [(-4, 14), (0, 14), (0, 24), (-4, 24)]
+
+  Furniture: FU-{f}-PANO
+    asset: MeetingTable
+    position: (-2.6, 17.5)
+    rotation: 90
+
+#### Space: Copy Room {f}
+  usage: utility
+  area: 24 m2
+  zone: services
+  boundary: [(46, 16), (48, 16), (50, 24), (46, 24)]
+
+#### Space: Open Workspace {f}
+  usage: office
+  area: 426.7 m2
+  zone: administration
+  boundary: [(-4, 5.5), (45.375, 5.5), (48, 16), (38, 16), (38, 17), (8, 17), (8, 14), (-4, 14), (-4, 13), (4, 13), (4, 7.5), (-4, 7.5)]
+
+  Furniture: FU-{f}-OW01
+    asset: OfficeWorkstation
+    position: (9, 8.6)
+
+  Furniture: FU-{f}-OW02
+    asset: OfficeWorkstation
+    position: (9, 12.2)
+    rotation: 180
+
+  Furniture: FU-{f}-OW03
+    asset: OfficeWorkstation
+    position: (11, 8.6)
+
+  Furniture: FU-{f}-OW04
+    asset: OfficeWorkstation
+    position: (11, 12.2)
+    rotation: 180
+
+  Furniture: FU-{f}-OW05
+    asset: OfficeWorkstation
+    position: (13, 8.6)
+
+  Furniture: FU-{f}-OW06
+    asset: OfficeWorkstation
+    position: (13, 12.2)
+    rotation: 180
+
+  Furniture: FU-{f}-OW07
+    asset: OfficeWorkstation
+    position: (15, 8.6)
+
+  Furniture: FU-{f}-OW08
+    asset: OfficeWorkstation
+    position: (15, 12.2)
+    rotation: 180
+
+  Furniture: FU-{f}-OW09
+    asset: OfficeWorkstation
+    position: (17, 8.6)
+
+  Furniture: FU-{f}-OW10
+    asset: OfficeWorkstation
+    position: (17, 12.2)
+    rotation: 180
+
+  Furniture: FU-{f}-OW11
+    asset: OfficeWorkstation
+    position: (19, 8.6)
+
+  Furniture: FU-{f}-OW12
+    asset: OfficeWorkstation
+    position: (19, 12.2)
+    rotation: 180
+
+  Furniture: FU-{f}-LOUNGE-1
+    asset: LoungeBench
+    position: (38, 9)
+
+  Furniture: FU-{f}-LOUNGE-2
+    asset: CafeTable
+    position: (40.5, 11.5)
+
+#### Space: West Core {f}
+  usage: staircase
+  area: 80 m2
+  zone: circulation
+  boundary: [(0, 14), (8, 14), (8, 24), (0, 24)]
+
+#### Space: East Core {f}
+  usage: staircase
+  area: 64 m2
+  zone: circulation
+  boundary: [(38, 16), (46, 16), (46, 24), (38, 24)]
+
+# Site: Campus Nord
+
+## Building: Forum Nord
+
+### Storey: Level 2
+  elevation: 8.5 m
+  height: 3.6 m
+  apply_template: OfficeFloor
+  f: L2
+
+  Stair: ST-L2-W
+    from_storey: Level 2
+    to_storey: Level 3
+    type: straight
+    position: (0.4, 14.6)
+    width: 1.4 m
+    riser_count: 21
+    riser_height: 0.171 m
+    tread_depth: 0.27 m
+
+  Stair: ST-L2-E
+    from_storey: Level 2
+    to_storey: Level 3
+    type: straight
+    position: (42, 16.4)
+    width: 1.4 m
+    riser_count: 21
+    riser_height: 0.171 m
+    tread_depth: 0.27 m
+
+  // ------------------------------------------------------------------
+  // Audimax roof (green roof at the level 2 floor line)
+  // ------------------------------------------------------------------
+
+  Slab: RF-AUD
+    boundary: [(44.2, -0.6), (62.6, -4.7), (66.8, 26.8), (50.2, 24.4)]
+    thickness: 0.45 m
+    z_offset: 0.45 m
+    material: green_roof
+    slab_type: roof
+
+### Storey: Level 3
+  elevation: 12.1 m
+  height: 3.6 m
+  apply_template: OfficeFloor
+  f: L3
+
+  Stair: ST-L3-W
+    from_storey: Level 3
+    to_storey: Level 4
+    type: straight
+    position: (2, 14.6)
+    width: 1.4 m
+    riser_count: 21
+    riser_height: 0.171 m
+    tread_depth: 0.27 m
+
+  Stair: ST-L3-E
+    from_storey: Level 3
+    to_storey: Level 4
+    type: straight
+    position: (43.8, 16.4)
+    width: 1.4 m
+    riser_count: 21
+    riser_height: 0.171 m
+    tread_depth: 0.27 m

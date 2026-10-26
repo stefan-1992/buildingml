@@ -1,0 +1,93 @@
+// Template edge cases test fixture
+// Tests: nested variables, multi-storey application, static templates,
+//        auto-IDs within templates, templates with spaces
+
+// =========================================================================
+// Template with nested variables ({f} and {n} substitution in IDs and names)
+// =========================================================================
+
+Template: NestedVarFloor
+  Wall: W-{f}-{n}-EXT
+    from: (0, 0) to: (10, 0)
+    height: 2.8 m
+    thickness: 0.3 m
+    is_external: true
+  Wall: W-{f}-{n}-INT
+    from: (5, 0) to: (5, 5)
+    height: 2.8 m
+    thickness: 0.15 m
+    is_external: false
+
+#### Space: Unit {n}A on Floor {f}
+  usage: living
+  area: 50.0 m2
+
+  Wall: W-{f}-{n}A-01
+    from: (0, 0) to: (0, 5)
+    height: 2.8 m
+    thickness: 0.15 m
+
+// =========================================================================
+// Static template (no variables at all)
+// =========================================================================
+
+Template: StaticLayout
+  Slab: SLAB-STATIC
+    boundary: [(0,0), (10,0), (10,8), (0,8)]
+    thickness: 0.25 m
+  Column: COL-STATIC-01
+    position: (0, 0)
+    height: 3 m
+    profile: rectangle(0.3, 0.3)
+  Column: COL-STATIC-02
+    position: (10, 0)
+    height: 3 m
+    profile: rectangle(0.3, 0.3)
+
+// =========================================================================
+// Template with auto-ID elements (bare Type: without ID)
+// =========================================================================
+
+Template: AutoIdFloor
+  Wall:
+    from: (0, 0) to: (8, 0)
+    height: 2.8 m
+    thickness: 0.24 m
+  Wall:
+    from: (8, 0) to: (8, 6)
+    height: 2.8 m
+    thickness: 0.24 m
+
+// =========================================================================
+// Building using the templates above
+// =========================================================================
+
+# Site: TestSite
+## Building: TestBuilding
+
+// Nested variables: apply to two floors
+### Storey: Floor 1
+  elevation: 0 m
+  height: 3.0 m
+  apply_template: NestedVarFloor
+  f: F1
+  n: 1
+
+### Storey: Floor 2
+  elevation: 3.0 m
+  height: 3.0 m
+  apply_template: NestedVarFloor
+  f: F2
+  n: 2
+
+// Static template: applied to one floor (no variables needed)
+### Storey: Floor 3
+  elevation: 6.0 m
+  height: 3.0 m
+  apply_template: StaticLayout
+
+// Auto-ID template
+### Storey: Floor 4
+  elevation: 9.0 m
+  height: 3.0 m
+  apply_template: AutoIdFloor

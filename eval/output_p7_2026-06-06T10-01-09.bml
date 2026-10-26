@@ -1,0 +1,207 @@
+# Site: ResidentialSite
+
+## Building: TwoStoreyResidence
+
+### Storey: GroundFloor
+  elevation: 0 m
+  height: 3 m
+
+#### Space: GroundFloorLiving
+  usage: living
+
+  Slab: SL-GF-01
+    boundary: [(0, 0), (15, 0), (15, 10), (0, 10)]
+    thickness: 0.2 m
+
+  Wall: W-GF-S
+    from: (0, 0) to: (15, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Door: D-GF-01
+      offset: 7.0 m
+      width: 1.0 m
+      height: 2.1 m
+    Window: WIN-GF-S1
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-GF-S2
+      offset: 11.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+  Wall: W-GF-E
+    from: (15, 0) to: (15, 10)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-GF-E1
+      offset: 3.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-GF-E2
+      offset: 6.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+  Wall: W-GF-N
+    from: (15, 10) to: (0, 10)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-GF-N1
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-GF-N2
+      offset: 11.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+  Wall: W-GF-W
+    from: (0, 10) to: (0, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-GF-W1
+      offset: 3.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-GF-W2
+      offset: 6.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+### Storey: FirstFloor
+  elevation: 3 m
+  height: 3 m
+
+#### Space: FirstFloorBedrooms
+  usage: bedroom
+
+  Slab: SL-FF-01
+    boundary: [(0, 0), (15, 0), (15, 10), (0, 10)]
+    thickness: 0.2 m
+
+  Wall: W-FF-S
+    from: (0, 0) to: (15, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Door: D-FF-S1
+      offset: 5.5 m
+      width: 0.9 m
+      height: 2.1 m
+    Window: WIN-FF-S1
+      offset: 1.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-FF-S2
+      offset: 12.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+  Wall: W-FF-E
+    from: (15, 0) to: (15, 10)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-FF-E1
+      offset: 3.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-FF-E2
+      offset: 6.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+  Wall: W-FF-N
+    from: (15, 10) to: (0, 10)
+    height: 3 m
+    thickness: 0.24 m
+    Door: D-FF-N1
+      offset: 5.5 m
+      width: 0.9 m
+      height: 2.1 m
+    Window: WIN-FF-N1
+      offset: 1.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-FF-N2
+      offset: 12.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+  Wall: W-FF-W
+    from: (0, 10) to: (0, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-FF-W1
+      offset: 3.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-FF-W2
+      offset: 6.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+#### Space: SouthBalcony
+  usage: balcony
+
+  Slab: SL-BAL-S
+    boundary: [(3, -1.5), (12, -1.5), (12, 0), (3, 0)]
+    thickness: 0.18 m
+
+  Railing: RL-BAL-S-F
+    from: (3, -1.5) to: (12, -1.5)
+    height: 1.1 m
+
+  Railing: RL-BAL-S-L
+    from: (3, 0) to: (3, -1.5)
+    height: 1.1 m
+
+  Railing: RL-BAL-S-R
+    from: (12, -1.5) to: (12, 0)
+    height: 1.1 m
+
+#### Space: NorthBalcony
+  usage: balcony
+
+  Slab: SL-BAL-N
+    boundary: [(3, 10), (12, 10), (12, 11.5), (3, 11.5)]
+    thickness: 0.18 m
+
+  Railing: RL-BAL-N-F
+    from: (3, 11.5) to: (12, 11.5)
+    height: 1.1 m
+
+  Railing: RL-BAL-N-L
+    from: (3, 10) to: (3, 11.5)
+    height: 1.1 m
+
+  Railing: RL-BAL-N-R
+    from: (12, 11.5) to: (12, 10)
+    height: 1.1 m
+
+### Storey: RoofLevel
+  elevation: 6 m
+  height: 0 m
+
+#### Space: RoofSpace
+  usage: storage
+
+  Roof: RF-01
+    boundary: [(0, 0), (15, 0), (15, 10), (0, 10)]
+    type: gable
+    ridge_height: 3.0 m

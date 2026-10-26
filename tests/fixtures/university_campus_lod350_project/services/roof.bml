@@ -1,0 +1,79 @@
+// Roof - air handling unit above the west shaft, roof drain and the
+// maintenance zone in front of the unit. Roof slab top at 0.4 m.
+// The supply and extract air and heating risers end at the unit's base.
+
+import materials from "../materials.bml"
+import systems from "./systems.bml"
+
+# Site: Campus Nord
+
+## Building: Forum Nord
+
+### Storey: Roof
+  elevation: 19.3 m
+  height: 3 m
+
+  Equipment: AHU-RF
+    type: air_handler
+    system: SA
+    position: (5.4, 21.6)
+    width: 6 m
+    depth: 2.2 m
+    height: 2 m
+    z_offset: 0.4 m
+    material: plant_grey
+
+  // Kept free for opening the unit's service doors
+  Proxy: PX-RF-AHU-CLEARANCE
+    predefined_type: provisionforspace
+    boundary: [(2.4, 18.3), (8.4, 18.3), (8.4, 20.5), (2.4, 20.5)]
+    height: 2 m
+    z_offset: 0.4 m
+    material: clearance_zone
+
+  Duct: SA-RF-R
+    system: SA
+    width: 0.25 m
+    height: 1 m
+    path: [(4.375, 21.5, 0), (4.375, 21.5, 0.4)]
+    sleeve: true
+    material: galvanised_steel_duct
+
+  Duct: EA-RF-R
+    system: EA
+    width: 0.25 m
+    height: 1 m
+    path: [(4.775, 21.5, 0), (4.775, 21.5, 0.4)]
+    sleeve: true
+    material: galvanised_steel_duct
+
+  Pipe: HTGF-RF-R
+    system: HTG
+    diameter: 0.05 m
+    from: (4.4, 22.35, 0) to: (4.4, 22.35, 0.4)
+    sleeve: true
+    material: heating_steel
+
+  Pipe: HTGR-RF-R
+    system: HTG
+    diameter: 0.05 m
+    from: (4.6, 22.35, 0) to: (4.6, 22.35, 0.4)
+    sleeve: true
+    material: heating_steel
+
+  Terminal: RD-RF-01
+    type: floor_drain
+    predefined_type: roofdrain
+    system: RW
+    position: (4.15, 23.2)
+    diameter: 0.3 m
+    height: 0.08 m
+    z_offset: 0.4 m
+    material: pvc_drain
+
+  Pipe: RW-RF-R
+    system: RW
+    diameter: 0.1 m
+    from: (4.15, 23.2, 0) to: (4.15, 23.2, 0.4)
+    sleeve: true
+    material: pvc_drain

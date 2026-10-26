@@ -1,0 +1,1915 @@
+// Levels 2-3 - building services of the office floors (template ServicesOfficeFloor)
+//
+// Risers in the west shaft (x 3.925..5.0, y 20.925..23.825, beside the lift):
+//   supply and extract air ducts, sprinkler, heating flow/return, rain water.
+// Each floor leaves the shaft through fire dampers into the west lobby:
+//   supply air  - south offices (y 3), open workspace (y 7), north offices and
+//                 open strip (y 16.3), meeting and panorama rooms
+//   extract air - north offices (y 19.55)
+//   sprinkler   - one line per zone, one head per office
+// Power and lighting tray from the riser beside the east lift (x 41.15).
+// Duct centres at 2.98 m, pipes at 3.13 m, trays at 2.87 m above the floor;
+// suspended ceilings at 2.76 m, slab soffit at 3.19 m.
+// Variable: {f} = level code (L2, L3).
+
+import materials from "../materials.bml"
+import systems from "./systems.bml"
+
+Template: ServicesOfficeFloor
+
+  // ------------------------------------------------------------------
+  // Risers (west shaft, east riser gap)
+  // ------------------------------------------------------------------
+
+  Duct: SA-{f}-R
+    system: SA
+    width: 0.25 m
+    height: 1 m
+    path: [(4.375, 21.5, 0), (4.375, 21.5, 3.6)]
+    sleeve: true
+    material: galvanised_steel_duct
+
+  Duct: EA-{f}-R
+    system: EA
+    width: 0.25 m
+    height: 1 m
+    path: [(4.775, 21.5, 0), (4.775, 21.5, 3.6)]
+    sleeve: true
+    material: galvanised_steel_duct
+
+  Pipe: SPR-{f}-R
+    system: SPR
+    diameter: 0.1 m
+    path: [(4.15, 22.35, 0), (4.15, 22.35, 3.6)]
+    sleeve: true
+    material: sprinkler_steel
+
+  Pipe: HTGF-{f}-R
+    system: HTG
+    diameter: 0.05 m
+    from: (4.4, 22.35, 0) to: (4.4, 22.35, 3.6)
+    sleeve: true
+    material: heating_steel
+
+  Pipe: HTGR-{f}-R
+    system: HTG
+    diameter: 0.05 m
+    from: (4.6, 22.35, 0) to: (4.6, 22.35, 3.6)
+    sleeve: true
+    material: heating_steel
+
+  Pipe: RW-{f}-R
+    system: RW
+    diameter: 0.1 m
+    from: (4.15, 23.2, 0) to: (4.15, 23.2, 3.6)
+    sleeve: true
+    material: pvc_drain
+
+  CableTray: PWR-{f}-R
+    system: PWR
+    width: 0.3 m
+    height: 0.06 m
+    path: [(41.15, 22.4, 0), (41.15, 22.4, 3.6)]
+    material: cable_tray_steel
+
+  // ------------------------------------------------------------------
+  // Supply air
+  // ------------------------------------------------------------------
+
+  Duct: SA-{f}-A
+    system: SA
+    width: 0.3 m
+    height: 0.2 m
+    path: [(4.375, 21.5, 2.98), (4.375, 20.3, 2.98)]
+    material: galvanised_steel_duct
+
+  Equipment: FD-SA-{f}
+    type: fire_damper
+    system: SA
+    position: (4.375, 20.15)
+    width: 0.34 m
+    depth: 0.3 m
+    height: 0.24 m
+    z_offset: 2.86 m
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-B
+    system: SA
+    width: 0.3 m
+    height: 0.2 m
+    path: [(4.375, 20, 2.98), (4.375, 3, 2.98)]
+    hangers: 2.4 m
+    material: galvanised_steel_duct
+
+  // South offices
+  Duct: SA-{f}-S
+    system: SA
+    width: 0.4 m
+    height: 0.2 m
+    path: [(-2.4, 3, 2.98), (42.7, 3, 2.98)]
+    hangers: 2.4 m
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DS01
+    system: SA
+    diameter: 0.16 m
+    path: [(-2, 3, 2.98), (-2, 3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DS02
+    system: SA
+    diameter: 0.16 m
+    path: [(2, 3, 2.98), (2, 3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DS03
+    system: SA
+    diameter: 0.16 m
+    path: [(6, 3, 2.98), (6, 3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DS04
+    system: SA
+    diameter: 0.16 m
+    path: [(10, 3, 2.98), (10, 3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DS05
+    system: SA
+    diameter: 0.16 m
+    path: [(14, 3, 2.98), (14, 3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DS06
+    system: SA
+    diameter: 0.16 m
+    path: [(18, 3, 2.98), (18, 3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DS07
+    system: SA
+    diameter: 0.16 m
+    path: [(22, 3, 2.98), (22, 3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DS08
+    system: SA
+    diameter: 0.16 m
+    path: [(26, 3, 2.98), (26, 3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DS09
+    system: SA
+    diameter: 0.16 m
+    path: [(30, 3, 2.98), (30, 3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DS10
+    system: SA
+    diameter: 0.16 m
+    path: [(34, 3, 2.98), (34, 3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DS11
+    system: SA
+    diameter: 0.16 m
+    path: [(38, 3, 2.98), (38, 3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DS12
+    system: SA
+    diameter: 0.16 m
+    path: [(42.2, 3, 2.98), (42.2, 3, 2.76)]
+    material: galvanised_steel_duct
+
+  Terminal: ATS-{f}-S01
+    type: air_supply
+    system: SA
+    position: (-2, 3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-S02
+    type: air_supply
+    system: SA
+    position: (2, 3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-S03
+    type: air_supply
+    system: SA
+    position: (6, 3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-S04
+    type: air_supply
+    system: SA
+    position: (10, 3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-S05
+    type: air_supply
+    system: SA
+    position: (14, 3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-S06
+    type: air_supply
+    system: SA
+    position: (18, 3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-S07
+    type: air_supply
+    system: SA
+    position: (22, 3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-S08
+    type: air_supply
+    system: SA
+    position: (26, 3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-S09
+    type: air_supply
+    system: SA
+    position: (30, 3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-S10
+    type: air_supply
+    system: SA
+    position: (34, 3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-S11
+    type: air_supply
+    system: SA
+    position: (38, 3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-S12
+    type: air_supply
+    system: SA
+    position: (42.2, 3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  // Open workspace south of the atrium
+  Duct: SA-{f}-O
+    system: SA
+    width: 0.4 m
+    height: 0.2 m
+    path: [(4.375, 7, 2.98), (42.6, 7, 2.98)]
+    hangers: 2.4 m
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DO1
+    system: SA
+    diameter: 0.16 m
+    path: [(10, 7, 2.98), (10, 7, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DO2
+    system: SA
+    diameter: 0.16 m
+    path: [(22, 7, 2.98), (22, 7, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DO3
+    system: SA
+    diameter: 0.16 m
+    path: [(28, 7, 2.98), (28, 7, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DO4
+    system: SA
+    diameter: 0.16 m
+    path: [(34, 7, 2.98), (34, 7, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DO5
+    system: SA
+    diameter: 0.16 m
+    path: [(16, 7, 2.98), (16, 11.5, 2.98), (16, 11.5, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DO6
+    system: SA
+    diameter: 0.16 m
+    path: [(40, 7, 2.98), (40, 12, 2.98), (40, 12, 2.76)]
+    material: galvanised_steel_duct
+
+  Terminal: ATS-{f}-O1
+    type: air_supply
+    system: SA
+    position: (10, 7)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-O2
+    type: air_supply
+    system: SA
+    position: (22, 7)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-O3
+    type: air_supply
+    system: SA
+    position: (28, 7)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-O4
+    type: air_supply
+    system: SA
+    position: (34, 7)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-O5
+    type: air_supply
+    system: SA
+    position: (16, 11.5)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-O6
+    type: air_supply
+    system: SA
+    position: (40, 12)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  // Open strip north of the atrium and north offices
+  Duct: SA-{f}-N
+    system: SA
+    width: 0.4 m
+    height: 0.2 m
+    path: [(4.375, 16.3, 2.98), (37.3, 16.3, 2.98)]
+    hangers: 2.4 m
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DW1
+    system: SA
+    diameter: 0.16 m
+    path: [(15.5, 16.3, 2.98), (15.5, 16.3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DW2
+    system: SA
+    diameter: 0.16 m
+    path: [(23, 16.3, 2.98), (23, 16.3, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DW3
+    system: SA
+    diameter: 0.16 m
+    path: [(30.5, 16.3, 2.98), (30.5, 16.3, 2.76)]
+    material: galvanised_steel_duct
+
+  Terminal: ATS-{f}-W1
+    type: air_supply
+    system: SA
+    position: (15.5, 16.3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-W2
+    type: air_supply
+    system: SA
+    position: (23, 16.3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-W3
+    type: air_supply
+    system: SA
+    position: (30.5, 16.3)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Duct: SA-{f}-DN01
+    system: SA
+    diameter: 0.16 m
+    path: [(9.875, 16.3, 2.98), (9.875, 18.6, 2.98), (9.875, 18.6, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DN02
+    system: SA
+    diameter: 0.16 m
+    path: [(13.625, 16.3, 2.98), (13.625, 18.6, 2.98), (13.625, 18.6, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DN03
+    system: SA
+    diameter: 0.16 m
+    path: [(17.375, 16.3, 2.98), (17.375, 18.6, 2.98), (17.375, 18.6, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DN04
+    system: SA
+    diameter: 0.16 m
+    path: [(21.125, 16.3, 2.98), (21.125, 18.6, 2.98), (21.125, 18.6, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DN05
+    system: SA
+    diameter: 0.16 m
+    path: [(24.875, 16.3, 2.98), (24.875, 18.6, 2.98), (24.875, 18.6, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DN06
+    system: SA
+    diameter: 0.16 m
+    path: [(28.625, 16.3, 2.98), (28.625, 18.6, 2.98), (28.625, 18.6, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DN07
+    system: SA
+    diameter: 0.16 m
+    path: [(32.375, 16.3, 2.98), (32.375, 18.6, 2.98), (32.375, 18.6, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DN08
+    system: SA
+    diameter: 0.16 m
+    path: [(36.125, 16.3, 2.98), (36.125, 18.6, 2.98), (36.125, 18.6, 2.76)]
+    material: galvanised_steel_duct
+
+  Terminal: ATS-{f}-N01
+    type: air_supply
+    system: SA
+    position: (9.875, 18.6)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-N02
+    type: air_supply
+    system: SA
+    position: (13.625, 18.6)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-N03
+    type: air_supply
+    system: SA
+    position: (17.375, 18.6)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-N04
+    type: air_supply
+    system: SA
+    position: (21.125, 18.6)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-N05
+    type: air_supply
+    system: SA
+    position: (24.875, 18.6)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-N06
+    type: air_supply
+    system: SA
+    position: (28.625, 18.6)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-N07
+    type: air_supply
+    system: SA
+    position: (32.375, 18.6)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-N08
+    type: air_supply
+    system: SA
+    position: (36.125, 18.6)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  // Meeting and panorama rooms
+  Duct: SA-{f}-M
+    system: SA
+    width: 0.3 m
+    height: 0.2 m
+    path: [(4.375, 10.25, 2.98), (-2, 10.25, 2.98), (-2, 22.4, 2.98)]
+    hangers: 2.4 m
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DM1
+    system: SA
+    diameter: 0.16 m
+    path: [(2, 10.25, 2.98), (2, 10.25, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DM2
+    system: SA
+    diameter: 0.16 m
+    path: [(-1, 10.25, 2.98), (-1, 10.25, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DP1
+    system: SA
+    diameter: 0.16 m
+    path: [(-2, 17, 2.98), (-2, 17, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: SA-{f}-DP2
+    system: SA
+    diameter: 0.16 m
+    path: [(-2, 22, 2.98), (-2, 22, 2.76)]
+    material: galvanised_steel_duct
+
+  Terminal: ATS-{f}-M1
+    type: air_supply
+    system: SA
+    position: (2, 10.25)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-M2
+    type: air_supply
+    system: SA
+    position: (-1, 10.25)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-P1
+    type: air_supply
+    system: SA
+    position: (-2, 17)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATS-{f}-P2
+    type: air_supply
+    system: SA
+    position: (-2, 22)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  // ------------------------------------------------------------------
+  // Extract air (north offices)
+  // ------------------------------------------------------------------
+
+  Duct: EA-{f}-A
+    system: EA
+    width: 0.3 m
+    height: 0.2 m
+    path: [(4.775, 21.5, 2.98), (4.775, 20.3, 2.98)]
+    material: galvanised_steel_duct
+
+  Equipment: FD-EA-{f}
+    type: fire_damper
+    system: EA
+    position: (4.775, 20.15)
+    width: 0.34 m
+    depth: 0.3 m
+    height: 0.24 m
+    z_offset: 2.86 m
+    material: galvanised_steel_duct
+
+  Duct: EA-{f}-B
+    system: EA
+    width: 0.3 m
+    height: 0.2 m
+    path: [(4.775, 20, 2.98), (4.775, 19.55, 2.98), (37.3, 19.55, 2.98)]
+    hangers: 2.4 m
+    material: galvanised_steel_duct
+
+  Duct: EA-{f}-DN01
+    system: EA
+    diameter: 0.16 m
+    path: [(9.875, 19.55, 2.98), (9.875, 19.55, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: EA-{f}-DN02
+    system: EA
+    diameter: 0.16 m
+    path: [(13.625, 19.55, 2.98), (13.625, 19.55, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: EA-{f}-DN03
+    system: EA
+    diameter: 0.16 m
+    path: [(17.375, 19.55, 2.98), (17.375, 19.55, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: EA-{f}-DN04
+    system: EA
+    diameter: 0.16 m
+    path: [(21.125, 19.55, 2.98), (21.125, 19.55, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: EA-{f}-DN05
+    system: EA
+    diameter: 0.16 m
+    path: [(24.875, 19.55, 2.98), (24.875, 19.55, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: EA-{f}-DN06
+    system: EA
+    diameter: 0.16 m
+    path: [(28.625, 19.55, 2.98), (28.625, 19.55, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: EA-{f}-DN07
+    system: EA
+    diameter: 0.16 m
+    path: [(32.375, 19.55, 2.98), (32.375, 19.55, 2.76)]
+    material: galvanised_steel_duct
+
+  Duct: EA-{f}-DN08
+    system: EA
+    diameter: 0.16 m
+    path: [(36.125, 19.55, 2.98), (36.125, 19.55, 2.76)]
+    material: galvanised_steel_duct
+
+  Terminal: ATE-{f}-N01
+    type: air_extract
+    system: EA
+    position: (9.875, 19.55)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATE-{f}-N02
+    type: air_extract
+    system: EA
+    position: (13.625, 19.55)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATE-{f}-N03
+    type: air_extract
+    system: EA
+    position: (17.375, 19.55)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATE-{f}-N04
+    type: air_extract
+    system: EA
+    position: (21.125, 19.55)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATE-{f}-N05
+    type: air_extract
+    system: EA
+    position: (24.875, 19.55)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATE-{f}-N06
+    type: air_extract
+    system: EA
+    position: (28.625, 19.55)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATE-{f}-N07
+    type: air_extract
+    system: EA
+    position: (32.375, 19.55)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  Terminal: ATE-{f}-N08
+    type: air_extract
+    system: EA
+    position: (36.125, 19.55)
+    z_offset: 2.71 m
+    material: terminal_white
+
+  // ------------------------------------------------------------------
+  // Sprinkler
+  // ------------------------------------------------------------------
+
+  Pipe: SPR-{f}-B
+    system: SPR
+    diameter: 0.065 m
+    path: [(4.15, 22.35, 3.13), (4.15, 4, 3.13)]
+    hangers: 3 m
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-S
+    system: SPR
+    diameter: 0.065 m
+    path: [(-2, 4, 3.13), (42.2, 4, 3.13)]
+    hangers: 3 m
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-OS
+    system: SPR
+    diameter: 0.065 m
+    path: [(4.15, 8, 3.13), (44.6, 8, 3.13)]
+    hangers: 3 m
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-CP
+    system: SPR
+    diameter: 0.05 m
+    path: [(38.5, 8, 3.13), (38.5, 15.4, 3.13), (47, 15.4, 3.13), (47, 22, 3.13)]
+    hangers: 3 m
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-OC
+    system: SPR
+    diameter: 0.065 m
+    path: [(4.15, 15.6, 3.13), (37.3, 15.6, 3.13)]
+    hangers: 3 m
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-N
+    system: SPR
+    diameter: 0.065 m
+    path: [(4.15, 19, 3.13), (37.3, 19, 3.13)]
+    hangers: 3 m
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-M
+    system: SPR
+    diameter: 0.05 m
+    path: [(4.15, 11, 3.13), (-2.8, 11, 3.13), (-2.8, 21, 3.13)]
+    hangers: 3 m
+    material: sprinkler_steel
+
+  // Heads: drop from the line through the ceiling
+  Pipe: SPR-{f}-HS01
+    system: SPR
+    diameter: 0.025 m
+    path: [(-1, 4, 3.13), (-1, 4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HS02
+    system: SPR
+    diameter: 0.025 m
+    path: [(3, 4, 3.13), (3, 4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HS03
+    system: SPR
+    diameter: 0.025 m
+    path: [(7, 4, 3.13), (7, 4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HS04
+    system: SPR
+    diameter: 0.025 m
+    path: [(11, 4, 3.13), (11, 4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HS05
+    system: SPR
+    diameter: 0.025 m
+    path: [(15, 4, 3.13), (15, 4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HS06
+    system: SPR
+    diameter: 0.025 m
+    path: [(19, 4, 3.13), (19, 4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HS07
+    system: SPR
+    diameter: 0.025 m
+    path: [(23, 4, 3.13), (23, 4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HS08
+    system: SPR
+    diameter: 0.025 m
+    path: [(27, 4, 3.13), (27, 4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HS09
+    system: SPR
+    diameter: 0.025 m
+    path: [(31, 4, 3.13), (31, 4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HS10
+    system: SPR
+    diameter: 0.025 m
+    path: [(35, 4, 3.13), (35, 4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HS11
+    system: SPR
+    diameter: 0.025 m
+    path: [(39, 4, 3.13), (39, 4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HS12
+    system: SPR
+    diameter: 0.025 m
+    path: [(41.2, 4, 3.13), (41.2, 4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HO01
+    system: SPR
+    diameter: 0.025 m
+    path: [(6.5, 8, 3.13), (6.5, 8, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HO02
+    system: SPR
+    diameter: 0.025 m
+    path: [(10.5, 8, 3.13), (10.5, 8, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HO03
+    system: SPR
+    diameter: 0.025 m
+    path: [(15.5, 8, 3.13), (15.5, 8, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HO04
+    system: SPR
+    diameter: 0.025 m
+    path: [(21, 8, 3.13), (21, 8, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HO05
+    system: SPR
+    diameter: 0.025 m
+    path: [(25, 8, 3.13), (25, 8, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HO06
+    system: SPR
+    diameter: 0.025 m
+    path: [(29, 8, 3.13), (29, 8, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HO07
+    system: SPR
+    diameter: 0.025 m
+    path: [(33, 8, 3.13), (33, 8, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HO08
+    system: SPR
+    diameter: 0.025 m
+    path: [(41, 8, 3.13), (41, 8, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HO09
+    system: SPR
+    diameter: 0.025 m
+    path: [(43.5, 8, 3.13), (43.5, 8, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HO10
+    system: SPR
+    diameter: 0.025 m
+    path: [(38.5, 11, 3.13), (38.5, 11, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HO11
+    system: SPR
+    diameter: 0.025 m
+    path: [(38.5, 14, 3.13), (38.5, 14, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HO12
+    system: SPR
+    diameter: 0.025 m
+    path: [(44.5, 15.4, 3.13), (44.5, 15.4, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HC1
+    system: SPR
+    diameter: 0.025 m
+    path: [(47, 17.5, 3.13), (47, 17.5, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HC2
+    system: SPR
+    diameter: 0.025 m
+    path: [(47, 21.5, 3.13), (47, 21.5, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HW1
+    system: SPR
+    diameter: 0.025 m
+    path: [(9, 15.6, 3.13), (9, 15.6, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HW2
+    system: SPR
+    diameter: 0.025 m
+    path: [(13.5, 15.6, 3.13), (13.5, 15.6, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HW3
+    system: SPR
+    diameter: 0.025 m
+    path: [(17.5, 15.6, 3.13), (17.5, 15.6, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HW4
+    system: SPR
+    diameter: 0.025 m
+    path: [(21.5, 15.6, 3.13), (21.5, 15.6, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HW5
+    system: SPR
+    diameter: 0.025 m
+    path: [(25.5, 15.6, 3.13), (25.5, 15.6, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HW6
+    system: SPR
+    diameter: 0.025 m
+    path: [(29.5, 15.6, 3.13), (29.5, 15.6, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HW7
+    system: SPR
+    diameter: 0.025 m
+    path: [(33.5, 15.6, 3.13), (33.5, 15.6, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HN1
+    system: SPR
+    diameter: 0.025 m
+    path: [(10.775, 19, 3.13), (10.775, 19, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HN2
+    system: SPR
+    diameter: 0.025 m
+    path: [(14.525, 19, 3.13), (14.525, 19, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HN3
+    system: SPR
+    diameter: 0.025 m
+    path: [(18.275, 19, 3.13), (18.275, 19, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HN4
+    system: SPR
+    diameter: 0.025 m
+    path: [(22.025, 19, 3.13), (22.025, 19, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HN5
+    system: SPR
+    diameter: 0.025 m
+    path: [(25.775, 19, 3.13), (25.775, 19, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HN6
+    system: SPR
+    diameter: 0.025 m
+    path: [(29.525, 19, 3.13), (29.525, 19, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HN7
+    system: SPR
+    diameter: 0.025 m
+    path: [(33.275, 19, 3.13), (33.275, 19, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HN8
+    system: SPR
+    diameter: 0.025 m
+    path: [(37.025, 19, 3.13), (37.025, 19, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HM1
+    system: SPR
+    diameter: 0.025 m
+    path: [(2, 11, 3.13), (2, 11, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HM2
+    system: SPR
+    diameter: 0.025 m
+    path: [(-1.2, 11, 3.13), (-1.2, 11, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HP1
+    system: SPR
+    diameter: 0.025 m
+    path: [(-2.8, 16, 3.13), (-2.8, 16, 2.76)]
+    material: sprinkler_steel
+
+  Pipe: SPR-{f}-HP2
+    system: SPR
+    diameter: 0.025 m
+    path: [(-2.8, 20, 3.13), (-2.8, 20, 2.76)]
+    material: sprinkler_steel
+
+  Terminal: SPH-{f}-S01
+    type: sprinkler
+    system: SPR
+    position: (-1, 4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-S02
+    type: sprinkler
+    system: SPR
+    position: (3, 4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-S03
+    type: sprinkler
+    system: SPR
+    position: (7, 4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-S04
+    type: sprinkler
+    system: SPR
+    position: (11, 4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-S05
+    type: sprinkler
+    system: SPR
+    position: (15, 4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-S06
+    type: sprinkler
+    system: SPR
+    position: (19, 4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-S07
+    type: sprinkler
+    system: SPR
+    position: (23, 4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-S08
+    type: sprinkler
+    system: SPR
+    position: (27, 4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-S09
+    type: sprinkler
+    system: SPR
+    position: (31, 4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-S10
+    type: sprinkler
+    system: SPR
+    position: (35, 4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-S11
+    type: sprinkler
+    system: SPR
+    position: (39, 4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-S12
+    type: sprinkler
+    system: SPR
+    position: (41.2, 4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-O01
+    type: sprinkler
+    system: SPR
+    position: (6.5, 8)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-O02
+    type: sprinkler
+    system: SPR
+    position: (10.5, 8)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-O03
+    type: sprinkler
+    system: SPR
+    position: (15.5, 8)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-O04
+    type: sprinkler
+    system: SPR
+    position: (21, 8)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-O05
+    type: sprinkler
+    system: SPR
+    position: (25, 8)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-O06
+    type: sprinkler
+    system: SPR
+    position: (29, 8)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-O07
+    type: sprinkler
+    system: SPR
+    position: (33, 8)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-O08
+    type: sprinkler
+    system: SPR
+    position: (41, 8)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-O09
+    type: sprinkler
+    system: SPR
+    position: (43.5, 8)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-O10
+    type: sprinkler
+    system: SPR
+    position: (38.5, 11)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-O11
+    type: sprinkler
+    system: SPR
+    position: (38.5, 14)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-O12
+    type: sprinkler
+    system: SPR
+    position: (44.5, 15.4)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-C1
+    type: sprinkler
+    system: SPR
+    position: (47, 17.5)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-C2
+    type: sprinkler
+    system: SPR
+    position: (47, 21.5)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-W1
+    type: sprinkler
+    system: SPR
+    position: (9, 15.6)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-W2
+    type: sprinkler
+    system: SPR
+    position: (13.5, 15.6)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-W3
+    type: sprinkler
+    system: SPR
+    position: (17.5, 15.6)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-W4
+    type: sprinkler
+    system: SPR
+    position: (21.5, 15.6)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-W5
+    type: sprinkler
+    system: SPR
+    position: (25.5, 15.6)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-W6
+    type: sprinkler
+    system: SPR
+    position: (29.5, 15.6)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-W7
+    type: sprinkler
+    system: SPR
+    position: (33.5, 15.6)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-N1
+    type: sprinkler
+    system: SPR
+    position: (10.775, 19)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-N2
+    type: sprinkler
+    system: SPR
+    position: (14.525, 19)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-N3
+    type: sprinkler
+    system: SPR
+    position: (18.275, 19)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-N4
+    type: sprinkler
+    system: SPR
+    position: (22.025, 19)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-N5
+    type: sprinkler
+    system: SPR
+    position: (25.775, 19)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-N6
+    type: sprinkler
+    system: SPR
+    position: (29.525, 19)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-N7
+    type: sprinkler
+    system: SPR
+    position: (33.275, 19)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-N8
+    type: sprinkler
+    system: SPR
+    position: (37.025, 19)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-M1
+    type: sprinkler
+    system: SPR
+    position: (2, 11)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-M2
+    type: sprinkler
+    system: SPR
+    position: (-1.2, 11)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-P1
+    type: sprinkler
+    system: SPR
+    position: (-2.8, 16)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  Terminal: SPH-{f}-P2
+    type: sprinkler
+    system: SPR
+    position: (-2.8, 20)
+    z_offset: 2.7 m
+    material: stainless_steel
+
+  // ------------------------------------------------------------------
+  // Power and lighting
+  // ------------------------------------------------------------------
+
+  CableTray: PWR-{f}-M
+    system: PWR
+    width: 0.3 m
+    height: 0.06 m
+    path: [(41.15, 22.4, 2.87), (41.15, 14.5, 2.87), (43.4, 14.5, 2.87), (43.4, 1, 2.87), (-3.5, 1, 2.87)]
+    hangers: 1.5 m
+    material: cable_tray_steel
+
+  CableTray: PWR-{f}-N
+    system: PWR
+    width: 0.3 m
+    height: 0.06 m
+    path: [(41.15, 20.2, 2.87), (8.5, 20.2, 2.87)]
+    hangers: 1.5 m
+    material: cable_tray_steel
+
+  Equipment: DB-{f}
+    type: distribution_board
+    system: PWR
+    position: (41.35, 18)
+    rotation: 90
+    width: 0.8 m
+    depth: 0.25 m
+    height: 2 m
+    z_offset: 0.1 m
+    material: plant_grey
+
+  Terminal: SD-{f}-W
+    type: smoke_detector
+    system: FA
+    position: (6, 18)
+    z_offset: 3.14 m
+    material: terminal_white
+
+  Terminal: SD-{f}-E
+    type: smoke_detector
+    system: FA
+    position: (39.5, 18.5)
+    z_offset: 3.14 m
+    material: terminal_white
+
+  // South offices
+  Terminal: LT-{f}-S01A
+    type: light
+    system: LTG
+    position: (-2, 1.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S01B
+    type: light
+    system: LTG
+    position: (-2, 4.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S02A
+    type: light
+    system: LTG
+    position: (2, 1.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S02B
+    type: light
+    system: LTG
+    position: (2, 4.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S03A
+    type: light
+    system: LTG
+    position: (6, 1.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S03B
+    type: light
+    system: LTG
+    position: (6, 4.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S04A
+    type: light
+    system: LTG
+    position: (10, 1.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S04B
+    type: light
+    system: LTG
+    position: (10, 4.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S05A
+    type: light
+    system: LTG
+    position: (14, 1.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S05B
+    type: light
+    system: LTG
+    position: (14, 4.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S06A
+    type: light
+    system: LTG
+    position: (18, 1.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S06B
+    type: light
+    system: LTG
+    position: (18, 4.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S07A
+    type: light
+    system: LTG
+    position: (22, 1.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S07B
+    type: light
+    system: LTG
+    position: (22, 4.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S08A
+    type: light
+    system: LTG
+    position: (26, 1.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S08B
+    type: light
+    system: LTG
+    position: (26, 4.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S09A
+    type: light
+    system: LTG
+    position: (30, 1.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S09B
+    type: light
+    system: LTG
+    position: (30, 4.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S10A
+    type: light
+    system: LTG
+    position: (34, 1.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S10B
+    type: light
+    system: LTG
+    position: (34, 4.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S11A
+    type: light
+    system: LTG
+    position: (38, 1.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S11B
+    type: light
+    system: LTG
+    position: (38, 4.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S12A
+    type: light
+    system: LTG
+    position: (42, 1.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-S12B
+    type: light
+    system: LTG
+    position: (42, 4.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  // North offices
+  Terminal: LT-{f}-N01A
+    type: light
+    system: LTG
+    position: (9.875, 21)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N01B
+    type: light
+    system: LTG
+    position: (9.875, 23)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N02A
+    type: light
+    system: LTG
+    position: (13.625, 21)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N02B
+    type: light
+    system: LTG
+    position: (13.625, 23)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N03A
+    type: light
+    system: LTG
+    position: (17.375, 21)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N03B
+    type: light
+    system: LTG
+    position: (17.375, 23)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N04A
+    type: light
+    system: LTG
+    position: (21.125, 21)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N04B
+    type: light
+    system: LTG
+    position: (21.125, 23)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N05A
+    type: light
+    system: LTG
+    position: (24.875, 21)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N05B
+    type: light
+    system: LTG
+    position: (24.875, 23)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N06A
+    type: light
+    system: LTG
+    position: (28.625, 21)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N06B
+    type: light
+    system: LTG
+    position: (28.625, 23)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N07A
+    type: light
+    system: LTG
+    position: (32.375, 21)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N07B
+    type: light
+    system: LTG
+    position: (32.375, 23)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N08A
+    type: light
+    system: LTG
+    position: (36.125, 21)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-N08B
+    type: light
+    system: LTG
+    position: (36.125, 23)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  // Open workspace
+  Terminal: LT-{f}-O01
+    type: light
+    system: LTG
+    position: (6, 9.8)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O02
+    type: light
+    system: LTG
+    position: (9, 9.8)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O03
+    type: light
+    system: LTG
+    position: (12, 9.8)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O04
+    type: light
+    system: LTG
+    position: (15, 9.8)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O05
+    type: light
+    system: LTG
+    position: (18, 9.8)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O06
+    type: light
+    system: LTG
+    position: (21, 9.8)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O07
+    type: light
+    system: LTG
+    position: (6, 13.4)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O08
+    type: light
+    system: LTG
+    position: (9, 13.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O09
+    type: light
+    system: LTG
+    position: (12, 13.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O10
+    type: light
+    system: LTG
+    position: (15, 13.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O11
+    type: light
+    system: LTG
+    position: (18, 13.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O12
+    type: light
+    system: LTG
+    position: (21, 13.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O13
+    type: light
+    system: LTG
+    position: (13, 6.2)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O14
+    type: light
+    system: LTG
+    position: (19, 6.2)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O15
+    type: light
+    system: LTG
+    position: (25, 6.2)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O16
+    type: light
+    system: LTG
+    position: (31, 6.2)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O17
+    type: light
+    system: LTG
+    position: (37, 6.2)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O18
+    type: light
+    system: LTG
+    position: (37.5, 10)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O19
+    type: light
+    system: LTG
+    position: (41.5, 10)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O20
+    type: light
+    system: LTG
+    position: (37.5, 13)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O21
+    type: light
+    system: LTG
+    position: (41.5, 13)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O22
+    type: light
+    system: LTG
+    position: (11, 16.2)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O23
+    type: light
+    system: LTG
+    position: (19, 16.2)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O24
+    type: light
+    system: LTG
+    position: (27, 16.2)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-O25
+    type: light
+    system: LTG
+    position: (34.5, 16.2)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  // Meeting, panorama and copy rooms
+  Terminal: LT-{f}-M1
+    type: light
+    system: LTG
+    position: (-2.5, 8.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-M2
+    type: light
+    system: LTG
+    position: (2.5, 8.6)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-M3
+    type: light
+    system: LTG
+    position: (0.5, 12.2)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-P1
+    type: light
+    system: LTG
+    position: (-1, 15.2)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-P2
+    type: light
+    system: LTG
+    position: (-1, 19.5)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-P3
+    type: light
+    system: LTG
+    position: (-1, 23)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-C1
+    type: light
+    system: LTG
+    position: (48, 19)
+    z_offset: 2.68 m
+    material: terminal_white
+
+  Terminal: LT-{f}-C2
+    type: light
+    system: LTG
+    position: (48.3, 22.5)
+    z_offset: 2.68 m
+    material: terminal_white
+
+# Site: Campus Nord
+
+## Building: Forum Nord
+
+### Storey: Level 2
+  elevation: 8.5 m
+  height: 3.6 m
+  apply_template: ServicesOfficeFloor
+  f: L2
+
+### Storey: Level 3
+  elevation: 12.1 m
+  height: 3.6 m
+  apply_template: ServicesOfficeFloor
+  f: L3

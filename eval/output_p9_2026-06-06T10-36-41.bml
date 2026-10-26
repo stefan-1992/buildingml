@@ -1,0 +1,306 @@
+# Site: HShapedApartmentSite
+
+## Building: ApartmentH
+
+### Storey: GroundFloor
+  elevation: 0 m
+  height: 3 m
+
+#### Space: AptA_Living_GF
+  usage: living
+  Wall: W-AL-S-GF
+    from: (0, 0) to: (8, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Door: D-AL-MAIN-GF
+      offset: 1.5 m
+      width: 0.9 m
+      height: 2.1 m
+    Window: WIN-AL-S-GF
+      offset: 4.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-AL-W-GF
+    from: (0, 0) to: (0, 6)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-AL-W-GF
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-AL-ES-GF
+    from: (8, 0) to: (8, 4.5)
+    height: 3 m
+    thickness: 0.24 m
+  Wall: W-AL-INT-GF
+    from: (0, 6) to: (8, 6)
+    height: 3 m
+    thickness: 0.15 m
+    Door: D-AL-INT-GF
+      offset: 3.5 m
+      width: 0.9 m
+      height: 2.1 m
+
+#### Space: AptA_Bedroom_GF
+  usage: bedroom
+  Wall: W-AL-N-GF
+    from: (0, 12) to: (8, 12)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-AL-N-GF
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-AL-WN-GF
+    from: (0, 6) to: (0, 12)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-AL-WN-GF
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-AL-EN-GF
+    from: (8, 7.5) to: (8, 12)
+    height: 3 m
+    thickness: 0.24 m
+
+#### Space: Corridor_GF
+  usage: corridor
+  Wall: W-COR-S-GF
+    from: (8, 4.5) to: (11, 4.5)
+    height: 3 m
+    thickness: 0.24 m
+  Wall: W-COR-N-GF
+    from: (8, 7.5) to: (11, 7.5)
+    height: 3 m
+    thickness: 0.24 m
+  Stair: STR-GF
+    from: (8.5, 5.0) to: (10.5, 7.0)
+    width: 1.0 m
+    height: 3 m
+
+#### Space: AptB_Living_GF
+  usage: living
+  Wall: W-BR-S-GF
+    from: (11, 0) to: (19, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Door: D-BR-MAIN-GF
+      offset: 5.5 m
+      width: 0.9 m
+      height: 2.1 m
+    Window: WIN-BR-S-GF
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-BR-E-GF
+    from: (19, 0) to: (19, 6)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-BR-E-GF
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-BR-WS-GF
+    from: (11, 0) to: (11, 4.5)
+    height: 3 m
+    thickness: 0.24 m
+  Wall: W-BR-INT-GF
+    from: (11, 6) to: (19, 6)
+    height: 3 m
+    thickness: 0.15 m
+    Door: D-BR-INT-GF
+      offset: 3.5 m
+      width: 0.9 m
+      height: 2.1 m
+
+#### Space: AptB_Bedroom_GF
+  usage: bedroom
+  Wall: W-BR-N-GF
+    from: (11, 12) to: (19, 12)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-BR-N-GF
+      offset: 5.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-BR-EN-GF
+    from: (19, 6) to: (19, 12)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-BR-EN-GF
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-BR-WN-GF
+    from: (11, 7.5) to: (11, 12)
+    height: 3 m
+    thickness: 0.24 m
+
+### Storey: FirstFloor
+  elevation: 3 m
+  height: 3 m
+
+#### Space: AptA_Living_FF
+  usage: living
+  Wall: W-AL-S-FF
+    from: (0, 0) to: (8, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-AL-S1-FF
+      offset: 1.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-AL-S2-FF
+      offset: 5.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-AL-W-FF
+    from: (0, 0) to: (0, 6)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-AL-W-FF
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-AL-ES-FF
+    from: (8, 0) to: (8, 4.5)
+    height: 3 m
+    thickness: 0.24 m
+    Door: D-AL-ENTRY-FF
+      offset: 1.5 m
+      width: 0.9 m
+      height: 2.1 m
+  Wall: W-AL-INT-FF
+    from: (0, 6) to: (8, 6)
+    height: 3 m
+    thickness: 0.15 m
+    Door: D-AL-INT-FF
+      offset: 3.5 m
+      width: 0.9 m
+      height: 2.1 m
+
+#### Space: AptA_Bedroom_FF
+  usage: bedroom
+  Wall: W-AL-N-FF
+    from: (0, 12) to: (8, 12)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-AL-N-FF
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-AL-WN-FF
+    from: (0, 6) to: (0, 12)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-AL-WN-FF
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-AL-EN-FF
+    from: (8, 7.5) to: (8, 12)
+    height: 3 m
+    thickness: 0.24 m
+
+#### Space: Corridor_FF
+  usage: corridor
+  Wall: W-COR-S-FF
+    from: (8, 4.5) to: (11, 4.5)
+    height: 3 m
+    thickness: 0.24 m
+  Wall: W-COR-N-FF
+    from: (8, 7.5) to: (11, 7.5)
+    height: 3 m
+    thickness: 0.24 m
+
+#### Space: AptB_Living_FF
+  usage: living
+  Wall: W-BR-S-FF
+    from: (11, 0) to: (19, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-BR-S1-FF
+      offset: 1.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-BR-S2-FF
+      offset: 5.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-BR-E-FF
+    from: (19, 0) to: (19, 6)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-BR-E-FF
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-BR-WS-FF
+    from: (11, 0) to: (11, 4.5)
+    height: 3 m
+    thickness: 0.24 m
+    Door: D-BR-ENTRY-FF
+      offset: 1.5 m
+      width: 0.9 m
+      height: 2.1 m
+  Wall: W-BR-INT-FF
+    from: (11, 6) to: (19, 6)
+    height: 3 m
+    thickness: 0.15 m
+    Door: D-BR-INT-FF
+      offset: 3.5 m
+      width: 0.9 m
+      height: 2.1 m
+
+#### Space: AptB_Bedroom_FF
+  usage: bedroom
+  Wall: W-BR-N-FF
+    from: (11, 12) to: (19, 12)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-BR-N-FF
+      offset: 5.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-BR-EN-FF
+    from: (19, 6) to: (19, 12)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-BR-EN-FF
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-BR-WN-FF
+    from: (11, 7.5) to: (11, 12)
+    height: 3 m
+    thickness: 0.24 m
+
+### Storey: RoofLevel
+  elevation: 6 m
+  height: 0 m
+
+#### Space: RoofDeck
+  usage: storage
+  Roof: RF-01
+    boundary: [(0, 0), (8, 0), (8, 4.5), (11, 4.5), (11, 0), (19, 0), (19, 12), (11, 12), (11, 7.5), (8, 7.5), (8, 12), (0, 12)]
+    type: flat
+    ridge_height: 0 m

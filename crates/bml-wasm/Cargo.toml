@@ -1,0 +1,16 @@
+[package]
+name = "bml-wasm"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "WASM bindings for BuildingML compiler"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+bml-core = { path = "../bml-core" }
+wasm-bindgen.workspace = true
+serde_json.workspace = true
+getrandom = { version = "0.2", features = ["js"] }

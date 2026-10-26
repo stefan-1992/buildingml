@@ -1,0 +1,13 @@
+// Single slab test
+# Site: Test Site
+
+## Building: Test Building
+
+### Storey: Ground Floor
+  elevation: 0.0 m
+
+  Slab: SLAB-01
+    boundary: [(0,0), (6,0), (6,5), (0,5)]
+    thickness: 0.22 m
+    material: reinforced_concrete
+    slab_type: floor

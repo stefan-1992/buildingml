@@ -1,0 +1,172 @@
+# Site: ResidentialSite
+
+## Building: FourStoreyHouse
+
+### Storey: GroundFloor
+  elevation: 0 m
+  height: 3 m
+#### Space: GroundLiving
+  usage: living
+  Slab: SL-GF
+    boundary: [(0, 0), (5, 0), (5, 3), (0, 3)]
+    thickness: 0.2 m
+  Wall: W-GF-S
+    from: (0, 0) to: (5, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Door: D-GF-01
+      offset: 2.0 m
+      width: 0.9 m
+      height: 2.1 m
+    Window: WIN-GF-S
+      offset: 3.5 m
+      width: 0.8 m
+      height: 1.0 m
+      sill_height: 0.9 m
+  Wall: W-GF-E
+    from: (5, 0) to: (5, 3)
+    height: 3 m
+    thickness: 0.24 m
+  Wall: W-GF-N
+    from: (5, 3) to: (0, 3)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-GF-N
+      offset: 2.0 m
+      width: 0.8 m
+      height: 1.0 m
+      sill_height: 0.9 m
+  Wall: W-GF-W
+    from: (0, 3) to: (0, 0)
+    height: 3 m
+    thickness: 0.24 m
+
+### Storey: Floor1
+  elevation: 3 m
+  height: 3 m
+#### Space: Floor1Bedroom
+  usage: bedroom
+  Slab: SL-F1
+    boundary: [(0, 0), (5, 0), (5, 3), (0, 3)]
+    thickness: 0.2 m
+  Wall: W-F1-S
+    from: (0, 0) to: (5, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-F1-S1
+      offset: 1.5 m
+      width: 0.8 m
+      height: 1.0 m
+      sill_height: 0.9 m
+    Window: WIN-F1-S2
+      offset: 3.2 m
+      width: 0.8 m
+      height: 1.0 m
+      sill_height: 0.9 m
+  Wall: W-F1-E
+    from: (5, 0) to: (5, 3)
+    height: 3 m
+    thickness: 0.24 m
+  Wall: W-F1-N
+    from: (5, 3) to: (0, 3)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-F1-N
+      offset: 2.0 m
+      width: 0.8 m
+      height: 1.0 m
+      sill_height: 0.9 m
+  Wall: W-F1-W
+    from: (0, 3) to: (0, 0)
+    height: 3 m
+    thickness: 0.24 m
+
+### Storey: Floor2
+  elevation: 6 m
+  height: 3 m
+#### Space: Floor2Bedroom
+  usage: bedroom
+  Slab: SL-F2
+    boundary: [(0, 0), (5, 0), (5, 3), (0, 3)]
+    thickness: 0.2 m
+  Wall: W-F2-S
+    from: (0, 0) to: (5, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-F2-S1
+      offset: 1.5 m
+      width: 0.8 m
+      height: 1.0 m
+      sill_height: 0.9 m
+    Window: WIN-F2-S2
+      offset: 3.2 m
+      width: 0.8 m
+      height: 1.0 m
+      sill_height: 0.9 m
+  Wall: W-F2-E
+    from: (5, 0) to: (5, 3)
+    height: 3 m
+    thickness: 0.24 m
+  Wall: W-F2-N
+    from: (5, 3) to: (0, 3)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-F2-N
+      offset: 2.0 m
+      width: 0.8 m
+      height: 1.0 m
+      sill_height: 0.9 m
+  Wall: W-F2-W
+    from: (0, 3) to: (0, 0)
+    height: 3 m
+    thickness: 0.24 m
+
+### Storey: Floor3
+  elevation: 9 m
+  height: 3 m
+#### Space: Floor3Bedroom
+  usage: bedroom
+  Slab: SL-F3
+    boundary: [(0, 0), (5, 0), (5, 3), (0, 3)]
+    thickness: 0.2 m
+  Wall: W-F3-S
+    from: (0, 0) to: (5, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-F3-S1
+      offset: 1.5 m
+      width: 0.8 m
+      height: 1.0 m
+      sill_height: 0.9 m
+    Window: WIN-F3-S2
+      offset: 3.2 m
+      width: 0.8 m
+      height: 1.0 m
+      sill_height: 0.9 m
+  Wall: W-F3-E
+    from: (5, 0) to: (5, 3)
+    height: 3 m
+    thickness: 0.24 m
+  Wall: W-F3-N
+    from: (5, 3) to: (0, 3)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WIN-F3-N
+      offset: 2.0 m
+      width: 0.8 m
+      height: 1.0 m
+      sill_height: 0.9 m
+  Wall: W-F3-W
+    from: (0, 3) to: (0, 0)
+    height: 3 m
+    thickness: 0.24 m
+
+### Storey: RoofLevel
+  elevation: 12 m
+  height: 0 m
+#### Space: AtticSpace
+  usage: storage
+  Roof: RF-01
+    boundary: [(0, 0), (5, 0), (5, 3), (0, 3)]
+    type: gable
+    ridge_height: 2.0 m

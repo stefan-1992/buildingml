@@ -1,0 +1,554 @@
+// Two-storey residential house �?4 bedroom family home
+// Footprint: 10m x 8m, total ~160m2 gross floor area
+
+Material: exterior_masonry
+  category: masonry
+  density: 1800 kg/m3
+
+Material: interior_partition
+  category: concrete
+  density: 1800 kg/m3
+
+Material: reinforced_concrete
+  category: concrete
+  grade: C30
+  density: 2400 kg/m3
+
+# Site: Family Residence
+  location: 48.1351, 11.5820
+  address: "Ahornweg 12, 80331 Munich"
+
+## Building: Two Storey House
+  type: residential
+  gross_floor_area: 160.0 m2
+
+// =========================================================================
+// Ground Floor �?Entrance, Living, Kitchen, WC
+// =========================================================================
+
+### Storey: Ground Floor
+  elevation: 0.0 m
+  height: 2.80 m
+
+//// Exterior Walls ////
+
+#### Space: Entrance Hall
+  usage: circulation
+  area: 10.5 m2
+
+  // South exterior wall (entrance side)
+  Wall: W-GF-S1
+    from: (0, 0) to: (3, 0)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Door: D-FRONT
+      offset: 0.7 m
+      width: 1.10 m
+      height: 2.10 m
+      type: single_leaf
+      is_external: true
+      fire_rating: T30
+
+  // Entrance hall east partition
+  Wall: W-GF-I1
+    from: (3, 0) to: (3, 4.5)
+    height: 2.80 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-GF-01
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+
+  // West exterior wall segment (entrance)
+  Wall: W-GF-W1
+    from: (0, 4.5) to: (0, 0)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  // Entrance hall north partition
+  Wall: W-GF-I2
+    from: (0, 4.5) to: (3, 4.5)
+    height: 2.80 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-GF-02
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+
+#### Space: Living Room
+  usage: living
+  area: 31.5 m2
+
+  // South exterior wall (living room)
+  Wall: W-GF-S2
+    from: (3, 0) to: (10, 0)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-GF-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.80 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-GF-02
+      offset: 4.5 m
+      width: 1.5 m
+      height: 1.4 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // East exterior wall (living room lower)
+  Wall: W-GF-E1
+    from: (10, 0) to: (10, 4.5)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-GF-03
+      offset: 1.0 m
+      width: 1.2 m
+      height: 1.4 m
+      sill_height: 0.80 m
+      type: triple_glazed
+
+  // Living room / back rooms divider
+  Wall: W-GF-I3
+    from: (3, 4.5) to: (10, 4.5)
+    height: 2.80 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-GF-03
+      offset: 4.5 m
+      width: 1.20 m
+      height: 2.10 m
+      type: double_leaf
+
+#### Space: Kitchen
+  usage: kitchen
+  area: 21.0 m2
+
+  // North exterior wall (kitchen)
+  Wall: W-GF-N1
+    from: (6, 8) to: (0, 8)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-GF-04
+      offset: 1.0 m
+      width: 1.8 m
+      height: 1.4 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // West exterior wall (kitchen)
+  Wall: W-GF-W2
+    from: (0, 8) to: (0, 4.5)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-GF-05
+      offset: 0.75 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 1.00 m
+      type: triple_glazed
+
+  // Kitchen / stair+WC partition
+  Wall: W-GF-I4
+    from: (6, 4.5) to: (6, 8)
+    height: 2.80 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-GF-04
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+
+#### Space: WC
+  usage: bathroom
+  area: 5.25 m2
+
+  // North exterior wall (WC)
+  Wall: W-GF-N2
+    from: (8.5, 8) to: (6, 8)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+    Window: WIN-GF-06
+      offset: 0.5 m
+      width: 0.6 m
+      height: 0.6 m
+      sill_height: 1.60 m
+      type: double_glazed
+
+  // WC / staircase partition
+  Wall: W-GF-I5
+    from: (8.5, 4.5) to: (8.5, 8)
+    height: 2.80 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-GF-05
+      offset: 0.5 m
+      width: 0.80 m
+      height: 2.10 m
+      type: single_leaf
+
+#### Space: Staircase
+  usage: circulation
+  area: 5.25 m2
+
+  // East exterior wall (staircase + upper)
+  Wall: W-GF-E2
+    from: (10, 4.5) to: (10, 8)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  // North exterior wall (staircase)
+  Wall: W-GF-N3
+    from: (10, 8) to: (8.5, 8)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Stair: ST-GF-01
+    from_storey: Ground Floor
+    to_storey: First Floor
+    type: straight
+    position: (9.0, 5.5)
+    width: 1.0 m
+    riser_count: 16
+    riser_height: 0.175 m
+    tread_depth: 0.27 m
+
+  // Ground floor slab
+  Slab: SLAB-GF
+    boundary: [(0,0), (10,0), (10,8), (0,8)]
+    thickness: 0.25 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  // Load-bearing beam spanning the building width
+  Beam: B-GF-01
+    from: (0, 4.5) to: (10, 4.5)
+    profile: rectangle(0.30, 0.45)
+    material: reinforced_concrete
+
+  // Central column
+  Column: COL-GF-01
+    position: (5.0, 4.5)
+    height: 2.80 m
+    profile: rectangle(0.30, 0.30)
+    material: reinforced_concrete
+
+// =========================================================================
+// First Floor �?2 Bedrooms, Bathroom, Landing/Hallway
+// =========================================================================
+
+### Storey: First Floor
+  elevation: 2.80 m
+  height: 2.60 m
+
+#### Space: Landing
+  usage: circulation
+  area: 8.75 m2
+
+  // Landing south wall (internal partition over entrance below)
+  Wall: W-FF-I1
+    from: (0, 0) to: (5, 0)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  // Landing partition east
+  Wall: W-FF-I2
+    from: (5, 0) to: (5, 3.5)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-FF-03
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+
+  // Landing partition north
+  Wall: W-FF-I3
+    from: (0, 3.5) to: (5, 3.5)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  // West exterior wall (landing)
+  Wall: W-FF-W1
+    from: (0, 3.5) to: (0, 0)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+  Railing: RL-FF-01
+    height: 1.0 m
+    length: 1.5 m
+
+#### Space: Master Bedroom
+  usage: bedroom
+  area: 22.5 m2
+
+  // South exterior wall (master bedroom)
+  Wall: W-FF-S1
+    from: (5, 0) to: (10, 0)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+    Window: WIN-FF-01
+      offset: 0.75 m
+      width: 2.0 m
+      height: 1.5 m
+      sill_height: 0.85 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // East exterior wall (master bedroom)
+  Wall: W-FF-E1
+    from: (10, 0) to: (10, 4.5)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+    Window: WIN-FF-02
+      offset: 1.0 m
+      width: 1.2 m
+      height: 1.4 m
+      sill_height: 0.85 m
+      type: triple_glazed
+
+  // Master bedroom / back rooms divider
+  Wall: W-FF-I4
+    from: (5, 4.5) to: (10, 4.5)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-FF-01
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+
+#### Space: Bedroom 2
+  usage: bedroom
+  area: 14.0 m2
+
+  // West exterior wall (bedroom 2)
+  Wall: W-FF-W2
+    from: (0, 8) to: (0, 3.5)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+    Window: WIN-FF-03
+      offset: 1.0 m
+      width: 1.5 m
+      height: 1.4 m
+      sill_height: 0.85 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // North exterior wall (bedroom 2)
+  Wall: W-FF-N1
+    from: (4, 8) to: (0, 8)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+  // Bedroom 2 / bathroom partition
+  Wall: W-FF-I5
+    from: (4, 3.5) to: (4, 8)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-FF-02
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+
+#### Space: Bathroom
+  usage: bathroom
+  area: 10.5 m2
+
+  // North exterior wall (bathroom)
+  Wall: W-FF-N2
+    from: (7, 8) to: (4, 8)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+    Window: WIN-FF-04
+      offset: 0.5 m
+      width: 1.0 m
+      height: 0.8 m
+      sill_height: 1.40 m
+      type: double_glazed
+
+  // Bathroom / staircase partition
+  Wall: W-FF-I7
+    from: (7, 4.5) to: (7, 8)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-FF-04
+      offset: 0.5 m
+      width: 0.80 m
+      height: 2.10 m
+      type: single_leaf
+
+  // Bathroom south partition
+  Wall: W-FF-I8
+    from: (4, 4.5) to: (5, 4.5)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+#### Space: Upper Hallway
+  usage: circulation
+  area: 10.5 m2
+
+  // East exterior wall (upper hallway/stair)
+  Wall: W-FF-E2
+    from: (10, 4.5) to: (10, 8)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+  // North exterior wall (upper hallway)
+  Wall: W-FF-N3
+    from: (10, 8) to: (7, 8)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+  // First floor slab (also ground floor ceiling)
+  Slab: SLAB-FF
+    boundary: [(0,0), (10,0), (10,8), (0,8)]
+    thickness: 0.22 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  // Load-bearing beam at mid-span
+  Beam: B-FF-01
+    from: (0, 4.5) to: (10, 4.5)
+    profile: rectangle(0.30, 0.40)
+    material: reinforced_concrete
+
+  Column: COL-FF-01
+    position: (5.0, 4.5)
+    height: 2.60 m
+    profile: rectangle(0.30, 0.30)
+    material: reinforced_concrete
+
+// =========================================================================
+// Roof
+// =========================================================================
+
+### Storey: Roof
+  elevation: 5.40 m
+
+  Roof: RF-01
+    type: gable
+    boundary: [(-0.5, -0.5), (10.5, -0.5), (10.5, 8.5), (-0.5, 8.5)]
+    ridge_height: 3.5 m
+    ridge_direction: x
+    overhang: 0.5 m

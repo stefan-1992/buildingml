@@ -1,0 +1,16 @@
+// Single wall test
+# Site: Test Site
+
+## Building: Test Building
+  type: residential
+
+### Storey: Ground Floor
+  elevation: 0.0 m
+  height: 2.80 m
+
+  Wall: W-01
+    from: (0, 0) to: (6, 0)
+    height: 2.80 m
+    thickness: 0.24 m
+    is_external: true
+    load_bearing: true

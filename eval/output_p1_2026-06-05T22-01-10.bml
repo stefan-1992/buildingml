@@ -1,0 +1,470 @@
+# Site: HotelSite
+
+## Building: BoutiqueHotel
+
+### Storey: GroundFloor
+  elevation: 0 m
+  height: 3 m
+  Slab: SL-GF
+    boundary: [(0, 0), (16, 0), (16, 16), (0, 16)]
+    thickness: 0.25 m
+
+#### Space: Room-GF-S1
+  usage: bedroom
+  Wall: W-GF-S1-S
+    from: (0, 0) to: (4, 0)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-GF-S1
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-GF-S1-W
+    from: (0, 0) to: (0, 6)
+    height: 3 m
+    thickness: 0.3 m
+  Wall: W-GF-S1-E
+    from: (4, 0) to: (4, 6)
+    height: 3 m
+    thickness: 0.2 m
+  Wall: W-GF-S1-N
+    from: (0, 6) to: (4, 6)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-GF-S1
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+
+#### Space: Room-GF-S2
+  usage: bedroom
+  Wall: W-GF-S2-S
+    from: (4, 0) to: (8, 0)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-GF-S2
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-GF-S2-E
+    from: (8, 0) to: (8, 6)
+    height: 3 m
+    thickness: 0.2 m
+  Wall: W-GF-S2-N
+    from: (4, 6) to: (8, 6)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-GF-S2
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+
+#### Space: Room-GF-S3
+  usage: bedroom
+  Wall: W-GF-S3-S
+    from: (8, 0) to: (12, 0)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-GF-S3
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-GF-S3-E
+    from: (12, 0) to: (12, 6)
+    height: 3 m
+    thickness: 0.2 m
+  Wall: W-GF-S3-N
+    from: (8, 6) to: (12, 6)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-GF-S3
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+
+#### Space: Room-GF-S4
+  usage: bedroom
+  Wall: W-GF-S4-S
+    from: (12, 0) to: (16, 0)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-GF-S4
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-GF-S4-E
+    from: (16, 0) to: (16, 6)
+    height: 3 m
+    thickness: 0.3 m
+  Wall: W-GF-S4-N
+    from: (12, 6) to: (16, 6)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-GF-S4
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+
+#### Space: Corridor-GF
+  usage: corridor
+  Wall: W-GF-COR-W
+    from: (0, 6) to: (0, 10)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-GF-COR-W
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.5 m
+      sill_height: 0.9 m
+  Wall: W-GF-COR-E
+    from: (16, 6) to: (16, 10)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-GF-COR-E
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.5 m
+      sill_height: 0.9 m
+
+#### Space: Room-GF-N1
+  usage: bedroom
+  Wall: W-GF-N1-S
+    from: (0, 10) to: (4, 10)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-GF-N1
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+  Wall: W-GF-N1-W
+    from: (0, 10) to: (0, 16)
+    height: 3 m
+    thickness: 0.3 m
+  Wall: W-GF-N1-E
+    from: (4, 10) to: (4, 16)
+    height: 3 m
+    thickness: 0.2 m
+  Wall: W-GF-N1-N
+    from: (0, 16) to: (4, 16)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-GF-N1
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+#### Space: Room-GF-N2
+  usage: bedroom
+  Wall: W-GF-N2-S
+    from: (4, 10) to: (8, 10)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-GF-N2
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+  Wall: W-GF-N2-E
+    from: (8, 10) to: (8, 16)
+    height: 3 m
+    thickness: 0.2 m
+  Wall: W-GF-N2-N
+    from: (4, 16) to: (8, 16)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-GF-N2
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+#### Space: Room-GF-N3
+  usage: bedroom
+  Wall: W-GF-N3-S
+    from: (8, 10) to: (12, 10)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-GF-N3
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+  Wall: W-GF-N3-E
+    from: (12, 10) to: (12, 16)
+    height: 3 m
+    thickness: 0.2 m
+  Wall: W-GF-N3-N
+    from: (8, 16) to: (12, 16)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-GF-N3
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+#### Space: Room-GF-N4
+  usage: bedroom
+  Wall: W-GF-N4-S
+    from: (12, 10) to: (16, 10)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-GF-N4
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+  Wall: W-GF-N4-E
+    from: (16, 10) to: (16, 16)
+    height: 3 m
+    thickness: 0.3 m
+  Wall: W-GF-N4-N
+    from: (12, 16) to: (16, 16)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-GF-N4
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+### Storey: FirstFloor
+  elevation: 3 m
+  height: 3 m
+  Slab: SL-FF
+    boundary: [(0, 0), (16, 0), (16, 16), (0, 16)]
+    thickness: 0.25 m
+
+#### Space: Room-FF-S1
+  usage: bedroom
+  Wall: W-FF-S1-S
+    from: (0, 0) to: (4, 0)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-FF-S1
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-FF-S1-W
+    from: (0, 0) to: (0, 6)
+    height: 3 m
+    thickness: 0.3 m
+  Wall: W-FF-S1-E
+    from: (4, 0) to: (4, 6)
+    height: 3 m
+    thickness: 0.2 m
+  Wall: W-FF-S1-N
+    from: (0, 6) to: (4, 6)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-FF-S1
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+
+#### Space: Room-FF-S2
+  usage: bedroom
+  Wall: W-FF-S2-S
+    from: (4, 0) to: (8, 0)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-FF-S2
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-FF-S2-E
+    from: (8, 0) to: (8, 6)
+    height: 3 m
+    thickness: 0.2 m
+  Wall: W-FF-S2-N
+    from: (4, 6) to: (8, 6)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-FF-S2
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+
+#### Space: Room-FF-S3
+  usage: bedroom
+  Wall: W-FF-S3-S
+    from: (8, 0) to: (12, 0)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-FF-S3
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-FF-S3-E
+    from: (12, 0) to: (12, 6)
+    height: 3 m
+    thickness: 0.2 m
+  Wall: W-FF-S3-N
+    from: (8, 6) to: (12, 6)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-FF-S3
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+
+#### Space: Room-FF-S4
+  usage: bedroom
+  Wall: W-FF-S4-S
+    from: (12, 0) to: (16, 0)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-FF-S4
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-FF-S4-E
+    from: (16, 0) to: (16, 6)
+    height: 3 m
+    thickness: 0.3 m
+  Wall: W-FF-S4-N
+    from: (12, 6) to: (16, 6)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-FF-S4
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+
+#### Space: Corridor-FF
+  usage: corridor
+  Wall: W-FF-COR-W
+    from: (0, 6) to: (0, 10)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-FF-COR-W
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.5 m
+      sill_height: 0.9 m
+  Wall: W-FF-COR-E
+    from: (16, 6) to: (16, 10)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-FF-COR-E
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.5 m
+      sill_height: 0.9 m
+
+#### Space: Room-FF-N1
+  usage: bedroom
+  Wall: W-FF-N1-S
+    from: (0, 10) to: (4, 10)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-FF-N1
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+  Wall: W-FF-N1-W
+    from: (0, 10) to: (0, 16)
+    height: 3 m
+    thickness: 0.3 m
+  Wall: W-FF-N1-E
+    from: (4, 10) to: (4, 16)
+    height: 3 m
+    thickness: 0.2 m
+  Wall: W-FF-N1-N
+    from: (0, 16) to: (4, 16)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-FF-N1
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+#### Space: Room-FF-N2
+  usage: bedroom
+  Wall: W-FF-N2-S
+    from: (4, 10) to: (8, 10)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-FF-N2
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+  Wall: W-FF-N2-E
+    from: (8, 10) to: (8, 16)
+    height: 3 m
+    thickness: 0.2 m
+  Wall: W-FF-N2-N
+    from: (4, 16) to: (8, 16)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-FF-N2
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+#### Space: Room-FF-N3
+  usage: bedroom
+  Wall: W-FF-N3-S
+    from: (8, 10) to: (12, 10)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-FF-N3
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+  Wall: W-FF-N3-E
+    from: (12, 10) to: (12, 16)
+    height: 3 m
+    thickness: 0.2 m
+  Wall: W-FF-N3-N
+    from: (8, 16) to: (12, 16)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-FF-N3
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+#### Space: Room-FF-N4
+  usage: bedroom
+  Wall: W-FF-N4-S
+    from: (12, 10) to: (16, 10)
+    height: 3 m
+    thickness: 0.2 m
+    Door: D-FF-N4
+      offset: 1.55 m
+      width: 0.9 m
+      height: 2.1 m
+  Wall: W-FF-N4-E
+    from: (16, 10) to: (16, 16)
+    height: 3 m
+    thickness: 0.3 m
+  Wall: W-FF-N4-N
+    from: (12, 16) to: (16, 16)
+    height: 3 m
+    thickness: 0.3 m
+    Window: WN-FF-N4
+      offset: 1.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+### Storey: RoofLevel
+  elevation: 6 m
+  height: 3 m
+
+#### Space: AtticSpace
+  usage: storage
+  Roof: RF-01
+    boundary: [(0, 0), (16, 0), (16, 16), (0, 16)]
+    type: hip
+    ridge_height: 2.5 m

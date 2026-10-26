@@ -1,0 +1,41 @@
+// Roof Level ?Flat Roof + Rooftop Terrace
+// elevation: 18.50 m
+// Demonstrates: railing from: axis positioning
+
+# Site: Parkview Residences
+
+## Building: Block A
+
+### Storey: Roof
+  elevation: 18.50 m
+
+  Roof: RF-01
+    type: hip
+    boundary: [(-0.3, -0.3), (40.3, -0.3), (40.3, 18.3), (-0.3, 18.3)]
+    ridge_height: 3.5 m
+    ridge_direction: x
+    overhang: 0.5 m
+
+  // Rooftop terrace slab (~1/3 of roof, south side, overhangs exterior walls)
+  Slab: SLAB-TERRACE
+    boundary: [(-0.3,-0.3), (40.3,-0.3), (40.3,6), (-0.3,6)]
+    thickness: 0.15 m
+    material: reinforced_concrete
+    slab_type: roof
+
+  // Terrace railings at slab edge
+  Railing: RL-TERRACE-S
+    from: (-0.3, -0.3) to: (40.3, -0.3)
+    height: 1.10 m
+
+  Railing: RL-TERRACE-E
+    from: (40.3, -0.3) to: (40.3, 6)
+    height: 1.10 m
+
+  Railing: RL-TERRACE-W
+    from: (-0.3, 6) to: (-0.3, -0.3)
+    height: 1.10 m
+
+  Railing: RL-TERRACE-N
+    from: (-0.3, 6) to: (40.3, 6)
+    height: 1.10 m

@@ -1,0 +1,25 @@
+{
+  "grammars": [
+    {
+      "name": "buildingml",
+      "camelcase": "BuildingML",
+      "scope": "source.buildingml",
+      "path": ".",
+      "file-types": ["bml"],
+      "highlights": "queries/highlights.scm",
+      "external-scanner": {
+        "path": "src/scanner.c"
+      }
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Tree-sitter grammar for BuildingML"
+  },
+  "bindings": {
+    "rust": {
+      "path": "bindings/rust"
+    }
+  }
+}

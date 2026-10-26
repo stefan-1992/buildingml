@@ -1,0 +1,27 @@
+// Compliance checks for Forum Nord (accessibility and escape routes)
+
+Check: min_door_width
+  description: "Doors must be at least 0.90 m wide (barrier-free access)"
+  applies_to: Door
+  assert: width >= 0.90
+
+Check: min_door_height
+  description: "Doors must be at least 2.10 m high"
+  applies_to: Door
+  assert: height >= 2.10
+
+CheckSuite: escape_routes
+  description: "Escape routes in a public assembly building"
+  jurisdiction: DE
+  version: "2024"
+  section: "MVStaettVO section 7"
+
+  Check: stair_width
+    description: "Stairs in escape routes must be at least 1.20 m wide"
+    applies_to: Stair
+    assert: width >= 1.20
+
+  Check: stair_riser_height
+    description: "Stair risers must not exceed 0.19 m"
+    applies_to: Stair
+    assert: riser_height <= 0.19

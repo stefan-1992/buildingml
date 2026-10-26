@@ -1,0 +1,1252 @@
+// Level 1 - Lecture and seminar rooms
+// elevation 4.5 m, height 4.0 m
+// Three lecture rooms on the south side behind timber sun fins, a 4 m wide
+// learning street, seminar rooms to the north and a gallery around the atrium.
+// The roof of the mensa bulge below is a green roof.
+
+import materials from "../materials.bml"
+import assets from "../assets/furniture.bml"
+
+# Site: Campus Nord
+
+## Building: Forum Nord
+
+### Storey: Level 1
+  elevation: 4.5 m
+  height: 4 m
+
+  // ------------------------------------------------------------------
+  // Floor slab with atrium, stair and lift voids
+  // ------------------------------------------------------------------
+
+  Slab: SL-L1
+    boundary: { outer: [(49.648, 24), (49.626, 24), (49.626, 23.825), (45.875, 23.825), (45.875, 18.635), (43.675, 18.635), (43.675, 19.205), (41.725, 19.205), (41.725, 23.825), (3.675, 23.825), (3.675, 18.96), (1.8, 18.96), (1.8, 19.53), (0.175, 19.53), (0.175, 0.175), (4.042, 0.175), (4.042, 0), (19.958, 0), (19.958, 0.175), (22.04, 0.175), (22.04, 0.2), (43.909, 0.2), (43.909, 0), (43.971, 0.237), (44.055, 0.218), (44.057, 0.23), (43.887, 0.272), (49.755, 23.743), (49.681, 23.734)], holes: [[(38.2, 21), (38.2, 23.8), (40.9, 23.8), (40.9, 21)], [(24, 9), (23, 14.5), (34.5, 15), (35, 8.5)], [(5, 21), (5, 23.8), (7.7, 23.8), (7.7, 21)]] }
+    thickness: 0.41 m
+    material: floor_410
+    slab_type: floor
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Slab: SL-L1-BULGE
+    boundary: [(4.042, -0.11), (4.064, -0.168), (4.243, -0.112), (4.725, -1.303), (5.388, -2.404), (6.217, -3.386), (7.19, -4.226), (8.284, -4.901), (9.47, -5.396), (10.719, -5.698), (12, -5.8), (13.281, -5.698), (14.53, -5.396), (15.716, -4.901), (16.81, -4.226), (17.783, -3.386), (18.612, -2.404), (19.275, -1.303), (19.757, -0.112), (19.936, -0.168), (19.958, -0.11), (19.958, 0), (4.042, 0)]
+    thickness: 0.41 m
+    material: roof_bulge
+    slab_type: roof
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.18
+
+  Plate: PL-L1-GREEN-ROOF
+    boundary: [(19.523, -1.251), (19.933, -0.175), (4.067, -0.175), (4.477, -1.251), (5.148, -2.41), (5.997, -3.446), (7, -4.333), (8.132, -5.048), (9.365, -5.572), (10.665, -5.892), (12, -6), (13.335, -5.892), (14.635, -5.572), (15.868, -5.048), (17, -4.333), (18.003, -3.446), (18.852, -2.41)]
+    thickness: 0.15 m
+    z_offset: 0.15 m
+    material: green_roof_buildup
+    type: "extensive_green_roof"
+
+  // ------------------------------------------------------------------
+  // Facades
+  // ------------------------------------------------------------------
+
+  Wall: W-L1-S
+    from: (0.175, 0) to: (22.125, 0)
+    height: 4 m
+    thickness: 0.35 m
+    material: ew_exposed_concrete
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.24
+    acoustic_rating: 52
+
+    Window: WIN-L1-S1
+      offset: 0.525 m
+      width: 2.9 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-S2
+      offset: 4.125 m
+      width: 2.9 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-S3
+      offset: 8.825 m
+      width: 2.6 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-S4
+      offset: 11.825 m
+      width: 2.6 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-S5
+      offset: 15.825 m
+      width: 2.6 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-S6
+      offset: 18.825 m
+      width: 2.6 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+  Member: FIN-L1-S-01
+    boundary: [(0.54, -0.71), (0.54, -0.176), (0.46, -0.176), (0.46, -0.71)]
+    height: 4 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-02
+    boundary: [(1.54, -0.71), (1.54, -0.176), (1.46, -0.176), (1.46, -0.71)]
+    height: 4 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-03
+    boundary: [(2.54, -0.71), (2.54, -0.176), (2.46, -0.176), (2.46, -0.71)]
+    height: 4 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-04
+    boundary: [(3.54, -0.71), (3.54, -0.176), (3.46, -0.176), (3.46, -0.71)]
+    height: 4 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-05
+    boundary: [(4.54, -0.71), (4.54, -0.176), (4.46, -0.176), (4.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-06
+    boundary: [(5.54, -0.71), (5.54, -0.176), (5.46, -0.176), (5.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-07
+    boundary: [(6.54, -0.71), (6.54, -0.176), (6.46, -0.176), (6.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-08
+    boundary: [(7.54, -0.71), (7.54, -0.176), (7.46, -0.176), (7.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-09
+    boundary: [(8.54, -0.71), (8.54, -0.176), (8.46, -0.176), (8.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-10
+    boundary: [(9.54, -0.71), (9.54, -0.176), (9.46, -0.176), (9.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-11
+    boundary: [(10.54, -0.71), (10.54, -0.176), (10.46, -0.176), (10.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-12
+    boundary: [(11.54, -0.71), (11.54, -0.176), (11.46, -0.176), (11.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-13
+    boundary: [(12.54, -0.71), (12.54, -0.176), (12.46, -0.176), (12.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-14
+    boundary: [(13.54, -0.71), (13.54, -0.176), (13.46, -0.176), (13.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-15
+    boundary: [(14.54, -0.71), (14.54, -0.176), (14.46, -0.176), (14.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-16
+    boundary: [(15.54, -0.71), (15.54, -0.176), (15.46, -0.176), (15.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-17
+    boundary: [(16.54, -0.71), (16.54, -0.176), (16.46, -0.176), (16.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-18
+    boundary: [(17.54, -0.71), (17.54, -0.176), (17.46, -0.176), (17.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-19
+    boundary: [(18.54, -0.71), (18.54, -0.176), (18.46, -0.176), (18.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-20
+    boundary: [(19.54, -0.71), (19.54, -0.176), (19.46, -0.176), (19.46, -0.71)]
+    height: 3.85 m
+    z_offset: 0.15 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-21
+    boundary: [(20.54, -0.71), (20.54, -0.176), (20.46, -0.176), (20.46, -0.71)]
+    height: 4 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Member: FIN-L1-S-22
+    boundary: [(21.54, -0.71), (21.54, -0.176), (21.46, -0.176), (21.46, -0.71)]
+    height: 4 m
+    type: "sun_fin"
+    material: larch_cladding
+
+  Wall: CW-L1-S
+    from: (22.125, 0) to: (43.909, 0)
+    height: 4 m
+    thickness: 0.08 m
+    mullions: 1.5 m
+    transoms: [2.8 m]
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+  Wall: W-L1-W
+    from: (0, 23.825) to: (0, -0.175)
+    height: 3.59 m
+    thickness: 0.35 m
+    material: ew_exposed_concrete
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.24
+    acoustic_rating: 52
+
+    Window: WIN-L1-W1
+      offset: 10.325 m
+      width: 3 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-W2
+      offset: 14.625 m
+      width: 3 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-W3
+      offset: 18.425 m
+      width: 3 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+  Wall: W-L1-N
+    from: (49.626, 24) to: (-0.175, 24)
+    height: 4 m
+    thickness: 0.35 m
+    material: ew_exposed_concrete
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.24
+    acoustic_rating: 52
+
+    Window: WIN-L1-N1
+      offset: 4.626 m
+      width: 2 m
+      height: 2.4 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-N2
+      offset: 12.126 m
+      width: 3 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-N3
+      offset: 16.126 m
+      width: 3 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-N4
+      offset: 20.126 m
+      width: 3 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-N5
+      offset: 24.126 m
+      width: 3 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-N6
+      offset: 28.126 m
+      width: 3 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-N7
+      offset: 32.126 m
+      width: 3 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L1-N8
+      offset: 36.126 m
+      width: 3 m
+      height: 2.6 m
+      sill_height: 0.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+  // ------------------------------------------------------------------
+  // Lecture rooms and learning street
+  // ------------------------------------------------------------------
+
+  Wall: W-L1-CORR-S
+    from: (0.175, 10) to: (21.875, 10)
+    height: 3.59 m
+    thickness: 0.2 m
+    material: dw_200
+    load_bearing: false
+    fire_rating: EI90
+    acoustic_rating: 53
+
+    Door: D-L1-LR1
+      offset: 6.225 m
+      width: 1.2 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-L1-LR2
+      offset: 13.225 m
+      width: 1.2 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-L1-LR3
+      offset: 20.225 m
+      width: 1.2 m
+      height: 2.2 m
+      type: single_leaf
+
+  Wall: W-L1-LR12
+    from: (8, 0.175) to: (8, 9.9)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-L1-LR23
+    from: (15, 0.175) to: (15, 9.9)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-L1-LR3-E
+    from: (22, 0.2) to: (22, 10.1)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-L1-CORR-N
+    from: (8.125, 14) to: (21.875, 14)
+    height: 3.59 m
+    thickness: 0.2 m
+    material: dw_200
+    load_bearing: false
+    fire_rating: EI90
+    acoustic_rating: 53
+
+    Door: D-L1-SR1
+      offset: 5.075 m
+      width: 1.2 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-L1-SR2
+      offset: 12.075 m
+      width: 1.2 m
+      height: 2.2 m
+      type: single_leaf
+
+  Wall: W-L1-SR12
+    from: (15, 14.1) to: (15, 23.825)
+    height: 3.59 m
+    thickness: 0.2 m
+    material: dw_200
+    load_bearing: false
+    fire_rating: EI90
+    acoustic_rating: 53
+
+  Wall: W-L1-SR2-E
+    from: (22, 13.9) to: (22, 23.825)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-L1-SR3-S
+    from: (22.125, 18) to: (29.925, 18)
+    height: 3.59 m
+    thickness: 0.08 m
+    material: glass_partition
+    load_bearing: false
+    acoustic_rating: 37
+
+    Door: D-L1-SR3
+      offset: 6.275 m
+      width: 1.2 m
+      height: 2.2 m
+      type: single_leaf
+
+  Wall: W-L1-SR3-E
+    from: (30, 17.96) to: (30, 23.825)
+    height: 3.59 m
+    thickness: 0.15 m
+    material: dw_150
+    load_bearing: false
+    fire_rating: EI60
+    acoustic_rating: 48
+
+  Wall: W-L1-LR4-W-A
+    from: (36, 0.2) to: (36, 3.749)
+    height: 3.59 m
+    thickness: 0.08 m
+    material: glass_partition
+    load_bearing: false
+    acoustic_rating: 37
+
+  Wall: W-L1-LR4-W-B
+    from: (36, 4.251) to: (36, 8.9)
+    height: 3.59 m
+    thickness: 0.08 m
+    material: glass_partition
+    load_bearing: false
+    acoustic_rating: 37
+
+  Wall: W-L1-LR4-N
+    from: (35.96, 9) to: (46.044, 9)
+    height: 3.59 m
+    thickness: 0.2 m
+    material: dw_200
+    load_bearing: false
+    fire_rating: EI90
+    acoustic_rating: 53
+
+    Door: D-L1-LR4
+      offset: 1.04 m
+      width: 1.2 m
+      height: 2.2 m
+      type: single_leaf
+
+  // ------------------------------------------------------------------
+  // West core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-L1-CW1
+    from: (0.175, 14) to: (7.875, 14)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L1-CW-LOBBY
+      offset: 4.825 m
+      width: 1.8 m
+      height: 2.3 m
+      fire_rating: T30
+      type: double_leaf
+
+  Wall: W-L1-CW2
+    from: (3.8, 14.125) to: (3.8, 23.825)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L1-CW-STAIR
+      offset: 0.375 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+      type: single_leaf
+
+  Wall: W-L1-CW3
+    from: (3.925, 20.8) to: (7.875, 20.8)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L1-CW-LIFT
+      offset: 1.475 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: EI30
+      type: single_leaf
+
+  Wall: W-L1-CW4
+    from: (8, 13.9) to: (8, 23.825)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  // ------------------------------------------------------------------
+  // East core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-L1-CE1
+    from: (37.875, 16) to: (46.125, 16)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L1-CE-LOBBY
+      offset: 1.025 m
+      width: 1.6 m
+      height: 2.3 m
+      fire_rating: T30
+      type: double_leaf
+
+  Wall: W-L1-CE2
+    from: (46, 16.125) to: (46, 23.825)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-L1-CE3
+    from: (38, 16.125) to: (38, 23.825)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-L1-CE4
+    from: (41.6, 16.125) to: (41.6, 23.825)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L1-CE-STAIR
+      offset: 0.375 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+      type: single_leaf
+
+  Wall: W-L1-CE5
+    from: (38.125, 20.8) to: (41.475, 20.8)
+    height: 3.59 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L1-CE-LIFT
+      offset: 1.075 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: EI30
+      type: single_leaf
+
+  Column: C-L1-01
+    position: (28, 4)
+    height: 3.59 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+    fire_rating: R90
+
+  Column: C-L1-02
+    position: (36, 4)
+    height: 3.59 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+    fire_rating: R90
+
+  Column: C-L1-03
+    position: (40, 10)
+    height: 3.59 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+    fire_rating: R90
+
+  Column: C-L1-04
+    position: (26, 17)
+    height: 3.59 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+    fire_rating: R90
+
+  Railing: RL-L1-ATR-1
+    from: (24, 9) to: (35, 8.5)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-L1-ATR-2
+    from: (35, 8.5) to: (34.5, 15)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-L1-ATR-3
+    from: (34.5, 15) to: (23, 14.5)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-L1-ATR-4
+    from: (23, 14.5) to: (24, 9)
+    height: 1.1 m
+    material: glazing
+
+  Stair: ST-L1-W
+    from_storey: Level 1
+    to_storey: Level 2
+    type: u_shaped
+    position: (0.175, 19.23)
+    width: 1.625 m
+    riser_count: 23
+    tread_depth: 0.25 m
+    landing_depth: 1.595 m
+    turn: right
+    gap: 0.25 m
+    material: exposed_concrete
+    fire_rating: R90
+
+  Member: ST-L1-W-H1
+    from: (0.245, 19.23, 1.074) to: (0.245, 21.98, 2.987)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L1-W
+    material: stainless_steel
+
+  Member: ST-L1-W-H2
+    from: (1.73, 19.23, 1.074) to: (1.73, 21.98, 2.987)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L1-W
+    material: stainless_steel
+
+  Member: ST-L1-W-H3
+    from: (2.12, 22.23, 3.161) to: (2.12, 19.73, 4.9)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L1-W
+    material: stainless_steel
+
+  Member: ST-L1-W-H4
+    from: (3.605, 22.23, 3.161) to: (3.605, 19.73, 4.9)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L1-W
+    material: stainless_steel
+
+  Wall: W-L1-W-EYE
+    from: (1.925, 19.23) to: (1.925, 22.23)
+    height: 4 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    is_external: false
+    load_bearing: true
+    fire_rating: REI90
+
+  Stair: ST-L1-E
+    from_storey: Level 1
+    to_storey: Level 2
+    type: u_shaped
+    position: (41.725, 18.905)
+    width: 1.95 m
+    riser_count: 23
+    tread_depth: 0.25 m
+    landing_depth: 1.92 m
+    turn: right
+    gap: 0.25 m
+    material: exposed_concrete
+    fire_rating: R90
+
+  Member: ST-L1-E-H1
+    from: (41.795, 18.905, 1.074) to: (41.795, 21.655, 2.987)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L1-E
+    material: stainless_steel
+
+  Member: ST-L1-E-H2
+    from: (43.605, 18.905, 1.074) to: (43.605, 21.655, 2.987)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L1-E
+    material: stainless_steel
+
+  Member: ST-L1-E-H3
+    from: (43.995, 21.905, 3.161) to: (43.995, 19.405, 4.9)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L1-E
+    material: stainless_steel
+
+  Member: ST-L1-E-H4
+    from: (45.805, 21.905, 3.161) to: (45.805, 19.405, 4.9)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L1-E
+    material: stainless_steel
+
+  Wall: W-L1-E-EYE
+    from: (43.8, 18.905) to: (43.8, 21.905)
+    height: 4 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    is_external: false
+    load_bearing: true
+    fire_rating: REI90
+
+#### Space: Lecture Room 1.01
+  usage: classroom
+  area: 80 m2
+  zone: teaching
+  boundary: [(0, 0), (8, 0), (8, 10), (0, 10)]
+
+  Covering: CL-LECTURE-ROOM-1-01
+    predefined_type: ceiling
+    z_offset: 3.16 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-L1-LR1-01
+    asset: LectureDesk
+    position: (0.5, 3)
+
+  Furniture: FU-L1-LR1-02
+    asset: LectureDesk
+    position: (2, 3)
+
+  Furniture: FU-L1-LR1-03
+    asset: LectureDesk
+    position: (4.6, 3)
+
+  Furniture: FU-L1-LR1-04
+    asset: LectureDesk
+    position: (6.1, 3)
+
+  Furniture: FU-L1-LR1-05
+    asset: LectureDesk
+    position: (0.5, 4.15)
+
+  Furniture: FU-L1-LR1-06
+    asset: LectureDesk
+    position: (2, 4.15)
+
+  Furniture: FU-L1-LR1-07
+    asset: LectureDesk
+    position: (4.6, 4.15)
+
+  Furniture: FU-L1-LR1-08
+    asset: LectureDesk
+    position: (6.1, 4.15)
+
+  Furniture: FU-L1-LR1-09
+    asset: LectureDesk
+    position: (0.5, 5.3)
+
+  Furniture: FU-L1-LR1-10
+    asset: LectureDesk
+    position: (2, 5.3)
+
+  Furniture: FU-L1-LR1-11
+    asset: LectureDesk
+    position: (4.6, 5.3)
+
+  Furniture: FU-L1-LR1-12
+    asset: LectureDesk
+    position: (6.1, 5.3)
+
+  Furniture: FU-L1-LR1-13
+    asset: LectureDesk
+    position: (0.5, 6.45)
+
+  Furniture: FU-L1-LR1-14
+    asset: LectureDesk
+    position: (2, 6.45)
+
+  Furniture: FU-L1-LR1-15
+    asset: LectureDesk
+    position: (4.6, 6.45)
+
+  Furniture: FU-L1-LR1-16
+    asset: LectureDesk
+    position: (6.1, 6.45)
+
+  Furniture: FU-L1-LR1-17
+    asset: LectureDesk
+    position: (0.5, 7.6)
+
+  Furniture: FU-L1-LR1-18
+    asset: LectureDesk
+    position: (2, 7.6)
+
+  Furniture: FU-L1-LR1-19
+    asset: LectureDesk
+    position: (4.6, 7.6)
+
+  Furniture: FU-L1-LR1-20
+    asset: LectureDesk
+    position: (6.1, 7.6)
+
+#### Space: Lecture Room 1.02
+  usage: classroom
+  area: 70 m2
+  zone: teaching
+  boundary: [(8, 0), (15, 0), (15, 10), (8, 10)]
+
+  Covering: CL-LECTURE-ROOM-1-02
+    predefined_type: ceiling
+    z_offset: 3.16 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-L1-LR2-01
+    asset: LectureDesk
+    position: (8.5, 3)
+
+  Furniture: FU-L1-LR2-02
+    asset: LectureDesk
+    position: (12.1, 3)
+
+  Furniture: FU-L1-LR2-03
+    asset: LectureDesk
+    position: (8.5, 4.15)
+
+  Furniture: FU-L1-LR2-04
+    asset: LectureDesk
+    position: (12.1, 4.15)
+
+  Furniture: FU-L1-LR2-05
+    asset: LectureDesk
+    position: (8.5, 5.3)
+
+  Furniture: FU-L1-LR2-06
+    asset: LectureDesk
+    position: (12.1, 5.3)
+
+  Furniture: FU-L1-LR2-07
+    asset: LectureDesk
+    position: (8.5, 6.45)
+
+  Furniture: FU-L1-LR2-08
+    asset: LectureDesk
+    position: (12.1, 6.45)
+
+  Furniture: FU-L1-LR2-09
+    asset: LectureDesk
+    position: (8.5, 7.6)
+
+  Furniture: FU-L1-LR2-10
+    asset: LectureDesk
+    position: (12.1, 7.6)
+
+#### Space: Lecture Room 1.03
+  usage: classroom
+  area: 70 m2
+  zone: teaching
+  boundary: [(15, 0), (22, 0), (22, 10), (15, 10)]
+
+  Covering: CL-LECTURE-ROOM-1-03
+    predefined_type: ceiling
+    z_offset: 3.16 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-L1-LR3-01
+    asset: LectureDesk
+    position: (15.5, 3)
+
+  Furniture: FU-L1-LR3-02
+    asset: LectureDesk
+    position: (19.1, 3)
+
+  Furniture: FU-L1-LR3-03
+    asset: LectureDesk
+    position: (15.5, 4.15)
+
+  Furniture: FU-L1-LR3-04
+    asset: LectureDesk
+    position: (19.1, 4.15)
+
+  Furniture: FU-L1-LR3-05
+    asset: LectureDesk
+    position: (15.5, 5.3)
+
+  Furniture: FU-L1-LR3-06
+    asset: LectureDesk
+    position: (19.1, 5.3)
+
+  Furniture: FU-L1-LR3-07
+    asset: LectureDesk
+    position: (15.5, 6.45)
+
+  Furniture: FU-L1-LR3-08
+    asset: LectureDesk
+    position: (19.1, 6.45)
+
+  Furniture: FU-L1-LR3-09
+    asset: LectureDesk
+    position: (15.5, 7.6)
+
+  Furniture: FU-L1-LR3-10
+    asset: LectureDesk
+    position: (19.1, 7.6)
+
+#### Space: Learning Street
+  usage: corridor
+  area: 88 m2
+  zone: circulation
+  boundary: [(0, 10), (22, 10), (22, 14), (0, 14)]
+
+  Covering: CL-LEARNING-STREET
+    predefined_type: ceiling
+    z_offset: 3.16 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-L1-STREET-1
+    asset: LoungeBench
+    position: (3, 11.4)
+
+  Furniture: FU-L1-STREET-2
+    asset: LoungeBench
+    position: (10, 11.4)
+
+  Furniture: FU-L1-STREET-3
+    asset: LoungeBench
+    position: (17, 11.4)
+
+#### Space: Seminar Room 1.11
+  usage: classroom
+  area: 70 m2
+  zone: teaching
+  boundary: [(8, 14), (15, 14), (15, 24), (8, 24)]
+
+  Covering: CL-SEMINAR-ROOM-1-11
+    predefined_type: ceiling
+    z_offset: 3.16 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-L1-SR1-T
+    asset: MeetingTable
+    position: (10.33, 16)
+    rotation: 90
+
+#### Space: Seminar Room 1.12
+  usage: classroom
+  area: 70 m2
+  zone: teaching
+  boundary: [(15, 14), (22, 14), (22, 24), (15, 24)]
+
+  Covering: CL-SEMINAR-ROOM-1-12
+    predefined_type: ceiling
+    z_offset: 3.16 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-L1-SR2-T
+    asset: MeetingTable
+    position: (17.3, 16)
+    rotation: 90
+
+#### Space: Seminar Room 1.13
+  usage: classroom
+  area: 48 m2
+  zone: teaching
+  boundary: [(22, 18), (30, 18), (30, 24), (22, 24)]
+
+  Covering: CL-SEMINAR-ROOM-1-13
+    predefined_type: ceiling
+    z_offset: 3.16 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-L1-SR3-T
+    asset: MeetingTable
+    position: (24, 19.6)
+
+#### Space: Lecture Room 1.04
+  usage: classroom
+  area: 82.1 m2
+  zone: teaching
+  boundary: [(36, 0), (43.819, 0), (46.069, 9), (36, 9)]
+
+  Covering: CL-LECTURE-ROOM-1-04
+    predefined_type: ceiling
+    z_offset: 3.16 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-L1-LR4-01
+    asset: LectureDesk
+    position: (36.5, 2.5)
+
+  Furniture: FU-L1-LR4-02
+    asset: LectureDesk
+    position: (38, 2.5)
+
+  Furniture: FU-L1-LR4-03
+    asset: LectureDesk
+    position: (40.6, 2.5)
+
+  Furniture: FU-L1-LR4-04
+    asset: LectureDesk
+    position: (42.1, 2.5)
+
+  Furniture: FU-L1-LR4-05
+    asset: LectureDesk
+    position: (36.5, 3.65)
+
+  Furniture: FU-L1-LR4-06
+    asset: LectureDesk
+    position: (38, 3.65)
+
+  Furniture: FU-L1-LR4-07
+    asset: LectureDesk
+    position: (40.6, 3.65)
+
+  Furniture: FU-L1-LR4-08
+    asset: LectureDesk
+    position: (42.1, 3.65)
+
+  Furniture: FU-L1-LR4-09
+    asset: LectureDesk
+    position: (36.5, 4.8)
+
+  Furniture: FU-L1-LR4-10
+    asset: LectureDesk
+    position: (38, 4.8)
+
+  Furniture: FU-L1-LR4-11
+    asset: LectureDesk
+    position: (40.6, 4.8)
+
+  Furniture: FU-L1-LR4-12
+    asset: LectureDesk
+    position: (42.1, 4.8)
+
+  Furniture: FU-L1-LR4-13
+    asset: LectureDesk
+    position: (36.5, 5.95)
+
+  Furniture: FU-L1-LR4-14
+    asset: LectureDesk
+    position: (38, 5.95)
+
+  Furniture: FU-L1-LR4-15
+    asset: LectureDesk
+    position: (40.6, 5.95)
+
+  Furniture: FU-L1-LR4-16
+    asset: LectureDesk
+    position: (42.1, 5.95)
+
+  Furniture: FU-L1-LR4-17
+    asset: LectureDesk
+    position: (36.5, 7.1)
+
+  Furniture: FU-L1-LR4-18
+    asset: LectureDesk
+    position: (38, 7.1)
+
+  Furniture: FU-L1-LR4-19
+    asset: LectureDesk
+    position: (40.6, 7.1)
+
+  Furniture: FU-L1-LR4-20
+    asset: LectureDesk
+    position: (42.1, 7.1)
+
+#### Space: Atrium Gallery Level 1
+  usage: circulation
+  area: 338.4 m2
+  zone: circulation
+  boundary: [(22, 0), (36, 0), (36, 9), (46.069, 9), (49.819, 24), (46, 24), (46, 16), (38, 16), (38, 24), (30, 24), (30, 18), (22, 18)]
+
+  Furniture: FU-L1-STUDY-1
+    asset: CafeTable
+    position: (24, 16.2)
+
+  Furniture: FU-L1-STUDY-2
+    asset: CafeTable
+    position: (28, 16.2)
+
+  Furniture: FU-L1-STUDY-3
+    asset: CafeTable
+    position: (37, 11)
+
+  Furniture: FU-L1-STUDY-4
+    asset: CafeTable
+    position: (37, 13)
+
+#### Space: West Core L1
+  usage: staircase
+  area: 80 m2
+  zone: circulation
+  boundary: [(0, 14), (8, 14), (8, 24), (0, 24)]
+
+#### Space: East Core L1
+  usage: staircase
+  area: 64 m2
+  zone: circulation
+  boundary: [(38, 16), (46, 16), (46, 24), (38, 24)]

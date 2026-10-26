@@ -1,0 +1,71 @@
+// Materials for Forum Nord. color/opacity/specular/shininess set the look in
+// the 3D preview and become IfcSurfaceStyles in the IFC output.
+
+Material: reinforced_concrete
+  category: concrete
+  grade: C30
+  density: 2400 kg/m3
+
+Material: exposed_concrete
+  category: concrete
+  grade: C35
+  density: 2400 kg/m3
+  color: "#c4c1b9"
+
+Material: facade_metal_anthracite
+  category: metal
+  color: "#3a3d42"
+  specular: 0.4
+  shininess: 48
+
+Material: larch_cladding
+  category: timber
+  color: "#b07c4f"
+
+Material: oak
+  category: timber
+  color: "#c49a6c"
+
+Material: glazing
+  category: glass
+  color: "#9ec9dc"
+  opacity: 0.32
+  specular: 0.9
+  shininess: 96
+
+Material: glass_partition
+  category: glass
+  color: "#d5e8ef"
+  opacity: 0.22
+  specular: 0.8
+  shininess: 96
+
+Material: aluminium_mullion
+  category: metal
+  color: "#c9ccd1"
+  specular: 0.6
+  shininess: 64
+
+Material: drywall
+  category: gypsum
+  color: "#eceae5"
+
+Material: stainless_steel
+  category: metal
+  color: "#b4b8bc"
+  specular: 0.7
+  shininess: 80
+
+Material: green_roof
+  category: vegetation
+  color: "#6e8f4c"
+
+Material: pv_panel
+  category: glass
+  color: "#1f2b45"
+  specular: 0.8
+  shininess: 96
+
+Material: projection_screen
+  category: textile
+  color: "#f4f4f2"

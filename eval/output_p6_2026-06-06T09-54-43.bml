@@ -1,0 +1,77 @@
+# Site: HexagonSite
+
+## Building: HexagonBuilding
+
+### Storey: GroundFloor
+  elevation: 0 m
+  height: 3 m
+
+#### Space: MainSpace
+  usage: living
+  Slab: SL-GF
+    boundary: [(10, 4.33), (7.5, 8.66), (2.5, 8.66), (0, 4.33), (2.5, 0), (7.5, 0)]
+    thickness: 0.2 m
+  Wall: W-01
+    from: (2.5, 0) to: (7.5, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Door: D-01
+      offset: 2.05 m
+      width: 0.9 m
+      height: 2.1 m
+  Wall: W-02
+    from: (7.5, 0) to: (10, 4.33)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WN-02
+      offset: 1.5 m
+      width: 1.0 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-03
+    from: (10, 4.33) to: (7.5, 8.66)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WN-03
+      offset: 1.5 m
+      width: 1.0 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-04
+    from: (7.5, 8.66) to: (2.5, 8.66)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WN-04
+      offset: 1.5 m
+      width: 1.0 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-05
+    from: (2.5, 8.66) to: (0, 4.33)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WN-05
+      offset: 1.5 m
+      width: 1.0 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-06
+    from: (0, 4.33) to: (2.5, 0)
+    height: 3 m
+    thickness: 0.24 m
+    Window: WN-06
+      offset: 1.5 m
+      width: 1.0 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+### Storey: RoofLevel
+  elevation: 3 m
+  height: 0 m
+
+#### Space: AtticSpace
+  usage: storage
+  Roof: RF-01
+    boundary: [(10, 4.33), (7.5, 8.66), (2.5, 8.66), (0, 4.33), (2.5, 0), (7.5, 0)]
+    type: hip
+    ridge_height: 2.5 m

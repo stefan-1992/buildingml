@@ -1,0 +1,20 @@
+// Material definitions for Parkview Residences
+// Shared across all storeys via import
+
+Material: reinforced_concrete
+  category: concrete
+  grade: C30
+  density: 2400 kg/m3
+
+Material: exterior_insulated
+  category: concrete
+  density: 1800 kg/m3
+
+Material: interior_partition
+  category: concrete
+  density: 1200 kg/m3
+
+Material: shear_wall_concrete
+  category: concrete
+  grade: C30
+  density: 2400 kg/m3

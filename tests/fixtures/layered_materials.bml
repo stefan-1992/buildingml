@@ -1,0 +1,48 @@
+// Layered material build-ups (IfcMaterialLayerSet + IfcMaterialLayerSetUsage)
+// and the common property set keys. The first layer is the exterior / top side.
+
+Material: concrete
+  color: "#b3b3ad"
+Material: mineral_wool
+Material: plaster
+Material: screed
+Material: ext_wall
+  ifc_name: "External wall 300"
+  layers:
+    - mineral_wool: 0.14 m
+    - concrete: 0.15 m
+    - plaster: 10 mm
+Material: floor
+  layers:
+    - screed: 0.05 m
+    - concrete: 0.25 m
+
+# Site: S
+## Building: B
+### Storey: GF
+  elevation: 0 m
+  height: 3 m
+  Wall: W1
+    from: (0, 0) to: (6, 0)
+    height: 3 m
+    thickness: 0.3 m
+    material: ext_wall
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.24
+    acoustic_rating: 52
+  Slab: S1
+    boundary: [(0, 0), (6, 0), (6, 5), (0, 5)]
+    thickness: 0.3 m
+    material: floor
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+  Column: C1
+    position: (3, 3)
+    profile: rectangle(0.3, 0.3)
+    height: 3 m
+    material: concrete
+    load_bearing: true
+    fire_rating: R90

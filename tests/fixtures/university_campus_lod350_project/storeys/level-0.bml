@@ -1,0 +1,1694 @@
+// Level 0 - Mensa, foyer, kitchen, Audimax
+// elevation 0.0 m, height 4.5 m
+// Mensa with a curved, fully glazed bulge towards the campus square (south),
+// glazed entrance foyer under the atrium, kitchen with servery counters, and
+// the fan-shaped Audimax (double height, 8.5 m) with raked seating tiers.
+
+import materials from "../materials.bml"
+import assets from "../assets/furniture.bml"
+
+# Site: Campus Nord
+
+## Building: Forum Nord
+
+### Storey: Level 0
+  elevation: 0 m
+  height: 4.5 m
+
+  // ------------------------------------------------------------------
+  // Footings: strip footing under the facades, cores and kitchen walls,
+  // pads under the columns, strips under the stair eye walls
+  // ------------------------------------------------------------------
+
+  Footing: FT-01
+    predefined_type: strip_footing
+    under: [W-L0-S1, CW-L0-MENSA, W-L0-S2, CW-L0-FOYER, W-AUD-S, W-AUD-E, W-AUD-N, W-AUD-W, W-L0-N, W-L0-W, W-L0-SERVERY, W-L0-KITCHEN-E, W-L0-CW1, W-L0-CW2, W-L0-CW3, W-L0-CW4, W-L0-CE1, W-L0-CE2, W-L0-CE3, W-L0-CE4, W-L0-CE5]
+    width: 0.75 m
+    depth: 0.8 m
+    z_offset: -0.6 m
+    material: reinforced_concrete
+
+  Footing: FT-02
+    predefined_type: pad_footing
+    position: (28, 4)
+    width: 1.6 m
+    depth: 0.8 m
+    z_offset: -0.6 m
+    material: reinforced_concrete
+
+  Footing: FT-03
+    predefined_type: pad_footing
+    position: (36, 4)
+    width: 1.6 m
+    depth: 0.8 m
+    z_offset: -0.6 m
+    material: reinforced_concrete
+
+  Footing: FT-04
+    predefined_type: pad_footing
+    position: (8, 4.5)
+    width: 1.6 m
+    depth: 0.8 m
+    z_offset: -0.6 m
+    material: reinforced_concrete
+
+  Footing: FT-05
+    predefined_type: pad_footing
+    position: (15, 4.5)
+    width: 1.6 m
+    depth: 0.8 m
+    z_offset: -0.6 m
+    material: reinforced_concrete
+
+  Footing: FT-06
+    predefined_type: pad_footing
+    position: (8, 10)
+    width: 1.6 m
+    depth: 0.8 m
+    z_offset: -0.6 m
+    material: reinforced_concrete
+
+  Footing: FT-07
+    predefined_type: pad_footing
+    position: (15, 10)
+    width: 1.6 m
+    depth: 0.8 m
+    z_offset: -0.6 m
+    material: reinforced_concrete
+
+  Footing: FT-08
+    predefined_type: pad_footing
+    position: (40, 10)
+    width: 1.6 m
+    depth: 0.8 m
+    z_offset: -0.6 m
+    material: reinforced_concrete
+
+  Footing: FT-09
+    predefined_type: pad_footing
+    position: (26, 17)
+    width: 1.6 m
+    depth: 0.8 m
+    z_offset: -0.6 m
+    material: reinforced_concrete
+
+  Footing: FT-10
+    predefined_type: strip_footing
+    under: [W-L0-E-EYE]
+    width: 0.65 m
+    depth: 0.8 m
+    z_offset: -0.6 m
+    material: reinforced_concrete
+
+  Footing: FT-11
+    predefined_type: strip_footing
+    under: [W-L0-W-EYE]
+    width: 0.65 m
+    depth: 0.8 m
+    z_offset: -0.6 m
+    material: reinforced_concrete
+
+  // ------------------------------------------------------------------
+  // Ground slabs
+  // ------------------------------------------------------------------
+
+  Slab: SL-L0
+    boundary: [(0, 0), (4, 0), (4.477, -1.251), (5.148, -2.41), (5.997, -3.446), (7, -4.333), (8.132, -5.048), (9.365, -5.572), (10.665, -5.892), (12, -6), (13.335, -5.892), (14.635, -5.572), (15.868, -5.048), (17, -4.333), (18.003, -3.446), (18.852, -2.41), (19.523, -1.251), (20, 0), (44, 0), (50, 24), (0, 24)]
+    thickness: 0.6 m
+    material: ground_slab
+    slab_type: floor
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+    thermal_transmittance: 0.25
+
+  Slab: SL-L0-AUD
+    boundary: [(44, 0), (62, -4), (66, 26), (50, 24)]
+    thickness: 0.6 m
+    material: ground_slab
+    slab_type: floor
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+    thermal_transmittance: 0.25
+
+  // ------------------------------------------------------------------
+  // South facade: concrete piers, curved mensa glazing, foyer curtain wall
+  // ------------------------------------------------------------------
+
+  Wall: W-L0-S1
+    from: (0.175, 0) to: (4.042, 0)
+    height: 4.5 m
+    thickness: 0.35 m
+    material: ew_exposed_concrete
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.24
+    acoustic_rating: 52
+
+  Wall: CW-L0-MENSA
+    from: (4.052, -0.172) via: (12, -6) to: (19.948, -0.172)
+    height: 4.5 m
+    thickness: 0.08 m
+    mullions: [0, 1.57, 3.14, 4.71, 6.28, 7.85, 9.42, 11.42, 13.032, 14.643, 16.255, 17.867, 19.478, 21.09]
+    brackets: true
+    transoms: [2.8 m]
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+    Door: D-L0-MENSA-TERRACE
+      offset: 9.42 m
+      width: 2 m
+      height: 2.6 m
+      thermal_transmittance: 1.3
+      type: double_leaf
+
+  Wall: W-L0-S2
+    from: (19.958, 0) to: (22.04, 0)
+    height: 4.5 m
+    thickness: 0.35 m
+    material: ew_exposed_concrete
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.24
+    acoustic_rating: 52
+
+  Wall: CW-L0-FOYER
+    from: (22.04, 0) to: (43.909, 0)
+    height: 4.5 m
+    thickness: 0.08 m
+    mullions: [0, 1.392, 2.784, 4.176, 5.568, 6.96, 9.36, 10.96, 12.56, 14.96, 16.342, 17.724, 19.105, 20.487, 21.869]
+    brackets: true
+    transoms: [2.8 m]
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+    Door: D-L0-MAIN-1
+      offset: 6.96 m
+      width: 2.4 m
+      height: 2.7 m
+      is_external: true
+      thermal_transmittance: 1.3
+      type: double_leaf
+
+    Door: D-L0-MAIN-2
+      offset: 12.56 m
+      width: 2.4 m
+      height: 2.7 m
+      is_external: true
+      thermal_transmittance: 1.3
+      type: double_leaf
+
+  // ------------------------------------------------------------------
+  // West and north facades
+  // ------------------------------------------------------------------
+
+  Wall: W-L0-W
+    from: (0, 23.825) to: (0, -0.175)
+    height: 4.5 m
+    thickness: 0.35 m
+    material: ew_exposed_concrete
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.24
+    acoustic_rating: 52
+
+    Door: D-L0-WEST-EXIT
+      offset: 6.125 m
+      width: 1.2 m
+      height: 2.3 m
+      is_external: true
+      thermal_transmittance: 1.3
+      type: single_leaf
+
+    Window: WIN-L0-W1
+      offset: 10.825 m
+      width: 3.2 m
+      height: 3 m
+      sill_height: 0.6 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L0-W2
+      offset: 14.825 m
+      width: 3.2 m
+      height: 3 m
+      sill_height: 0.6 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L0-W3
+      offset: 18.825 m
+      width: 3.2 m
+      height: 3 m
+      sill_height: 0.6 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+  Wall: W-L0-N
+    from: (49.626, 24) to: (-0.175, 24)
+    height: 4.5 m
+    thickness: 0.35 m
+    material: ew_exposed_concrete
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.24
+    acoustic_rating: 52
+
+    Window: WIN-L0-N1
+      offset: 4.626 m
+      width: 2.4 m
+      height: 2.4 m
+      sill_height: 1.2 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Door: D-L0-NORTH-ENTRY
+      offset: 13.626 m
+      width: 2.4 m
+      height: 2.7 m
+      is_external: true
+      thermal_transmittance: 1.3
+      type: double_leaf
+
+    Window: WIN-L0-N2
+      offset: 20.626 m
+      width: 2.8 m
+      height: 1 m
+      sill_height: 1.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L0-N2B
+      offset: 23.826 m
+      width: 2.8 m
+      height: 1 m
+      sill_height: 1.9 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Window: WIN-L0-N3
+      offset: 28.626 m
+      width: 4 m
+      height: 2 m
+      sill_height: 1.4 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+    Door: D-L0-DELIVERY
+      offset: 33.626 m
+      width: 2.4 m
+      height: 3 m
+      is_external: true
+      thermal_transmittance: 1.3
+      type: double_leaf
+
+    Window: WIN-L0-N4
+      offset: 37.626 m
+      width: 4 m
+      height: 2 m
+      sill_height: 1.4 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.045 m
+
+  // ------------------------------------------------------------------
+  // Mensa / foyer / kitchen partitions
+  // ------------------------------------------------------------------
+
+  Wall: W-L0-MENSA-FOYER
+    from: (22, 0.2) to: (22, 13.875)
+    height: 4.09 m
+    thickness: 0.08 m
+    material: glass_partition
+    load_bearing: false
+    acoustic_rating: 37
+
+    Door: D-L0-MENSA-FOYER
+      offset: 4.8 m
+      width: 2 m
+      height: 2.6 m
+      type: double_leaf
+
+  Wall: W-L0-SERVERY
+    from: (7.875, 14) to: (22.04, 14)
+    height: 4.09 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Opening: OP-L0-COUNTER-1
+      offset: 1.125 m
+      width: 3 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+    Opening: OP-L0-COUNTER-2
+      offset: 5.125 m
+      width: 3 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+    Opening: OP-L0-COUNTER-3
+      offset: 9.125 m
+      width: 3 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+    Door: D-L0-KITCHEN-SERVERY
+      offset: 12.725 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+  Wall: W-L0-KITCHEN-E
+    from: (22, 14.125) to: (22, 23.825)
+    height: 4.09 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L0-KITCHEN-FOYER
+      offset: 0.875 m
+      width: 1.2 m
+      height: 2.2 m
+      type: single_leaf
+
+  Wall: W-L0-WC1
+    from: (22.125, 19) to: (30.075, 19)
+    height: 4.09 m
+    thickness: 0.15 m
+    material: dw_150
+    load_bearing: false
+    fire_rating: EI60
+    acoustic_rating: 48
+
+    Door: D-L0-WC
+      offset: 3.075 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+  Wall: W-L0-WC2
+    from: (30, 19.075) to: (30, 23.825)
+    height: 4.09 m
+    thickness: 0.15 m
+    material: dw_150
+    load_bearing: false
+    fire_rating: EI60
+    acoustic_rating: 48
+
+  // ------------------------------------------------------------------
+  // West core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-L0-CW1
+    from: (0.175, 14) to: (7.875, 14)
+    height: 4.09 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L0-CW-LOBBY
+      offset: 4.825 m
+      width: 1.8 m
+      height: 2.3 m
+      fire_rating: T30
+      type: double_leaf
+
+  Wall: W-L0-CW2
+    from: (3.8, 14.125) to: (3.8, 23.825)
+    height: 4.09 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L0-CW-STAIR
+      offset: 0.375 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+      type: single_leaf
+
+  Wall: W-L0-CW3
+    from: (3.925, 20.8) to: (7.875, 20.8)
+    height: 4.09 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L0-CW-LIFT
+      offset: 1.475 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: EI30
+      type: single_leaf
+
+  Wall: W-L0-CW4
+    from: (8, 14.125) to: (8, 23.825)
+    height: 4.09 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  // ------------------------------------------------------------------
+  // East core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-L0-CE1
+    from: (37.875, 16) to: (46.125, 16)
+    height: 4.09 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L0-CE-LOBBY
+      offset: 1.025 m
+      width: 1.6 m
+      height: 2.3 m
+      fire_rating: T30
+      type: double_leaf
+
+  Wall: W-L0-CE2
+    from: (46, 16.125) to: (46, 23.825)
+    height: 4.09 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-L0-CE3
+    from: (38, 16.125) to: (38, 23.825)
+    height: 4.09 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-L0-CE4
+    from: (41.6, 16.125) to: (41.6, 23.825)
+    height: 4.09 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L0-CE-STAIR
+      offset: 0.375 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+      type: single_leaf
+
+  Wall: W-L0-CE5
+    from: (38.125, 20.8) to: (41.475, 20.8)
+    height: 4.09 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-L0-CE-LIFT
+      offset: 1.075 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: EI30
+      type: single_leaf
+
+  // ------------------------------------------------------------------
+  // Audimax shell (double height, 8.5 m), larch cladding outside
+  // ------------------------------------------------------------------
+
+  Wall: W-AUD-W
+    from: (44.057, 0.23) to: (49.925, 23.701)
+    height: 8.5 m
+    thickness: 0.35 m
+    material: iw_rc_350
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 58
+
+    Door: D-AUD-1
+      offset: 2.163 m
+      width: 2 m
+      height: 2.6 m
+      fire_rating: T30
+      type: double_leaf
+
+    Door: D-AUD-2
+      offset: 19.763 m
+      width: 2 m
+      height: 2.6 m
+      fire_rating: T30
+      type: double_leaf
+
+  Wall: W-AUD-S
+    from: (43.922, 0.017) to: (61.76, -3.947)
+    height: 8.5 m
+    thickness: 0.45 m
+    material: ew_larch
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.22
+    acoustic_rating: 54
+
+    Door: D-AUD-EXIT-S
+      offset: 1.48 m
+      width: 1.8 m
+      height: 2.4 m
+      is_external: true
+      thermal_transmittance: 1.3
+      type: double_leaf
+
+    Window: WIN-AUD-S1
+      offset: 5.08 m
+      width: 0.6 m
+      height: 6 m
+      sill_height: 1.2 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.085 m
+
+    Window: WIN-AUD-S2
+      offset: 8.08 m
+      width: 0.6 m
+      height: 6 m
+      sill_height: 1.2 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.085 m
+
+    Window: WIN-AUD-S3
+      offset: 11.08 m
+      width: 0.6 m
+      height: 6 m
+      sill_height: 1.2 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.085 m
+
+    Window: WIN-AUD-S4
+      offset: 14.08 m
+      width: 0.6 m
+      height: 6 m
+      sill_height: 1.2 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.085 m
+
+  Wall: W-AUD-E
+    from: (61.97, -4.224) to: (66.031, 26.231)
+    height: 8.5 m
+    thickness: 0.45 m
+    material: ew_larch
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.22
+    acoustic_rating: 54
+
+  Wall: W-AUD-N
+    from: (65.711, 25.964) to: (49.653, 23.957)
+    height: 8.5 m
+    thickness: 0.45 m
+    material: ew_larch
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.22
+    acoustic_rating: 54
+
+    Door: D-AUD-EXIT-N
+      offset: 12.709 m
+      width: 1.8 m
+      height: 2.4 m
+      is_external: true
+      thermal_transmittance: 1.3
+      type: double_leaf
+
+    Window: WIN-AUD-N1
+      offset: 1.209 m
+      width: 0.8 m
+      height: 5.5 m
+      sill_height: 1.5 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.085 m
+
+    Window: WIN-AUD-N2
+      offset: 4.809 m
+      width: 0.8 m
+      height: 5.5 m
+      sill_height: 1.5 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.085 m
+
+    Window: WIN-AUD-N3
+      offset: 8.409 m
+      width: 0.8 m
+      height: 5.5 m
+      sill_height: 1.5 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.085 m
+
+  Beam: BM-AUD-01
+    from: (44.723, 2.147, 8) to: (62.076, -1.635, 8)
+    profile: rectangle(0.24, 1)
+    material: glulam
+    load_bearing: true
+    fire_rating: R60
+
+  Beam: BM-AUD-02
+    from: (45.216, 4.108, 8) to: (62.417, 0.895, 8)
+    profile: rectangle(0.24, 1)
+    material: glulam
+    load_bearing: true
+    fire_rating: R60
+
+  Beam: BM-AUD-03
+    from: (45.71, 6.069, 8) to: (62.758, 3.425, 8)
+    profile: rectangle(0.24, 1)
+    material: glulam
+    load_bearing: true
+    fire_rating: R60
+
+  Beam: BM-AUD-04
+    from: (46.205, 8.03, 8) to: (63.097, 5.955, 8)
+    profile: rectangle(0.24, 1)
+    material: glulam
+    load_bearing: true
+    fire_rating: R60
+
+  Beam: BM-AUD-05
+    from: (46.699, 9.992, 8) to: (63.431, 8.486, 8)
+    profile: rectangle(0.24, 1)
+    material: glulam
+    load_bearing: true
+    fire_rating: R60
+
+  Beam: BM-AUD-06
+    from: (47.194, 11.954, 8) to: (63.764, 11.017, 8)
+    profile: rectangle(0.24, 1)
+    material: glulam
+    load_bearing: true
+    fire_rating: R60
+
+  Beam: BM-AUD-07
+    from: (47.689, 13.917, 8) to: (64.097, 13.547, 8)
+    profile: rectangle(0.24, 1)
+    material: glulam
+    load_bearing: true
+    fire_rating: R60
+
+  Beam: BM-AUD-08
+    from: (48.183, 15.88, 8) to: (64.43, 16.076, 8)
+    profile: rectangle(0.24, 1)
+    material: glulam
+    load_bearing: true
+    fire_rating: R60
+
+  Beam: BM-AUD-09
+    from: (48.679, 17.844, 8) to: (64.764, 18.605, 8)
+    profile: rectangle(0.24, 1)
+    material: glulam
+    load_bearing: true
+    fire_rating: R60
+
+  Beam: BM-AUD-10
+    from: (49.174, 19.808, 8) to: (65.096, 21.134, 8)
+    profile: rectangle(0.24, 1)
+    material: glulam
+    load_bearing: true
+    fire_rating: R60
+
+  Beam: BM-AUD-11
+    from: (49.669, 21.773, 8) to: (65.429, 23.662, 8)
+    profile: rectangle(0.24, 1)
+    material: glulam
+    load_bearing: true
+    fire_rating: R60
+
+  // Steel shoes carry the glulam beams at both wall faces
+
+  Accessory: BM-AUD-01-SHW
+    type: shoe
+    position: (44.850, 2.119)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -12.3
+    material: support_steel
+    connects: [BM-AUD-01, W-AUD-W]
+
+  Accessory: BM-AUD-01-SHE
+    type: shoe
+    position: (61.949, -1.607)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -12.3
+    material: support_steel
+    connects: [BM-AUD-01, W-AUD-E]
+
+  Accessory: BM-AUD-02-SHW
+    type: shoe
+    position: (45.344, 4.084)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -10.58
+    material: support_steel
+    connects: [BM-AUD-02, W-AUD-W]
+
+  Accessory: BM-AUD-02-SHE
+    type: shoe
+    position: (62.289, 0.919)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -10.58
+    material: support_steel
+    connects: [BM-AUD-02, W-AUD-E]
+
+  Accessory: BM-AUD-03-SHW
+    type: shoe
+    position: (45.838, 6.049)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -8.82
+    material: support_steel
+    connects: [BM-AUD-03, W-AUD-W]
+
+  Accessory: BM-AUD-03-SHE
+    type: shoe
+    position: (62.630, 3.445)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -8.82
+    material: support_steel
+    connects: [BM-AUD-03, W-AUD-E]
+
+  Accessory: BM-AUD-04-SHW
+    type: shoe
+    position: (46.334, 8.014)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -7.0
+    material: support_steel
+    connects: [BM-AUD-04, W-AUD-W]
+
+  Accessory: BM-AUD-04-SHE
+    type: shoe
+    position: (62.968, 5.971)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -7.0
+    material: support_steel
+    connects: [BM-AUD-04, W-AUD-E]
+
+  Accessory: BM-AUD-05-SHW
+    type: shoe
+    position: (46.828, 9.980)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -5.14
+    material: support_steel
+    connects: [BM-AUD-05, W-AUD-W]
+
+  Accessory: BM-AUD-05-SHE
+    type: shoe
+    position: (63.302, 8.498)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -5.14
+    material: support_steel
+    connects: [BM-AUD-05, W-AUD-E]
+
+  Accessory: BM-AUD-06-SHW
+    type: shoe
+    position: (47.324, 11.947)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -3.24
+    material: support_steel
+    connects: [BM-AUD-06, W-AUD-W]
+
+  Accessory: BM-AUD-06-SHE
+    type: shoe
+    position: (63.634, 11.024)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -3.24
+    material: support_steel
+    connects: [BM-AUD-06, W-AUD-E]
+
+  Accessory: BM-AUD-07-SHW
+    type: shoe
+    position: (47.819, 13.914)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -1.29
+    material: support_steel
+    connects: [BM-AUD-07, W-AUD-W]
+
+  Accessory: BM-AUD-07-SHE
+    type: shoe
+    position: (63.967, 13.550)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: -1.29
+    material: support_steel
+    connects: [BM-AUD-07, W-AUD-E]
+
+  Accessory: BM-AUD-08-SHW
+    type: shoe
+    position: (48.313, 15.882)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: 0.69
+    material: support_steel
+    connects: [BM-AUD-08, W-AUD-W]
+
+  Accessory: BM-AUD-08-SHE
+    type: shoe
+    position: (64.300, 16.074)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: 0.69
+    material: support_steel
+    connects: [BM-AUD-08, W-AUD-E]
+
+  Accessory: BM-AUD-09-SHW
+    type: shoe
+    position: (48.809, 17.850)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: 2.71
+    material: support_steel
+    connects: [BM-AUD-09, W-AUD-W]
+
+  Accessory: BM-AUD-09-SHE
+    type: shoe
+    position: (64.634, 18.599)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: 2.71
+    material: support_steel
+    connects: [BM-AUD-09, W-AUD-E]
+
+  Accessory: BM-AUD-10-SHW
+    type: shoe
+    position: (49.304, 19.819)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: 4.76
+    material: support_steel
+    connects: [BM-AUD-10, W-AUD-W]
+
+  Accessory: BM-AUD-10-SHE
+    type: shoe
+    position: (64.966, 21.123)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: 4.76
+    material: support_steel
+    connects: [BM-AUD-10, W-AUD-E]
+
+  Accessory: BM-AUD-11-SHW
+    type: shoe
+    position: (49.798, 21.788)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: 6.83
+    material: support_steel
+    connects: [BM-AUD-11, W-AUD-W]
+
+  Accessory: BM-AUD-11-SHE
+    type: shoe
+    position: (65.300, 23.647)
+    width: 0.24 m
+    depth: 0.24 m
+    height: 0.1 m
+    z_offset: 7.4 m
+    rotation: 6.83
+    material: support_steel
+    connects: [BM-AUD-11, W-AUD-E]
+
+  // ------------------------------------------------------------------
+  // Columns (mensa and foyer)
+  // ------------------------------------------------------------------
+
+  Column: C-L0-01
+    position: (8, 4.5)
+    height: 4.09 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+    fire_rating: R90
+
+  Column: C-L0-02
+    position: (15, 4.5)
+    height: 4.09 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+    fire_rating: R90
+
+  Column: C-L0-03
+    position: (8, 10)
+    height: 4.09 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+    fire_rating: R90
+
+  Column: C-L0-04
+    position: (15, 10)
+    height: 4.09 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+    fire_rating: R90
+
+  Column: C-L0-05
+    position: (28, 4)
+    height: 4.09 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+    fire_rating: R90
+
+  Column: C-L0-06
+    position: (36, 4)
+    height: 4.09 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+    fire_rating: R90
+
+  Column: C-L0-07
+    position: (40, 10)
+    height: 4.09 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+    fire_rating: R90
+
+  Column: C-L0-08
+    position: (26, 17)
+    height: 4.09 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+    fire_rating: R90
+
+  // ------------------------------------------------------------------
+  // Elevators (shaft from level 0 to level 4)
+  // ------------------------------------------------------------------
+
+  Elevator: EL-WEST
+    position: (5.1, 21.1)
+    shaft_width: 2.4 m
+    shaft_depth: 2.6 m
+    from_storey: Level 0
+    to_storey: Level 4
+    capacity: "1000 kg"
+    type: passenger
+
+  Elevator: EL-EAST
+    position: (38.4, 21.1)
+    shaft_width: 2.4 m
+    shaft_depth: 2.6 m
+    from_storey: Level 0
+    to_storey: Level 4
+    capacity: "1000 kg"
+    type: passenger
+
+  Stair: ST-L0-W
+    from_storey: Level 0
+    to_storey: Level 1
+    type: u_shaped
+    position: (0.175, 18.96)
+    width: 1.625 m
+    riser_count: 26
+    tread_depth: 0.25 m
+    landing_depth: 1.615 m
+    turn: right
+    gap: 0.25 m
+    material: exposed_concrete
+    fire_rating: R90
+
+  Member: ST-L0-W-H1
+    from: (0.245, 18.96, 1.073) to: (0.245, 21.96, 3.15)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L0-W
+    material: stainless_steel
+
+  Member: ST-L0-W-H2
+    from: (1.73, 18.96, 1.073) to: (1.73, 21.96, 3.15)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L0-W
+    material: stainless_steel
+
+  Member: ST-L0-W-H3
+    from: (2.12, 22.21, 3.323) to: (2.12, 19.21, 5.4)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L0-W
+    material: stainless_steel
+
+  Member: ST-L0-W-H4
+    from: (3.605, 22.21, 3.323) to: (3.605, 19.21, 5.4)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L0-W
+    material: stainless_steel
+
+  Wall: W-L0-W-EYE
+    from: (1.925, 18.96) to: (1.925, 22.21)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    is_external: false
+    load_bearing: true
+    fire_rating: REI90
+
+  Stair: ST-L0-E
+    from_storey: Level 0
+    to_storey: Level 1
+    type: u_shaped
+    position: (41.725, 18.635)
+    width: 1.95 m
+    riser_count: 26
+    tread_depth: 0.25 m
+    landing_depth: 1.94 m
+    turn: right
+    gap: 0.25 m
+    material: exposed_concrete
+    fire_rating: R90
+
+  Member: ST-L0-E-H1
+    from: (41.795, 18.635, 1.073) to: (41.795, 21.635, 3.15)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L0-E
+    material: stainless_steel
+
+  Member: ST-L0-E-H2
+    from: (43.605, 18.635, 1.073) to: (43.605, 21.635, 3.15)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L0-E
+    material: stainless_steel
+
+  Member: ST-L0-E-H3
+    from: (43.995, 21.885, 3.323) to: (43.995, 18.885, 5.4)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L0-E
+    material: stainless_steel
+
+  Member: ST-L0-E-H4
+    from: (45.805, 21.885, 3.323) to: (45.805, 18.885, 5.4)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L0-E
+    material: stainless_steel
+
+  Wall: W-L0-E-EYE
+    from: (43.8, 18.635) to: (43.8, 21.885)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    is_external: false
+    load_bearing: true
+    fire_rating: REI90
+
+#### Space: Mensa Dining Hall
+  usage: dining
+  area: 378.3 m2
+  zone: mensa
+  boundary: [(0, 0), (4, 0), (4.477, -1.251), (5.148, -2.41), (5.997, -3.446), (7, -4.333), (8.132, -5.048), (9.365, -5.572), (10.665, -5.892), (12, -6), (13.335, -5.892), (14.635, -5.572), (15.868, -5.048), (17, -4.333), (18.003, -3.446), (18.852, -2.41), (19.523, -1.251), (20, 0), (22, 0), (22, 14), (0, 14)]
+
+  Furniture: FU-MENSA-T11
+    asset: MensaTable
+    position: (1, 2)
+
+  Furniture: FU-MENSA-T21
+    asset: MensaTable
+    position: (1, 4.4)
+
+  Furniture: FU-MENSA-T31
+    asset: MensaTable
+    position: (1, 6.8)
+
+  Furniture: FU-MENSA-T41
+    asset: MensaTable
+    position: (1, 9.2)
+
+  Furniture: FU-MENSA-T51
+    asset: MensaTable
+    position: (1, 11.6)
+
+  Furniture: FU-MENSA-T12
+    asset: MensaTable
+    position: (3.8, 2)
+
+  Furniture: FU-MENSA-T22
+    asset: MensaTable
+    position: (3.8, 4.4)
+
+  Furniture: FU-MENSA-T32
+    asset: MensaTable
+    position: (3.8, 6.8)
+
+  Furniture: FU-MENSA-T42
+    asset: MensaTable
+    position: (3.8, 9.2)
+
+  Furniture: FU-MENSA-T52
+    asset: MensaTable
+    position: (3.8, 11.6)
+
+  Furniture: FU-MENSA-T13
+    asset: MensaTable
+    position: (9, 2)
+
+  Furniture: FU-MENSA-T23
+    asset: MensaTable
+    position: (9, 4.4)
+
+  Furniture: FU-MENSA-T33
+    asset: MensaTable
+    position: (9, 6.8)
+
+  Furniture: FU-MENSA-T43
+    asset: MensaTable
+    position: (9, 9.2)
+
+  Furniture: FU-MENSA-T53
+    asset: MensaTable
+    position: (9, 11.6)
+
+  Furniture: FU-MENSA-T14
+    asset: MensaTable
+    position: (11.9, 2)
+
+  Furniture: FU-MENSA-T24
+    asset: MensaTable
+    position: (11.9, 4.4)
+
+  Furniture: FU-MENSA-T34
+    asset: MensaTable
+    position: (11.9, 6.8)
+
+  Furniture: FU-MENSA-T44
+    asset: MensaTable
+    position: (11.9, 9.2)
+
+  Furniture: FU-MENSA-T54
+    asset: MensaTable
+    position: (11.9, 11.6)
+
+  Furniture: FU-MENSA-T15
+    asset: MensaTable
+    position: (16, 2)
+
+  Furniture: FU-MENSA-T25
+    asset: MensaTable
+    position: (16, 4.4)
+
+  Furniture: FU-MENSA-T35
+    asset: MensaTable
+    position: (16, 6.8)
+
+  Furniture: FU-MENSA-T45
+    asset: MensaTable
+    position: (16, 9.2)
+
+  Furniture: FU-MENSA-T55
+    asset: MensaTable
+    position: (16, 11.6)
+
+  Furniture: FU-MENSA-T16
+    asset: MensaTable
+    position: (18.8, 2)
+
+  Furniture: FU-MENSA-T26
+    asset: MensaTable
+    position: (18.8, 4.4)
+
+  Furniture: FU-MENSA-T36
+    asset: MensaTable
+    position: (18.8, 6.8)
+
+  Furniture: FU-MENSA-T46
+    asset: MensaTable
+    position: (18.8, 9.2)
+
+  Furniture: FU-MENSA-T56
+    asset: MensaTable
+    position: (18.8, 11.6)
+
+  Furniture: FU-MENSA-R1
+    asset: CafeTable
+    position: (6.76, -2.278)
+
+  Furniture: FU-MENSA-R2
+    asset: CafeTable
+    position: (8.849, -3.844)
+
+  Furniture: FU-MENSA-R3
+    asset: CafeTable
+    position: (11.4, -4.4)
+
+  Furniture: FU-MENSA-R4
+    asset: CafeTable
+    position: (13.951, -3.844)
+
+  Furniture: FU-MENSA-R5
+    asset: CafeTable
+    position: (16.04, -2.278)
+
+#### Space: Mensa Kitchen
+  usage: kitchen
+  area: 140 m2
+  zone: mensa
+  boundary: [(8, 14), (22, 14), (22, 24), (8, 24)]
+
+  Proxy: PX-KITCHEN-ISLAND-1
+    boundary: [(10, 18), (12.8, 18), (12.8, 19.2), (10, 19.2)]
+    height: 0.9 m
+    type: "kitchen_island"
+    material: stainless_steel
+
+  Proxy: PX-KITCHEN-ISLAND-2
+    boundary: [(14, 18), (16.8, 18), (16.8, 19.2), (14, 19.2)]
+    height: 0.9 m
+    type: "kitchen_island"
+    material: stainless_steel
+
+  Proxy: PX-KITCHEN-ISLAND-3
+    boundary: [(18, 18), (20.8, 18), (20.8, 19.2), (18, 19.2)]
+    height: 0.9 m
+    type: "kitchen_island"
+    material: stainless_steel
+
+  Proxy: PX-KITCHEN-LINE
+    boundary: [(8.3, 22.9), (21.7, 22.9), (21.7, 23.7), (8.3, 23.7)]
+    height: 0.9 m
+    type: "cooking_line"
+    material: stainless_steel
+
+#### Space: Foyer and Atrium
+  usage: lobby
+  area: 496 m2
+  zone: circulation
+  boundary: [(22, 0), (44, 0), (50, 24), (46, 24), (46, 16), (38, 16), (38, 24), (30, 24), (30, 19), (22, 19)]
+
+  Furniture: FU-FOYER-1
+    asset: LoungeBench
+    position: (24.987, 2.952)
+
+  Furniture: FU-FOYER-2
+    asset: LoungeBench
+    position: (31, 3)
+
+  Furniture: FU-FOYER-3
+    asset: LoungeBench
+    position: (39, 3)
+
+#### Space: Toilets Level 0
+  usage: bathroom
+  area: 40 m2
+  zone: services
+  boundary: [(22, 19), (30, 19), (30, 24), (22, 24)]
+
+  Covering: CL-TOILETS-LEVEL-0
+    predefined_type: ceiling
+    z_offset: 3.66 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+#### Space: Audimax
+  usage: classroom
+  area: 464 m2
+  zone: teaching
+  boundary: [(44, 0), (62, -4), (66, 26), (50, 24)]
+
+  Proxy: PX-AUD-STAGE
+    boundary: [(44.718, 1.367), (47.936, 0.712), (52.864, 22.888), (49.962, 22.593)]
+    height: 0.45 m
+    type: "stage"
+    material: oak
+
+  Proxy: PX-AUD-SCREEN
+    boundary: [(45.71, 5.97), (45.815, 5.955), (48.797, 18.009), (48.698, 18.006)]
+    height: 3.2 m
+    z_offset: 3 m
+    type: "projection_screen"
+    material: projection_screen
+
+  Slab: SL-AUD-TIER-01
+    boundary: [(49.481, -0.813), (50.6, -1.056), (55.717, 24.332), (54.719, 24.213)]
+    thickness: 0.36 m
+    z_offset: 0.36 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-01L
+    boundary: [(49.841, -0.485), (50.176, -0.557), (52.522, 10.886), (52.204, 10.908)]
+    height: 0.75 m
+    z_offset: 0.36 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-01R
+    boundary: [(52.526, 12.461), (52.842, 12.446), (55.188, 23.888), (54.888, 23.854)]
+    height: 0.75 m
+    z_offset: 0.36 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-02
+    boundary: [(50.6, -1.056), (51.719, -1.3), (56.715, 24.451), (55.717, 24.332)]
+    thickness: 0.72 m
+    z_offset: 0.72 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-02L
+    boundary: [(50.958, -0.723), (51.294, -0.795), (53.585, 10.812), (53.266, 10.834)]
+    height: 0.75 m
+    z_offset: 0.72 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-02R
+    boundary: [(53.581, 12.41), (53.897, 12.395), (56.188, 24.002), (55.888, 23.968)]
+    height: 0.75 m
+    z_offset: 0.72 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-03
+    boundary: [(51.719, -1.3), (52.838, -1.543), (57.714, 24.57), (56.715, 24.451)]
+    thickness: 1.08 m
+    z_offset: 1.08 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-03L
+    boundary: [(52.076, -0.961), (52.411, -1.033), (54.647, 10.739), (54.328, 10.761)]
+    height: 0.75 m
+    z_offset: 1.08 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-03R
+    boundary: [(54.636, 12.359), (54.952, 12.344), (57.188, 24.115), (56.888, 24.081)]
+    height: 0.75 m
+    z_offset: 1.08 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-04
+    boundary: [(52.838, -1.543), (53.957, -1.787), (58.712, 24.689), (57.714, 24.57)]
+    thickness: 1.44 m
+    z_offset: 1.44 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-04L
+    boundary: [(53.193, -1.199), (53.528, -1.27), (55.709, 10.665), (55.391, 10.687)]
+    height: 0.75 m
+    z_offset: 1.44 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-04R
+    boundary: [(55.69, 12.308), (56.007, 12.293), (58.188, 24.228), (57.888, 24.194)]
+    height: 0.75 m
+    z_offset: 1.44 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-05
+    boundary: [(53.957, -1.787), (55.076, -2.03), (59.71, 24.808), (58.712, 24.689)]
+    thickness: 1.8 m
+    z_offset: 1.8 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-05L
+    boundary: [(54.31, -1.437), (54.645, -1.508), (56.772, 10.592), (56.453, 10.614)]
+    height: 0.75 m
+    z_offset: 1.8 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-05R
+    boundary: [(56.745, 12.257), (57.062, 12.242), (59.188, 24.342), (58.888, 24.308)]
+    height: 0.75 m
+    z_offset: 1.8 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-06
+    boundary: [(55.076, -2.03), (56.195, -2.274), (60.708, 24.927), (59.71, 24.808)]
+    thickness: 2.16 m
+    z_offset: 2.16 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-06L
+    boundary: [(55.427, -1.675), (55.762, -1.746), (57.834, 10.518), (57.515, 10.54)]
+    height: 0.75 m
+    z_offset: 2.16 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-06R
+    boundary: [(57.8, 12.206), (58.117, 12.191), (60.189, 24.455), (59.889, 24.421)]
+    height: 0.75 m
+    z_offset: 2.16 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-07
+    boundary: [(56.195, -2.274), (57.314, -2.517), (61.707, 25.046), (60.708, 24.927)]
+    thickness: 2.52 m
+    z_offset: 2.52 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-07L
+    boundary: [(56.544, -1.913), (56.879, -1.984), (58.897, 10.445), (58.578, 10.467)]
+    height: 0.75 m
+    z_offset: 2.52 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-07R
+    boundary: [(58.855, 12.155), (59.172, 12.14), (61.189, 24.568), (60.889, 24.534)]
+    height: 0.75 m
+    z_offset: 2.52 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-08
+    boundary: [(57.314, -2.517), (58.433, -2.761), (62.705, 25.165), (61.707, 25.046)]
+    thickness: 2.88 m
+    z_offset: 2.88 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-08L
+    boundary: [(57.662, -2.151), (57.997, -2.222), (59.959, 10.371), (59.64, 10.393)]
+    height: 0.75 m
+    z_offset: 2.88 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-08R
+    boundary: [(59.91, 12.104), (60.226, 12.088), (62.189, 24.682), (61.889, 24.648)]
+    height: 0.75 m
+    z_offset: 2.88 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-09
+    boundary: [(58.433, -2.761), (59.552, -3.004), (63.703, 25.283), (62.705, 25.165)]
+    thickness: 3.24 m
+    z_offset: 3.24 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-09L
+    boundary: [(58.779, -2.389), (59.114, -2.46), (61.021, 10.298), (60.703, 10.32)]
+    height: 0.75 m
+    z_offset: 3.24 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-09R
+    boundary: [(60.965, 12.053), (61.281, 12.037), (63.189, 24.795), (62.889, 24.761)]
+    height: 0.75 m
+    z_offset: 3.24 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-10
+    boundary: [(59.552, -3.004), (60.671, -3.248), (64.701, 25.402), (63.703, 25.283)]
+    thickness: 3.6 m
+    z_offset: 3.6 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-10L
+    boundary: [(59.896, -2.626), (60.231, -2.698), (62.084, 10.224), (61.765, 10.246)]
+    height: 0.75 m
+    z_offset: 3.6 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-10R
+    boundary: [(62.02, 12.002), (62.336, 11.986), (64.189, 24.908), (63.889, 24.874)]
+    height: 0.75 m
+    z_offset: 3.6 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-11
+    boundary: [(60.671, -3.248), (61.79, -3.491), (65.7, 25.521), (64.701, 25.402)]
+    thickness: 3.96 m
+    z_offset: 3.96 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-11L
+    boundary: [(61.013, -2.864), (61.348, -2.936), (63.146, 10.151), (62.827, 10.173)]
+    height: 0.75 m
+    z_offset: 3.96 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-11R
+    boundary: [(63.075, 11.951), (63.391, 11.935), (65.189, 25.022), (64.889, 24.988)]
+    height: 0.75 m
+    z_offset: 3.96 m
+    type: "lecture_desk_row"
+    material: oak
+
+#### Space: West Core L0
+  usage: staircase
+  area: 80 m2
+  zone: circulation
+  boundary: [(0, 14), (8, 14), (8, 24), (0, 24)]
+
+#### Space: East Core L0
+  usage: staircase
+  area: 64 m2
+  zone: circulation
+  boundary: [(38, 16), (46, 16), (46, 24), (38, 24)]

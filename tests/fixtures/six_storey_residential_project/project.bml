@@ -1,0 +1,42 @@
+// Six-storey reinforced concrete residential building (multi-file version)
+// 48 dwelling units across 5 upper floors + ground-level common areas and parking
+// Footprint: 40m x 18m, oriented east-west
+//
+// This is the multi-file equivalent of six_storey_residential.bml
+// Split into separate files for materials, templates, storeys, checks, and assets.
+//
+// Layout key:
+//   x-axis: 0 (west) to 40 (east)
+//   y-axis: 0 (south, main entrance) to 18 (north, parking ramp)
+//   Central corridor: y=8 to y=10 on residential floors
+//   West stair core: x=0 to x=3
+//   East stair core: x=37 to x=40
+//   Elevator core: x=19 to x=21
+//
+// v0.2 features demonstrated:
+//   - Multi-file project with imports
+//   - Template + apply_template (TypicalResidentialFloor for Floors 1-4)
+//   - {variable} substitution in element IDs and space names
+//   - Auto-ID generation (bare Type: without ID)
+//   - zone: property for space grouping
+//   - Extended usage enum (lobby, parking, plant_room, etc.)
+//   - Railing from: axis positioning
+//   - Storey-level elements (slab, columns, beams before spaces)
+//   - Compliance checks in separate file
+//   - Furniture asset library in separate file
+
+import materials from "./materials.bml"
+import ground from "./storeys/ground-floor.bml"
+import typical from "./storeys/typical-floors.bml"
+import top from "./storeys/top-floor.bml"
+import roof from "./storeys/roof.bml"
+import checks from "./checks/residential.bml"
+import assets from "./assets/furniture.bml"
+
+# Site: Parkview Residences
+  location: 48.1351, 11.5820
+  address: "Lindenstrasse 42, 80331 Munich"
+
+## Building: Block A
+  type: residential
+  gross_floor_area: 4320.0 m2

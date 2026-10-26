@@ -1,0 +1,31 @@
+// Test fixture for Proxy, Member, and Plate element types.
+
+# Site: TestSite
+
+## Building: TestBuilding
+
+### Storey: Ground Floor
+  elevation: 0 m
+  height: 3 m
+
+#### Space: Workshop
+  usage: utility
+  area: 60 m2
+
+  // Generic building element proxy (e.g., a misc bracket or custom component)
+  Proxy: PX-01
+    position: (2.0, 3.0)
+    width: 0.8 m
+    depth: 0.6 m
+    height: 1.2 m
+    type: "misc_bracket"
+
+  // Structural member (diagonal brace)
+  Member: MB-01
+    from: (0.0, 0.0) to: (3.0, 4.0)
+    profile: rectangle(0.1, 0.05)
+
+  // Steel plate (floor panel)
+  Plate: PL-01
+    boundary: [(0,0), (2,0), (2,1.5), (0,1.5)]
+    thickness: 12 mm

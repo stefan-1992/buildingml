@@ -1,0 +1,118 @@
+/// Furniture asset system test fixture
+/// Tests asset library definitions, multi-part geometry, and asset placement
+
+# AssetLibrary: Office Furniture
+  description: "Standard office furniture collection"
+  version: "1.0"
+
+## Asset: OfficeDesk
+  description: "Standard office desk with drawer unit"
+  category: desk
+  width: 1.6 m
+  depth: 0.8 m
+  height: 0.75 m
+
+### Part: Desktop
+  geometry: box(1.6, 0.8, 0.03)
+  position: (0, 0, 0.72)
+  material: oak_veneer
+
+### Part: LeftLeg
+  geometry: box(0.04, 0.6, 0.72)
+  position: (0.02, 0.1, 0)
+  material: steel_chrome
+
+### Part: RightLeg
+  geometry: box(0.04, 0.6, 0.72)
+  position: (1.54, 0.1, 0)
+  material: steel_chrome
+
+### Part: DrawerUnit
+  geometry: box(0.4, 0.5, 0.5)
+  position: (1.1, 0.15, 0.22)
+  material: oak_veneer
+
+## Asset: OfficeChair
+  category: seating
+  width: 0.65 m
+  depth: 0.65 m
+  height: 1.2 m
+
+### Part: Seat
+  geometry: box(0.45, 0.45, 0.05)
+  position: (0.1, 0.1, 0.45)
+  material: fabric_black
+
+### Part: Base
+  geometry: cylinder(0.02, 0.45)
+  position: (0.325, 0.325, 0)
+  material: steel_chrome
+
+### Part: Backrest
+  geometry: box(0.45, 0.03, 0.45)
+  position: (0.1, 0.07, 0.50)
+  material: fabric_black
+
+# Site: Office Park
+  location: 48.1351, 11.5820
+
+## Building: Office Tower
+  address: "123 Innovation Street"
+
+### Storey: Ground Floor
+  elevation: 0 m
+  height: 3.2 m
+
+  Wall: W-GF-01
+    from: (0, 0) to: (12, 0)
+    height: 3.2 m
+    thickness: 0.24 m
+
+  Wall: W-GF-02
+    from: (12, 0) to: (12, 8)
+    height: 3.2 m
+    thickness: 0.24 m
+
+  Wall: W-GF-03
+    from: (12, 8) to: (0, 8)
+    height: 3.2 m
+    thickness: 0.24 m
+
+  Wall: W-GF-04
+    from: (0, 8) to: (0, 0)
+    height: 3.2 m
+    thickness: 0.24 m
+
+  Slab: SLAB-GF
+    boundary: [(0, 0), (12, 0), (12, 8), (0, 8)]
+    thickness: 0.2 m
+
+#### Space: Office 101
+  area: 25 m2
+  usage: office
+
+  Furniture: DESK-01
+    asset: OfficeDesk
+    position: (2.0, 1.5)
+    rotation: 0
+
+  Furniture: CHAIR-01
+    asset: OfficeChair
+    position: (2.5, 2.0)
+    rotation: 180
+
+#### Space: Office 102
+  area: 25 m2
+  usage: office
+
+  Furniture: DESK-02
+    asset: OfficeDesk
+    position: (8.0, 1.5)
+    rotation: 90
+
+  /// Furniture without asset reference (v0.1 bounding-box stub)
+  Furniture: CABINET-01
+    position: (10.0, 6.0)
+    width: 1.2 m
+    depth: 0.6 m
+    height: 1.8 m

@@ -1,0 +1,108 @@
+# Site: TShaped
+
+## Building: ConcreteBuilding
+
+### Storey: GroundFloor
+  elevation: 0 m
+  height: 4 m
+
+#### Space: HorizontalSection
+  usage: office
+
+  Slab: SL-01
+    boundary: [(0, 0), (30, 0), (30, 10), (20, 10), (20, 30), (10, 30), (10, 10), (0, 10)]
+    thickness: 0.2 m
+
+  Wall: W-H-S
+    from: (0, 0) to: (30, 0)
+    height: 4 m
+    thickness: 0.3 m
+    Window: WIN-H-01
+      offset: 5 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-H-02
+      offset: 14.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-H-03
+      offset: 23.5 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+  Wall: W-H-E
+    from: (30, 0) to: (30, 10)
+    height: 4 m
+    thickness: 0.3 m
+
+  Wall: W-H-NR
+    from: (30, 10) to: (20, 10)
+    height: 4 m
+    thickness: 0.3 m
+
+  Wall: W-H-NL
+    from: (10, 10) to: (0, 10)
+    height: 4 m
+    thickness: 0.3 m
+
+  Wall: W-H-W
+    from: (0, 10) to: (0, 0)
+    height: 4 m
+    thickness: 0.3 m
+
+#### Space: VerticalSection
+  usage: office
+
+  Wall: W-V-N
+    from: (10, 10) to: (20, 10)
+    height: 4 m
+    thickness: 0.3 m
+    Door: D-01
+      offset: 4.55 m
+      width: 0.9 m
+      height: 2.1 m
+
+  Wall: W-V-E
+    from: (20, 10) to: (20, 30)
+    height: 4 m
+    thickness: 0.3 m
+    Window: WIN-V-01
+      offset: 8 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+  Wall: W-V-S
+    from: (20, 30) to: (10, 30)
+    height: 4 m
+    thickness: 0.3 m
+    Window: WIN-V-02
+      offset: 4.25 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+  Wall: W-V-W
+    from: (10, 30) to: (10, 10)
+    height: 4 m
+    thickness: 0.3 m
+    Window: WIN-V-03
+      offset: 8 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+### Storey: RoofLevel
+  elevation: 4 m
+  height: 0 m
+
+#### Space: RoofDeck
+  usage: storage
+
+  Roof: RF-01
+    boundary: [(0, 0), (30, 0), (30, 10), (20, 10), (20, 30), (10, 30), (10, 10), (0, 10)]
+    type: flat
+    ridge_height: 0 m

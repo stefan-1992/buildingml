@@ -1,0 +1,365 @@
+// Materials for Forum Nord. color/opacity/specular/shininess set the look in
+// the 3D preview and become IfcSurfaceStyles in the IFC output.
+
+Material: reinforced_concrete
+  category: concrete
+  grade: C30
+  density: 2400 kg/m3
+
+Material: exposed_concrete
+  category: concrete
+  grade: C35
+  density: 2400 kg/m3
+  color: "#c4c1b9"
+
+Material: facade_metal_anthracite
+  category: metal
+  color: "#3a3d42"
+  specular: 0.4
+  shininess: 48
+
+Material: larch_cladding
+  category: timber
+  color: "#b07c4f"
+
+Material: oak
+  category: timber
+  color: "#c49a6c"
+
+Material: glazing
+  category: glass
+  color: "#9ec9dc"
+  opacity: 0.32
+  specular: 0.9
+  shininess: 96
+
+Material: glass_partition
+  category: glass
+  color: "#d5e8ef"
+  opacity: 0.22
+  specular: 0.8
+  shininess: 96
+
+Material: aluminium_mullion
+  category: metal
+  color: "#c9ccd1"
+  specular: 0.6
+  shininess: 64
+
+Material: drywall
+  category: gypsum
+  color: "#eceae5"
+
+Material: stainless_steel
+  category: metal
+  color: "#b4b8bc"
+  specular: 0.7
+  shininess: 80
+
+Material: green_roof
+  category: vegetation
+  color: "#6e8f4c"
+
+Material: pv_panel
+  category: glass
+  color: "#1f2b45"
+  specular: 0.8
+  shininess: 96
+
+Material: projection_screen
+  category: textile
+  color: "#f4f4f2"
+
+// ------------------------------------------------------------------
+// LOD 300: layer materials and build-ups. The first layer is the
+// exterior side of a wall and the top side of a slab or roof.
+// ------------------------------------------------------------------
+
+Material: mineral_wool
+  category: insulation
+  color: "#e8d27a"
+
+Material: ventilation_cavity
+  category: air
+
+Material: gypsum_plaster
+  category: plaster
+  color: "#f1efe9"
+
+Material: gypsum_board
+  category: gypsum
+  color: "#eceae5"
+
+Material: stud_insulation
+  category: insulation
+  color: "#e8d27a"
+
+Material: render
+  category: plaster
+  color: "#d9d5cc"
+
+Material: terrazzo
+  category: stone
+  color: "#cfcac0"
+
+Material: linoleum
+  category: flooring
+  color: "#8c8f86"
+
+Material: screed
+  category: cement
+  color: "#bdb9b0"
+
+Material: impact_sound_insulation
+  category: insulation
+
+Material: eps_insulation
+  category: insulation
+
+Material: xps_insulation
+  category: insulation
+
+Material: pir_insulation
+  category: insulation
+
+Material: lean_concrete
+  category: concrete
+
+Material: bitumen_membrane
+  category: membrane
+  color: "#2f3033"
+
+Material: vapour_barrier
+  category: membrane
+
+Material: concrete_pavers
+  category: concrete
+  color: "#a9a59c"
+
+Material: gravel_bed
+  category: aggregate
+
+Material: substrate
+  category: vegetation
+  color: "#6e8f4c"
+
+Material: drainage_layer
+  category: aggregate
+
+Material: clt
+  category: timber
+  color: "#d9b98c"
+
+Material: glulam
+  category: timber
+  grade: GL28h
+  color: "#d4a96a"
+
+Material: acoustic_ceiling
+  category: gypsum
+  color: "#f5f4f0"
+
+// External walls
+
+Material: ew_exposed_concrete
+  ifc_name: "EW exposed concrete 350 - core insulation"
+  layers:
+    - exposed_concrete: 0.07 m
+    - mineral_wool: 0.12 m
+    - reinforced_concrete: 0.15 m
+    - gypsum_plaster: 0.01 m
+
+Material: ew_larch
+  ifc_name: "EW larch - ventilated 450"
+  layers:
+    - larch_cladding: 0.025 m
+    - ventilation_cavity: 0.035 m
+    - mineral_wool: 0.16 m
+    - reinforced_concrete: 0.22 m
+    - gypsum_plaster: 0.01 m
+
+Material: ew_metal
+  ifc_name: "EW metal cassette - timber frame 300"
+  layers:
+    - facade_metal_anthracite: 0.003 m
+    - ventilation_cavity: 0.042 m
+    - mineral_wool: 0.08 m
+    - stud_insulation: 0.15 m
+    - gypsum_board: 0.025 m
+
+Material: ew_etics
+  ifc_name: "EW ETICS on concrete 300"
+  layers:
+    - render: 0.01 m
+    - mineral_wool: 0.12 m
+    - reinforced_concrete: 0.16 m
+    - gypsum_plaster: 0.01 m
+
+// Internal walls
+
+Material: iw_rc_250
+  ifc_name: "IW concrete 250"
+  layers:
+    - gypsum_plaster: 0.01 m
+    - reinforced_concrete: 0.23 m
+    - gypsum_plaster: 0.01 m
+
+Material: iw_rc_300
+  ifc_name: "IW concrete 300"
+  layers:
+    - gypsum_plaster: 0.01 m
+    - reinforced_concrete: 0.28 m
+    - gypsum_plaster: 0.01 m
+
+Material: iw_rc_350
+  ifc_name: "IW concrete 350"
+  layers:
+    - gypsum_plaster: 0.015 m
+    - reinforced_concrete: 0.32 m
+    - gypsum_plaster: 0.015 m
+
+Material: dw_120
+  ifc_name: "Drywall 120 - double board"
+  layers:
+    - gypsum_board: 0.025 m
+    - stud_insulation: 0.07 m
+    - gypsum_board: 0.025 m
+
+Material: dw_150
+  ifc_name: "Drywall 150 - double board"
+  layers:
+    - gypsum_board: 0.025 m
+    - stud_insulation: 0.1 m
+    - gypsum_board: 0.025 m
+
+Material: dw_200
+  ifc_name: "Drywall 200 - double stud"
+  layers:
+    - gypsum_board: 0.025 m
+    - stud_insulation: 0.15 m
+    - gypsum_board: 0.025 m
+
+// Slabs and roofs
+
+Material: ground_slab
+  ifc_name: "Ground slab 600"
+  layers:
+    - terrazzo: 0.02 m
+    - screed: 0.07 m
+    - eps_insulation: 0.04 m
+    - reinforced_concrete: 0.3 m
+    - xps_insulation: 0.12 m
+    - lean_concrete: 0.05 m
+
+Material: floor_410
+  ifc_name: "Floor 410 - floating screed"
+  layers:
+    - linoleum: 0.01 m
+    - screed: 0.065 m
+    - impact_sound_insulation: 0.035 m
+    - reinforced_concrete: 0.3 m
+
+Material: roof_bulge
+  ifc_name: "Green roof deck 410"
+  layers:
+    - bitumen_membrane: 0.01 m
+    - eps_insulation: 0.16 m
+    - vapour_barrier: 0.01 m
+    - reinforced_concrete: 0.23 m
+
+Material: green_roof_buildup
+  ifc_name: "Extensive green roof 150"
+  layers:
+    - substrate: 0.1 m
+    - drainage_layer: 0.05 m
+
+Material: terrace_410
+  ifc_name: "Roof terrace 410"
+  layers:
+    - concrete_pavers: 0.04 m
+    - gravel_bed: 0.03 m
+    - bitumen_membrane: 0.01 m
+    - pir_insulation: 0.1 m
+    - vapour_barrier: 0.01 m
+    - reinforced_concrete: 0.22 m
+
+Material: roof_400
+  ifc_name: "Flat roof 400 - warm deck"
+  layers:
+    - bitumen_membrane: 0.01 m
+    - eps_insulation: 0.18 m
+    - vapour_barrier: 0.01 m
+    - reinforced_concrete: 0.2 m
+
+Material: roof_aud
+  ifc_name: "Audimax green roof on CLT 450"
+  layers:
+    - substrate: 0.1 m
+    - drainage_layer: 0.05 m
+    - bitumen_membrane: 0.01 m
+    - eps_insulation: 0.16 m
+    - vapour_barrier: 0.01 m
+    - clt: 0.12 m
+
+// ------------------------------------------------------------------
+// Building services (LOD 350)
+// ------------------------------------------------------------------
+
+Material: galvanised_steel_duct
+  category: metal
+  color: "#b9bec4"
+  specular: 0.5
+  shininess: 40
+
+Material: sprinkler_steel
+  category: metal
+  color: "#c8352e"
+  specular: 0.4
+  shininess: 32
+
+Material: copper
+  category: metal
+  color: "#b8733d"
+  specular: 0.6
+  shininess: 48
+
+Material: heating_steel
+  category: metal
+  color: "#e0a030"
+  specular: 0.4
+  shininess: 32
+
+Material: pvc_drain
+  category: plastic
+  color: "#6f7378"
+
+Material: cable_tray_steel
+  category: metal
+  color: "#8d949b"
+  specular: 0.5
+  shininess: 40
+
+Material: terminal_white
+  category: metal
+  color: "#eef0f2"
+
+Material: plant_grey
+  category: metal
+  color: "#5d6a75"
+  specular: 0.3
+  shininess: 24
+
+Material: sanitary_ceramic
+  category: ceramic
+  color: "#f7f7f4"
+  specular: 0.6
+  shininess: 64
+
+Material: support_steel
+  category: metal
+  color: "#4c5257"
+
+Material: clearance_zone
+  category: other
+  color: "#3fb46a"
+  opacity: 0.15

@@ -1,0 +1,98 @@
+================================================================================
+Site heading
+================================================================================
+
+# Site: Test Site
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)))
+
+================================================================================
+Building heading
+================================================================================
+
+## Building: House A
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)))
+
+================================================================================
+Storey heading
+================================================================================
+
+### Storey: Ground Floor
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)))
+
+================================================================================
+Space heading
+================================================================================
+
+#### Space: Living Room
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)))
+
+================================================================================
+Multiple headings at different levels
+================================================================================
+
+# Site: T
+  loc: 1, 2
+## Building: B
+  type: res
+### Storey: S
+  elev: 0.0 m
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (property
+      (simple_property
+        key: (property_key)
+        value: (number_pair
+          (number)
+          (number)))))
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (property
+      (simple_property
+        key: (property_key)
+        value: (identifier))))
+  (heading
+    (heading_marker)
+    (spatial_type)
+    (heading_name)
+    (property
+      (simple_property
+        key: (property_key)
+        value: (number_with_unit
+          (number)
+          (unit))))))

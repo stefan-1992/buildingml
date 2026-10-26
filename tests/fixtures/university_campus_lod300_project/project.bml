@@ -1,0 +1,46 @@
+// Forum Nord - fictitious university building (multi-file project), LOD 300 version
+//
+// Same building as university_campus_project/, detailed to LOD 300:
+//   - layered wall, slab and roof build-ups with property sets (U-value, fire, acoustic)
+//   - wall junctions closed without overlaps (rectangular wall ends leave up to 2 cm
+//     joints at oblique corners), walls split around columns
+//   - curtain walls as mullion/transom grids (aluminium members, glazing panels)
+//   - u-shaped concrete stairs (generated flights and landing) with steel handrails
+//   - glulam main beams under the Audimax roof
+//   - suspended acoustic ceilings (Covering) in offices, teaching rooms and corridors,
+//     outlines defaulted from the spaces
+//   - strip footings under the walls and pad footings under the columns (Footing)
+//   - no clashes between elements, furniture included
+//
+// Five levels plus roof, gross floor area about 6,900 m2:
+//   Level 0  Mensa with curved glazed bulge, foyer, kitchen, Audimax (double height)
+//   Level 1  Lecture rooms, seminar rooms, gallery around the atrium
+//   Level 2  Offices (template OfficeFloor), cantilever 4 m west
+//   Level 3  Offices (template OfficeFloor)
+//   Level 4  Twisted glazed library pavilion + roof terrace
+//   Roof     Flat roof, skylight lantern over the atrium, PV array
+//
+// Layout key:
+//   x-axis: west -> east, y-axis: south (campus square) -> north
+//   Main block (0,0)-(44,0)-(50,24)-(0,24); east facade slanted
+//   Office floors extend to x = -4 (cantilever)
+//   Atrium void: (24,9) (35,8.5) (34.5,15) (23,14.5), levels 1-4, skylight on the roof
+//   West core x 0..8, y 14..24; east core x 38..46, y 16..24
+//   Audimax: fan-shaped hall (44,0) (62,-4) (66,26) (50,24)
+
+import materials from "./materials.bml"
+import level0 from "./storeys/level-0.bml"
+import level1 from "./storeys/level-1.bml"
+import offices from "./storeys/level-2-3-offices.bml"
+import level4 from "./storeys/level-4.bml"
+import roof from "./storeys/roof.bml"
+import checks from "./checks/university.bml"
+import assets from "./assets/furniture.bml"
+
+# Site: Campus Nord
+  location: 48.2650, 11.6710
+  address: "Forumsplatz 1, 85748 Garching (fictitious)"
+
+## Building: Forum Nord
+  type: educational
+  year: 2028

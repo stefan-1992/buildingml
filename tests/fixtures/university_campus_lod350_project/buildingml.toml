@@ -1,0 +1,18 @@
+buildingml_version = "0.2"
+ifc_version = "IFC4"
+output_format = "step"
+entry = "project.bml"
+
+[units]
+length = "m"
+area = "m2"
+angle = "deg"
+
+[lint]
+wall_thickness = "warn"
+door_width = "warn"
+window_sill = "warn"
+storey_height = "warn"
+column_aspect = "warn"
+beam_span = "warn"
+wall_overlap = "warn"

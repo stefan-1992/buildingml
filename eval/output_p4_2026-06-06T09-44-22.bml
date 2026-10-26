@@ -1,0 +1,148 @@
+# Site: ThreeSectionComplex
+
+## Building: ConnectedSections
+
+### Storey: GroundFloor
+  elevation: 0 m
+  height: 3 m
+
+#### Space: SectionOne
+  usage: living
+  Wall: W-S1-S
+    from: (0, 0) to: (10, 0)
+    height: 3 m
+    thickness: 0.24 m
+    material: brick
+    Window: WIN-S1-S1
+      offset: 2.0 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-S1-S2
+      offset: 6.5 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-S1-W
+    from: (0, 0) to: (0, 5)
+    height: 3 m
+    thickness: 0.24 m
+    material: brick
+    Door: D-S1-ENTRY
+      offset: 1.5 m
+      width: 0.9 m
+      height: 2.1 m
+  Wall: W-S1-N
+    from: (0, 5) to: (10, 5)
+    height: 3 m
+    thickness: 0.24 m
+    material: brick
+    Window: WIN-S1-N1
+      offset: 3.5 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-S1-E
+    from: (10, 0) to: (10, 5)
+    height: 3 m
+    thickness: 0.24 m
+    material: brick
+    Door: D-S1-S2
+      offset: 2.0 m
+      width: 0.9 m
+      height: 2.1 m
+  Slab: SL-S1
+    boundary: [(0, 0), (10, 0), (10, 5), (0, 5)]
+    thickness: 0.2 m
+
+#### Space: SectionTwo
+  usage: dining
+  Wall: W-S2-S
+    from: (10, 0) to: (20, 0)
+    height: 3 m
+    thickness: 0.24 m
+    material: brick
+    Window: WIN-S2-S1
+      offset: 2.0 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-S2-S2
+      offset: 6.5 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-S2-N
+    from: (10, 5) to: (20, 5)
+    height: 3 m
+    thickness: 0.24 m
+    material: brick
+    Window: WIN-S2-N1
+      offset: 3.5 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-S2-E
+    from: (20, 0) to: (20, 5)
+    height: 3 m
+    thickness: 0.24 m
+    material: brick
+    Door: D-S2-S3
+      offset: 2.0 m
+      width: 0.9 m
+      height: 2.1 m
+  Slab: SL-S2
+    boundary: [(10, 0), (20, 0), (20, 5), (10, 5)]
+    thickness: 0.2 m
+
+#### Space: SectionThree
+  usage: bedroom
+  Wall: W-S3-S
+    from: (20, 0) to: (30, 0)
+    height: 3 m
+    thickness: 0.24 m
+    material: brick
+    Window: WIN-S3-S1
+      offset: 2.0 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+    Window: WIN-S3-S2
+      offset: 6.5 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-S3-E
+    from: (30, 0) to: (30, 5)
+    height: 3 m
+    thickness: 0.24 m
+    material: brick
+    Window: WIN-S3-E1
+      offset: 1.5 m
+      width: 1.0 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-S3-N
+    from: (20, 5) to: (30, 5)
+    height: 3 m
+    thickness: 0.24 m
+    material: brick
+    Window: WIN-S3-N1
+      offset: 3.5 m
+      width: 1.5 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Slab: SL-S3
+    boundary: [(20, 0), (30, 0), (30, 5), (20, 5)]
+    thickness: 0.2 m
+
+### Storey: RoofLevel
+  elevation: 3 m
+  height: 0 m
+
+#### Space: AtticSpace
+  usage: storage
+  Roof: RF-01
+    boundary: [(0, 0), (30, 0), (30, 5), (0, 5)]
+    type: gable
+    ridge_height: 2.5 m

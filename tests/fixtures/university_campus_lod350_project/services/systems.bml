@@ -1,0 +1,50 @@
+// Distribution systems of Forum Nord (IfcDistributionSystem).
+// Every services element names one of them with `system:`.
+
+# Site: Campus Nord
+
+## Building: Forum Nord
+
+  System: SA
+    predefined_type: ventilation
+    ifc_name: "Supply air"
+
+  System: EA
+    predefined_type: exhaust
+    ifc_name: "Extract air"
+
+  System: SPR
+    predefined_type: fireprotection
+    ifc_name: "Sprinkler"
+
+  System: DCW
+    predefined_type: domesticcoldwater
+    ifc_name: "Domestic cold water"
+
+  System: DHW
+    predefined_type: domestichotwater
+    ifc_name: "Domestic hot water"
+
+  System: WW
+    predefined_type: wastewater
+    ifc_name: "Waste water"
+
+  System: RW
+    predefined_type: rainwater
+    ifc_name: "Rain water"
+
+  System: HTG
+    predefined_type: heating
+    ifc_name: "Heating (district heat to air handler coils)"
+
+  System: PWR
+    predefined_type: electrical
+    ifc_name: "Power"
+
+  System: LTG
+    predefined_type: lighting
+    ifc_name: "Lighting"
+
+  System: FA
+    predefined_type: security
+    ifc_name: "Fire alarm"

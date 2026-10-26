@@ -1,0 +1,963 @@
+﻿/// Official BuildingML Common Furniture Asset Library
+/// Contains standardized, real-world scaled furniture components for immediate use.
+
+# AssetLibrary: Common Furniture
+  description: "BuildingML Standard Common Furniture Collection"
+  version: "1.0"
+
+## Asset: SingleBed
+  description: "Standard Single Bed"
+  category: bed
+  width: 1.0 m
+  depth: 2.0 m
+  height: 0.5 m
+
+### Part: Frame
+  geometry: box(1.0, 2.0, 0.2)
+  position: (0, 0, 0.1)
+  material: wood_light
+
+### Part: Mattress
+  geometry: box(0.96, 1.96, 0.2)
+  position: (0.02, 0.02, 0.3)
+  material: fabric_white
+
+### Part: Pillow
+  geometry: box(0.6, 0.4, 0.1)
+  position: (0.2, 1.5, 0.5)
+  material: fabric_white
+
+## Asset: DoubleBed
+  description: "Standard Double Bed"
+  category: bed
+  width: 1.5 m
+  depth: 2.0 m
+  height: 0.5 m
+
+### Part: Frame
+  geometry: box(1.5, 2.0, 0.2)
+  position: (0, 0, 0.1)
+  material: wood_dark
+
+### Part: Mattress
+  geometry: box(1.46, 1.96, 0.2)
+  position: (0.02, 0.02, 0.3)
+  material: fabric_white
+
+### Part: PillowLeft
+  geometry: box(0.5, 0.4, 0.1)
+  position: (0.2, 1.5, 0.5)
+  material: fabric_white
+
+### Part: PillowRight
+  geometry: box(0.5, 0.4, 0.1)
+  position: (0.8, 1.5, 0.5)
+  material: fabric_white
+
+## Asset: Wardrobe
+  description: "Standard 2-door Wardrobe"
+  category: storage
+  width: 1.0 m
+  depth: 0.6 m
+  height: 2.2 m
+
+### Part: Body
+  geometry: box(1.0, 0.58, 2.2)
+  position: (0, 0, 0)
+  material: wood_light
+
+### Part: DoorLeft
+  geometry: box(0.49, 0.02, 2.1)
+  position: (0, 0.58, 0.05)
+  material: wood_light
+
+### Part: DoorRight
+  geometry: box(0.49, 0.02, 2.1)
+  position: (0.51, 0.58, 0.05)
+  material: wood_light
+
+## Asset: Sofa
+  description: "Modern 3-Seater Sofa"
+  category: seating
+  width: 2.2 m
+  depth: 0.9 m
+  height: 0.8 m
+
+### Part: Base
+  geometry: box(2.2, 0.8, 0.2)
+  position: (0, 0, 0.1)
+  material: fabric_grey
+
+### Part: Cushions
+  geometry: box(1.8, 0.6, 0.15)
+  position: (0.2, 0.1, 0.3)
+  material: fabric_light_grey
+
+### Part: Backrest
+  geometry: box(2.0, 0.2, 0.5)
+  position: (0.1, 0.7, 0.3)
+  material: fabric_grey
+
+### Part: ArmrestLeft
+  geometry: box(0.2, 0.8, 0.4)
+  position: (0, 0.1, 0.3)
+  material: fabric_grey
+
+### Part: ArmrestRight
+  geometry: box(0.2, 0.8, 0.4)
+  position: (2.0, 0.1, 0.3)
+  material: fabric_grey
+
+## Asset: DiningTable
+  description: "Rectangular Dining Table"
+  category: table
+  width: 1.8 m
+  depth: 0.9 m
+  height: 0.75 m
+
+### Part: TableTop
+  geometry: box(1.8, 0.9, 0.05)
+  position: (0, 0, 0.7)
+  material: wood_oak
+
+### Part: LegFL
+  geometry: cylinder(0.04, 0.7)
+  position: (0.1, 0.1, 0)
+  material: steel_black
+
+### Part: LegFR
+  geometry: cylinder(0.04, 0.7)
+  position: (1.7, 0.1, 0)
+  material: steel_black
+
+### Part: LegBL
+  geometry: cylinder(0.04, 0.7)
+  position: (0.1, 0.8, 0)
+  material: steel_black
+
+### Part: LegBR
+  geometry: cylinder(0.04, 0.7)
+  position: (1.7, 0.8, 0)
+  material: steel_black
+
+## Asset: DiningChair
+  description: "Standard Dining Chair"
+  category: seating
+  width: 0.45 m
+  depth: 0.5 m
+  height: 0.9 m
+
+### Part: Seat
+  geometry: box(0.45, 0.45, 0.05)
+  position: (0, 0.05, 0.45)
+  material: wood_oak
+
+### Part: Backrest
+  geometry: box(0.45, 0.05, 0.4)
+  position: (0, 0.45, 0.5)
+  material: wood_oak
+
+### Part: LegFL
+  geometry: cylinder(0.02, 0.45)
+  position: (0.05, 0.1, 0)
+  material: steel_black
+
+### Part: LegFR
+  geometry: cylinder(0.02, 0.45)
+  position: (0.4, 0.1, 0)
+  material: steel_black
+
+### Part: LegBL
+  geometry: cylinder(0.02, 0.9)
+  position: (0.05, 0.45, 0)
+  material: steel_black
+
+### Part: LegBR
+  geometry: cylinder(0.02, 0.9)
+  position: (0.4, 0.45, 0)
+  material: steel_black
+
+## Asset: KitchenCounter
+  description: "Standard Kitchen Base Cabinet with Countertop"
+  category: kitchen
+  width: 0.6 m
+  depth: 0.6 m
+  height: 0.9 m
+
+### Part: Cabinet
+  geometry: box(0.6, 0.58, 0.86)
+  position: (0, 0.02, 0)
+  material: wood_white
+
+### Part: Countertop
+  geometry: box(0.6, 0.6, 0.04)
+  position: (0, 0, 0.86)
+  material: stone_granite
+
+## Asset: Refrigerator
+  description: "Freestanding Refrigerator"
+  category: kitchen
+  width: 0.7 m
+  depth: 0.7 m
+  height: 1.9 m
+
+### Part: Body
+  geometry: box(0.7, 0.7, 1.9)
+  position: (0, 0, 0)
+  material: metal_steel
+  
+### Part: FreezerDoor
+  geometry: box(0.7, 0.05, 0.6)
+  position: (0, -0.05, 0)
+  material: metal_steel
+
+### Part: FridgeDoor
+  geometry: box(0.7, 0.05, 1.25)
+  position: (0, -0.05, 0.65)
+  material: metal_steel
+
+## Asset: Toilet
+  description: "Floor-mounted Toilet"
+  category: bathroom
+  width: 0.4 m
+  depth: 0.7 m
+  height: 0.8 m
+
+### Part: BaseBowl
+  geometry: cylinder(0.18, 0.4)
+  position: (0.2, 0.3, 0)
+  material: ceramic_white
+
+### Part: Tank
+  geometry: box(0.4, 0.2, 0.4)
+  position: (0, 0.5, 0.4)
+  material: ceramic_white
+
+## Asset: Bathtub
+  description: "Standard Built-in Bathtub"
+  category: bathroom
+  width: 1.8 m
+  depth: 0.8 m
+  height: 0.6 m
+
+### Part: Exterior
+  geometry: box(1.8, 0.8, 0.6)
+  position: (0, 0, 0)
+  material: ceramic_white
+
+### Part: InteriorVoid
+  geometry: box(1.6, 0.6, 0.4)
+  position: (0.1, 0.1, 0.2)
+  material: water_blue
+
+## Asset: OfficeDesk
+  description: "Standard office desk with drawer unit"
+  category: desk
+  width: 1.6 m
+  depth: 0.8 m
+  height: 0.75 m
+
+### Part: Desktop
+  geometry: box(1.6, 0.8, 0.03)
+  position: (0, 0, 0.72)
+  material: oak_veneer
+
+### Part: LeftLeg
+  geometry: box(0.04, 0.6, 0.72)
+  position: (0.02, 0.1, 0)
+  material: steel_chrome
+
+### Part: RightLeg
+  geometry: box(0.04, 0.6, 0.72)
+  position: (1.54, 0.1, 0)
+  material: steel_chrome
+
+### Part: DrawerUnit
+  geometry: box(0.4, 0.5, 0.5)
+  position: (1.1, 0.15, 0.22)
+  material: oak_veneer
+
+## Asset: OfficeChair
+  category: seating
+  width: 0.65 m
+  depth: 0.65 m
+  height: 1.2 m
+
+### Part: Seat
+  geometry: box(0.45, 0.45, 0.05)
+  position: (0.1, 0.1, 0.45)
+  material: fabric_black
+
+### Part: Base
+  geometry: cylinder(0.02, 0.45)
+  position: (0.325, 0.325, 0)
+  material: steel_chrome
+
+### Part: Backrest
+  geometry: box(0.45, 0.03, 0.45)
+  position: (0.1, 0.07, 0.50)
+  material: fabric_black
+
+
+/// Two-storey residential house — 4 bedroom family home
+/// Footprint: 10m x 8m, total ~160m2 gross floor area
+
+
+
+Material: exterior_masonry
+  category: masonry
+  density: 1800 kg/m3
+
+Material: interior_partition
+  category: concrete
+  density: 1800 kg/m3
+
+Material: reinforced_concrete
+  category: concrete
+  grade: C30
+  density: 2400 kg/m3
+
+# Site: Family Residence
+  location: 48.1351, 11.5820
+  address: "Ahornweg 12, 80331 Munich"
+
+## Building: Two Storey House
+  type: residential
+  gross_floor_area: 160.0 m2
+
+// =========================================================================
+// Ground Floor �?Entrance, Living, Kitchen, WC
+// =========================================================================
+
+### Storey: Ground Floor
+  elevation: 0.0 m
+  height: 2.80 m
+
+//// Exterior Walls ////
+
+#### Space: Entrance Hall
+  usage: circulation
+  area: 10.5 m2
+
+  // South exterior wall (entrance side)
+  Wall: W-GF-S1
+    from: (0, 0) to: (3, 0)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Door: D-FRONT
+      offset: 0.7 m
+      width: 1.10 m
+      height: 2.10 m
+      type: single_leaf
+      is_external: true
+      fire_rating: T30
+
+  // Entrance hall east partition
+  Wall: W-GF-I1
+    from: (3, 0) to: (3, 4.5)
+    height: 2.80 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-GF-01
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+
+  // West exterior wall segment (entrance)
+  Wall: W-GF-W1
+    from: (0, 4.5) to: (0, 0)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  // Entrance hall north partition
+  Wall: W-GF-I2
+    from: (0, 4.5) to: (3, 4.5)
+    height: 2.80 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-GF-02
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+
+#### Space: Living Room
+  usage: living
+  area: 31.5 m2
+
+  // South exterior wall (living room)
+  Wall: W-GF-S2
+    from: (3, 0) to: (10, 0)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-GF-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.80 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-GF-02
+      offset: 4.5 m
+      width: 1.5 m
+      height: 1.4 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // East exterior wall (living room lower)
+  Wall: W-GF-E1
+    from: (10, 0) to: (10, 4.5)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-GF-03
+      offset: 1.0 m
+      width: 1.2 m
+      height: 1.4 m
+      sill_height: 0.80 m
+      type: triple_glazed
+
+  // Living room / back rooms divider
+  Wall: W-GF-I3
+    from: (3, 4.5) to: (10, 4.5)
+    height: 2.80 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-GF-03
+      offset: 4.5 m
+      width: 1.20 m
+      height: 2.10 m
+      type: double_leaf
+
+  Furniture: SOFA-GF
+    asset: Sofa
+    position: (4.0, 3.5)
+    rotation: 180
+
+  Furniture: DINING-TABLE-GF
+    asset: DiningTable
+    position: (6.5, 1.0)
+    rotation: 0
+
+  Furniture: DINING-CHAIR-01
+    asset: DiningChair
+    position: (6.5, 0.5)
+    rotation: 0
+
+  Furniture: DINING-CHAIR-02
+    asset: DiningChair
+    position: (7.5, 0.5)
+    rotation: 0
+
+  Furniture: DINING-CHAIR-03
+    asset: DiningChair
+    position: (6.5, 2.0)
+    rotation: 180
+
+  Furniture: DINING-CHAIR-04
+    asset: DiningChair
+    position: (7.5, 2.0)
+    rotation: 180
+
+#### Space: Kitchen
+  usage: kitchen
+  area: 21.0 m2
+
+  // North exterior wall (kitchen)
+  Wall: W-GF-N1
+    from: (6, 8) to: (0, 8)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-GF-04
+      offset: 1.0 m
+      width: 1.8 m
+      height: 1.4 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // West exterior wall (kitchen)
+  Wall: W-GF-W2
+    from: (0, 8) to: (0, 4.5)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-GF-05
+      offset: 0.75 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 1.00 m
+      type: triple_glazed
+
+  // Kitchen / stair+WC partition
+  Wall: W-GF-I4
+    from: (6, 4.5) to: (6, 8)
+    height: 2.80 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-GF-04
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+
+  Furniture: KITCHEN-COUNTER-01
+    asset: KitchenCounter
+    position: (0.3, 7.2)
+    rotation: 0
+
+  Furniture: KITCHEN-COUNTER-02
+    asset: KitchenCounter
+    position: (0.9, 7.2)
+    rotation: 0
+
+  Furniture: KITCHEN-COUNTER-03
+    asset: KitchenCounter
+    position: (1.5, 7.2)
+    rotation: 0
+
+  Furniture: KITCHEN-COUNTER-04
+    asset: KitchenCounter
+    position: (2.1, 7.2)
+    rotation: 0
+
+  Furniture: KITCHEN-COUNTER-05
+    asset: KitchenCounter
+    position: (2.7, 7.2)
+    rotation: 0
+
+  Furniture: KITCHEN-COUNTER-06
+    asset: KitchenCounter
+    position: (3.3, 7.2)
+    rotation: 0
+
+  Furniture: KITCHEN-COUNTER-07
+    asset: KitchenCounter
+    position: (3.9, 7.2)
+    rotation: 0
+
+  Furniture: FRIDGE-GF
+    asset: Refrigerator
+    position: (5.0, 7.2)
+    rotation: 0
+
+#### Space: WC
+  usage: bathroom
+  area: 5.25 m2
+
+  // North exterior wall (WC)
+  Wall: W-GF-N2
+    from: (8.5, 8) to: (6, 8)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+    Window: WIN-GF-06
+      offset: 0.5 m
+      width: 0.6 m
+      height: 0.6 m
+      sill_height: 1.60 m
+      type: double_glazed
+
+  // WC / staircase partition
+  Wall: W-GF-I5
+    from: (8.5, 4.5) to: (8.5, 8)
+    height: 2.80 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-GF-05
+      offset: 0.5 m
+      width: 0.80 m
+      height: 2.10 m
+      type: single_leaf
+
+  Furniture: TOILET-GF
+    asset: Toilet
+    position: (6.5, 7.1)
+    rotation: 180
+
+#### Space: Staircase
+  usage: circulation
+  area: 5.25 m2
+
+  // East exterior wall (staircase + upper)
+  Wall: W-GF-E2
+    from: (10, 4.5) to: (10, 8)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  // North exterior wall (staircase)
+  Wall: W-GF-N3
+    from: (10, 8) to: (8.5, 8)
+    height: 2.80 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Stair: ST-GF-01
+    from_storey: Ground Floor
+    to_storey: First Floor
+    type: straight
+    position: (9.0, 5.5)
+    width: 1.0 m
+    riser_count: 16
+    riser_height: 0.175 m
+    tread_depth: 0.27 m
+
+  // Ground floor slab
+  Slab: SLAB-GF
+    boundary: [(0,0), (10,0), (10,8), (0,8)]
+    thickness: 0.25 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  // Load-bearing beam spanning the building width
+  Beam: B-GF-01
+    from: (0, 4.5) to: (10, 4.5)
+    profile: rectangle(0.30, 0.45)
+    material: reinforced_concrete
+
+  // Central column
+  Column: COL-GF-01
+    position: (5.0, 4.5)
+    height: 2.80 m
+    profile: rectangle(0.30, 0.30)
+    material: reinforced_concrete
+
+// =========================================================================
+// First Floor �?2 Bedrooms, Bathroom, Landing/Hallway
+// =========================================================================
+
+### Storey: First Floor
+  elevation: 2.80 m
+  height: 2.60 m
+
+#### Space: Landing
+  usage: circulation
+  area: 8.75 m2
+
+  // Landing south wall (internal partition over entrance below)
+  Wall: W-FF-I1
+    from: (0, 0) to: (5, 0)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  // Landing partition east
+  Wall: W-FF-I2
+    from: (5, 0) to: (5, 3.5)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-FF-03
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+
+  // Landing partition north
+  Wall: W-FF-I3
+    from: (0, 3.5) to: (5, 3.5)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  // West exterior wall (landing)
+  Wall: W-FF-W1
+    from: (0, 3.5) to: (0, 0)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+  Railing: RL-FF-01
+    height: 1.0 m
+    length: 1.5 m
+
+#### Space: Master Bedroom
+  usage: bedroom
+  area: 22.5 m2
+
+  // South exterior wall (master bedroom)
+  Wall: W-FF-S1
+    from: (5, 0) to: (10, 0)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+    Window: WIN-FF-01
+      offset: 0.75 m
+      width: 2.0 m
+      height: 1.5 m
+      sill_height: 0.85 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // East exterior wall (master bedroom)
+  Wall: W-FF-E1
+    from: (10, 0) to: (10, 4.5)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+    Window: WIN-FF-02
+      offset: 1.0 m
+      width: 1.2 m
+      height: 1.4 m
+      sill_height: 0.85 m
+      type: triple_glazed
+
+  // Master bedroom / back rooms divider
+  Wall: W-FF-I4
+    from: (5, 4.5) to: (10, 4.5)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-FF-01
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+
+  Furniture: BED-MASTER
+    asset: DoubleBed
+    position: (6.75, 2.3)
+    rotation: 0
+
+  Furniture: WARDROBE-MASTER
+    asset: Wardrobe
+    position: (5.2, 3.7)
+    rotation: 90
+
+#### Space: Bedroom 2
+  usage: bedroom
+  area: 14.0 m2
+
+  // West exterior wall (bedroom 2)
+  Wall: W-FF-W2
+    from: (0, 8) to: (0, 3.5)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+    Window: WIN-FF-03
+      offset: 1.0 m
+      width: 1.5 m
+      height: 1.4 m
+      sill_height: 0.85 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  // North exterior wall (bedroom 2)
+  Wall: W-FF-N1
+    from: (4, 8) to: (0, 8)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+  // Bedroom 2 / bathroom partition
+  Wall: W-FF-I5
+    from: (4, 3.5) to: (4, 8)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-FF-02
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+
+  Furniture: BED-BR2
+    asset: SingleBed
+    position: (1.5, 5.85)
+    rotation: 0
+
+  Furniture: WARDROBE-BR2
+    asset: Wardrobe
+    position: (0.2, 3.7)
+    rotation: 0
+
+#### Space: Bathroom
+  usage: bathroom
+  area: 10.5 m2
+
+  // North exterior wall (bathroom)
+  Wall: W-FF-N2
+    from: (7, 8) to: (4, 8)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+    Window: WIN-FF-04
+      offset: 0.5 m
+      width: 1.0 m
+      height: 0.8 m
+      sill_height: 1.40 m
+      type: double_glazed
+
+  // Bathroom / staircase partition
+  Wall: W-FF-I7
+    from: (7, 4.5) to: (7, 8)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-FF-04
+      offset: 0.5 m
+      width: 0.80 m
+      height: 2.10 m
+      type: single_leaf
+
+  // Bathroom south partition
+  Wall: W-FF-I8
+    from: (4, 4.5) to: (5, 4.5)
+    height: 2.60 m
+    thickness: 0.115 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  Furniture: BATHTUB-FF
+    asset: Bathtub
+    position: (4.3, 7.0)
+    rotation: 0
+
+  Furniture: TOILET-FF
+    asset: Toilet
+    position: (4.15, 5.5)
+    rotation: 0
+
+#### Space: Upper Hallway
+  usage: circulation
+  area: 10.5 m2
+
+  // East exterior wall (upper hallway/stair)
+  Wall: W-FF-E2
+    from: (10, 4.5) to: (10, 8)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+  // North exterior wall (upper hallway)
+  Wall: W-FF-N3
+    from: (10, 8) to: (7, 8)
+    height: 2.60 m
+    thickness: 0.30 m
+    material: exterior_masonry
+    is_external: true
+    load_bearing: true
+
+  // First floor slab (also ground floor ceiling)
+  Slab: SLAB-FF
+    boundary: [(0,0), (10,0), (10,8), (0,8)]
+    thickness: 0.22 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  // Load-bearing beam at mid-span
+  Beam: B-FF-01
+    from: (0, 4.5) to: (10, 4.5)
+    profile: rectangle(0.30, 0.40)
+    material: reinforced_concrete
+
+  Column: COL-FF-01
+    position: (5.0, 4.5)
+    height: 2.60 m
+    profile: rectangle(0.30, 0.30)
+    material: reinforced_concrete
+
+// =========================================================================
+// Roof
+// =========================================================================
+
+### Storey: Roof
+  elevation: 5.40 m
+
+  Roof: RF-01
+    type: gable
+    boundary: [(-0.5, -0.5), (10.5, -0.5), (10.5, 8.5), (-0.5, 8.5)]
+    ridge_height: 3.5 m
+    ridge_direction: x
+    overhang: 0.5 m
+

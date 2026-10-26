@@ -1,0 +1,2845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BuildingML Floorplan Editor</title>
+<style>
+:root {
+  --bg: #1e1e2e;
+  --surface: #252536;
+  --surface2: #2a2a3d;
+  --border: #383850;
+  --text: #cdd6f4;
+  --text-dim: #6c7086;
+  --accent: #89b4fa;
+  --accent-hover: #b4d0fb;
+  --error: #f38ba8;
+  --warning: #fab387;
+  --success: #a6e3a1;
+  --wall-color: #c8c0b8;
+  --wall-stroke: #8a8278;
+  --door-color: #a06020;
+  --window-color: #5588cc;
+  --column-color: #888886;
+  --slab-color: #d0d0ce;
+  --grid-color: rgba(100, 100, 140, 0.15);
+  --grid-major: rgba(100, 100, 140, 0.3);
+  --snap-color: #f5c211;
+  --select-color: #89b4fa;
+  --hover-color: rgba(137, 180, 250, 0.3);
+  --space-fill: rgba(137, 180, 250, 0.05);
+  --space-hover: rgba(137, 180, 250, 0.10);
+  --space-select: rgba(137, 180, 250, 0.15);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+}
+#app {
+  display: grid;
+  grid-template-columns: 240px 1fr 280px;
+  grid-template-rows: 44px 1fr 32px;
+  height: 100vh;
+  gap: 1px;
+  background: var(--border);
+}
+
+/* Toolbar */
+#toolbar {
+  grid-column: 1 / -1;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+}
+#toolbar h1 { font-size: 13px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+.toolbar-sep { width: 1px; height: 24px; background: var(--border); margin: 0 4px; }
+.tool-group { display: flex; gap: 2px; }
+.tool-btn {
+  background: transparent; border: 1px solid transparent; color: var(--text-dim);
+  padding: 4px 10px; border-radius: 4px; cursor: pointer;
+  font-family: inherit; font-size: 11px; white-space: nowrap;
+  transition: all 0.15s;
+}
+.tool-btn:hover { color: var(--text); background: var(--surface2); }
+.tool-btn.active { color: var(--accent); border-color: var(--accent); background: rgba(137,180,250,0.1); }
+.tool-btn.action { color: var(--text); }
+.tool-btn.action:hover { background: var(--accent); color: var(--bg); }
+#toolbar .status { margin-left: auto; font-size: 11px; color: var(--text-dim); }
+
+/* Left Panel */
+#left-panel {
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.panel-header {
+  padding: 8px 12px; font-size: 11px; color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+}
+#element-list {
+  flex: 1; overflow-y: auto; padding: 4px 0;
+}
+.elem-item {
+  padding: 6px 12px; font-size: 12px; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  border-left: 3px solid transparent;
+}
+.elem-item:hover { background: var(--surface2); }
+.elem-item.selected { background: rgba(137,180,250,0.1); border-left-color: var(--accent); color: var(--accent); }
+.elem-icon {
+  width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
+}
+.elem-id { flex: 1; overflow: hidden; text-overflow: ellipsis; }
+.elem-type { font-size: 10px; color: var(--text-dim); }
+
+/* Canvas Area */
+#canvas-container {
+  background: #15151f;
+  position: relative;
+  overflow: hidden;
+}
+#canvas { display: block; }
+#canvas-overlay {
+  position: absolute; bottom: 8px; left: 8px;
+  font-size: 10px; color: rgba(255,255,255,0.4);
+  pointer-events: none;
+}
+#coords-display {
+  position: absolute; bottom: 8px; right: 8px;
+  font-size: 10px; color: rgba(255,255,255,0.5);
+  pointer-events: none; font-variant-numeric: tabular-nums;
+}
+#snap-indicator {
+  position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; padding: 2px 8px; border-radius: 3px;
+  background: rgba(245,194,17,0.15); color: var(--snap-color);
+  pointer-events: none; display: none;
+}
+
+/* Right Panel */
+#right-panel {
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#properties-panel { flex: 1; overflow-y: auto; padding: 0; }
+.prop-section {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.prop-section-title {
+  font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.5px; color: var(--text-dim); margin-bottom: 6px;
+}
+.prop-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+}
+.prop-label {
+  font-size: 11px; color: var(--text-dim); min-width: 70px; flex-shrink: 0;
+}
+.prop-input {
+  flex: 1; background: var(--bg); border: 1px solid var(--border);
+  color: var(--text); padding: 3px 6px; border-radius: 3px;
+  font-family: inherit; font-size: 11px; outline: none;
+  min-width: 0;
+}
+.prop-input:focus { border-color: var(--accent); }
+.prop-input:disabled { opacity: 0.5; }
+#bml-output {
+  flex: 1; min-height: 200px;
+  background: var(--bg); color: var(--text); border: none;
+  padding: 8px 12px; font-family: inherit; font-size: 11px;
+  line-height: 1.5; resize: none; outline: none; tab-size: 2;
+}
+
+/* Status Bar */
+#statusbar {
+  grid-column: 1 / -1;
+  background: var(--surface);
+  display: flex; align-items: center;
+  padding: 0 12px; font-size: 11px; color: var(--text-dim);
+  gap: 16px;
+}
+#statusbar .sep { width: 1px; height: 16px; background: var(--border); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+/* Context menu */
+#context-menu {
+  display: none; position: fixed; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 4px 0; min-width: 160px; z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+#context-menu.visible { display: block; }
+.ctx-item {
+  padding: 6px 16px; font-size: 12px; cursor: pointer;
+  display: flex; justify-content: space-between;
+}
+.ctx-item:hover { background: var(--accent); color: var(--bg); }
+.ctx-item .shortcut { font-size: 10px; color: var(--text-dim); margin-left: 20px; }
+.ctx-item:hover .shortcut { color: inherit; }
+.ctx-sep { height: 1px; background: var(--border); margin: 4px 0; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="toolbar">
+    <h1>BuildingML Floorplan</h1>
+    <a href="/" style="background:var(--border);color:var(--text);padding:4px 12px;border-radius:4px;font-size:12px;text-decoration:none;font-family:inherit;">3D Viewer</a>
+    <div class="toolbar-sep"></div>
+    <div class="tool-group">
+      <button class="tool-btn active" data-tool="select" title="Select / Move (V)">Select</button>
+      <button class="tool-btn" data-tool="wall" title="Draw Wall (W)">Wall</button>
+      <button class="tool-btn" data-tool="door" title="Place Door (D)">Door</button>
+      <button class="tool-btn" data-tool="window" title="Place Window (N)">Window</button>
+      <button class="tool-btn" data-tool="column" title="Place Column (C)">Column</button>
+      <button class="tool-btn" data-tool="slab" title="Draw Slab (S)">Slab</button>
+    </div>
+    <div class="toolbar-sep"></div>
+    <div class="tool-group">
+      <button class="tool-btn action" onclick="undo()" title="Undo (Ctrl+Z)">Undo</button>
+      <button class="tool-btn action" onclick="redo()" title="Redo (Ctrl+Y)">Redo</button>
+      <button class="tool-btn action" id="save-btn" onclick="saveBml()" title="Save to file (Ctrl+S)" style="display:none">Save</button>
+    </div>
+    <div class="toolbar-sep"></div>
+    <div class="tool-group">
+      <button class="tool-btn action" onclick="zoomToFit()">Fit</button>
+      <button class="tool-btn action" onclick="toggleGrid()">Grid</button>
+      <button class="tool-btn action" onclick="toggleSnap()">Snap</button>
+    </div>
+    <div class="toolbar-sep" id="storey-selector-sep" style="display:none"></div>
+    <div class="tool-group" id="storey-selector-group" style="display:none">
+      <select id="storey-select" class="prop-input" style="font-size:11px; padding:3px 6px; background:var(--surface2); color:var(--text); border:1px solid var(--border); border-radius:4px;"></select>
+    </div>
+    <span class="status" id="status">Ready</span>
+  </div>
+
+  <div id="left-panel">
+    <div class="panel-header">Elements</div>
+    <div id="element-list"></div>
+    <div class="panel-header">Storey</div>
+    <div class="prop-section">
+      <div class="prop-row">
+        <span class="prop-label">Name</span>
+        <input class="prop-input" id="storey-name" value="Ground Floor">
+      </div>
+      <div class="prop-row">
+        <span class="prop-label">Elevation</span>
+        <input class="prop-input" id="storey-elevation" type="number" value="0" step="0.1"> 
+      </div>
+      <div class="prop-row">
+        <span class="prop-label">Height</span>
+        <input class="prop-input" id="storey-height" type="number" value="2.8" step="0.1">
+      </div>
+    </div>
+  </div>
+
+  <div id="canvas-container">
+    <canvas id="canvas"></canvas>
+    <div id="canvas-overlay">Scroll to zoom | Drag to pan | Click inside room to select space | Alt+Drag = independent move | A = anchor wall | Tools: W=Wall, D=Door, N=Window, C=Column, S=Slab, V=Select</div>
+    <div id="coords-display">0.00, 0.00</div>
+    <div id="snap-indicator">SNAP</div>
+  </div>
+
+  <div id="right-panel">
+    <div class="panel-header">Properties</div>
+    <div id="properties-panel">
+      <div class="prop-section" id="no-selection" style="color:var(--text-dim); font-size: 12px;">
+        Select an element to edit its properties
+      </div>
+    </div>
+    <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
+      <span>BML Output</span>
+      <button class="tool-btn action" onclick="copyBml()" style="padding:2px 8px; font-size:10px;">Copy</button>
+    </div>
+    <textarea id="bml-output" readonly></textarea>
+  </div>
+
+  <div id="statusbar">
+    <span id="sb-tool">Tool: Select</span>
+    <span class="sep"></span>
+    <span id="sb-elements">0 elements</span>
+    <span class="sep"></span>
+    <span id="sb-zoom">100%</span>
+    <span class="sep"></span>
+    <span id="sb-snap">Snap: 0.25m</span>
+    <span class="sep" id="sb-alt-sep" style="display:none"></span>
+    <span id="sb-alt" style="display:none; color: var(--warning);">Alt: Independent</span>
+  </div>
+</div>
+
+<div id="context-menu">
+  <div class="ctx-item" onclick="deleteSelected()">Delete<span class="shortcut">Del</span></div>
+  <div class="ctx-item" onclick="duplicateSelected()">Duplicate<span class="shortcut">Ctrl+D</span></div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" id="ctx-anchor" onclick="toggleAnchor()" style="display:none">Anchor Wall<span class="shortcut">A</span></div>
+  <div class="ctx-sep" id="ctx-anchor-sep" style="display:none"></div>
+  <div class="ctx-item" onclick="bringToFront()">Bring to Front</div>
+  <div class="ctx-item" onclick="sendToBack()">Send to Back</div>
+</div>
+
+<script>
+// ============================================================================
+// State
+// ============================================================================
+
+const SNAP_SIZE = 0.25; // meters
+let showGrid = true;
+let snapEnabled = true;
+let currentTool = 'select';
+let selectedId = null;
+let hoveredId = null;
+let nextIdCounters = { Wall: 1, Door: 1, Window: 1, Column: 1, Slab: 1, Beam: 1 };
+
+// Canvas / camera
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let viewX = 0, viewY = 0; // camera center in world coords
+let zoom = 50; // pixels per meter
+let dpr = window.devicePixelRatio || 1;
+
+// Elements (the floorplan model)
+let elements = [];
+
+// Undo/redo
+let undoStack = [];
+let redoStack = [];
+
+// Interaction state
+let isDragging = false;
+let isPanning = false;
+let dragStart = null;
+let dragStartWorld = null;
+let dragSaveStateDone = false; // whether saveState() has been called for current drag
+let wallStart = null; // for wall tool
+let slabPoints = []; // for slab tool
+let ghostPos = null; // current mouse world position (snapped)
+let rawMouseWorld = null;
+
+// Space detection
+const CONNECT_TOL = 0.05; // meters — tolerance for connecting wall endpoints
+let detectedSpaces = []; // [{id, name, polygon, wallIds, area}]
+let dragSpaceEndpoints = []; // [{wallId, end: 'from'|'to'}]
+let dragSpaceColumns = []; // [columnId]
+let dragSpaceSlabVerts = []; // [{slabId, vertexIdx}]
+
+// Independent (perpendicular) space drag
+let perpDragMode = false;           // true during Alt+drag or when anchored walls cause detach
+let perpSharedWallIds = [];         // wall IDs to leave in place (shared + anchored)
+let perpExclusiveEndpoints = [];    // [{wallId, end}] endpoints to move
+let perpReplacementWalls = [];      // IDs of replacement walls created at drag start
+let perpDragPolygon = null;         // cached polygon for rendering during drag
+
+// Anchored wall drag
+let anchoredWallConnections = [];   // [{wallId, end}] connected endpoints to move with anchored wall
+
+// ============================================================================
+// Element Model
+// ============================================================================
+
+function genId(type) {
+  const prefix = type.charAt(0).toUpperCase();
+  const n = nextIdCounters[type] || 1;
+  nextIdCounters[type] = n + 1;
+  return `${prefix}-${String(n).padStart(2, '0')}`;
+}
+
+function createWall(from, to) {
+  return {
+    type: 'Wall', id: genId('Wall'),
+    from: { x: from.x, y: from.y },
+    to: { x: to.x, y: to.y },
+    height: parseFloat(document.getElementById('storey-height').value) || 2.8,
+    thickness: 0.24,
+    anchored: false,
+    children: []
+  };
+}
+
+function createDoor(wallId, offset) {
+  return {
+    type: 'Door', id: genId('Door'),
+    parentWall: wallId, offset: offset,
+    width: 0.9, height: 2.1
+  };
+}
+
+function createWindow(wallId, offset) {
+  return {
+    type: 'Window', id: genId('Window'),
+    parentWall: wallId, offset: offset,
+    width: 1.2, height: 1.4, sill_height: 0.9
+  };
+}
+
+function createColumn(pos) {
+  return {
+    type: 'Column', id: genId('Column'),
+    x: pos.x, y: pos.y,
+    height: parseFloat(document.getElementById('storey-height').value) || 2.8,
+    profileW: 0.3, profileD: 0.3
+  };
+}
+
+function createSlab(points) {
+  return {
+    type: 'Slab', id: genId('Slab'),
+    boundary: points.map(p => ({ x: p.x, y: p.y })),
+    thickness: 0.22
+  };
+}
+
+function wallLength(wall) {
+  const dx = wall.to.x - wall.from.x;
+  const dy = wall.to.y - wall.from.y;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+function wallAngle(wall) {
+  return Math.atan2(wall.to.y - wall.from.y, wall.to.x - wall.from.x);
+}
+
+// ============================================================================
+// Space Detection (planar face enumeration from wall topology)
+// ============================================================================
+
+function pointInPolygon(p, polygon) {
+  let inside = false;
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const xi = polygon[i].x, yi = polygon[i].y;
+    const xj = polygon[j].x, yj = polygon[j].y;
+    if (((yi > p.y) !== (yj > p.y)) && (p.x < (xj - xi) * (p.y - yi) / (yj - yi) + xi)) {
+      inside = !inside;
+    }
+  }
+  return inside;
+}
+
+function detectSpaces() {
+  const walls = elements.filter(e => e.type === 'Wall');
+  if (walls.length < 3) { detectedSpaces = []; return; }
+
+  // Step 1: Cluster endpoints into unique vertices
+  const verts = [];
+  const vmap = new Map();
+  function vkey(x, y) {
+    const rx = Math.round(x / CONNECT_TOL) * CONNECT_TOL;
+    const ry = Math.round(y / CONNECT_TOL) * CONNECT_TOL;
+    return rx.toFixed(3) + ',' + ry.toFixed(3);
+  }
+  function getVert(x, y) {
+    const k = vkey(x, y);
+    if (vmap.has(k)) return vmap.get(k);
+    const i = verts.length;
+    verts.push({ x, y });
+    vmap.set(k, i);
+    return i;
+  }
+
+  // Step 2: Build directed half-edges
+  const hedges = [];
+  for (const w of walls) {
+    const fi = getVert(w.from.x, w.from.y);
+    const ti = getVert(w.to.x, w.to.y);
+    if (fi === ti) continue;
+    hedges.push({ from: fi, to: ti, wallId: w.id });
+    hedges.push({ from: ti, to: fi, wallId: w.id });
+  }
+
+  // Step 3: Build adjacency with sorted outgoing edges at each vertex
+  const adj = new Map();
+  for (let i = 0; i < hedges.length; i++) {
+    const h = hedges[i];
+    if (!adj.has(h.from)) adj.set(h.from, []);
+    adj.get(h.from).push({
+      to: h.to, wallId: h.wallId, idx: i,
+      angle: Math.atan2(verts[h.to].y - verts[h.from].y, verts[h.to].x - verts[h.from].x)
+    });
+  }
+  for (const [, list] of adj) {
+    list.sort((a, b) => a.angle - b.angle);
+  }
+
+  // Step 4: For each half-edge u→v, find the next half-edge in face traversal.
+  // At vertex v, find the twin (v→u), then take the previous edge in CCW-sorted order.
+  const nxt = new Array(hedges.length).fill(-1);
+  for (let i = 0; i < hedges.length; i++) {
+    const h = hedges[i];
+    const outgoing = adj.get(h.to);
+    if (!outgoing || outgoing.length === 0) continue;
+
+    // Find twin (v→u) in outgoing edges of v, prefer same wallId
+    let twinIdx = -1;
+    for (let j = 0; j < outgoing.length; j++) {
+      if (outgoing[j].to === h.from && outgoing[j].wallId === h.wallId) {
+        twinIdx = j; break;
+      }
+    }
+    if (twinIdx < 0) {
+      for (let j = 0; j < outgoing.length; j++) {
+        if (outgoing[j].to === h.from) { twinIdx = j; break; }
+      }
+    }
+    if (twinIdx >= 0) {
+      const prevIdx = (twinIdx - 1 + outgoing.length) % outgoing.length;
+      nxt[i] = outgoing[prevIdx].idx;
+    }
+  }
+
+  // Step 5: Trace face cycles
+  const visited = new Set();
+  const faces = [];
+  for (let i = 0; i < hedges.length; i++) {
+    if (visited.has(i) || nxt[i] < 0) continue;
+    const cycle = [];
+    let cur = i;
+    let safe = 0;
+    while (!visited.has(cur) && nxt[cur] >= 0 && safe < 500) {
+      visited.add(cur);
+      cycle.push(cur);
+      cur = nxt[cur];
+      safe++;
+    }
+    if (cycle.length >= 3 && cur === i) {
+      const poly = cycle.map(ci => ({ ...verts[hedges[ci].from] }));
+      const wids = [...new Set(cycle.map(ci => hedges[ci].wallId))];
+      // Signed area: positive = CCW = interior face in our Y-up coordinate system
+      let area = 0;
+      for (let j = 0; j < poly.length; j++) {
+        const p1 = poly[j], p2 = poly[(j + 1) % poly.length];
+        area += p1.x * p2.y - p2.x * p1.y;
+      }
+      area /= 2;
+      if (area > 0.1) {
+        faces.push({ polygon: poly, wallIds: wids, area });
+      }
+    }
+  }
+
+  faces.sort((a, b) => a.area - b.area);
+
+  // Preserve user-given names across re-detection by matching wall ID sets
+  const oldNames = new Map();
+  for (const s of detectedSpaces) {
+    oldNames.set(s.wallIds.slice().sort().join(','), s.name);
+  }
+
+  detectedSpaces = faces.map((f, i) => {
+    const key = f.wallIds.slice().sort().join(',');
+    return {
+      id: 'space-' + i,
+      name: oldNames.get(key) || 'Space ' + (i + 1),
+      polygon: f.polygon,
+      wallIds: f.wallIds,
+      area: f.area
+    };
+  });
+}
+
+// ============================================================================
+// Undo / Redo
+// ============================================================================
+
+function saveState() {
+  undoStack.push(JSON.stringify(elements));
+  redoStack = [];
+  if (undoStack.length > 100) undoStack.shift();
+}
+
+function undo() {
+  if (undoStack.length === 0) return;
+  redoStack.push(JSON.stringify(elements));
+  elements = JSON.parse(undoStack.pop());
+  selectedId = null;
+  refreshAll();
+}
+
+function redo() {
+  if (redoStack.length === 0) return;
+  undoStack.push(JSON.stringify(elements));
+  elements = JSON.parse(redoStack.pop());
+  selectedId = null;
+  refreshAll();
+}
+
+// ============================================================================
+// Canvas Setup
+// ============================================================================
+
+function resizeCanvas() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  dpr = window.devicePixelRatio || 1;
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  canvas.style.width = rect.width + 'px';
+  canvas.style.height = rect.height + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function worldToScreen(wx, wy) {
+  const rect = canvas.getBoundingClientRect();
+  const cx = rect.width / 2;
+  const cy = rect.height / 2;
+  return {
+    x: cx + (wx - viewX) * zoom,
+    y: cy - (wy - viewY) * zoom  // flip Y: world Y+ is up, screen Y+ is down
+  };
+}
+
+function screenToWorld(sx, sy) {
+  const rect = canvas.getBoundingClientRect();
+  const cx = rect.width / 2;
+  const cy = rect.height / 2;
+  return {
+    x: viewX + (sx - cx) / zoom,
+    y: viewY - (sy - cy) / zoom
+  };
+}
+
+function snapToGrid(val) {
+  if (!snapEnabled) return val;
+  return Math.round(val / SNAP_SIZE) * SNAP_SIZE;
+}
+
+function snapPoint(p) {
+  return { x: snapToGrid(p.x), y: snapToGrid(p.y) };
+}
+
+// ============================================================================
+// Drawing
+// ============================================================================
+
+function draw() {
+  resizeCanvas();
+  const w = canvas.getBoundingClientRect().width;
+  const h = canvas.getBoundingClientRect().height;
+
+  // Background
+  ctx.fillStyle = '#15151f';
+  ctx.fillRect(0, 0, w, h);
+
+  // Grid
+  if (showGrid) drawGrid(w, h);
+
+  // Draw spaces (below everything)
+  detectedSpaces.forEach(s => {
+    // During perp drag, use cached polygon for the dragged space
+    if (perpDragMode && perpDragPolygon && selectedId === s.id) {
+      drawSpace({ ...s, polygon: perpDragPolygon });
+    } else {
+      drawSpace(s);
+    }
+  });
+
+  // Draw slabs (below everything)
+  elements.filter(e => e.type === 'Slab').forEach(e => drawSlab(e));
+
+  // Draw walls
+  elements.filter(e => e.type === 'Wall').forEach(e => drawWall(e));
+
+  // Draw openings (doors, windows)
+  elements.filter(e => e.type === 'Door' || e.type === 'Window').forEach(e => drawOpening(e));
+
+  // Draw columns
+  elements.filter(e => e.type === 'Column').forEach(e => drawColumn(e));
+
+  // Ghost preview
+  drawGhost(w, h);
+
+  // Selection highlight (spaces are drawn in drawSpace, elements here)
+  if (selectedId && !selectedId.startsWith('space-')) {
+    const sel = elements.find(e => e.id === selectedId);
+    if (sel) drawSelectionHighlight(sel);
+  }
+
+  requestAnimationFrame(draw);
+}
+
+function drawGrid(w, h) {
+  const topLeft = screenToWorld(0, 0);
+  const bottomRight = screenToWorld(w, h);
+
+  // Determine grid spacing based on zoom
+  let gridStep = 1; // 1 meter
+  if (zoom < 20) gridStep = 5;
+  if (zoom < 8) gridStep = 10;
+  if (zoom > 100) gridStep = 0.5;
+  if (zoom > 200) gridStep = 0.25;
+
+  const minX = Math.floor(Math.min(topLeft.x, bottomRight.x) / gridStep) * gridStep;
+  const maxX = Math.ceil(Math.max(topLeft.x, bottomRight.x) / gridStep) * gridStep;
+  const minY = Math.floor(Math.min(topLeft.y, bottomRight.y) / gridStep) * gridStep;
+  const maxY = Math.ceil(Math.max(topLeft.y, bottomRight.y) / gridStep) * gridStep;
+
+  ctx.lineWidth = 1;
+
+  for (let x = minX; x <= maxX; x += gridStep) {
+    const isMajor = Math.abs(x % (gridStep * 5)) < 0.001 || Math.abs(x) < 0.001;
+    ctx.strokeStyle = Math.abs(x) < 0.001 ? 'rgba(137,180,250,0.3)' : (isMajor ? 'var(--grid-major)' : 'var(--grid-color)');
+    ctx.strokeStyle = Math.abs(x) < 0.001 ? 'rgba(137,180,250,0.3)' : (isMajor ? 'rgba(100,100,140,0.3)' : 'rgba(100,100,140,0.12)');
+    const s = worldToScreen(x, 0);
+    ctx.beginPath();
+    ctx.moveTo(s.x, 0);
+    ctx.lineTo(s.x, h);
+    ctx.stroke();
+  }
+
+  for (let y = minY; y <= maxY; y += gridStep) {
+    const isMajor = Math.abs(y % (gridStep * 5)) < 0.001 || Math.abs(y) < 0.001;
+    ctx.strokeStyle = Math.abs(y) < 0.001 ? 'rgba(137,180,250,0.3)' : (isMajor ? 'rgba(100,100,140,0.3)' : 'rgba(100,100,140,0.12)');
+    const s = worldToScreen(0, y);
+    ctx.beginPath();
+    ctx.moveTo(0, s.y);
+    ctx.lineTo(w, s.y);
+    ctx.stroke();
+  }
+
+  // Origin marker
+  const o = worldToScreen(0, 0);
+  ctx.fillStyle = 'rgba(137,180,250,0.5)';
+  ctx.beginPath();
+  ctx.arc(o.x, o.y, 4, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawWall(wall) {
+  const f = worldToScreen(wall.from.x, wall.from.y);
+  const t = worldToScreen(wall.to.x, wall.to.y);
+  const thickPx = wall.thickness * zoom;
+  const angle = Math.atan2(t.y - f.y, t.x - f.x);
+  const nx = Math.sin(angle) * thickPx / 2;
+  const ny = -Math.cos(angle) * thickPx / 2;
+
+  const isHovered = hoveredId === wall.id;
+  const isSelected = selectedId === wall.id;
+
+  // Wall body
+  ctx.fillStyle = isHovered ? '#d5cfc5' : '#c8c0b8';
+  ctx.strokeStyle = isSelected ? '#89b4fa' : '#8a8278';
+  ctx.lineWidth = isSelected ? 2 : 1;
+
+  ctx.beginPath();
+  ctx.moveTo(f.x - nx, f.y - ny);
+  ctx.lineTo(t.x - nx, t.y - ny);
+  ctx.lineTo(t.x + nx, t.y + ny);
+  ctx.lineTo(f.x + nx, f.y + ny);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Wall endpoints
+  ctx.fillStyle = isSelected ? '#89b4fa' : '#8a8278';
+  ctx.beginPath();
+  ctx.arc(f.x, f.y, 3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(t.x, t.y, 3, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Dimension label
+  const len = wallLength(wall);
+  if (zoom > 15) {
+    const mid = { x: (f.x + t.x) / 2, y: (f.y + t.y) / 2 };
+    ctx.save();
+    ctx.translate(mid.x, mid.y);
+    let textAngle = angle;
+    if (textAngle > Math.PI / 2 || textAngle < -Math.PI / 2) textAngle += Math.PI;
+    ctx.rotate(textAngle);
+    ctx.fillStyle = 'rgba(255,255,255,0.7)';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(len.toFixed(2) + 'm', 0, -thickPx / 2 - 4);
+    ctx.restore();
+  }
+
+  // Wall ID label
+  if (zoom > 25) {
+    const mid = { x: (f.x + t.x) / 2, y: (f.y + t.y) / 2 };
+    ctx.fillStyle = 'rgba(200,200,220,0.5)';
+    ctx.font = '9px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(wall.id, mid.x, mid.y + thickPx / 2 + 12);
+  }
+
+  // Anchor indicator
+  if (wall.anchored) {
+    const mid = { x: (f.x + t.x) / 2, y: (f.y + t.y) / 2 };
+    const r = 6;
+    // Diamond shape
+    ctx.fillStyle = '#f38ba8';
+    ctx.beginPath();
+    ctx.moveTo(mid.x, mid.y - r);
+    ctx.lineTo(mid.x + r, mid.y);
+    ctx.lineTo(mid.x, mid.y + r);
+    ctx.lineTo(mid.x - r, mid.y);
+    ctx.closePath();
+    ctx.fill();
+    // "A" label
+    ctx.fillStyle = '#1e1e2e';
+    ctx.font = 'bold 8px monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('A', mid.x, mid.y);
+    ctx.textBaseline = 'alphabetic';
+  }
+}
+
+function drawOpening(elem) {
+  const wall = elements.find(e => e.id === elem.parentWall);
+  if (!wall) return;
+
+  const f = worldToScreen(wall.from.x, wall.from.y);
+  const t = worldToScreen(wall.to.x, wall.to.y);
+  const angle = Math.atan2(t.y - f.y, t.x - f.x);
+  const thickPx = wall.thickness * zoom;
+  const offsetPx = elem.offset * zoom;
+  const widthPx = elem.width * zoom;
+
+  const isHovered = hoveredId === elem.id;
+  const isSelected = selectedId === elem.id;
+
+  ctx.save();
+  ctx.translate(f.x, f.y);
+  ctx.rotate(angle);
+
+  if (elem.type === 'Door') {
+    // Door: gap in wall + swing arc
+    // Clear the wall area
+    ctx.fillStyle = '#15151f';
+    ctx.fillRect(offsetPx, -thickPx / 2 - 1, widthPx, thickPx + 2);
+
+    // Door leaf
+    ctx.strokeStyle = isSelected ? '#89b4fa' : (isHovered ? '#c08040' : '#a06020');
+    ctx.lineWidth = isSelected ? 2.5 : 2;
+    ctx.beginPath();
+    ctx.moveTo(offsetPx, -thickPx / 2);
+    ctx.lineTo(offsetPx, -thickPx / 2 - widthPx * 0.8);
+    ctx.stroke();
+
+    // Swing arc
+    ctx.strokeStyle = isSelected ? 'rgba(137,180,250,0.4)' : 'rgba(160,96,32,0.3)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.arc(offsetPx, -thickPx / 2, widthPx * 0.8, -Math.PI / 2, 0);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // ID label
+    if (zoom > 25) {
+      ctx.fillStyle = 'rgba(200,170,120,0.7)';
+      ctx.font = '9px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(elem.id, offsetPx + widthPx / 2, thickPx / 2 + 12);
+    }
+  } else if (elem.type === 'Window') {
+    // Window: parallel lines in wall
+    ctx.fillStyle = '#15151f';
+    ctx.fillRect(offsetPx, -thickPx / 2 - 1, widthPx, thickPx + 2);
+
+    ctx.strokeStyle = isSelected ? '#89b4fa' : (isHovered ? '#77aaee' : '#5588cc');
+    ctx.lineWidth = isSelected ? 2.5 : 2;
+
+    // Double line for glass
+    const gap = thickPx * 0.15;
+    ctx.beginPath();
+    ctx.moveTo(offsetPx, -gap);
+    ctx.lineTo(offsetPx + widthPx, -gap);
+    ctx.moveTo(offsetPx, gap);
+    ctx.lineTo(offsetPx + widthPx, gap);
+    ctx.stroke();
+
+    // Cross pattern
+    ctx.strokeStyle = isSelected ? 'rgba(137,180,250,0.3)' : 'rgba(85,136,204,0.3)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(offsetPx + widthPx / 2, -thickPx / 2);
+    ctx.lineTo(offsetPx + widthPx / 2, thickPx / 2);
+    ctx.stroke();
+
+    // ID label
+    if (zoom > 25) {
+      ctx.fillStyle = 'rgba(120,170,220,0.7)';
+      ctx.font = '9px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(elem.id, offsetPx + widthPx / 2, thickPx / 2 + 12);
+    }
+  }
+
+  ctx.restore();
+}
+
+function drawColumn(col) {
+  const s = worldToScreen(col.x, col.y);
+  const hw = (col.profileW / 2) * zoom;
+  const hd = (col.profileD / 2) * zoom;
+
+  const isHovered = hoveredId === col.id;
+  const isSelected = selectedId === col.id;
+
+  ctx.fillStyle = isHovered ? '#999' : '#888886';
+  ctx.strokeStyle = isSelected ? '#89b4fa' : '#666';
+  ctx.lineWidth = isSelected ? 2 : 1;
+
+  ctx.fillRect(s.x - hw, s.y - hd, hw * 2, hd * 2);
+  ctx.strokeRect(s.x - hw, s.y - hd, hw * 2, hd * 2);
+
+  // Cross marker
+  ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(s.x - hw, s.y - hd);
+  ctx.lineTo(s.x + hw, s.y + hd);
+  ctx.moveTo(s.x + hw, s.y - hd);
+  ctx.lineTo(s.x - hw, s.y + hd);
+  ctx.stroke();
+
+  // ID label
+  if (zoom > 25) {
+    ctx.fillStyle = 'rgba(180,180,180,0.6)';
+    ctx.font = '9px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(col.id, s.x, s.y + hd + 12);
+  }
+}
+
+function drawSlab(slab) {
+  if (slab.boundary.length < 3) return;
+
+  const isHovered = hoveredId === slab.id;
+  const isSelected = selectedId === slab.id;
+
+  ctx.fillStyle = isHovered ? 'rgba(220,220,215,0.15)' : 'rgba(208,208,206,0.1)';
+  ctx.strokeStyle = isSelected ? '#89b4fa' : 'rgba(208,208,206,0.4)';
+  ctx.lineWidth = isSelected ? 2 : 1;
+  ctx.setLineDash(isSelected ? [] : [4, 4]);
+
+  ctx.beginPath();
+  const first = worldToScreen(slab.boundary[0].x, slab.boundary[0].y);
+  ctx.moveTo(first.x, first.y);
+  for (let i = 1; i < slab.boundary.length; i++) {
+    const p = worldToScreen(slab.boundary[i].x, slab.boundary[i].y);
+    ctx.lineTo(p.x, p.y);
+  }
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // ID label
+  if (zoom > 15) {
+    let cx = 0, cy = 0;
+    for (const p of slab.boundary) { cx += p.x; cy += p.y; }
+    cx /= slab.boundary.length;
+    cy /= slab.boundary.length;
+    const s = worldToScreen(cx, cy);
+    ctx.fillStyle = 'rgba(200,200,200,0.5)';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(slab.id, s.x, s.y);
+  }
+}
+
+function drawSpace(space) {
+  if (space.polygon.length < 3) return;
+  const isHovered = hoveredId === space.id;
+  const isSelected = selectedId === space.id;
+
+  ctx.fillStyle = isSelected ? 'rgba(137,180,250,0.15)' :
+                  isHovered ? 'rgba(137,180,250,0.10)' :
+                              'rgba(137,180,250,0.05)';
+  ctx.beginPath();
+  const first = worldToScreen(space.polygon[0].x, space.polygon[0].y);
+  ctx.moveTo(first.x, first.y);
+  for (let i = 1; i < space.polygon.length; i++) {
+    const p = worldToScreen(space.polygon[i].x, space.polygon[i].y);
+    ctx.lineTo(p.x, p.y);
+  }
+  ctx.closePath();
+  ctx.fill();
+
+  if (isSelected) {
+    ctx.strokeStyle = '#89b4fa';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Space label at centroid
+  if (zoom > 10) {
+    let cx = 0, cy = 0;
+    for (const p of space.polygon) { cx += p.x; cy += p.y; }
+    cx /= space.polygon.length;
+    cy /= space.polygon.length;
+    const s = worldToScreen(cx, cy);
+    ctx.fillStyle = isSelected ? 'rgba(137,180,250,0.8)' : 'rgba(137,180,250,0.4)';
+    ctx.font = '11px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(space.name, s.x, s.y);
+    if (zoom > 20) {
+      ctx.fillStyle = isSelected ? 'rgba(137,180,250,0.6)' : 'rgba(137,180,250,0.3)';
+      ctx.font = '9px monospace';
+      ctx.fillText(space.area.toFixed(1) + ' m\u00B2', s.x, s.y + 14);
+    }
+  }
+}
+
+function drawSelectionHighlight(elem) {
+  ctx.setLineDash([4, 4]);
+  ctx.strokeStyle = '#89b4fa';
+  ctx.lineWidth = 1;
+
+  if (elem.type === 'Wall') {
+    const f = worldToScreen(elem.from.x, elem.from.y);
+    const t = worldToScreen(elem.to.x, elem.to.y);
+    const pad = 8;
+    const angle = Math.atan2(t.y - f.y, t.x - f.x);
+    const nx = Math.sin(angle) * (elem.thickness * zoom / 2 + pad);
+    const ny = -Math.cos(angle) * (elem.thickness * zoom / 2 + pad);
+
+    ctx.beginPath();
+    ctx.moveTo(f.x - nx, f.y - ny);
+    ctx.lineTo(t.x - nx, t.y - ny);
+    ctx.lineTo(t.x + nx, t.y + ny);
+    ctx.lineTo(f.x + nx, f.y + ny);
+    ctx.closePath();
+    ctx.stroke();
+  } else if (elem.type === 'Column') {
+    const s = worldToScreen(elem.x, elem.y);
+    const hw = (elem.profileW / 2) * zoom + 6;
+    const hd = (elem.profileD / 2) * zoom + 6;
+    ctx.strokeRect(s.x - hw, s.y - hd, hw * 2, hd * 2);
+  } else if (elem.type === 'Slab' && elem.boundary.length >= 3) {
+    ctx.beginPath();
+    const first = worldToScreen(elem.boundary[0].x, elem.boundary[0].y);
+    ctx.moveTo(first.x, first.y);
+    for (let i = 1; i < elem.boundary.length; i++) {
+      const p = worldToScreen(elem.boundary[i].x, elem.boundary[i].y);
+      ctx.lineTo(p.x, p.y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+  ctx.setLineDash([]);
+}
+
+function drawGhost() {
+  if (!ghostPos) return;
+
+  if (currentTool === 'wall' && wallStart) {
+    // Draw wall preview
+    const f = worldToScreen(wallStart.x, wallStart.y);
+    const t = worldToScreen(ghostPos.x, ghostPos.y);
+    ctx.strokeStyle = 'rgba(137,180,250,0.6)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    ctx.moveTo(f.x, f.y);
+    ctx.lineTo(t.x, t.y);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Preview length
+    const dx = ghostPos.x - wallStart.x;
+    const dy = ghostPos.y - wallStart.y;
+    const len = Math.sqrt(dx * dx + dy * dy);
+    if (len > 0.01) {
+      const mid = { x: (f.x + t.x) / 2, y: (f.y + t.y) / 2 };
+      ctx.fillStyle = 'rgba(137,180,250,0.8)';
+      ctx.font = '11px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(len.toFixed(2) + 'm', mid.x, mid.y - 10);
+    }
+
+    // Snap indicator dot at start
+    ctx.fillStyle = '#89b4fa';
+    ctx.beginPath();
+    ctx.arc(f.x, f.y, 4, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  if (currentTool === 'slab' && slabPoints.length > 0) {
+    ctx.strokeStyle = 'rgba(208,208,206,0.6)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    const first = worldToScreen(slabPoints[0].x, slabPoints[0].y);
+    ctx.moveTo(first.x, first.y);
+    for (let i = 1; i < slabPoints.length; i++) {
+      const p = worldToScreen(slabPoints[i].x, slabPoints[i].y);
+      ctx.lineTo(p.x, p.y);
+    }
+    const g = worldToScreen(ghostPos.x, ghostPos.y);
+    ctx.lineTo(g.x, g.y);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Point markers
+    for (const p of slabPoints) {
+      const s = worldToScreen(p.x, p.y);
+      ctx.fillStyle = 'rgba(208,208,206,0.8)';
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Crosshair
+  if (currentTool !== 'select') {
+    const g = worldToScreen(ghostPos.x, ghostPos.y);
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(g.x - 10, g.y);
+    ctx.lineTo(g.x + 10, g.y);
+    ctx.moveTo(g.x, g.y - 10);
+    ctx.lineTo(g.x, g.y + 10);
+    ctx.stroke();
+
+    // Snap dot
+    if (snapEnabled) {
+      ctx.fillStyle = '#f5c211';
+      ctx.beginPath();
+      ctx.arc(g.x, g.y, 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+// ============================================================================
+// Hit Testing
+// ============================================================================
+
+function hitTest(worldPt) {
+  // Test by type in specificity order: small/precise elements first, large area elements last.
+  // Within each type, reverse array order is preserved (last-added wins among same type).
+
+  // 1. Openings (doors/windows) — smallest, most specific
+  for (let i = elements.length - 1; i >= 0; i--) {
+    const e = elements[i];
+    if ((e.type === 'Door' || e.type === 'Window') && hitTestElement(e, worldPt)) return e.id;
+  }
+  // 2. Columns — point elements
+  for (let i = elements.length - 1; i >= 0; i--) {
+    const e = elements[i];
+    if (e.type === 'Column' && hitTestElement(e, worldPt)) return e.id;
+  }
+  // 3. Walls — line elements, should beat area elements
+  for (let i = elements.length - 1; i >= 0; i--) {
+    const e = elements[i];
+    if (e.type === 'Wall' && hitTestElement(e, worldPt)) return e.id;
+  }
+  // 4. Spaces — detected regions, beat slabs
+  for (const space of detectedSpaces) {
+    if (pointInPolygon(worldPt, space.polygon)) return space.id;
+  }
+  // 5. Slabs — largest area elements, lowest priority
+  for (let i = elements.length - 1; i >= 0; i--) {
+    const e = elements[i];
+    if (e.type === 'Slab' && hitTestElement(e, worldPt)) return e.id;
+  }
+  return null;
+}
+
+function hitTestElement(e, p) {
+  if (e.type === 'Wall') return hitTestWall(e, p);
+  if (e.type === 'Column') return hitTestColumn(e, p);
+  if (e.type === 'Door' || e.type === 'Window') return hitTestOpening(e, p);
+  if (e.type === 'Slab') return hitTestSlab(e, p);
+  return false;
+}
+
+function hitTestWall(wall, p) {
+  // Distance from point to line segment
+  const fx = wall.from.x, fy = wall.from.y;
+  const tx = wall.to.x, ty = wall.to.y;
+  const dx = tx - fx, dy = ty - fy;
+  const len2 = dx * dx + dy * dy;
+  if (len2 < 0.0001) return false;
+  let t = ((p.x - fx) * dx + (p.y - fy) * dy) / len2;
+  t = Math.max(0, Math.min(1, t));
+  const closestX = fx + t * dx;
+  const closestY = fy + t * dy;
+  const dist = Math.sqrt((p.x - closestX) ** 2 + (p.y - closestY) ** 2);
+  return dist < wall.thickness / 2 + 0.1;
+}
+
+function hitTestColumn(col, p) {
+  const hw = col.profileW / 2 + 0.05;
+  const hd = col.profileD / 2 + 0.05;
+  return Math.abs(p.x - col.x) < hw && Math.abs(p.y - col.y) < hd;
+}
+
+function hitTestOpening(elem, p) {
+  const wall = elements.find(e => e.id === elem.parentWall);
+  if (!wall) return false;
+
+  // Transform point into wall-local coordinates
+  const fx = wall.from.x, fy = wall.from.y;
+  const angle = wallAngle(wall);
+  const cos = Math.cos(-angle), sin = Math.sin(-angle);
+  const lx = (p.x - fx) * cos - (p.y - fy) * sin;
+  const ly = (p.x - fx) * sin + (p.y - fy) * cos;
+
+  return lx >= elem.offset - 0.1 && lx <= elem.offset + elem.width + 0.1 &&
+         Math.abs(ly) < wall.thickness / 2 + 0.15;
+}
+
+function hitTestSlab(slab, p) {
+  if (slab.boundary.length < 3) return false;
+  // Point-in-polygon (ray casting)
+  let inside = false;
+  for (let i = 0, j = slab.boundary.length - 1; i < slab.boundary.length; j = i++) {
+    const xi = slab.boundary[i].x, yi = slab.boundary[i].y;
+    const xj = slab.boundary[j].x, yj = slab.boundary[j].y;
+    if (((yi > p.y) !== (yj > p.y)) && (p.x < (xj - xi) * (p.y - yi) / (yj - yi) + xi)) {
+      inside = !inside;
+    }
+  }
+  return inside;
+}
+
+// Setup drag state for space movement
+function setupSpaceDrag(spaceId) {
+  const idx = parseInt(spaceId.split('-')[1]);
+  const space = detectedSpaces[idx];
+  if (!space) return;
+
+  dragSpaceEndpoints = [];
+  dragSpaceColumns = [];
+  dragSpaceSlabVerts = [];
+
+  // Find all wall endpoints that sit on the space boundary vertices
+  for (const wall of elements.filter(e => e.type === 'Wall')) {
+    let fromMatch = false, toMatch = false;
+    for (const sv of space.polygon) {
+      if (Math.abs(wall.from.x - sv.x) < CONNECT_TOL && Math.abs(wall.from.y - sv.y) < CONNECT_TOL) {
+        fromMatch = true;
+      }
+      if (Math.abs(wall.to.x - sv.x) < CONNECT_TOL && Math.abs(wall.to.y - sv.y) < CONNECT_TOL) {
+        toMatch = true;
+      }
+    }
+    if (fromMatch) dragSpaceEndpoints.push({ wallId: wall.id, end: 'from' });
+    if (toMatch) dragSpaceEndpoints.push({ wallId: wall.id, end: 'to' });
+  }
+
+  // Find columns inside the space
+  for (const col of elements.filter(e => e.type === 'Column')) {
+    if (pointInPolygon(col, space.polygon)) {
+      dragSpaceColumns.push(col.id);
+    }
+  }
+
+  // Find slab vertices that coincide with space vertices
+  for (const slab of elements.filter(e => e.type === 'Slab')) {
+    for (let vi = 0; vi < slab.boundary.length; vi++) {
+      const sv = slab.boundary[vi];
+      for (const pv of space.polygon) {
+        if (Math.abs(sv.x - pv.x) < CONNECT_TOL && Math.abs(sv.y - pv.y) < CONNECT_TOL) {
+          dragSpaceSlabVerts.push({ slabId: slab.id, vertexIdx: vi });
+          break;
+        }
+      }
+    }
+  }
+}
+
+// Classify walls of a space as shared (in 2+ spaces) or exclusive
+function identifySharedWalls(spaceId) {
+  const idx = parseInt(spaceId.split('-')[1]);
+  const space = detectedSpaces[idx];
+  if (!space) return { shared: [], exclusive: [] };
+
+  const shared = [];
+  const exclusive = [];
+  for (const wallId of space.wallIds) {
+    const isShared = detectedSpaces.some((s, si) => si !== idx && s.wallIds.includes(wallId));
+    const wall = elements.find(e => e.id === wallId);
+    const isAnchored = wall && wall.anchored;
+    if (isShared || isAnchored) {
+      shared.push(wallId);
+    } else {
+      exclusive.push(wallId);
+    }
+  }
+  return { shared, exclusive };
+}
+
+// Setup perpendicular (independent) space drag
+function setupPerpSpaceDrag(spaceId) {
+  const idx = parseInt(spaceId.split('-')[1]);
+  const space = detectedSpaces[idx];
+  if (!space) return;
+
+  const { shared, exclusive } = identifySharedWalls(spaceId);
+  perpSharedWallIds = shared;
+  perpExclusiveEndpoints = [];
+
+  // Only add exclusive wall endpoints to the move list
+  for (const wallId of exclusive) {
+    const wall = elements.find(e => e.id === wallId);
+    if (!wall) continue;
+    let fromOnBoundary = false, toOnBoundary = false;
+    for (const sv of space.polygon) {
+      if (Math.abs(wall.from.x - sv.x) < CONNECT_TOL && Math.abs(wall.from.y - sv.y) < CONNECT_TOL) fromOnBoundary = true;
+      if (Math.abs(wall.to.x - sv.x) < CONNECT_TOL && Math.abs(wall.to.y - sv.y) < CONNECT_TOL) toOnBoundary = true;
+    }
+    if (fromOnBoundary) perpExclusiveEndpoints.push({ wallId, end: 'from' });
+    if (toOnBoundary) perpExclusiveEndpoints.push({ wallId, end: 'to' });
+  }
+
+  // Setup columns and slab verts using same logic as setupSpaceDrag
+  dragSpaceColumns = [];
+  dragSpaceSlabVerts = [];
+  for (const col of elements.filter(e => e.type === 'Column')) {
+    if (pointInPolygon(col, space.polygon)) dragSpaceColumns.push(col.id);
+  }
+  for (const slab of elements.filter(e => e.type === 'Slab')) {
+    for (let vi = 0; vi < slab.boundary.length; vi++) {
+      const sv = slab.boundary[vi];
+      for (const pv of space.polygon) {
+        if (Math.abs(sv.x - pv.x) < CONNECT_TOL && Math.abs(sv.y - pv.y) < CONNECT_TOL) {
+          dragSpaceSlabVerts.push({ slabId: slab.id, vertexIdx: vi });
+          break;
+        }
+      }
+    }
+  }
+
+  // Cache space polygon for rendering
+  perpDragPolygon = space.polygon.map(p => ({ x: p.x, y: p.y }));
+}
+
+// Create replacement walls for shared/anchored walls that stay in place
+function createReplacementWalls(spaceId) {
+  const idx = parseInt(spaceId.split('-')[1]);
+  const space = detectedSpaces[idx];
+  if (!space) return;
+
+  perpReplacementWalls = [];
+  for (const wallId of perpSharedWallIds) {
+    const orig = elements.find(e => e.id === wallId);
+    if (!orig) continue;
+    const copy = createWall(
+      { x: orig.from.x, y: orig.from.y },
+      { x: orig.to.x, y: orig.to.y }
+    );
+    copy.height = orig.height;
+    copy.thickness = orig.thickness;
+    elements.push(copy);
+    perpReplacementWalls.push(copy.id);
+    // Add both endpoints of replacement wall to exclusive endpoints
+    perpExclusiveEndpoints.push({ wallId: copy.id, end: 'from' });
+    perpExclusiveEndpoints.push({ wallId: copy.id, end: 'to' });
+  }
+}
+
+// Check if a space has any anchored walls
+function spaceHasAnchoredWalls(spaceId) {
+  const idx = parseInt(spaceId.split('-')[1]);
+  const space = detectedSpaces[idx];
+  if (!space) return false;
+  return space.wallIds.some(wid => {
+    const w = elements.find(e => e.id === wid);
+    return w && w.anchored;
+  });
+}
+
+// Find wall endpoints connected to a given wall (for anchored wall drag)
+function findConnectedEndpoints(wall) {
+  const connections = [];
+  for (const other of elements.filter(e => e.type === 'Wall' && e.id !== wall.id)) {
+    // Check connections at wall.from
+    if (Math.abs(other.from.x - wall.from.x) < CONNECT_TOL && Math.abs(other.from.y - wall.from.y) < CONNECT_TOL) {
+      connections.push({ wallId: other.id, end: 'from' });
+    }
+    if (Math.abs(other.to.x - wall.from.x) < CONNECT_TOL && Math.abs(other.to.y - wall.from.y) < CONNECT_TOL) {
+      connections.push({ wallId: other.id, end: 'to' });
+    }
+    // Check connections at wall.to
+    if (Math.abs(other.from.x - wall.to.x) < CONNECT_TOL && Math.abs(other.from.y - wall.to.y) < CONNECT_TOL) {
+      connections.push({ wallId: other.id, end: 'from' });
+    }
+    if (Math.abs(other.to.x - wall.to.x) < CONNECT_TOL && Math.abs(other.to.y - wall.to.y) < CONNECT_TOL) {
+      connections.push({ wallId: other.id, end: 'to' });
+    }
+  }
+  return connections;
+}
+
+// Find closest wall and offset along it
+function findWallAtPoint(worldPt) {
+  let bestWall = null;
+  let bestDist = Infinity;
+  let bestOffset = 0;
+
+  for (const e of elements) {
+    if (e.type !== 'Wall') continue;
+    const fx = e.from.x, fy = e.from.y;
+    const tx = e.to.x, ty = e.to.y;
+    const dx = tx - fx, dy = ty - fy;
+    const len2 = dx * dx + dy * dy;
+    if (len2 < 0.001) continue;
+    let t = ((worldPt.x - fx) * dx + (worldPt.y - fy) * dy) / len2;
+    t = Math.max(0, Math.min(1, t));
+    const cx = fx + t * dx, cy = fy + t * dy;
+    const dist = Math.sqrt((worldPt.x - cx) ** 2 + (worldPt.y - cy) ** 2);
+    if (dist < bestDist) {
+      bestDist = dist;
+      bestWall = e;
+      bestOffset = t * Math.sqrt(len2);
+    }
+  }
+
+  if (bestDist > 0.5) return null;
+  return { wall: bestWall, offset: bestOffset };
+}
+
+// ============================================================================
+// Tool Handlers
+// ============================================================================
+
+canvas.addEventListener('mousedown', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const sx = e.clientX - rect.left;
+  const sy = e.clientY - rect.top;
+  const world = screenToWorld(sx, sy);
+  const snapped = snapPoint(world);
+
+  hideContextMenu();
+
+  // Right click = context menu
+  if (e.button === 2) {
+    e.preventDefault();
+    const id = hitTest(world);
+    if (id) {
+      selectedId = id;
+      showContextMenu(e.clientX, e.clientY);
+      refreshAll();
+    }
+    return;
+  }
+
+  // Middle button or shift = pan
+  if (e.button === 1 || (e.button === 0 && e.shiftKey)) {
+    isPanning = true;
+    dragStart = { x: e.clientX, y: e.clientY };
+    e.preventDefault();
+    return;
+  }
+
+  if (e.button !== 0) return;
+
+  if (currentTool === 'select') {
+    const id = hitTest(world);
+    selectedId = id; // Immediate selection on mousedown
+
+    if (id) {
+      dragStart = { x: e.clientX, y: e.clientY };
+      dragStartWorld = { ...world };
+      dragSaveStateDone = false;
+      if (id.startsWith('space-')) {
+        if (e.altKey || spaceHasAnchoredWalls(id)) {
+          perpDragMode = true;
+          setupPerpSpaceDrag(id);
+        } else {
+          setupSpaceDrag(id);
+        }
+      }
+    }
+    refreshAll();
+  } else if (currentTool === 'wall') {
+    if (!wallStart) {
+      wallStart = { ...snapped };
+    } else {
+      if (Math.abs(snapped.x - wallStart.x) > 0.01 || Math.abs(snapped.y - wallStart.y) > 0.01) {
+        saveState();
+        const wall = createWall(wallStart, snapped);
+        elements.push(wall);
+        wallStart = { ...snapped }; // Chain walls
+        refreshAll();
+      }
+    }
+  } else if (currentTool === 'door') {
+    const hit = findWallAtPoint(world);
+    if (hit) {
+      saveState();
+      const door = createDoor(hit.wall.id, Math.max(0, snapToGrid(hit.offset - 0.45)));
+      elements.push(door);
+      refreshAll();
+    }
+  } else if (currentTool === 'window') {
+    const hit = findWallAtPoint(world);
+    if (hit) {
+      saveState();
+      const win = createWindow(hit.wall.id, Math.max(0, snapToGrid(hit.offset - 0.6)));
+      elements.push(win);
+      refreshAll();
+    }
+  } else if (currentTool === 'column') {
+    saveState();
+    const col = createColumn(snapped);
+    elements.push(col);
+    refreshAll();
+  } else if (currentTool === 'slab') {
+    // Close polygon if clicking near first point
+    if (slabPoints.length >= 3) {
+      const d = Math.sqrt((snapped.x - slabPoints[0].x) ** 2 + (snapped.y - slabPoints[0].y) ** 2);
+      if (d < 0.3) {
+        saveState();
+        const slab = createSlab(slabPoints);
+        elements.push(slab);
+        slabPoints = [];
+        refreshAll();
+        return;
+      }
+    }
+    slabPoints.push({ ...snapped });
+  }
+});
+
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const sx = e.clientX - rect.left;
+  const sy = e.clientY - rect.top;
+  const world = screenToWorld(sx, sy);
+  const snapped = snapPoint(world);
+
+  rawMouseWorld = world;
+  ghostPos = snapped;
+
+  // Update coordinates display
+  document.getElementById('coords-display').textContent =
+    `${snapped.x.toFixed(2)}, ${snapped.y.toFixed(2)}`;
+
+  // Show snap indicator
+  document.getElementById('snap-indicator').style.display =
+    (snapEnabled && currentTool !== 'select') ? 'block' : 'none';
+
+  if (isPanning && dragStart) {
+    const dx = (e.clientX - dragStart.x) / zoom;
+    const dy = -(e.clientY - dragStart.y) / zoom;
+    viewX -= dx;
+    viewY -= dy;
+    dragStart = { x: e.clientX, y: e.clientY };
+    return;
+  }
+
+  // Start drag once 3px threshold exceeded (prevents accidental drags on click)
+  if (!isDragging && selectedId && dragStart && dragStartWorld) {
+    const dist = Math.sqrt((e.clientX - dragStart.x) ** 2 + (e.clientY - dragStart.y) ** 2);
+    if (dist >= 3) {
+      isDragging = true;
+      if (!dragSaveStateDone) {
+        saveState(); // Capture pre-drag state for undo
+        dragSaveStateDone = true;
+        if (perpDragMode && selectedId && selectedId.startsWith('space-')) {
+          createReplacementWalls(selectedId);
+        }
+        // Setup anchored wall connections when starting to drag an anchored wall
+        if (selectedId && !selectedId.startsWith('space-')) {
+          const sel = elements.find(el => el.id === selectedId);
+          if (sel && sel.type === 'Wall' && sel.anchored) {
+            anchoredWallConnections = findConnectedEndpoints(sel);
+          }
+        }
+      }
+    }
+  }
+
+  if (isDragging && selectedId && dragStartWorld) {
+    const dx = snapped.x - snapToGrid(dragStartWorld.x);
+    const dy = snapped.y - snapToGrid(dragStartWorld.y);
+    if (Math.abs(dx) < 0.001 && Math.abs(dy) < 0.001) return;
+
+    if (selectedId.startsWith('space-') && perpDragMode) {
+      // Independent drag: move only exclusive + replacement wall endpoints
+      for (const ep of perpExclusiveEndpoints) {
+        const wall = elements.find(e => e.id === ep.wallId);
+        if (wall) { wall[ep.end].x += dx; wall[ep.end].y += dy; }
+      }
+      for (const colId of dragSpaceColumns) {
+        const col = elements.find(e => e.id === colId);
+        if (col) { col.x += dx; col.y += dy; }
+      }
+      for (const sv of dragSpaceSlabVerts) {
+        const slab = elements.find(e => e.id === sv.slabId);
+        if (slab) { slab.boundary[sv.vertexIdx].x += dx; slab.boundary[sv.vertexIdx].y += dy; }
+      }
+      // Translate cached polygon directly (skip detectSpaces during drag)
+      if (perpDragPolygon) {
+        for (const p of perpDragPolygon) { p.x += dx; p.y += dy; }
+      }
+      dragStartWorld = { ...snapped };
+      generateBml();
+      return;
+    }
+
+    if (selectedId.startsWith('space-')) {
+      // Smart space dragging: move all connected wall endpoints, columns, and slab vertices
+      for (const ep of dragSpaceEndpoints) {
+        const wall = elements.find(e => e.id === ep.wallId);
+        if (wall) { wall[ep.end].x += dx; wall[ep.end].y += dy; }
+      }
+      for (const colId of dragSpaceColumns) {
+        const col = elements.find(e => e.id === colId);
+        if (col) { col.x += dx; col.y += dy; }
+      }
+      for (const sv of dragSpaceSlabVerts) {
+        const slab = elements.find(e => e.id === sv.slabId);
+        if (slab) { slab.boundary[sv.vertexIdx].x += dx; slab.boundary[sv.vertexIdx].y += dy; }
+      }
+      dragStartWorld = { ...snapped };
+      // Re-detect spaces and keep selection stable by matching wall IDs
+      const prevWallKey = detectedSpaces[parseInt(selectedId.split('-')[1])]?.wallIds.slice().sort().join(',');
+      detectSpaces();
+      if (prevWallKey) {
+        const newIdx = detectedSpaces.findIndex(s => s.wallIds.slice().sort().join(',') === prevWallKey);
+        if (newIdx >= 0) selectedId = 'space-' + newIdx;
+      }
+      generateBml();
+      return;
+    }
+
+    const sel = elements.find(el => el.id === selectedId);
+    if (!sel) return;
+
+    if (sel.type === 'Wall') {
+      sel.from.x += dx; sel.from.y += dy;
+      sel.to.x += dx; sel.to.y += dy;
+      // Extend connected walls when dragging an anchored wall
+      if (sel.anchored) {
+        for (const conn of anchoredWallConnections) {
+          const w = elements.find(e => e.id === conn.wallId);
+          if (w) { w[conn.end].x += dx; w[conn.end].y += dy; }
+        }
+      }
+    } else if (sel.type === 'Column') {
+      sel.x += dx; sel.y += dy;
+    } else if (sel.type === 'Slab') {
+      for (const p of sel.boundary) { p.x += dx; p.y += dy; }
+    }
+    dragStartWorld = { ...snapped };
+    generateBml();
+    return;
+  }
+
+  // Hover detection
+  if (currentTool === 'select') {
+    if (isDragging && perpDragMode) {
+      canvas.style.cursor = 'grabbing';
+    } else {
+      const id = hitTest(world);
+      if (id !== hoveredId) {
+        hoveredId = id;
+        if (id && id.startsWith('space-') && e.altKey) {
+          canvas.style.cursor = 'grab';
+        } else {
+          canvas.style.cursor = id ? (id.startsWith('space-') ? 'move' : 'pointer') : 'default';
+        }
+      }
+    }
+  } else {
+    canvas.style.cursor = 'crosshair';
+    hoveredId = null;
+  }
+});
+
+canvas.addEventListener('mouseup', (e) => {
+  if (isDragging && selectedId) {
+    if (perpDragMode && selectedId.startsWith('space-')) {
+      // Re-detect spaces after perp drag and find the dragged space
+      // by matching wall IDs (replacement + exclusive)
+      const movedWallIds = new Set([
+        ...perpExclusiveEndpoints.map(ep => ep.wallId),
+        ...perpReplacementWalls
+      ]);
+      detectSpaces();
+      // Find the space that contains the most moved walls
+      let bestIdx = -1, bestMatch = 0;
+      for (let i = 0; i < detectedSpaces.length; i++) {
+        const match = detectedSpaces[i].wallIds.filter(wid => movedWallIds.has(wid)).length;
+        if (match > bestMatch) { bestMatch = match; bestIdx = i; }
+      }
+      if (bestIdx >= 0) selectedId = 'space-' + bestIdx;
+    }
+    refreshAll();
+  }
+
+  isDragging = false;
+  isPanning = false;
+  dragStart = null;
+  dragStartWorld = null;
+  dragSaveStateDone = false;
+  dragSpaceEndpoints = [];
+  dragSpaceColumns = [];
+  dragSpaceSlabVerts = [];
+  perpDragMode = false;
+  perpSharedWallIds = [];
+  perpExclusiveEndpoints = [];
+  perpReplacementWalls = [];
+  perpDragPolygon = null;
+  anchoredWallConnections = [];
+});
+
+canvas.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const factor = e.deltaY > 0 ? 0.9 : 1.1;
+  const rect = canvas.getBoundingClientRect();
+  const sx = e.clientX - rect.left;
+  const sy = e.clientY - rect.top;
+  const worldBefore = screenToWorld(sx, sy);
+
+  zoom *= factor;
+  zoom = Math.max(5, Math.min(500, zoom));
+
+  const worldAfter = screenToWorld(sx, sy);
+  viewX += worldBefore.x - worldAfter.x;
+  viewY += worldBefore.y - worldAfter.y;
+
+  document.getElementById('sb-zoom').textContent = Math.round(zoom / 50 * 100) + '%';
+}, { passive: false });
+
+canvas.addEventListener('dblclick', (e) => {
+  if (currentTool === 'wall' && wallStart) {
+    wallStart = null; // End wall chain
+  }
+  if (currentTool === 'slab' && slabPoints.length >= 3) {
+    saveState();
+    const slab = createSlab(slabPoints);
+    elements.push(slab);
+    slabPoints = [];
+    refreshAll();
+  }
+});
+
+canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+
+// ============================================================================
+// Keyboard Shortcuts
+// ============================================================================
+
+function updateAltIndicator(altHeld) {
+  const show = altHeld && selectedId && selectedId.startsWith('space-') && currentTool === 'select';
+  document.getElementById('sb-alt').style.display = show ? '' : 'none';
+  document.getElementById('sb-alt-sep').style.display = show ? '' : 'none';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Alt') updateAltIndicator(true);
+  // Don't intercept when typing in inputs
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+  if (e.key === 'v' || e.key === 'V') setTool('select');
+  else if (e.key === 'w' || e.key === 'W') setTool('wall');
+  else if (e.key === 'd' && !e.ctrlKey && !e.metaKey) setTool('door');
+  else if (e.key === 'n' || e.key === 'N') setTool('window');
+  else if (e.key === 'c' || e.key === 'C') setTool('column');
+  else if (e.key === 's' && !e.ctrlKey && !e.metaKey) setTool('slab');
+  else if (e.key === 'Escape') {
+    wallStart = null;
+    slabPoints = [];
+    selectedId = null;
+    setTool('select');
+    refreshAll();
+  }
+  else if (e.key === 'Delete' || e.key === 'Backspace') deleteSelected();
+  else if ((e.ctrlKey || e.metaKey) && e.key === 'z') { e.preventDefault(); undo(); }
+  else if ((e.ctrlKey || e.metaKey) && e.key === 'y') { e.preventDefault(); redo(); }
+  else if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); saveBml(); }
+  else if ((e.ctrlKey || e.metaKey) && e.key === 'd') { e.preventDefault(); duplicateSelected(); }
+  else if (e.key === 'a' || e.key === 'A') toggleAnchor();
+  else if (e.key === 'g') toggleGrid();
+  else if (e.key === 'x') toggleSnap();
+  else if (e.key === 'f') zoomToFit();
+  else if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key) && selectedId) {
+    e.preventDefault();
+    const step = e.shiftKey ? 1.0 : (snapEnabled ? SNAP_SIZE : 0.1);
+    let dx = 0, dy = 0;
+    if (e.key === 'ArrowRight') dx = step;
+    else if (e.key === 'ArrowLeft') dx = -step;
+    else if (e.key === 'ArrowUp') dy = step;
+    else if (e.key === 'ArrowDown') dy = -step;
+
+    saveState();
+
+    if (selectedId.startsWith('space-') && (e.altKey || spaceHasAnchoredWalls(selectedId))) {
+      // Independent (perpendicular) arrow move
+      setupPerpSpaceDrag(selectedId);
+      createReplacementWalls(selectedId);
+      for (const ep of perpExclusiveEndpoints) {
+        const wall = elements.find(el => el.id === ep.wallId);
+        if (wall) { wall[ep.end].x += dx; wall[ep.end].y += dy; }
+      }
+      for (const colId of dragSpaceColumns) {
+        const col = elements.find(el => el.id === colId);
+        if (col) { col.x += dx; col.y += dy; }
+      }
+      for (const sv of dragSpaceSlabVerts) {
+        const slab = elements.find(el => el.id === sv.slabId);
+        if (slab) { slab.boundary[sv.vertexIdx].x += dx; slab.boundary[sv.vertexIdx].y += dy; }
+      }
+      // Clean up perp state
+      perpDragMode = false;
+      perpSharedWallIds = [];
+      perpExclusiveEndpoints = [];
+      perpReplacementWalls = [];
+      perpDragPolygon = null;
+      dragSpaceColumns = [];
+      dragSpaceSlabVerts = [];
+      detectSpaces();
+      // Selection will be updated by refreshAll below
+    } else if (selectedId.startsWith('space-')) {
+      setupSpaceDrag(selectedId);
+      for (const ep of dragSpaceEndpoints) {
+        const wall = elements.find(el => el.id === ep.wallId);
+        if (wall) { wall[ep.end].x += dx; wall[ep.end].y += dy; }
+      }
+      for (const colId of dragSpaceColumns) {
+        const col = elements.find(el => el.id === colId);
+        if (col) { col.x += dx; col.y += dy; }
+      }
+      for (const sv of dragSpaceSlabVerts) {
+        const slab = elements.find(el => el.id === sv.slabId);
+        if (slab) { slab.boundary[sv.vertexIdx].x += dx; slab.boundary[sv.vertexIdx].y += dy; }
+      }
+      dragSpaceEndpoints = [];
+      dragSpaceColumns = [];
+      dragSpaceSlabVerts = [];
+      const prevWallKey = detectedSpaces[parseInt(selectedId.split('-')[1])]?.wallIds.slice().sort().join(',');
+      detectSpaces();
+      if (prevWallKey) {
+        const newIdx = detectedSpaces.findIndex(s => s.wallIds.slice().sort().join(',') === prevWallKey);
+        if (newIdx >= 0) selectedId = 'space-' + newIdx;
+      }
+    } else {
+      const sel = elements.find(el => el.id === selectedId);
+      if (sel) {
+        if (sel.type === 'Wall') {
+          sel.from.x += dx; sel.from.y += dy;
+          sel.to.x += dx; sel.to.y += dy;
+        } else if (sel.type === 'Column') {
+          sel.x += dx; sel.y += dy;
+        } else if (sel.type === 'Slab') {
+          for (const p of sel.boundary) { p.x += dx; p.y += dy; }
+        }
+      }
+    }
+    generateBml();
+    refreshAll();
+  }
+});
+
+document.addEventListener('keyup', (e) => {
+  if (e.key === 'Alt') updateAltIndicator(false);
+});
+
+// ============================================================================
+// Tool Management
+// ============================================================================
+
+function setTool(tool) {
+  currentTool = tool;
+  wallStart = null;
+  slabPoints = [];
+
+  document.querySelectorAll('.tool-btn[data-tool]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tool === tool);
+  });
+  document.getElementById('sb-tool').textContent = 'Tool: ' + tool.charAt(0).toUpperCase() + tool.slice(1);
+
+  canvas.style.cursor = tool === 'select' ? 'default' : 'crosshair';
+}
+
+document.querySelectorAll('.tool-btn[data-tool]').forEach(btn => {
+  btn.addEventListener('click', () => setTool(btn.dataset.tool));
+});
+
+function toggleGrid() { showGrid = !showGrid; }
+function toggleSnap() {
+  snapEnabled = !snapEnabled;
+  document.getElementById('sb-snap').textContent = snapEnabled ? 'Snap: 0.25m' : 'Snap: Off';
+}
+
+function zoomToFit() {
+  if (elements.length === 0) {
+    viewX = 0; viewY = 0; zoom = 50;
+    return;
+  }
+
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+
+  for (const e of elements) {
+    if (e.type === 'Wall') {
+      minX = Math.min(minX, e.from.x, e.to.x);
+      minY = Math.min(minY, e.from.y, e.to.y);
+      maxX = Math.max(maxX, e.from.x, e.to.x);
+      maxY = Math.max(maxY, e.from.y, e.to.y);
+    } else if (e.type === 'Column') {
+      minX = Math.min(minX, e.x); minY = Math.min(minY, e.y);
+      maxX = Math.max(maxX, e.x); maxY = Math.max(maxY, e.y);
+    } else if (e.type === 'Slab') {
+      for (const p of e.boundary) {
+        minX = Math.min(minX, p.x); minY = Math.min(minY, p.y);
+        maxX = Math.max(maxX, p.x); maxY = Math.max(maxY, p.y);
+      }
+    }
+  }
+
+  if (minX === Infinity) return;
+
+  viewX = (minX + maxX) / 2;
+  viewY = (minY + maxY) / 2;
+
+  const rect = canvas.getBoundingClientRect();
+  const dx = maxX - minX + 2;
+  const dy = maxY - minY + 2;
+  zoom = Math.min(rect.width / dx, rect.height / dy) * 0.8;
+  zoom = Math.max(5, Math.min(500, zoom));
+
+  document.getElementById('sb-zoom').textContent = Math.round(zoom / 50 * 100) + '%';
+}
+
+// ============================================================================
+// Element Operations
+// ============================================================================
+
+function deleteSelected() {
+  if (!selectedId) return;
+  // Spaces are virtual — cannot be directly deleted
+  if (selectedId.startsWith('space-')) return;
+  saveState();
+
+  // If deleting a wall, also remove its children (doors/windows)
+  const sel = elements.find(e => e.id === selectedId);
+  if (sel && sel.type === 'Wall') {
+    elements = elements.filter(e => e.id !== selectedId && e.parentWall !== selectedId);
+  } else {
+    elements = elements.filter(e => e.id !== selectedId);
+  }
+  selectedId = null;
+  refreshAll();
+}
+
+function duplicateSelected() {
+  if (!selectedId || selectedId.startsWith('space-')) return;
+  const sel = elements.find(e => e.id === selectedId);
+  if (!sel) return;
+
+  saveState();
+  const clone = JSON.parse(JSON.stringify(sel));
+  clone.id = genId(clone.type);
+
+  // Offset the clone
+  if (clone.type === 'Wall') {
+    clone.from.x += 0.5; clone.from.y += 0.5;
+    clone.to.x += 0.5; clone.to.y += 0.5;
+  } else if (clone.type === 'Column') {
+    clone.x += 0.5; clone.y += 0.5;
+  } else if (clone.type === 'Slab') {
+    for (const p of clone.boundary) { p.x += 0.5; p.y += 0.5; }
+  }
+
+  elements.push(clone);
+  selectedId = clone.id;
+  refreshAll();
+}
+
+function bringToFront() {
+  if (!selectedId || selectedId.startsWith('space-')) return;
+  const idx = elements.findIndex(e => e.id === selectedId);
+  if (idx < 0) return;
+  const [elem] = elements.splice(idx, 1);
+  elements.push(elem);
+}
+
+function sendToBack() {
+  if (!selectedId || selectedId.startsWith('space-')) return;
+  const idx = elements.findIndex(e => e.id === selectedId);
+  if (idx < 0) return;
+  const [elem] = elements.splice(idx, 1);
+  elements.unshift(elem);
+}
+
+// ============================================================================
+// Context Menu
+// ============================================================================
+
+function toggleAnchor() {
+  if (!selectedId || selectedId.startsWith('space-')) return;
+  const sel = elements.find(e => e.id === selectedId);
+  if (!sel || sel.type !== 'Wall') return;
+  saveState();
+  sel.anchored = !sel.anchored;
+  refreshAll();
+}
+
+function showContextMenu(x, y) {
+  const menu = document.getElementById('context-menu');
+  // Show/hide anchor option based on selection
+  const anchorItem = document.getElementById('ctx-anchor');
+  const anchorSep = document.getElementById('ctx-anchor-sep');
+  const sel = selectedId ? elements.find(e => e.id === selectedId) : null;
+  if (sel && sel.type === 'Wall') {
+    anchorItem.style.display = '';
+    anchorSep.style.display = '';
+    anchorItem.innerHTML = (sel.anchored ? 'Unanchor Wall' : 'Anchor Wall') + '<span class="shortcut">A</span>';
+  } else {
+    anchorItem.style.display = 'none';
+    anchorSep.style.display = 'none';
+  }
+  menu.style.left = x + 'px';
+  menu.style.top = y + 'px';
+  menu.classList.add('visible');
+}
+
+function hideContextMenu() {
+  document.getElementById('context-menu').classList.remove('visible');
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#context-menu')) hideContextMenu();
+});
+
+// ============================================================================
+// Properties Panel
+// ============================================================================
+
+function updatePropertiesPanel() {
+  const panel = document.getElementById('properties-panel');
+
+  // Handle space selection
+  if (selectedId && selectedId.startsWith('space-')) {
+    const idx = parseInt(selectedId.split('-')[1]);
+    const space = detectedSpaces[idx];
+    if (space) {
+      const sharedCount = space.wallIds.filter(wid =>
+        detectedSpaces.some((s, si) => si !== idx && s.wallIds.includes(wid))
+      ).length;
+      panel.innerHTML = `<div class="prop-section">
+        <div class="prop-section-title">Space</div>
+        <div class="prop-row">
+          <span class="prop-label">Name</span>
+          <input class="prop-input" value="${space.name}" onchange="renameSpace(${idx}, this.value)">
+        </div>
+        <div class="prop-row">
+          <span class="prop-label">Area</span>
+          <input class="prop-input" disabled value="${space.area.toFixed(2)} m\u00B2">
+        </div>
+        <div class="prop-row">
+          <span class="prop-label">Walls</span>
+          <input class="prop-input" disabled value="${space.wallIds.length}">
+        </div>
+        <div class="prop-row">
+          <span class="prop-label">Shared</span>
+          <input class="prop-input" disabled value="${sharedCount} wall${sharedCount !== 1 ? 's' : ''}">
+        </div>
+        <div class="prop-row">
+          <span class="prop-label">Vertices</span>
+          <input class="prop-input" disabled value="${space.polygon.length}">
+        </div>
+      </div>`;
+      return;
+    }
+  }
+
+  const sel = selectedId ? elements.find(e => e.id === selectedId) : null;
+
+  if (!sel) {
+    panel.innerHTML = '<div class="prop-section" style="color:var(--text-dim); font-size:12px;">Select an element to edit its properties</div>';
+    return;
+  }
+
+  let html = '';
+
+  // Common header
+  html += `<div class="prop-section">
+    <div class="prop-section-title">${sel.type}</div>
+    <div class="prop-row">
+      <span class="prop-label">ID</span>
+      <input class="prop-input" value="${sel.id}" onchange="updateProp('${sel.id}', 'id', this.value)">
+    </div>`;
+
+  if (sel.type === 'Wall') {
+    html += `
+    <div class="prop-row">
+      <span class="prop-label">From X</span>
+      <input class="prop-input" type="number" step="0.25" value="${sel.from.x}" onchange="updateProp('${sel.id}', 'from.x', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">From Y</span>
+      <input class="prop-input" type="number" step="0.25" value="${sel.from.y}" onchange="updateProp('${sel.id}', 'from.y', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">To X</span>
+      <input class="prop-input" type="number" step="0.25" value="${sel.to.x}" onchange="updateProp('${sel.id}', 'to.x', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">To Y</span>
+      <input class="prop-input" type="number" step="0.25" value="${sel.to.y}" onchange="updateProp('${sel.id}', 'to.y', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Height</span>
+      <input class="prop-input" type="number" step="0.1" value="${sel.height}" onchange="updateProp('${sel.id}', 'height', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Thickness</span>
+      <input class="prop-input" type="number" step="0.01" value="${sel.thickness}" onchange="updateProp('${sel.id}', 'thickness', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Length</span>
+      <input class="prop-input" disabled value="${wallLength(sel).toFixed(3)} m">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Anchored</span>
+      <input type="checkbox" ${sel.anchored ? 'checked' : ''} onchange="toggleAnchor()" style="accent-color: var(--error);">
+    </div>`;
+  } else if (sel.type === 'Door') {
+    html += `
+    <div class="prop-row">
+      <span class="prop-label">Wall</span>
+      <input class="prop-input" disabled value="${sel.parentWall}">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Offset</span>
+      <input class="prop-input" type="number" step="0.25" value="${sel.offset}" onchange="updateProp('${sel.id}', 'offset', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Width</span>
+      <input class="prop-input" type="number" step="0.1" value="${sel.width}" onchange="updateProp('${sel.id}', 'width', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Height</span>
+      <input class="prop-input" type="number" step="0.1" value="${sel.height}" onchange="updateProp('${sel.id}', 'height', parseFloat(this.value))">
+    </div>`;
+  } else if (sel.type === 'Window') {
+    html += `
+    <div class="prop-row">
+      <span class="prop-label">Wall</span>
+      <input class="prop-input" disabled value="${sel.parentWall}">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Offset</span>
+      <input class="prop-input" type="number" step="0.25" value="${sel.offset}" onchange="updateProp('${sel.id}', 'offset', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Width</span>
+      <input class="prop-input" type="number" step="0.1" value="${sel.width}" onchange="updateProp('${sel.id}', 'width', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Height</span>
+      <input class="prop-input" type="number" step="0.1" value="${sel.height}" onchange="updateProp('${sel.id}', 'height', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Sill Height</span>
+      <input class="prop-input" type="number" step="0.1" value="${sel.sill_height}" onchange="updateProp('${sel.id}', 'sill_height', parseFloat(this.value))">
+    </div>`;
+  } else if (sel.type === 'Column') {
+    html += `
+    <div class="prop-row">
+      <span class="prop-label">X</span>
+      <input class="prop-input" type="number" step="0.25" value="${sel.x}" onchange="updateProp('${sel.id}', 'x', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Y</span>
+      <input class="prop-input" type="number" step="0.25" value="${sel.y}" onchange="updateProp('${sel.id}', 'y', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Height</span>
+      <input class="prop-input" type="number" step="0.1" value="${sel.height}" onchange="updateProp('${sel.id}', 'height', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Width</span>
+      <input class="prop-input" type="number" step="0.05" value="${sel.profileW}" onchange="updateProp('${sel.id}', 'profileW', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Depth</span>
+      <input class="prop-input" type="number" step="0.05" value="${sel.profileD}" onchange="updateProp('${sel.id}', 'profileD', parseFloat(this.value))">
+    </div>`;
+  } else if (sel.type === 'Slab') {
+    html += `
+    <div class="prop-row">
+      <span class="prop-label">Thickness</span>
+      <input class="prop-input" type="number" step="0.01" value="${sel.thickness}" onchange="updateProp('${sel.id}', 'thickness', parseFloat(this.value))">
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">Points</span>
+      <input class="prop-input" disabled value="${sel.boundary.length} vertices">
+    </div>`;
+  }
+
+  html += '</div>';
+  panel.innerHTML = html;
+}
+
+function updateProp(elemId, path, value) {
+  const elem = elements.find(e => e.id === elemId);
+  if (!elem) return;
+
+  saveState();
+
+  if (path === 'id') {
+    // Update ID and fix references
+    const oldId = elem.id;
+    elem.id = value;
+    // Update parent references
+    elements.forEach(e => {
+      if (e.parentWall === oldId) e.parentWall = value;
+    });
+    selectedId = value;
+  } else if (path.includes('.')) {
+    const parts = path.split('.');
+    let obj = elem;
+    for (let i = 0; i < parts.length - 1; i++) obj = obj[parts[i]];
+    obj[parts[parts.length - 1]] = value;
+  } else {
+    elem[path] = value;
+  }
+
+  refreshAll();
+}
+
+function renameSpace(idx, name) {
+  if (detectedSpaces[idx]) {
+    detectedSpaces[idx].name = name;
+    generateBml();
+  }
+}
+
+// ============================================================================
+// Element List
+// ============================================================================
+
+function updateElementList() {
+  const list = document.getElementById('element-list');
+  const colorMap = {
+    Wall: '#c8c0b8', Door: '#a06020', Window: '#5588cc',
+    Column: '#888886', Slab: '#d0d0ce', Beam: '#666'
+  };
+
+  let html = '';
+
+  // Detected spaces first
+  for (const space of detectedSpaces) {
+    html += `
+    <div class="elem-item ${space.id === selectedId ? 'selected' : ''}"
+         onclick="selectElement('${space.id}')"
+         ondblclick="zoomToSpace('${space.id}')">
+      <div class="elem-icon" style="background:rgba(137,180,250,0.3); border:1px solid rgba(137,180,250,0.5);"></div>
+      <span class="elem-id">${space.name}</span>
+      <span class="elem-type">Space</span>
+    </div>`;
+  }
+
+  // Elements
+  html += elements.map(e => `
+    <div class="elem-item ${e.id === selectedId ? 'selected' : ''}"
+         onclick="selectElement('${e.id}')"
+         ondblclick="zoomToElement('${e.id}')">
+      <div class="elem-icon" style="background:${colorMap[e.type] || '#888'}"></div>
+      <span class="elem-id">${e.id}</span>
+      <span class="elem-type">${e.type}</span>
+    </div>
+  `).join('');
+
+  list.innerHTML = html;
+
+  const spaceInfo = detectedSpaces.length > 0 ? detectedSpaces.length + ' spaces, ' : '';
+  document.getElementById('sb-elements').textContent = spaceInfo + elements.length + ' elements';
+}
+
+function selectElement(id) {
+  selectedId = id;
+  refreshAll();
+}
+
+function zoomToElement(id) {
+  const e = elements.find(el => el.id === id);
+  if (!e) return;
+
+  if (e.type === 'Wall') {
+    viewX = (e.from.x + e.to.x) / 2;
+    viewY = (e.from.y + e.to.y) / 2;
+  } else if (e.type === 'Column') {
+    viewX = e.x; viewY = e.y;
+  } else if (e.type === 'Slab' && e.boundary.length > 0) {
+    let cx = 0, cy = 0;
+    for (const p of e.boundary) { cx += p.x; cy += p.y; }
+    viewX = cx / e.boundary.length;
+    viewY = cy / e.boundary.length;
+  } else if (e.parentWall) {
+    const wall = elements.find(w => w.id === e.parentWall);
+    if (wall) {
+      viewX = (wall.from.x + wall.to.x) / 2;
+      viewY = (wall.from.y + wall.to.y) / 2;
+    }
+  }
+}
+
+function zoomToSpace(spaceId) {
+  const idx = parseInt(spaceId.split('-')[1]);
+  const space = detectedSpaces[idx];
+  if (!space || space.polygon.length === 0) return;
+  selectedId = spaceId;
+  let cx = 0, cy = 0;
+  for (const p of space.polygon) { cx += p.x; cy += p.y; }
+  viewX = cx / space.polygon.length;
+  viewY = cy / space.polygon.length;
+  refreshAll();
+}
+
+// ============================================================================
+// BML Code Generation
+// ============================================================================
+
+function wallToBml(wall, indent) {
+  let bml = '';
+  bml += `${indent}Wall: ${wall.id}\n`;
+  bml += `${indent}  from: (${fmtNum(wall.from.x)}, ${fmtNum(wall.from.y)}) to: (${fmtNum(wall.to.x)}, ${fmtNum(wall.to.y)})\n`;
+  bml += `${indent}  height: ${fmtNum(wall.height)} m\n`;
+  bml += `${indent}  thickness: ${fmtNum(wall.thickness)} m\n`;
+
+  const children = elements.filter(e =>
+    (e.type === 'Door' || e.type === 'Window') && e.parentWall === wall.id
+  );
+  for (const child of children) {
+    if (child.type === 'Window') {
+      bml += `${indent}  Window: ${child.id}\n`;
+      bml += `${indent}    offset: ${fmtNum(child.offset)} m\n`;
+      bml += `${indent}    width: ${fmtNum(child.width)} m\n`;
+      bml += `${indent}    height: ${fmtNum(child.height)} m\n`;
+      bml += `${indent}    sill_height: ${fmtNum(child.sill_height)} m\n`;
+    } else if (child.type === 'Door') {
+      bml += `${indent}  Door: ${child.id}\n`;
+      bml += `${indent}    offset: ${fmtNum(child.offset)} m\n`;
+      bml += `${indent}    width: ${fmtNum(child.width)} m\n`;
+      bml += `${indent}    height: ${fmtNum(child.height)} m\n`;
+    }
+  }
+  bml += '\n';
+  return bml;
+}
+
+// Find storey section boundaries in BML source.
+// Returns array of {start, end} character offsets for each ### Storey: block.
+function findStoreyRanges(source) {
+  const ranges = [];
+  const re = /^### Storey:/gm;
+  let match;
+  while ((match = re.exec(source)) !== null) {
+    ranges.push({ start: match.index, end: source.length });
+  }
+  // Each storey ends where the next ### or ## or # heading begins (or EOF)
+  for (let i = 0; i < ranges.length; i++) {
+    // Skip past the current heading line before searching for the next one
+    const lineEnd = source.indexOf('\n', ranges[i].start);
+    const after = lineEnd >= 0 ? lineEnd + 1 : ranges[i].start + 1;
+    const nextHeading = source.slice(after).search(/^#{1,3} /m);
+    if (nextHeading >= 0) {
+      ranges[i].end = after + nextHeading;
+    }
+  }
+  return ranges;
+}
+
+// Replace one storey in the original source with new content.
+function mergeStoreyIntoSource(source, storeyIndex, newStoreyBml) {
+  const ranges = findStoreyRanges(source);
+  if (storeyIndex < 0 || storeyIndex >= ranges.length) {
+    // Can't find storey — append
+    return source + '\n' + newStoreyBml;
+  }
+  const r = ranges[storeyIndex];
+  // Trim trailing whitespace from newStoreyBml to avoid extra blank lines
+  const trimmed = newStoreyBml.replace(/\n+$/, '\n');
+  return source.slice(0, r.start) + trimmed + '\n' + source.slice(r.end);
+}
+
+// Generate only the storey block (### Storey: ... through all its elements)
+function generateStoreyBml() {
+  const storeyName = document.getElementById('storey-name').value || 'Ground Floor';
+  const elevation = document.getElementById('storey-elevation').value || '0';
+  const height = document.getElementById('storey-height').value || '2.8';
+
+  let bml = `### Storey: ${storeyName}\n`;
+  bml += `  elevation: ${fmtNum(parseFloat(elevation))} m\n`;
+  bml += `  height: ${fmtNum(parseFloat(height))} m\n\n`;
+
+  const assignedWalls = new Set();
+  const assignedColumns = new Set();
+
+  if (detectedSpaces.length > 0) {
+    for (const space of detectedSpaces) {
+      bml += `#### Space: ${space.name}\n`;
+      bml += `  area: ${fmtNum(space.area)} m2\n\n`;
+
+      for (const wallId of space.wallIds) {
+        if (assignedWalls.has(wallId)) continue;
+        const wall = elements.find(e => e.id === wallId);
+        if (!wall) continue;
+        assignedWalls.add(wallId);
+        bml += wallToBml(wall, '  ');
+      }
+
+      // Columns inside space
+      for (const col of elements.filter(e => e.type === 'Column')) {
+        if (assignedColumns.has(col.id)) continue;
+        if (pointInPolygon(col, space.polygon)) {
+          assignedColumns.add(col.id);
+          bml += `  Column: ${col.id}\n`;
+          bml += `    position: (${fmtNum(col.x)}, ${fmtNum(col.y)})\n`;
+          bml += `    height: ${fmtNum(col.height)} m\n`;
+          bml += `    profile: rectangle(${fmtNum(col.profileW)}, ${fmtNum(col.profileD)})\n\n`;
+        }
+      }
+    }
+  } else {
+    bml += `#### Space: Main Space\n`;
+    bml += `  area: 0 m2\n\n`;
+  }
+
+  // Unassigned walls
+  for (const wall of elements.filter(e => e.type === 'Wall')) {
+    if (assignedWalls.has(wall.id)) continue;
+    bml += wallToBml(wall, '  ');
+  }
+
+  // Slabs
+  const slabs = elements.filter(e => e.type === 'Slab');
+  for (const slab of slabs) {
+    bml += `  Slab: ${slab.id}\n`;
+    const pts = slab.boundary.map(p => `(${fmtNum(p.x)},${fmtNum(p.y)})`).join(', ');
+    bml += `    boundary: [${pts}]\n`;
+    bml += `    thickness: ${fmtNum(slab.thickness)} m\n\n`;
+  }
+
+  // Unassigned columns
+  for (const col of elements.filter(e => e.type === 'Column')) {
+    if (assignedColumns.has(col.id)) continue;
+    bml += `  Column: ${col.id}\n`;
+    bml += `    position: (${fmtNum(col.x)}, ${fmtNum(col.y)})\n`;
+    bml += `    height: ${fmtNum(col.height)} m\n`;
+    bml += `    profile: rectangle(${fmtNum(col.profileW)}, ${fmtNum(col.profileD)})\n\n`;
+  }
+
+  return bml;
+}
+
+function generateBml() {
+  const storeyBml = generateStoreyBml();
+
+  // For display, wrap in site/building if no original source
+  let displayBml;
+  if (originalFileSource) {
+    displayBml = mergeStoreyIntoSource(originalFileSource, currentStoreyIndex, storeyBml);
+  } else {
+    displayBml = `# Site: Project Site\n  location: 0.0, 0.0\n\n## Building: Building\n  type: residential\n\n` + storeyBml;
+  }
+
+  document.getElementById('bml-output').value = displayBml;
+  if (displayBml !== lastSavedBml) markUnsaved();
+}
+
+function fmtNum(n) {
+  if (Number.isInteger(n) || Math.abs(n - Math.round(n)) < 0.0001) return Math.round(n).toString();
+  // Remove trailing zeros
+  let s = n.toFixed(4);
+  s = s.replace(/\.?0+$/, '');
+  return s;
+}
+
+function copyBml() {
+  const textarea = document.getElementById('bml-output');
+  navigator.clipboard.writeText(textarea.value).then(() => {
+    document.getElementById('status').textContent = 'BML copied to clipboard';
+    setTimeout(() => { document.getElementById('status').textContent = 'Ready'; }, 2000);
+  });
+}
+
+let hasUnsavedChanges = false;
+let lastSavedBml = '';
+
+function markUnsaved() {
+  if (!hasUnsavedChanges) {
+    hasUnsavedChanges = true;
+    const saveBtn = document.getElementById('save-btn');
+    if (saveBtn) saveBtn.style.background = 'var(--warning)';
+  }
+}
+
+function markSaved() {
+  hasUnsavedChanges = false;
+  lastSavedBml = document.getElementById('bml-output').value;
+  const saveBtn = document.getElementById('save-btn');
+  if (saveBtn) saveBtn.style.background = '';
+}
+
+async function saveBml() {
+  const bml = document.getElementById('bml-output').value;
+  if (!bml.trim()) return;
+  const statusEl = document.getElementById('status');
+  try {
+    const resp = await fetch('/api/source', {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: bml,
+    });
+    if (resp.ok) {
+      originalFileSource = bml; // Update so next save merges against latest
+      markSaved();
+      statusEl.textContent = 'Saved to file';
+      setTimeout(() => { statusEl.textContent = 'Ready'; }, 2000);
+    } else {
+      const err = await resp.text();
+      statusEl.textContent = 'Save failed: ' + err;
+    }
+  } catch (e) {
+    statusEl.textContent = 'Save failed: ' + e.message;
+  }
+}
+
+window.addEventListener('beforeunload', (e) => {
+  if (hasUnsavedChanges) {
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
+
+// ============================================================================
+// Storey settings change handlers
+// ============================================================================
+
+document.getElementById('storey-name').addEventListener('input', generateBml);
+document.getElementById('storey-elevation').addEventListener('input', generateBml);
+document.getElementById('storey-height').addEventListener('input', generateBml);
+
+// ============================================================================
+// Refresh everything
+// ============================================================================
+
+function refreshAll() {
+  detectSpaces();
+  updateElementList();
+  updatePropertiesPanel();
+  generateBml();
+}
+
+// ============================================================================
+// Load example floorplan
+// ============================================================================
+
+function loadExample() {
+  elements = [];
+  nextIdCounters = { Wall: 1, Door: 1, Window: 1, Column: 1, Slab: 1, Beam: 1 };
+
+  // Room 1: Living room (left)
+  elements.push(createWall({ x: 0, y: 0 }, { x: 6, y: 0 }));   // W-01 bottom
+  elements.push(createWall({ x: 6, y: 0 }, { x: 6, y: 5 }));   // W-02 shared wall
+  elements.push(createWall({ x: 6, y: 5 }, { x: 0, y: 5 }));   // W-03 top
+  elements.push(createWall({ x: 0, y: 5 }, { x: 0, y: 0 }));   // W-04 left
+
+  // Room 2: Bedroom (right)
+  elements.push(createWall({ x: 6, y: 0 }, { x: 11, y: 0 }));  // W-05 bottom
+  elements.push(createWall({ x: 11, y: 0 }, { x: 11, y: 5 })); // W-06 right
+  elements.push(createWall({ x: 11, y: 5 }, { x: 6, y: 5 }));  // W-07 top
+
+  // Windows and doors
+  elements.push(createWindow('W-01', 1.5));  // Window on living room front
+  elements.push(createDoor('W-02', 1.5));    // Door between rooms (shared wall)
+  elements.push(createWindow('W-03', 1.5));  // Window on living room back
+  elements.push(createWindow('W-05', 1.5));  // Window on bedroom front
+  elements.push(createWindow('W-06', 1.0));  // Window on bedroom right
+
+  // Floor slab
+  elements.push(createSlab([
+    { x: 0, y: 0 }, { x: 11, y: 0 }, { x: 11, y: 5 }, { x: 0, y: 5 }
+  ]));
+
+  // Center view
+  viewX = 5.5; viewY = 2.5; zoom = 50;
+
+  selectedId = null;
+  refreshAll();
+}
+
+// ============================================================================
+// Load from semantic model (API integration)
+// ============================================================================
+
+const API_BASE = (window.location.pathname.includes('/floorplan') && window.location.port)
+  ? '' : null;
+
+let loadedModel = null;
+let originalFileSource = ''; // Full .bml file content from disk
+let currentStoreyIndex = 0;
+
+function getProperty(properties, key) {
+  const prop = properties.find(p => p.key === key);
+  if (!prop) return null;
+  return prop.value;
+}
+
+function getNumericValue(properties, key, fallback) {
+  const val = getProperty(properties, key);
+  if (val && typeof val === 'object' && 'Number' in val) return val.Number;
+  if (typeof val === 'number') return val;
+  return fallback;
+}
+
+function loadFromModel(modelJson, storeyIndex) {
+  elements = [];
+  nextIdCounters = { Wall: 1, Door: 1, Window: 1, Column: 1, Slab: 1, Beam: 1 };
+
+  const storeys = [];
+  for (const site of modelJson.sites || []) {
+    for (const building of site.buildings || []) {
+      for (const storey of building.storeys || []) {
+        storeys.push(storey);
+      }
+    }
+  }
+
+  if (storeys.length === 0) return false;
+
+  // Show storey selector if multiple storeys
+  if (storeys.length > 1) {
+    const sel = document.getElementById('storey-select');
+    sel.innerHTML = '';
+    storeys.forEach((s, i) => {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = s.name;
+      sel.appendChild(opt);
+    });
+    sel.value = storeyIndex || 0;
+    document.getElementById('storey-selector-sep').style.display = '';
+    document.getElementById('storey-selector-group').style.display = '';
+  }
+
+  const idx = storeyIndex || 0;
+  const storey = storeys[idx];
+  if (!storey) return false;
+
+  // Set storey properties
+  const elevation = getNumericValue(storey.properties, 'elevation', 0);
+  const height = getNumericValue(storey.properties, 'height', 2.8);
+  document.getElementById('storey-name').value = storey.name;
+  document.getElementById('storey-elevation').value = elevation;
+  document.getElementById('storey-height').value = height;
+
+  // Collect all elements from storey + its spaces
+  const allElements = [...(storey.elements || [])];
+  for (const space of storey.spaces || []) {
+    for (const elem of space.elements || []) {
+      allElements.push(elem);
+    }
+  }
+
+  // Build a map of wall IDs for child lookups
+  const wallIdMap = {};
+
+  // First pass: create walls
+  for (const elem of allElements) {
+    if (elem.element_type === 'Wall') {
+      const axisVal = getProperty(elem.properties, 'from');
+      if (!axisVal || !('Axis' in axisVal)) continue;
+      const from = axisVal.Axis.from;
+      const to = axisVal.Axis.to;
+      const wall = {
+        type: 'Wall', id: elem.id,
+        from: { x: from[0], y: from[1] },
+        to: { x: to[0], y: to[1] },
+        height: getNumericValue(elem.properties, 'height', height),
+        thickness: getNumericValue(elem.properties, 'thickness', 0.24),
+        children: []
+      };
+      // Track max ID counter
+      const idNum = parseInt(elem.id.replace(/\D+/g, ''), 10);
+      if (!isNaN(idNum) && idNum >= (nextIdCounters.Wall || 1)) {
+        nextIdCounters.Wall = idNum + 1;
+      }
+      elements.push(wall);
+      wallIdMap[elem.id] = wall;
+
+      // Process children (windows, doors)
+      for (const child of elem.children || []) {
+        if (child.element_type === 'Window') {
+          const win = {
+            type: 'Window', id: child.id,
+            parentWall: elem.id,
+            offset: getNumericValue(child.properties, 'offset', 0),
+            width: getNumericValue(child.properties, 'width', 1.2),
+            height: getNumericValue(child.properties, 'height', 1.4),
+            sill_height: getNumericValue(child.properties, 'sill_height', 0.9)
+          };
+          const winNum = parseInt(child.id.replace(/\D+/g, ''), 10);
+          if (!isNaN(winNum) && winNum >= (nextIdCounters.Window || 1)) {
+            nextIdCounters.Window = winNum + 1;
+          }
+          elements.push(win);
+        } else if (child.element_type === 'Door') {
+          const door = {
+            type: 'Door', id: child.id,
+            parentWall: elem.id,
+            offset: getNumericValue(child.properties, 'offset', 0),
+            width: getNumericValue(child.properties, 'width', 0.9),
+            height: getNumericValue(child.properties, 'height', 2.1)
+          };
+          const doorNum = parseInt(child.id.replace(/\D+/g, ''), 10);
+          if (!isNaN(doorNum) && doorNum >= (nextIdCounters.Door || 1)) {
+            nextIdCounters.Door = doorNum + 1;
+          }
+          elements.push(door);
+        }
+      }
+    }
+  }
+
+  // Second pass: columns
+  for (const elem of allElements) {
+    if (elem.element_type === 'Column') {
+      const posVal = getProperty(elem.properties, 'position');
+      let x = 0, y = 0;
+      if (posVal && 'Point' in posVal) {
+        x = posVal.Point[0]; y = posVal.Point[1];
+      }
+      const profVal = getProperty(elem.properties, 'profile');
+      let profileW = 0.3, profileD = 0.3;
+      if (profVal && 'Profile' in profVal && profVal.Profile.params.length >= 2) {
+        profileW = profVal.Profile.params[0];
+        profileD = profVal.Profile.params[1];
+      }
+      const col = {
+        type: 'Column', id: elem.id,
+        x, y,
+        height: getNumericValue(elem.properties, 'height', height),
+        profileW, profileD
+      };
+      const colNum = parseInt(elem.id.replace(/\D+/g, ''), 10);
+      if (!isNaN(colNum) && colNum >= (nextIdCounters.Column || 1)) {
+        nextIdCounters.Column = colNum + 1;
+      }
+      elements.push(col);
+    }
+  }
+
+  // Third pass: slabs
+  for (const elem of allElements) {
+    if (elem.element_type === 'Slab') {
+      const bndVal = getProperty(elem.properties, 'boundary');
+      if (!bndVal || !('Polygon' in bndVal)) continue;
+      const points = bndVal.Polygon.map(p => ({ x: p[0], y: p[1] }));
+      const slab = {
+        type: 'Slab', id: elem.id,
+        boundary: points,
+        thickness: getNumericValue(elem.properties, 'thickness', 0.22)
+      };
+      const slabNum = parseInt(elem.id.replace(/\D+/g, ''), 10);
+      if (!isNaN(slabNum) && slabNum >= (nextIdCounters.Slab || 1)) {
+        nextIdCounters.Slab = slabNum + 1;
+      }
+      elements.push(slab);
+    }
+  }
+
+  // Auto-fit view to content
+  if (elements.length > 0) {
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const e of elements) {
+      if (e.type === 'Wall') {
+        minX = Math.min(minX, e.from.x, e.to.x);
+        maxX = Math.max(maxX, e.from.x, e.to.x);
+        minY = Math.min(minY, e.from.y, e.to.y);
+        maxY = Math.max(maxY, e.from.y, e.to.y);
+      } else if (e.type === 'Column') {
+        minX = Math.min(minX, e.x); maxX = Math.max(maxX, e.x);
+        minY = Math.min(minY, e.y); maxY = Math.max(maxY, e.y);
+      } else if (e.type === 'Slab') {
+        for (const p of e.boundary) {
+          minX = Math.min(minX, p.x); maxX = Math.max(maxX, p.x);
+          minY = Math.min(minY, p.y); maxY = Math.max(maxY, p.y);
+        }
+      }
+    }
+    viewX = (minX + maxX) / 2;
+    viewY = (minY + maxY) / 2;
+    const canvasEl = document.getElementById('canvas');
+    const rect = canvasEl.parentElement.getBoundingClientRect();
+    const spanX = maxX - minX + 2;
+    const spanY = maxY - minY + 2;
+    zoom = Math.min(rect.width / spanX, rect.height / spanY) * 0.8;
+    zoom = Math.max(20, Math.min(200, zoom));
+  }
+
+  selectedId = null;
+  refreshAll();
+  return true;
+}
+
+// Storey selector change handler
+document.getElementById('storey-select').addEventListener('change', function() {
+  if (loadedModel) {
+    currentStoreyIndex = parseInt(this.value, 10);
+    loadFromModel(loadedModel, currentStoreyIndex);
+  }
+});
+
+// ============================================================================
+// Init
+// ============================================================================
+
+(async function init() {
+  if (API_BASE !== null) {
+    document.getElementById('save-btn').style.display = '';
+    try {
+      document.getElementById('status').textContent = 'Loading model...';
+      // Fetch original file source for storey-aware saving
+      try {
+        const srcResp = await fetch('/api/source');
+        if (srcResp.ok) {
+          originalFileSource = await srcResp.text();
+        }
+      } catch (e) { /* ignore */ }
+      const resp = await fetch('/api/model');
+      if (resp.ok) {
+        const modelJson = await resp.json();
+        loadedModel = modelJson;
+        currentStoreyIndex = 0;
+        if (loadFromModel(modelJson, 0)) {
+          lastSavedBml = document.getElementById('bml-output').value;
+          document.getElementById('status').textContent = 'Model loaded';
+          requestAnimationFrame(draw);
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to load model from API:', e);
+    }
+  }
+  // Fallback to example
+  loadExample();
+  requestAnimationFrame(draw);
+  document.getElementById('status').textContent = 'Ready';
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,905 @@
+// Level 4 - Library pavilion and roof terrace
+// elevation 15.7 m, height 3.6 m
+// A twisted, fully glazed library pavilion sits on the office block. The rest
+// of the slab is a roof terrace with glass railings and planters. The east stair
+// core continues as a closed box on the terrace.
+
+import materials from "../materials.bml"
+import assets from "../assets/furniture.bml"
+
+# Site: Campus Nord
+
+## Building: Forum Nord
+
+### Storey: Level 4
+  elevation: 15.7 m
+  height: 3.6 m
+
+  // ------------------------------------------------------------------
+  // Floor slab / terrace with voids
+  // ------------------------------------------------------------------
+
+  Slab: SL-L4
+    boundary: { outer: [(-4, 0), (44, 0), (50, 24), (-4, 24)], holes: [[(24, 9), (35, 8.5), (34.5, 15), (23, 14.5)], [(0.2, 14.3), (3.6, 14.3), (3.6, 23.7), (0.2, 23.7)], [(5, 21), (7.7, 21), (7.7, 23.8), (5, 23.8)], [(41.8, 16.2), (45.8, 16.2), (45.8, 23.8), (41.8, 23.8)], [(38.2, 21), (40.9, 21), (40.9, 23.8), (38.2, 23.8)]] }
+    thickness: 0.3 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  // ------------------------------------------------------------------
+  // Pavilion glazing
+  // ------------------------------------------------------------------
+
+  Wall: CW-L4-S
+    from: (0, 4) to: (36, 1.5)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glazing
+    is_external: true
+    Door: D-L4-TERRACE-S
+      offset: 16 m
+      width: 2 m
+      height: 2.6 m
+
+
+  Member: MU-CW-L4-S-01
+    boundary: [(1.463, 3.798), (1.523, 3.794), (1.537, 3.994), (1.477, 3.998)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-02
+    boundary: [(2.963, 3.694), (3.023, 3.69), (3.037, 3.889), (2.977, 3.894)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-03
+    boundary: [(4.463, 3.59), (4.523, 3.586), (4.537, 3.785), (4.477, 3.789)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-04
+    boundary: [(5.963, 3.486), (6.023, 3.481), (6.037, 3.681), (5.977, 3.685)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-05
+    boundary: [(7.463, 3.381), (7.523, 3.377), (7.537, 3.577), (7.477, 3.581)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-06
+    boundary: [(8.963, 3.277), (9.023, 3.273), (9.037, 3.473), (8.977, 3.477)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-07
+    boundary: [(10.463, 3.173), (10.523, 3.169), (10.537, 3.369), (10.477, 3.373)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-08
+    boundary: [(11.963, 3.069), (12.023, 3.065), (12.037, 3.264), (11.977, 3.269)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-09
+    boundary: [(13.463, 2.965), (13.523, 2.961), (13.537, 3.16), (13.477, 3.164)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-10
+    boundary: [(14.963, 2.861), (15.023, 2.856), (15.037, 3.056), (14.977, 3.06)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-11
+    boundary: [(19.463, 2.548), (19.523, 2.544), (19.537, 2.744), (19.477, 2.748)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-12
+    boundary: [(20.963, 2.444), (21.023, 2.44), (21.037, 2.639), (20.977, 2.644)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-13
+    boundary: [(22.463, 2.34), (22.523, 2.336), (22.537, 2.535), (22.477, 2.539)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-14
+    boundary: [(23.963, 2.236), (24.023, 2.231), (24.037, 2.431), (23.977, 2.435)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-15
+    boundary: [(25.463, 2.131), (25.523, 2.127), (25.537, 2.327), (25.477, 2.331)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-16
+    boundary: [(26.963, 2.027), (27.023, 2.023), (27.037, 2.223), (26.977, 2.227)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-17
+    boundary: [(28.463, 1.923), (28.523, 1.919), (28.537, 2.119), (28.477, 2.123)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-18
+    boundary: [(29.963, 1.819), (30.023, 1.815), (30.037, 2.014), (29.977, 2.019)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-19
+    boundary: [(31.463, 1.715), (31.523, 1.711), (31.537, 1.91), (31.477, 1.914)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-20
+    boundary: [(32.963, 1.611), (33.023, 1.606), (33.037, 1.806), (32.977, 1.81)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-S-21
+    boundary: [(34.463, 1.506), (34.523, 1.502), (34.537, 1.702), (34.477, 1.706)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: TR-CW-L4-S
+    boundary: [(-0.006, 3.92), (35.994, 1.42), (36.006, 1.58), (0.006, 4.08)]
+    height: 0.12 m
+    z_offset: 2.8 m
+    type: "transom"
+    material: aluminium_mullion
+
+  Wall: CW-L4-E
+    from: (36, 1.5) to: (37.5, 24)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glazing
+    is_external: true
+    Door: D-L4-TERRACE-E
+      offset: 4 m
+      width: 2 m
+      height: 2.6 m
+
+
+  Member: MU-CW-L4-E-01
+    boundary: [(36.198, 2.963), (36.202, 3.023), (36.002, 3.037), (35.998, 2.977)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-E-02
+    boundary: [(36.298, 4.463), (36.302, 4.523), (36.102, 4.537), (36.098, 4.477)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-E-03
+    boundary: [(36.598, 8.963), (36.602, 9.023), (36.402, 9.037), (36.398, 8.977)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-E-04
+    boundary: [(36.698, 10.463), (36.702, 10.523), (36.502, 10.537), (36.498, 10.477)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-E-05
+    boundary: [(36.798, 11.963), (36.802, 12.023), (36.602, 12.037), (36.598, 11.977)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-E-06
+    boundary: [(36.898, 13.463), (36.902, 13.523), (36.702, 13.537), (36.698, 13.477)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-E-07
+    boundary: [(36.998, 14.963), (37.002, 15.023), (36.802, 15.037), (36.798, 14.977)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-E-08
+    boundary: [(37.098, 16.463), (37.102, 16.523), (36.902, 16.537), (36.898, 16.477)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-E-09
+    boundary: [(37.198, 17.963), (37.202, 18.023), (37.002, 18.037), (36.998, 17.977)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-E-10
+    boundary: [(37.298, 19.463), (37.302, 19.523), (37.102, 19.537), (37.098, 19.477)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-E-11
+    boundary: [(37.398, 20.963), (37.402, 21.023), (37.202, 21.037), (37.198, 20.977)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-E-12
+    boundary: [(37.498, 22.463), (37.502, 22.523), (37.302, 22.537), (37.298, 22.477)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: TR-CW-L4-E
+    boundary: [(36.08, 1.495), (37.58, 23.995), (37.42, 24.005), (35.92, 1.505)]
+    height: 0.12 m
+    z_offset: 2.8 m
+    type: "transom"
+    material: aluminium_mullion
+
+  Wall: CW-L4-N
+    from: (37.5, 24) to: (8, 24)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glazing
+    is_external: true
+
+  Member: MU-CW-L4-N-01
+    boundary: [(36.055, 24.1), (35.995, 24.1), (35.995, 23.9), (36.055, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-02
+    boundary: [(34.58, 24.1), (34.52, 24.1), (34.52, 23.9), (34.58, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-03
+    boundary: [(33.105, 24.1), (33.045, 24.1), (33.045, 23.9), (33.105, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-04
+    boundary: [(31.63, 24.1), (31.57, 24.1), (31.57, 23.9), (31.63, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-05
+    boundary: [(30.155, 24.1), (30.095, 24.1), (30.095, 23.9), (30.155, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-06
+    boundary: [(28.68, 24.1), (28.62, 24.1), (28.62, 23.9), (28.68, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-07
+    boundary: [(27.205, 24.1), (27.145, 24.1), (27.145, 23.9), (27.205, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-08
+    boundary: [(25.73, 24.1), (25.67, 24.1), (25.67, 23.9), (25.73, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-09
+    boundary: [(24.255, 24.1), (24.195, 24.1), (24.195, 23.9), (24.255, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-10
+    boundary: [(22.78, 24.1), (22.72, 24.1), (22.72, 23.9), (22.78, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-11
+    boundary: [(21.305, 24.1), (21.245, 24.1), (21.245, 23.9), (21.305, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-12
+    boundary: [(19.83, 24.1), (19.77, 24.1), (19.77, 23.9), (19.83, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-13
+    boundary: [(18.355, 24.1), (18.295, 24.1), (18.295, 23.9), (18.355, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-14
+    boundary: [(16.88, 24.1), (16.82, 24.1), (16.82, 23.9), (16.88, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-15
+    boundary: [(15.405, 24.1), (15.345, 24.1), (15.345, 23.9), (15.405, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-16
+    boundary: [(13.93, 24.1), (13.87, 24.1), (13.87, 23.9), (13.93, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-17
+    boundary: [(12.455, 24.1), (12.395, 24.1), (12.395, 23.9), (12.455, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-18
+    boundary: [(10.98, 24.1), (10.92, 24.1), (10.92, 23.9), (10.98, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-N-19
+    boundary: [(9.505, 24.1), (9.445, 24.1), (9.445, 23.9), (9.505, 23.9)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: TR-CW-L4-N
+    boundary: [(37.5, 24.08), (8, 24.08), (8, 23.92), (37.5, 23.92)]
+    height: 0.12 m
+    z_offset: 2.8 m
+    type: "transom"
+    material: aluminium_mullion
+
+  Wall: CW-L4-W
+    from: (0, 14) to: (0, 4)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glazing
+    is_external: true
+    Door: D-L4-TERRACE-W
+      offset: 4 m
+      width: 2 m
+      height: 2.6 m
+
+
+  Member: MU-CW-L4-W-01
+    boundary: [(-0.1, 12.601), (-0.1, 12.541), (0.1, 12.541), (0.1, 12.601)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-W-02
+    boundary: [(-0.1, 11.173), (-0.1, 11.113), (0.1, 11.113), (0.1, 11.173)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-W-03
+    boundary: [(-0.1, 6.887), (-0.1, 6.827), (0.1, 6.827), (0.1, 6.887)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L4-W-04
+    boundary: [(-0.1, 5.459), (-0.1, 5.399), (0.1, 5.399), (0.1, 5.459)]
+    height: 3.6 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: TR-CW-L4-W
+    boundary: [(-0.08, 14), (-0.08, 4), (0.08, 4), (0.08, 14)]
+    height: 0.12 m
+    z_offset: 2.8 m
+    type: "transom"
+    material: aluminium_mullion
+
+  Wall: W-L4-CORE-N
+    from: (8, 24) to: (0, 24)
+    height: 3.6 m
+    thickness: 0.3 m
+    material: reinforced_concrete
+    is_external: true
+
+  // ------------------------------------------------------------------
+  // West core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-L4-CW1
+    from: (0, 14) to: (8, 14)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L4-CW-LOBBY
+      offset: 2.8 m
+      width: 1.8 m
+      height: 2.3 m
+
+
+  Wall: W-L4-CW2
+    from: (3.8, 14) to: (3.8, 24)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L4-CW-STAIR
+      offset: 0.5 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+
+
+  Wall: W-L4-CW3
+    from: (3.8, 20.8) to: (8, 20.8)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L4-CW-LIFT
+      offset: 1.6 m
+      width: 1.1 m
+      height: 2.2 m
+
+
+  Wall: W-L4-CW4
+    from: (8, 14) to: (8, 24)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+
+  Wall: W-L4-CW5
+    from: (0, 24) to: (0, 14)
+    height: 3.6 m
+    thickness: 0.3 m
+    material: reinforced_concrete
+
+  // ------------------------------------------------------------------
+  // East core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-L4-CE1
+    from: (38, 16) to: (46, 16)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L4-CE-LOBBY
+      offset: 0.9 m
+      width: 1.6 m
+      height: 2.3 m
+
+
+  Wall: W-L4-CE2
+    from: (46, 16) to: (46, 24)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+
+  Wall: W-L4-CE3
+    from: (38, 16) to: (38, 24)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+
+  Wall: W-L4-CE4
+    from: (41.6, 16) to: (41.6, 24)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L4-CE-STAIR
+      offset: 0.5 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+
+
+  Wall: W-L4-CE5
+    from: (38, 20.8) to: (41.6, 20.8)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L4-CE-LIFT
+      offset: 1.2 m
+      width: 1.1 m
+      height: 2.2 m
+
+
+  Wall: W-L4-CE6
+    from: (46, 24) to: (38, 24)
+    height: 3.6 m
+    thickness: 0.3 m
+    material: reinforced_concrete
+    is_external: true
+
+  // ------------------------------------------------------------------
+  // Group study rooms (glass boxes)
+  // ------------------------------------------------------------------
+
+  Wall: W-L4-STUDY-S
+    from: (8, 18) to: (37.1, 18)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glass_partition
+    Door: D-L4-ST1
+      offset: 2.8 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-L4-ST2
+      offset: 9.8 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-L4-ST3
+      offset: 16.8 m
+      width: 1 m
+      height: 2.2 m
+
+    Door: D-L4-ST4
+      offset: 23.8 m
+      width: 1 m
+      height: 2.2 m
+
+
+  Wall: W-L4-STUDY-P1
+    from: (15, 18) to: (15, 24)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glass_partition
+
+  Wall: W-L4-STUDY-P2
+    from: (22, 18) to: (22, 24)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glass_partition
+
+  Wall: W-L4-STUDY-P3
+    from: (29, 18) to: (29, 24)
+    height: 3.6 m
+    thickness: 0.08 m
+    material: glass_partition
+
+  Railing: RL-L4-ATR-1
+    from: (24, 9) to: (35, 8.5)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-L4-ATR-2
+    from: (35, 8.5) to: (34.5, 15)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-L4-ATR-3
+    from: (34.5, 15) to: (23, 14.5)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-L4-ATR-4
+    from: (23, 14.5) to: (24, 9)
+    height: 1.1 m
+    material: glazing
+
+  // ------------------------------------------------------------------
+  // Terrace: glass railings along the slab edge, planters
+  // ------------------------------------------------------------------
+
+  Railing: RL-L4-EDGE-S
+    from: (-4, 0) to: (44, 0)
+    height: 1.1 m
+    material: glazing
+    is_external: true
+
+  Railing: RL-L4-EDGE-E
+    from: (44, 0) to: (50, 24)
+    height: 1.1 m
+    material: glazing
+    is_external: true
+
+  Railing: RL-L4-EDGE-N1
+    from: (50, 24) to: (46, 24)
+    height: 1.1 m
+    material: glazing
+    is_external: true
+
+  Railing: RL-L4-EDGE-N2
+    from: (0, 24) to: (-4, 24)
+    height: 1.1 m
+    material: glazing
+    is_external: true
+
+  Railing: RL-L4-EDGE-W
+    from: (-4, 24) to: (-4, 0)
+    height: 1.1 m
+    material: glazing
+    is_external: true
+
+  Proxy: PX-L4-PLANTER-1
+    boundary: [(-3, 0.4), (0, 0.4), (0, 1.1), (-3, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-2
+    boundary: [(3, 0.4), (6, 0.4), (6, 1.1), (3, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-3
+    boundary: [(9, 0.4), (12, 0.4), (12, 1.1), (9, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-4
+    boundary: [(15, 0.4), (18, 0.4), (18, 1.1), (15, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-5
+    boundary: [(21, 0.4), (24, 0.4), (24, 1.1), (21, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-6
+    boundary: [(27, 0.4), (30, 0.4), (30, 1.1), (27, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-7
+    boundary: [(38, 0.4), (41, 0.4), (41, 1.1), (38, 1.1)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-W1
+    boundary: [(-3.4, 5), (-2.6, 5), (-2.6, 8), (-3.4, 8)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-W2
+    boundary: [(-3.4, 10), (-2.6, 10), (-2.6, 13), (-3.4, 13)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+  Proxy: PX-L4-PLANTER-W3
+    boundary: [(-3.4, 15), (-2.6, 15), (-2.6, 18), (-3.4, 18)]
+    height: 0.6 m
+    type: "planter"
+    material: green_roof
+
+#### Space: Group Study 4.11
+  usage: classroom
+  area: 42 m2
+  zone: library
+  boundary: [(8, 18), (15, 18), (15, 24), (8, 24)]
+
+  Furniture: FU-L4-ST1
+    asset: MeetingTable
+    position: (10, 19.8)
+
+#### Space: Group Study 4.12
+  usage: classroom
+  area: 42 m2
+  zone: library
+  boundary: [(15, 18), (22, 18), (22, 24), (15, 24)]
+
+  Furniture: FU-L4-ST2
+    asset: MeetingTable
+    position: (17, 19.8)
+
+#### Space: Group Study 4.13
+  usage: classroom
+  area: 42 m2
+  zone: library
+  boundary: [(22, 18), (29, 18), (29, 24), (22, 24)]
+
+  Furniture: FU-L4-ST3
+    asset: MeetingTable
+    position: (24, 19.8)
+
+#### Space: Group Study 4.14
+  usage: classroom
+  area: 49.8 m2
+  zone: library
+  boundary: [(29, 18), (37.1, 18), (37.5, 24), (29, 24)]
+
+  Furniture: FU-L4-ST4
+    asset: MeetingTable
+    position: (31, 19.8)
+
+#### Space: Library Reading Room
+  usage: classroom
+  area: 458.6 m2
+  zone: library
+  boundary: [(0, 4), (36, 1.5), (37.1, 18), (8, 18), (8, 14), (0, 14)]
+
+  Proxy: PX-L4-SHELF-01
+    boundary: [(9.5, 5.5), (11.5, 5.5), (11.5, 5.95), (9.5, 5.95)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-02
+    boundary: [(9.5, 8), (11.5, 8), (11.5, 8.45), (9.5, 8.45)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-03
+    boundary: [(12, 5.5), (14, 5.5), (14, 5.95), (12, 5.95)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-04
+    boundary: [(12, 8), (14, 8), (14, 8.45), (12, 8.45)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-05
+    boundary: [(14.5, 5.5), (16.5, 5.5), (16.5, 5.95), (14.5, 5.95)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-06
+    boundary: [(14.5, 8), (16.5, 8), (16.5, 8.45), (14.5, 8.45)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-07
+    boundary: [(17, 5.5), (19, 5.5), (19, 5.95), (17, 5.95)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-08
+    boundary: [(17, 8), (19, 8), (19, 8.45), (17, 8.45)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-09
+    boundary: [(19.5, 5.5), (21.5, 5.5), (21.5, 5.95), (19.5, 5.95)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Proxy: PX-L4-SHELF-10
+    boundary: [(19.5, 8), (21.5, 8), (21.5, 8.45), (19.5, 8.45)]
+    height: 2.1 m
+    type: "bookshelf"
+    material: oak
+
+  Furniture: FU-L4-RT01
+    asset: CafeTable
+    position: (10, 11)
+
+  Furniture: FU-L4-RT02
+    asset: CafeTable
+    position: (13, 11)
+
+  Furniture: FU-L4-RT03
+    asset: CafeTable
+    position: (16, 11)
+
+  Furniture: FU-L4-RT04
+    asset: CafeTable
+    position: (19, 11)
+
+  Furniture: FU-L4-RT05
+    asset: CafeTable
+    position: (25, 4)
+
+  Furniture: FU-L4-RT06
+    asset: CafeTable
+    position: (29, 4)
+
+  Furniture: FU-L4-RT07
+    asset: CafeTable
+    position: (33, 4)
+
+  Furniture: FU-L4-RT08
+    asset: CafeTable
+    position: (36, 8)
+
+  Furniture: FU-L4-RT09
+    asset: CafeTable
+    position: (36, 12)
+
+  Furniture: FU-L4-RT10
+    asset: CafeTable
+    position: (24, 16.2)
+
+  Furniture: FU-L4-RT11
+    asset: CafeTable
+    position: (28, 16.2)
+
+  Furniture: FU-L4-RT12
+    asset: CafeTable
+    position: (32, 16.2)
+
+  Furniture: FU-L4-RT13
+    asset: CafeTable
+    position: (2, 7)
+
+  Furniture: FU-L4-RT14
+    asset: CafeTable
+    position: (2, 10)
+
+#### Space: Roof Terrace
+  usage: terrace
+  area: 285.1 m2
+  zone: outdoor
+  boundary: [(-4, 0), (44, 0), (46.5, 10), (36.567, 10), (36, 1.5), (0, 4), (0, 24), (-4, 24)]
+
+  Furniture: FU-L4-TERR-1
+    asset: LoungeBench
+    position: (6.5, 1.6)
+
+  Furniture: FU-L4-TERR-2
+    asset: LoungeBench
+    position: (18.5, 1.6)
+
+  Furniture: FU-L4-TERR-3
+    asset: LoungeBench
+    position: (30.5, 1.6)
+
+#### Space: West Core L4
+  usage: staircase
+  area: 80 m2
+  zone: circulation
+  boundary: [(0, 14), (8, 14), (8, 24), (0, 24)]
+
+#### Space: East Core L4
+  usage: staircase
+  area: 64 m2
+  zone: circulation
+  boundary: [(38, 16), (46, 16), (46, 24), (38, 24)]

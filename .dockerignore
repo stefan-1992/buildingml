@@ -1,0 +1,10 @@
+target/
+node_modules/
+.git/
+.claude/
+editors/
+docs/
+*.ifc
+web/dist/
+web/node_modules/
+.github/

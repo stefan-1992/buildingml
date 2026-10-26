@@ -1,0 +1,708 @@
+// Roof - flat roof with skylight lantern over the atrium and PV array
+// elevation 19.3 m
+
+import materials from "../materials.bml"
+
+# Site: Campus Nord
+
+## Building: Forum Nord
+
+### Storey: Roof
+  elevation: 19.3 m
+  height: 3 m
+
+  // Main roof as a roof slab: it keeps the atrium void for the lantern
+  Slab: RF-PAVILION
+    boundary: { outer: [(-1.4, 4.7), (37.4, 0), (39.1, 25.4), (-1.4, 25.4)], holes: [[(24, 9), (35, 8.5), (34.5, 15), (23, 14.5)]] }
+    thickness: 0.4 m
+    z_offset: 0.4 m
+    material: roof_400
+    slab_type: roof
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.18
+
+  Roof: RF-CORE-E
+    type: flat
+    boundary: [(46.2, 24.2), (39.02, 24.2), (38.457, 15.8), (46.2, 15.8)]
+    thickness: 0.4 m
+    z_offset: 0 m
+    material: roof_400
+    fire_rating: REI90
+    thermal_transmittance: 0.18
+
+  // ------------------------------------------------------------------
+  // Skylight lantern (glass box, 1.2 m high)
+  // ------------------------------------------------------------------
+
+  Wall: CW-RF-LANTERN-1
+    from: (23.969, 9.001) to: (35.03, 8.499)
+    height: 1.2 m
+    thickness: 0.06 m
+    mullions: 1.5 m
+    brackets: true
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    z_offset: 0.4 m
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+  Wall: CW-RF-LANTERN-2
+    from: (34.983, 8.726) to: (34.515, 14.799)
+    height: 1.2 m
+    thickness: 0.06 m
+    mullions: 1.5 m
+    brackets: true
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    z_offset: 0.4 m
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+  Wall: CW-RF-LANTERN-3
+    from: (34.53, 15.001) to: (22.97, 14.499)
+    height: 1.2 m
+    thickness: 0.06 m
+    mullions: 1.5 m
+    brackets: true
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    z_offset: 0.4 m
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+  Wall: CW-RF-LANTERN-4
+    from: (23.041, 14.275) to: (23.964, 9.198)
+    height: 1.2 m
+    thickness: 0.06 m
+    mullions: 1.5 m
+    brackets: true
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    z_offset: 0.4 m
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+  Plate: PL-RF-SKYLIGHT
+    boundary: [(24, 9), (35, 8.5), (34.5, 15), (23, 14.5)]
+    thickness: 0.06 m
+    z_offset: 1.66 m
+    material: glazing
+    type: "skylight"
+
+  // ------------------------------------------------------------------
+  // Photovoltaic array
+  // ------------------------------------------------------------------
+
+  Plate: PL-PV-001
+    boundary: [(2, 5), (3.7, 5), (3.7, 6.1), (2, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-002
+    boundary: [(3.8, 5), (5.5, 5), (5.5, 6.1), (3.8, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-003
+    boundary: [(5.6, 5), (7.3, 5), (7.3, 6.1), (5.6, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-004
+    boundary: [(7.4, 5), (9.1, 5), (9.1, 6.1), (7.4, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-005
+    boundary: [(9.2, 5), (10.9, 5), (10.9, 6.1), (9.2, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-006
+    boundary: [(11, 5), (12.7, 5), (12.7, 6.1), (11, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-007
+    boundary: [(12.8, 5), (14.5, 5), (14.5, 6.1), (12.8, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-008
+    boundary: [(14.6, 5), (16.3, 5), (16.3, 6.1), (14.6, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-009
+    boundary: [(16.4, 5), (18.1, 5), (18.1, 6.1), (16.4, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-010
+    boundary: [(18.2, 5), (19.9, 5), (19.9, 6.1), (18.2, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-011
+    boundary: [(20, 5), (21.7, 5), (21.7, 6.1), (20, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-012
+    boundary: [(21.8, 5), (23.5, 5), (23.5, 6.1), (21.8, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-013
+    boundary: [(23.6, 5), (25.3, 5), (25.3, 6.1), (23.6, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-014
+    boundary: [(25.4, 5), (27.1, 5), (27.1, 6.1), (25.4, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-015
+    boundary: [(27.2, 5), (28.9, 5), (28.9, 6.1), (27.2, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-016
+    boundary: [(29, 5), (30.7, 5), (30.7, 6.1), (29, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-017
+    boundary: [(30.8, 5), (32.5, 5), (32.5, 6.1), (30.8, 6.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-018
+    boundary: [(2, 7), (3.7, 7), (3.7, 8.1), (2, 8.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-019
+    boundary: [(3.8, 7), (5.5, 7), (5.5, 8.1), (3.8, 8.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-020
+    boundary: [(5.6, 7), (7.3, 7), (7.3, 8.1), (5.6, 8.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-021
+    boundary: [(7.4, 7), (9.1, 7), (9.1, 8.1), (7.4, 8.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-022
+    boundary: [(9.2, 7), (10.9, 7), (10.9, 8.1), (9.2, 8.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-023
+    boundary: [(11, 7), (12.7, 7), (12.7, 8.1), (11, 8.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-024
+    boundary: [(12.8, 7), (14.5, 7), (14.5, 8.1), (12.8, 8.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-025
+    boundary: [(14.6, 7), (16.3, 7), (16.3, 8.1), (14.6, 8.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-026
+    boundary: [(16.4, 7), (18.1, 7), (18.1, 8.1), (16.4, 8.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-027
+    boundary: [(18.2, 7), (19.9, 7), (19.9, 8.1), (18.2, 8.1)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-028
+    boundary: [(2, 16.5), (3.7, 16.5), (3.7, 17.6), (2, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-029
+    boundary: [(3.8, 16.5), (5.5, 16.5), (5.5, 17.6), (3.8, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-030
+    boundary: [(5.6, 16.5), (7.3, 16.5), (7.3, 17.6), (5.6, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-031
+    boundary: [(7.4, 16.5), (9.1, 16.5), (9.1, 17.6), (7.4, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-032
+    boundary: [(9.2, 16.5), (10.9, 16.5), (10.9, 17.6), (9.2, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-033
+    boundary: [(11, 16.5), (12.7, 16.5), (12.7, 17.6), (11, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-034
+    boundary: [(12.8, 16.5), (14.5, 16.5), (14.5, 17.6), (12.8, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-035
+    boundary: [(14.6, 16.5), (16.3, 16.5), (16.3, 17.6), (14.6, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-036
+    boundary: [(16.4, 16.5), (18.1, 16.5), (18.1, 17.6), (16.4, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-037
+    boundary: [(18.2, 16.5), (19.9, 16.5), (19.9, 17.6), (18.2, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-038
+    boundary: [(20, 16.5), (21.7, 16.5), (21.7, 17.6), (20, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-039
+    boundary: [(21.8, 16.5), (23.5, 16.5), (23.5, 17.6), (21.8, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-040
+    boundary: [(23.6, 16.5), (25.3, 16.5), (25.3, 17.6), (23.6, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-041
+    boundary: [(25.4, 16.5), (27.1, 16.5), (27.1, 17.6), (25.4, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-042
+    boundary: [(27.2, 16.5), (28.9, 16.5), (28.9, 17.6), (27.2, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-043
+    boundary: [(29, 16.5), (30.7, 16.5), (30.7, 17.6), (29, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-044
+    boundary: [(30.8, 16.5), (32.5, 16.5), (32.5, 17.6), (30.8, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-045
+    boundary: [(32.6, 16.5), (34.3, 16.5), (34.3, 17.6), (32.6, 17.6)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-050
+    boundary: [(9.2, 18.7), (10.9, 18.7), (10.9, 19.8), (9.2, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-051
+    boundary: [(11, 18.7), (12.7, 18.7), (12.7, 19.8), (11, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-052
+    boundary: [(12.8, 18.7), (14.5, 18.7), (14.5, 19.8), (12.8, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-053
+    boundary: [(14.6, 18.7), (16.3, 18.7), (16.3, 19.8), (14.6, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-054
+    boundary: [(16.4, 18.7), (18.1, 18.7), (18.1, 19.8), (16.4, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-055
+    boundary: [(18.2, 18.7), (19.9, 18.7), (19.9, 19.8), (18.2, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-056
+    boundary: [(20, 18.7), (21.7, 18.7), (21.7, 19.8), (20, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-057
+    boundary: [(21.8, 18.7), (23.5, 18.7), (23.5, 19.8), (21.8, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-058
+    boundary: [(23.6, 18.7), (25.3, 18.7), (25.3, 19.8), (23.6, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-059
+    boundary: [(25.4, 18.7), (27.1, 18.7), (27.1, 19.8), (25.4, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-060
+    boundary: [(27.2, 18.7), (28.9, 18.7), (28.9, 19.8), (27.2, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-061
+    boundary: [(29, 18.7), (30.7, 18.7), (30.7, 19.8), (29, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-062
+    boundary: [(30.8, 18.7), (32.5, 18.7), (32.5, 19.8), (30.8, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-063
+    boundary: [(32.6, 18.7), (34.3, 18.7), (34.3, 19.8), (32.6, 19.8)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-068
+    boundary: [(9.2, 20.9), (10.9, 20.9), (10.9, 22), (9.2, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-069
+    boundary: [(11, 20.9), (12.7, 20.9), (12.7, 22), (11, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-070
+    boundary: [(12.8, 20.9), (14.5, 20.9), (14.5, 22), (12.8, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-071
+    boundary: [(14.6, 20.9), (16.3, 20.9), (16.3, 22), (14.6, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-072
+    boundary: [(16.4, 20.9), (18.1, 20.9), (18.1, 22), (16.4, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-073
+    boundary: [(18.2, 20.9), (19.9, 20.9), (19.9, 22), (18.2, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-074
+    boundary: [(20, 20.9), (21.7, 20.9), (21.7, 22), (20, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-075
+    boundary: [(21.8, 20.9), (23.5, 20.9), (23.5, 22), (21.8, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-076
+    boundary: [(23.6, 20.9), (25.3, 20.9), (25.3, 22), (23.6, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-077
+    boundary: [(25.4, 20.9), (27.1, 20.9), (27.1, 22), (25.4, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-078
+    boundary: [(27.2, 20.9), (28.9, 20.9), (28.9, 22), (27.2, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-079
+    boundary: [(29, 20.9), (30.7, 20.9), (30.7, 22), (29, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-080
+    boundary: [(30.8, 20.9), (32.5, 20.9), (32.5, 22), (30.8, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-081
+    boundary: [(32.6, 20.9), (34.3, 20.9), (34.3, 22), (32.6, 22)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-086
+    boundary: [(9.2, 23.1), (10.9, 23.1), (10.9, 24.2), (9.2, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-087
+    boundary: [(11, 23.1), (12.7, 23.1), (12.7, 24.2), (11, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-088
+    boundary: [(12.8, 23.1), (14.5, 23.1), (14.5, 24.2), (12.8, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-089
+    boundary: [(14.6, 23.1), (16.3, 23.1), (16.3, 24.2), (14.6, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-090
+    boundary: [(16.4, 23.1), (18.1, 23.1), (18.1, 24.2), (16.4, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-091
+    boundary: [(18.2, 23.1), (19.9, 23.1), (19.9, 24.2), (18.2, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-092
+    boundary: [(20, 23.1), (21.7, 23.1), (21.7, 24.2), (20, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-093
+    boundary: [(21.8, 23.1), (23.5, 23.1), (23.5, 24.2), (21.8, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-094
+    boundary: [(23.6, 23.1), (25.3, 23.1), (25.3, 24.2), (23.6, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-095
+    boundary: [(25.4, 23.1), (27.1, 23.1), (27.1, 24.2), (25.4, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-096
+    boundary: [(27.2, 23.1), (28.9, 23.1), (28.9, 24.2), (27.2, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-097
+    boundary: [(29, 23.1), (30.7, 23.1), (30.7, 24.2), (29, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-098
+    boundary: [(30.8, 23.1), (32.5, 23.1), (32.5, 24.2), (30.8, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"
+
+  Plate: PL-PV-099
+    boundary: [(32.6, 23.1), (34.3, 23.1), (34.3, 24.2), (32.6, 24.2)]
+    thickness: 0.04 m
+    z_offset: 0.8 m
+    material: pv_panel
+    type: "pv_module"

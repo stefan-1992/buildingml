@@ -1,0 +1,96 @@
+// Phase 7c: Enhanced Geometry test fixture
+// Tests: polygon spaces, curved walls, slabs with holes, auto boundaries
+
+# Site: Phase7cTestSite
+  location: 52.52, 13.405
+
+## Building: GeometryTestBuilding
+
+### Storey: Ground Floor
+  elevation: 0 m
+  height: 3.0 m
+
+  // L-shaped space with explicit boundary polygon
+  Wall: W-GF-01
+    from: (0, 0) to: (10, 0)
+    height: 3.0 m
+    thickness: 0.2 m
+
+  Wall: W-GF-02
+    from: (10, 0) to: (10, 5)
+    height: 3.0 m
+    thickness: 0.2 m
+
+  Wall: W-GF-03
+    from: (10, 5) to: (5, 5)
+    height: 3.0 m
+    thickness: 0.2 m
+
+  Wall: W-GF-04
+    from: (5, 5) to: (5, 8)
+    height: 3.0 m
+    thickness: 0.2 m
+
+  Wall: W-GF-05
+    from: (5, 8) to: (0, 8)
+    height: 3.0 m
+    thickness: 0.2 m
+
+  Wall: W-GF-06
+    from: (0, 8) to: (0, 0)
+    height: 3.0 m
+    thickness: 0.2 m
+
+  // Curved wall with via point
+  Wall: W-CURVE-01
+    from: (12, 0) via: (15, 2) to: (18, 0)
+    height: 3.0 m
+    thickness: 0.2 m
+
+  // Slab with a hole (elevator shaft cutout)
+  Slab: S-GF-01
+    boundary: { outer: [(0,0), (10,0), (10,5), (5,5), (5,8), (0,8)], holes: [[(2,2), (4,2), (4,4), (2,4)]] }
+    thickness: 0.2 m
+
+  // Circular column (tessellated cylinder)
+  Column: COL-CIR-01
+    position: (5, 4)
+    height: 3.0 m
+    profile: circle(0.15)
+
+#### Space: Main Hall
+  usage: lobby
+  boundary: [(0,0), (10,0), (10,5), (5,5), (5,8), (0,8)]
+
+### Storey: First Floor
+  elevation: 3.0 m
+  height: 3.0 m
+
+  // Regular rectangular space
+  Wall: W-FF-01
+    from: (0, 0) to: (6, 0)
+    height: 3.0 m
+    thickness: 0.2 m
+
+  Wall: W-FF-02
+    from: (6, 0) to: (6, 5)
+    height: 3.0 m
+    thickness: 0.2 m
+
+  Wall: W-FF-03
+    from: (6, 5) to: (0, 5)
+    height: 3.0 m
+    thickness: 0.2 m
+
+  Wall: W-FF-04
+    from: (0, 5) to: (0, 0)
+    height: 3.0 m
+    thickness: 0.2 m
+
+  Slab: S-FF-01
+    boundary: [(0,0), (6,0), (6,5), (0,5)]
+    thickness: 0.2 m
+
+#### Space: Office
+  usage: office
+  area: 30 m2

@@ -1,0 +1,644 @@
+// Floor 5 ?Top Residential Floor (8 larger units, explicit layout)
+// elevation: 15.50 m, height: 3.00 m
+// Demonstrates: zones per-unit, auto-IDs, storey-level elements
+
+# Site: Parkview Residences
+
+## Building: Block A
+
+### Storey: Floor 5
+  elevation: 15.50 m
+  height: 3.00 m
+
+  // Storey-level elements
+  Slab: SLAB-F5
+    boundary: [(0.15,0.15), (39.85,0.15), (39.85,17.85), (0.15,17.85)]
+    thickness: 0.25 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  // Auto-ID columns (unreferenced)
+  Column:
+    position: (8.0, 0.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column:
+    position: (20.0, 0.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column:
+    position: (32.0, 0.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column:
+    position: (8.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column:
+    position: (20.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column:
+    position: (32.0, 9.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column:
+    position: (8.0, 18.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column:
+    position: (20.0, 18.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Column:
+    position: (32.0, 18.0)
+    height: 3.00 m
+    profile: rectangle(0.35, 0.35)
+    material: reinforced_concrete
+
+  Beam: B-F5-01
+    from: (8, 0) to: (8, 18)
+    profile: rectangle(0.35, 0.55)
+    material: reinforced_concrete
+
+  Beam: B-F5-02
+    from: (20, 0) to: (20, 18)
+    profile: rectangle(0.35, 0.55)
+    material: reinforced_concrete
+
+  Beam: B-F5-03
+    from: (32, 0) to: (32, 18)
+    profile: rectangle(0.35, 0.55)
+    material: reinforced_concrete
+
+#### Space: Central Corridor F5
+  usage: corridor
+  area: 72.0 m2
+  zone: corridor
+  boundary: [(3, 8), (37, 8), (37, 10), (3, 10)]
+
+/// Penthouse unit, southwest (larger than typical floors)
+#### Space: Unit 501
+  usage: living
+  area: 120.0 m2
+  zone: unit_501
+
+  Wall: W-F5-501-S
+    from: (0, 0) to: (16, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F5-501-01
+      offset: 1.0 m
+      width: 2.5 m
+      height: 2.0 m
+      sill_height: 0.60 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F5-501-02
+      offset: 5.0 m
+      width: 2.5 m
+      height: 2.0 m
+      sill_height: 0.60 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F5-501-03
+      offset: 10.0 m
+      width: 2.5 m
+      height: 2.0 m
+      sill_height: 0.60 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F5-501-W
+    from: (0, 8) to: (0, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F5-501-04
+      offset: 1.5 m
+      width: 2.0 m
+      height: 2.0 m
+      sill_height: 0.60 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Door: D-F5-501-B
+      offset: 5.0 m
+      width: 2.00 m
+      height: 2.20 m
+      type: sliding
+
+  Wall: W-F5-501-E
+    from: (16, 0) to: (16, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  Wall: W-F5-501-N
+    from: (3, 8) to: (16, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F5-501
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+  Railing: RL-F5-501
+    from: (0, -0.15) to: (6, -0.15)
+    height: 1.10 m
+
+/// Two-bedroom unit, south centre
+#### Space: Unit 502
+  usage: living
+  area: 40.0 m2
+  zone: unit_502
+
+  Wall: W-F5-502-S
+    from: (16, 0) to: (21, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F5-502-01
+      offset: 1.0 m
+      width: 2.5 m
+      height: 2.0 m
+      sill_height: 0.60 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F5-502-E
+    from: (21, 0) to: (21, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  Wall: W-F5-502-N
+    from: (16, 8) to: (21, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F5-502
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+  Railing: RL-F5-502
+    from: (18, -0.15) to: (22, -0.15)
+    height: 1.10 m
+
+/// Penthouse unit, southeast (larger than typical floors)
+#### Space: Unit 503
+  usage: living
+  area: 120.0 m2
+  zone: unit_503
+
+  Wall: W-F5-503-S
+    from: (24, 0) to: (40, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F5-503-01
+      offset: 1.5 m
+      width: 2.5 m
+      height: 2.0 m
+      sill_height: 0.60 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F5-503-02
+      offset: 6.0 m
+      width: 2.5 m
+      height: 2.0 m
+      sill_height: 0.60 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F5-503-03
+      offset: 11.0 m
+      width: 2.5 m
+      height: 2.0 m
+      sill_height: 0.60 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F5-503-E
+    from: (40, 0) to: (40, 8)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F5-503-04
+      offset: 1.5 m
+      width: 2.0 m
+      height: 2.0 m
+      sill_height: 0.60 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Door: D-F5-503-B
+      offset: 5.0 m
+      width: 2.00 m
+      height: 2.20 m
+      type: sliding
+
+  Wall: W-F5-503-N
+    from: (24, 8) to: (37, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F5-503
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+  Railing: RL-F5-503
+    from: (34, -0.15) to: (40, -0.15)
+    height: 1.10 m
+
+/// Three-bedroom unit, northwest
+#### Space: Unit 504
+  usage: living
+  area: 95.0 m2
+  zone: unit_504
+
+  Wall: W-F5-504-N
+    from: (13, 18) to: (0, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F5-504-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F5-504-02
+      offset: 5.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F5-504-W
+    from: (0, 18) to: (0, 10)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F5-504-03
+      offset: 2.0 m
+      width: 1.4 m
+      height: 1.4 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F5-504-E
+    from: (13, 10) to: (13, 18)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  Wall: W-F5-504-S
+    from: (3, 10) to: (13, 10)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F5-504
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+/// Two-bedroom unit, north centre-left
+#### Space: Unit 505
+  usage: living
+  area: 78.0 m2
+  zone: unit_505
+
+  Wall: W-F5-505-N
+    from: (20, 18) to: (13, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F5-505-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F5-505-E
+    from: (20, 10) to: (20, 18)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  Wall: W-F5-505-S
+    from: (13, 10) to: (20, 10)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F5-505
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+/// Two-bedroom unit, north centre-right
+#### Space: Unit 506
+  usage: living
+  area: 78.0 m2
+  zone: unit_506
+
+  Wall: W-F5-506-N
+    from: (27, 18) to: (20, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F5-506-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F5-506-E
+    from: (27, 10) to: (27, 18)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  Wall: W-F5-506-S
+    from: (20, 10) to: (27, 10)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F5-506
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+/// Three-bedroom unit, northeast
+#### Space: Unit 507
+  usage: living
+  area: 95.0 m2
+  zone: unit_507
+
+  Wall: W-F5-507-N
+    from: (40, 18) to: (27, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F5-507-01
+      offset: 1.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+    Window: WIN-F5-507-02
+      offset: 5.0 m
+      width: 2.0 m
+      height: 1.6 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F5-507-E
+    from: (40, 10) to: (40, 18)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F5-507-03
+      offset: 2.0 m
+      width: 1.4 m
+      height: 1.4 m
+      sill_height: 0.90 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F5-507-S
+    from: (27, 10) to: (37, 10)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F5-507
+      offset: 0.5 m
+      width: 0.90 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+/// Accessible penthouse unit, south-facing
+#### Space: Unit 508
+  usage: living
+  area: 24.0 m2
+  zone: unit_508
+
+  Wall: W-F5-508-S
+    from: (21, 0) to: (24, 0)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+    Window: WIN-F5-508-01
+      offset: 0.25 m
+      width: 1.2 m
+      height: 1.6 m
+      sill_height: 0.60 m
+      type: triple_glazed
+      u_value: 0.7 W/m2K
+
+  Wall: W-F5-508-E
+    from: (24, 0) to: (24, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+  Wall: W-F5-508-N
+    from: (21, 8) to: (24, 8)
+    height: 3.00 m
+    thickness: 0.20 m
+    material: interior_partition
+    is_external: false
+    load_bearing: false
+
+    Door: D-F5-508
+      offset: 0.1 m
+      width: 1.00 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+#### Space: West Stairwell F5
+  usage: staircase
+  area: 24.0 m2
+
+  Wall: W-F5-WS-W
+    from: (0, 10) to: (0, 8)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Wall: W-F5-WS-E
+    from: (3, 0) to: (3, 10)
+    height: 3.00 m
+    thickness: 0.25 m
+    material: shear_wall_concrete
+    is_external: false
+    load_bearing: true
+    fire_rating: REI90
+
+    Door: D-F5-WS
+      offset: 6.0 m
+      width: 1.00 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30
+
+#### Space: East Stairwell F5
+  usage: staircase
+  area: 24.0 m2
+
+  Wall: W-F5-ES-E
+    from: (40, 8) to: (40, 10)
+    height: 3.00 m
+    thickness: 0.30 m
+    material: exterior_insulated
+    is_external: true
+    load_bearing: true
+    fire_rating: REI90
+
+  Wall: W-F5-ES-W
+    from: (37, 10) to: (37, 0)
+    height: 3.00 m
+    thickness: 0.25 m
+    material: shear_wall_concrete
+    is_external: false
+    load_bearing: true
+    fire_rating: REI90
+
+    Door: D-F5-ES
+      offset: 6.0 m
+      width: 1.00 m
+      height: 2.10 m
+      type: single_leaf
+      fire_rating: T30

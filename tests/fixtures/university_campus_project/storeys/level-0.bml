@@ -1,0 +1,1125 @@
+// Level 0 - Mensa, foyer, kitchen, Audimax
+// elevation 0.0 m, height 4.5 m
+// Mensa with a curved, fully glazed bulge towards the campus square (south),
+// glazed entrance foyer under the atrium, kitchen with servery counters, and
+// the fan-shaped Audimax (double height, 8.5 m) with raked seating tiers.
+
+import materials from "../materials.bml"
+import assets from "../assets/furniture.bml"
+
+# Site: Campus Nord
+
+## Building: Forum Nord
+
+### Storey: Level 0
+  elevation: 0 m
+  height: 4.5 m
+
+  // ------------------------------------------------------------------
+  // Ground slabs
+  // ------------------------------------------------------------------
+
+  Slab: SL-L0
+    boundary: [(0, 0), (4, 0), (4.477, -1.251), (5.148, -2.41), (5.997, -3.446), (7, -4.333), (8.132, -5.048), (9.365, -5.572), (10.665, -5.892), (12, -6), (13.335, -5.892), (14.635, -5.572), (15.868, -5.048), (17, -4.333), (18.003, -3.446), (18.852, -2.41), (19.523, -1.251), (20, 0), (44, 0), (50, 24), (0, 24)]
+    thickness: 0.3 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  Slab: SL-L0-AUD
+    boundary: [(44, 0), (62, -4), (66, 26), (50, 24)]
+    thickness: 0.3 m
+    material: reinforced_concrete
+    slab_type: floor
+
+  // ------------------------------------------------------------------
+  // South facade: concrete piers, curved mensa glazing, foyer curtain wall
+  // ------------------------------------------------------------------
+
+  Wall: W-L0-S1
+    from: (0, 0) to: (4, 0)
+    height: 4.5 m
+    thickness: 0.35 m
+    material: exposed_concrete
+    is_external: true
+
+  Wall: CW-L0-MENSA
+    from: (4, 0) via: (12, -6) to: (20, 0)
+    height: 4.5 m
+    thickness: 0.08 m
+    material: glazing
+    is_external: true
+    Door: D-L0-MENSA-TERRACE
+      offset: 9.6 m
+      width: 2 m
+      height: 2.6 m
+
+
+  Member: MU-CW-L0-MENSA-01
+    boundary: [(4.459, -1.442), (4.486, -1.495), (4.664, -1.405), (4.637, -1.351)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-MENSA-02
+    boundary: [(5.276, -2.757), (5.312, -2.804), (5.471, -2.683), (5.435, -2.635)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-MENSA-03
+    boundary: [(6.32, -3.9), (6.364, -3.94), (6.498, -3.792), (6.454, -3.752)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-MENSA-04
+    boundary: [(7.555, -4.834), (7.606, -4.865), (7.711, -4.695), (7.66, -4.663)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-MENSA-05
+    boundary: [(8.94, -5.525), (8.996, -5.547), (9.068, -5.36), (9.012, -5.339)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-MENSA-06
+    boundary: [(10.429, -5.952), (10.488, -5.963), (10.524, -5.767), (10.465, -5.756)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-MENSA-09
+    boundary: [(15.004, -5.547), (15.06, -5.525), (14.988, -5.339), (14.932, -5.36)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-MENSA-10
+    boundary: [(16.394, -4.865), (16.445, -4.834), (16.34, -4.663), (16.289, -4.695)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-MENSA-11
+    boundary: [(17.636, -3.94), (17.68, -3.9), (17.546, -3.752), (17.502, -3.792)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-MENSA-12
+    boundary: [(18.688, -2.804), (18.724, -2.757), (18.565, -2.635), (18.529, -2.683)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-MENSA-13
+    boundary: [(19.514, -1.495), (19.541, -1.442), (19.363, -1.351), (19.336, -1.405)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Wall: W-L0-S2
+    from: (20, 0) to: (22, 0)
+    height: 4.5 m
+    thickness: 0.35 m
+    material: exposed_concrete
+    is_external: true
+
+  Wall: CW-L0-FOYER
+    from: (22, 0) to: (44, 0)
+    height: 4.5 m
+    thickness: 0.08 m
+    material: glazing
+    is_external: true
+    Door: D-L0-MAIN-1
+      offset: 7 m
+      width: 2.4 m
+      height: 2.7 m
+      is_external: true
+
+    Door: D-L0-MAIN-2
+      offset: 12.6 m
+      width: 2.4 m
+      height: 2.7 m
+      is_external: true
+
+
+  Member: MU-CW-L0-FOYER-01
+    boundary: [(23.437, -0.1), (23.497, -0.1), (23.497, 0.1), (23.437, 0.1)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-FOYER-02
+    boundary: [(24.903, -0.1), (24.963, -0.1), (24.963, 0.1), (24.903, 0.1)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-FOYER-03
+    boundary: [(26.37, -0.1), (26.43, -0.1), (26.43, 0.1), (26.37, 0.1)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-FOYER-04
+    boundary: [(27.837, -0.1), (27.897, -0.1), (27.897, 0.1), (27.837, 0.1)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-FOYER-05
+    boundary: [(32.237, -0.1), (32.297, -0.1), (32.297, 0.1), (32.237, 0.1)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-FOYER-06
+    boundary: [(33.703, -0.1), (33.763, -0.1), (33.763, 0.1), (33.703, 0.1)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-FOYER-07
+    boundary: [(38.103, -0.1), (38.163, -0.1), (38.163, 0.1), (38.103, 0.1)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-FOYER-08
+    boundary: [(39.57, -0.1), (39.63, -0.1), (39.63, 0.1), (39.57, 0.1)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-FOYER-09
+    boundary: [(41.037, -0.1), (41.097, -0.1), (41.097, 0.1), (41.037, 0.1)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: MU-CW-L0-FOYER-10
+    boundary: [(42.503, -0.1), (42.563, -0.1), (42.563, 0.1), (42.503, 0.1)]
+    height: 4.5 m
+    type: "mullion"
+    material: aluminium_mullion
+
+  Member: TR-CW-L0-FOYER
+    boundary: [(22, -0.08), (44, -0.08), (44, 0.08), (22, 0.08)]
+    height: 0.12 m
+    z_offset: 2.8 m
+    type: "transom"
+    material: aluminium_mullion
+
+  // ------------------------------------------------------------------
+  // West and north facades
+  // ------------------------------------------------------------------
+
+  Wall: W-L0-W
+    from: (0, 24) to: (0, 0)
+    height: 4.5 m
+    thickness: 0.35 m
+    material: exposed_concrete
+    is_external: true
+    Door: D-L0-WEST-EXIT
+      offset: 6.3 m
+      width: 1.2 m
+      height: 2.3 m
+      is_external: true
+
+    Window: WIN-L0-W1
+      offset: 11 m
+      width: 3.2 m
+      height: 3 m
+      sill_height: 0.6 m
+
+    Window: WIN-L0-W2
+      offset: 15 m
+      width: 3.2 m
+      height: 3 m
+      sill_height: 0.6 m
+
+    Window: WIN-L0-W3
+      offset: 19 m
+      width: 3.2 m
+      height: 3 m
+      sill_height: 0.6 m
+
+
+  Wall: W-L0-N
+    from: (50, 24) to: (0, 24)
+    height: 4.5 m
+    thickness: 0.35 m
+    material: exposed_concrete
+    is_external: true
+    Window: WIN-L0-N1
+      offset: 5 m
+      width: 2.4 m
+      height: 2.4 m
+      sill_height: 1.2 m
+
+    Door: D-L0-NORTH-ENTRY
+      offset: 14 m
+      width: 2.4 m
+      height: 2.7 m
+      is_external: true
+
+    Window: WIN-L0-N2
+      offset: 21 m
+      width: 2.8 m
+      height: 1 m
+      sill_height: 1.9 m
+
+    Window: WIN-L0-N2B
+      offset: 24.2 m
+      width: 2.8 m
+      height: 1 m
+      sill_height: 1.9 m
+
+    Window: WIN-L0-N3
+      offset: 29 m
+      width: 4 m
+      height: 2 m
+      sill_height: 1.4 m
+
+    Door: D-L0-DELIVERY
+      offset: 34 m
+      width: 2.4 m
+      height: 3 m
+      is_external: true
+
+    Window: WIN-L0-N4
+      offset: 38 m
+      width: 4 m
+      height: 2 m
+      sill_height: 1.4 m
+
+
+  // ------------------------------------------------------------------
+  // Mensa / foyer / kitchen partitions
+  // ------------------------------------------------------------------
+
+  Wall: W-L0-MENSA-FOYER
+    from: (22, 0) to: (22, 14)
+    height: 4.5 m
+    thickness: 0.08 m
+    material: glass_partition
+    Door: D-L0-MENSA-FOYER
+      offset: 5 m
+      width: 2 m
+      height: 2.6 m
+
+
+  Wall: W-L0-SERVERY
+    from: (8, 14) to: (22, 14)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Opening: OP-L0-COUNTER-1
+      offset: 1 m
+      width: 3 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+    Opening: OP-L0-COUNTER-2
+      offset: 5 m
+      width: 3 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+    Opening: OP-L0-COUNTER-3
+      offset: 9 m
+      width: 3 m
+      height: 1.2 m
+      sill_height: 0.9 m
+
+    Door: D-L0-KITCHEN-SERVERY
+      offset: 12.6 m
+      width: 1 m
+      height: 2.2 m
+
+
+  Wall: W-L0-KITCHEN-E
+    from: (22, 14) to: (22, 24)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L0-KITCHEN-FOYER
+      offset: 1 m
+      width: 1.2 m
+      height: 2.2 m
+
+
+  Wall: W-L0-WC1
+    from: (22, 19) to: (30, 19)
+    height: 4.5 m
+    thickness: 0.15 m
+    material: drywall
+    Door: D-L0-WC
+      offset: 3.2 m
+      width: 1 m
+      height: 2.2 m
+
+
+  Wall: W-L0-WC2
+    from: (30, 19) to: (30, 24)
+    height: 4.5 m
+    thickness: 0.15 m
+    material: drywall
+
+  // ------------------------------------------------------------------
+  // West core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-L0-CW1
+    from: (0, 14) to: (8, 14)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L0-CW-LOBBY
+      offset: 2.8 m
+      width: 1.8 m
+      height: 2.3 m
+
+
+  Wall: W-L0-CW2
+    from: (3.8, 14) to: (3.8, 24)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L0-CW-STAIR
+      offset: 0.5 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+
+
+  Wall: W-L0-CW3
+    from: (3.8, 20.8) to: (8, 20.8)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L0-CW-LIFT
+      offset: 1.6 m
+      width: 1.1 m
+      height: 2.2 m
+
+
+  Wall: W-L0-CW4
+    from: (8, 14) to: (8, 24)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+
+  // ------------------------------------------------------------------
+  // East core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-L0-CE1
+    from: (38, 16) to: (46, 16)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L0-CE-LOBBY
+      offset: 0.9 m
+      width: 1.6 m
+      height: 2.3 m
+
+
+  Wall: W-L0-CE2
+    from: (46, 16) to: (46, 24)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+
+  Wall: W-L0-CE3
+    from: (38, 16) to: (38, 24)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+
+  Wall: W-L0-CE4
+    from: (41.6, 16) to: (41.6, 24)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L0-CE-STAIR
+      offset: 0.5 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+
+
+  Wall: W-L0-CE5
+    from: (38, 20.8) to: (41.6, 20.8)
+    height: 4.5 m
+    thickness: 0.25 m
+    material: reinforced_concrete
+    Door: D-L0-CE-LIFT
+      offset: 1.2 m
+      width: 1.1 m
+      height: 2.2 m
+
+
+  // ------------------------------------------------------------------
+  // Audimax shell (double height, 8.5 m), larch cladding outside
+  // ------------------------------------------------------------------
+
+  Wall: W-AUD-W
+    from: (44, 0) to: (50, 24)
+    height: 8.5 m
+    thickness: 0.35 m
+    material: reinforced_concrete
+    Door: D-AUD-1
+      offset: 2.4 m
+      width: 2 m
+      height: 2.6 m
+      fire_rating: T30
+
+    Door: D-AUD-2
+      offset: 20 m
+      width: 2 m
+      height: 2.6 m
+      fire_rating: T30
+
+
+  Wall: W-AUD-S
+    from: (44, 0) to: (62, -4)
+    height: 8.5 m
+    thickness: 0.45 m
+    material: larch_cladding
+    is_external: true
+    Door: D-AUD-EXIT-S
+      offset: 1.4 m
+      width: 1.8 m
+      height: 2.4 m
+      is_external: true
+
+    Window: WIN-AUD-S1
+      offset: 5 m
+      width: 0.6 m
+      height: 6 m
+      sill_height: 1.2 m
+
+    Window: WIN-AUD-S2
+      offset: 8 m
+      width: 0.6 m
+      height: 6 m
+      sill_height: 1.2 m
+
+    Window: WIN-AUD-S3
+      offset: 11 m
+      width: 0.6 m
+      height: 6 m
+      sill_height: 1.2 m
+
+    Window: WIN-AUD-S4
+      offset: 14 m
+      width: 0.6 m
+      height: 6 m
+      sill_height: 1.2 m
+
+
+  Wall: W-AUD-E
+    from: (62, -4) to: (66, 26)
+    height: 8.5 m
+    thickness: 0.45 m
+    material: larch_cladding
+    is_external: true
+
+  Wall: W-AUD-N
+    from: (66, 26) to: (50, 24)
+    height: 8.5 m
+    thickness: 0.45 m
+    material: larch_cladding
+    is_external: true
+    Door: D-AUD-EXIT-N
+      offset: 13 m
+      width: 1.8 m
+      height: 2.4 m
+      is_external: true
+
+    Window: WIN-AUD-N1
+      offset: 1.5 m
+      width: 0.8 m
+      height: 5.5 m
+      sill_height: 1.5 m
+
+    Window: WIN-AUD-N2
+      offset: 5.1 m
+      width: 0.8 m
+      height: 5.5 m
+      sill_height: 1.5 m
+
+    Window: WIN-AUD-N3
+      offset: 8.7 m
+      width: 0.8 m
+      height: 5.5 m
+      sill_height: 1.5 m
+
+
+  // ------------------------------------------------------------------
+  // Columns (mensa and foyer)
+  // ------------------------------------------------------------------
+
+  Column: C-L0-01
+    position: (8, 4.5)
+    height: 4.5 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+
+  Column: C-L0-02
+    position: (15, 4.5)
+    height: 4.5 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+
+  Column: C-L0-03
+    position: (8, 10)
+    height: 4.5 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+
+  Column: C-L0-04
+    position: (15, 10)
+    height: 4.5 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+
+  Column: C-L0-05
+    position: (28, 4)
+    height: 4.5 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+
+  Column: C-L0-06
+    position: (36, 4)
+    height: 4.5 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+
+  Column: C-L0-07
+    position: (40, 10)
+    height: 4.5 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+
+  Column: C-L0-08
+    position: (26, 17)
+    height: 4.5 m
+    profile: circle(0.25)
+    material: exposed_concrete
+    load_bearing: true
+
+  // ------------------------------------------------------------------
+  // Elevators (shaft from level 0 to level 4)
+  // ------------------------------------------------------------------
+
+  Elevator: EL-WEST
+    position: (5.1, 21.1)
+    shaft_width: 2.4 m
+    shaft_depth: 2.6 m
+    from_storey: Level 0
+    to_storey: Level 4
+    capacity: "1000 kg"
+    type: passenger
+
+  Elevator: EL-EAST
+    position: (38.4, 21.1)
+    shaft_width: 2.4 m
+    shaft_depth: 2.6 m
+    from_storey: Level 0
+    to_storey: Level 4
+    capacity: "1000 kg"
+    type: passenger
+
+  Stair: ST-L0-W
+    from_storey: Level 0
+    to_storey: Level 1
+    type: straight
+    position: (0.4, 14.6)
+    width: 1.4 m
+    riser_count: 26
+    riser_height: 0.173 m
+    tread_depth: 0.27 m
+
+  Stair: ST-L0-E
+    from_storey: Level 0
+    to_storey: Level 1
+    type: straight
+    position: (42, 16.4)
+    width: 1.4 m
+    riser_count: 26
+    riser_height: 0.173 m
+    tread_depth: 0.27 m
+
+#### Space: Mensa Dining Hall
+  usage: dining
+  area: 378.3 m2
+  zone: mensa
+  boundary: [(0, 0), (4, 0), (4.477, -1.251), (5.148, -2.41), (5.997, -3.446), (7, -4.333), (8.132, -5.048), (9.365, -5.572), (10.665, -5.892), (12, -6), (13.335, -5.892), (14.635, -5.572), (15.868, -5.048), (17, -4.333), (18.003, -3.446), (18.852, -2.41), (19.523, -1.251), (20, 0), (22, 0), (22, 14), (0, 14)]
+
+  Furniture: FU-MENSA-T11
+    asset: MensaTable
+    position: (1, 2)
+
+  Furniture: FU-MENSA-T21
+    asset: MensaTable
+    position: (1, 4.4)
+
+  Furniture: FU-MENSA-T31
+    asset: MensaTable
+    position: (1, 6.8)
+
+  Furniture: FU-MENSA-T41
+    asset: MensaTable
+    position: (1, 9.2)
+
+  Furniture: FU-MENSA-T51
+    asset: MensaTable
+    position: (1, 11.6)
+
+  Furniture: FU-MENSA-T12
+    asset: MensaTable
+    position: (3.8, 2)
+
+  Furniture: FU-MENSA-T22
+    asset: MensaTable
+    position: (3.8, 4.4)
+
+  Furniture: FU-MENSA-T32
+    asset: MensaTable
+    position: (3.8, 6.8)
+
+  Furniture: FU-MENSA-T42
+    asset: MensaTable
+    position: (3.8, 9.2)
+
+  Furniture: FU-MENSA-T52
+    asset: MensaTable
+    position: (3.8, 11.6)
+
+  Furniture: FU-MENSA-T13
+    asset: MensaTable
+    position: (9, 2)
+
+  Furniture: FU-MENSA-T23
+    asset: MensaTable
+    position: (9, 4.4)
+
+  Furniture: FU-MENSA-T33
+    asset: MensaTable
+    position: (9, 6.8)
+
+  Furniture: FU-MENSA-T43
+    asset: MensaTable
+    position: (9, 9.2)
+
+  Furniture: FU-MENSA-T53
+    asset: MensaTable
+    position: (9, 11.6)
+
+  Furniture: FU-MENSA-T14
+    asset: MensaTable
+    position: (11.9, 2)
+
+  Furniture: FU-MENSA-T24
+    asset: MensaTable
+    position: (11.9, 4.4)
+
+  Furniture: FU-MENSA-T34
+    asset: MensaTable
+    position: (11.9, 6.8)
+
+  Furniture: FU-MENSA-T44
+    asset: MensaTable
+    position: (11.9, 9.2)
+
+  Furniture: FU-MENSA-T54
+    asset: MensaTable
+    position: (11.9, 11.6)
+
+  Furniture: FU-MENSA-T15
+    asset: MensaTable
+    position: (16, 2)
+
+  Furniture: FU-MENSA-T25
+    asset: MensaTable
+    position: (16, 4.4)
+
+  Furniture: FU-MENSA-T35
+    asset: MensaTable
+    position: (16, 6.8)
+
+  Furniture: FU-MENSA-T45
+    asset: MensaTable
+    position: (16, 9.2)
+
+  Furniture: FU-MENSA-T55
+    asset: MensaTable
+    position: (16, 11.6)
+
+  Furniture: FU-MENSA-T16
+    asset: MensaTable
+    position: (18.8, 2)
+
+  Furniture: FU-MENSA-T26
+    asset: MensaTable
+    position: (18.8, 4.4)
+
+  Furniture: FU-MENSA-T36
+    asset: MensaTable
+    position: (18.8, 6.8)
+
+  Furniture: FU-MENSA-T46
+    asset: MensaTable
+    position: (18.8, 9.2)
+
+  Furniture: FU-MENSA-T56
+    asset: MensaTable
+    position: (18.8, 11.6)
+
+  Furniture: FU-MENSA-R1
+    asset: CafeTable
+    position: (6.76, -2.278)
+
+  Furniture: FU-MENSA-R2
+    asset: CafeTable
+    position: (8.849, -3.844)
+
+  Furniture: FU-MENSA-R3
+    asset: CafeTable
+    position: (11.4, -4.4)
+
+  Furniture: FU-MENSA-R4
+    asset: CafeTable
+    position: (13.951, -3.844)
+
+  Furniture: FU-MENSA-R5
+    asset: CafeTable
+    position: (16.04, -2.278)
+
+#### Space: Mensa Kitchen
+  usage: kitchen
+  area: 140 m2
+  zone: mensa
+  boundary: [(8, 14), (22, 14), (22, 24), (8, 24)]
+
+  Proxy: PX-KITCHEN-ISLAND-1
+    boundary: [(10, 18), (12.8, 18), (12.8, 19.2), (10, 19.2)]
+    height: 0.9 m
+    type: "kitchen_island"
+    material: stainless_steel
+
+  Proxy: PX-KITCHEN-ISLAND-2
+    boundary: [(14, 18), (16.8, 18), (16.8, 19.2), (14, 19.2)]
+    height: 0.9 m
+    type: "kitchen_island"
+    material: stainless_steel
+
+  Proxy: PX-KITCHEN-ISLAND-3
+    boundary: [(18, 18), (20.8, 18), (20.8, 19.2), (18, 19.2)]
+    height: 0.9 m
+    type: "kitchen_island"
+    material: stainless_steel
+
+  Proxy: PX-KITCHEN-LINE
+    boundary: [(8.3, 22.9), (21.7, 22.9), (21.7, 23.7), (8.3, 23.7)]
+    height: 0.9 m
+    type: "cooking_line"
+    material: stainless_steel
+
+#### Space: Foyer and Atrium
+  usage: lobby
+  area: 496 m2
+  zone: circulation
+  boundary: [(22, 0), (44, 0), (50, 24), (46, 24), (46, 16), (38, 16), (38, 24), (30, 24), (30, 19), (22, 19)]
+
+  Furniture: FU-FOYER-1
+    asset: LoungeBench
+    position: (25, 3)
+
+  Furniture: FU-FOYER-2
+    asset: LoungeBench
+    position: (31, 3)
+
+  Furniture: FU-FOYER-3
+    asset: LoungeBench
+    position: (39, 3)
+
+#### Space: Toilets Level 0
+  usage: bathroom
+  area: 40 m2
+  zone: services
+  boundary: [(22, 19), (30, 19), (30, 24), (22, 24)]
+
+#### Space: Audimax
+  usage: classroom
+  area: 464 m2
+  zone: teaching
+  boundary: [(44, 0), (62, -4), (66, 26), (50, 24)]
+
+  Proxy: PX-AUD-STAGE
+    boundary: [(44.718, 1.367), (47.936, 0.712), (52.864, 22.888), (49.962, 22.593)]
+    height: 0.45 m
+    type: "stage"
+    material: oak
+
+  Proxy: PX-AUD-SCREEN
+    boundary: [(45.71, 5.97), (45.815, 5.955), (48.797, 18.009), (48.698, 18.006)]
+    height: 3.2 m
+    z_offset: 3 m
+    type: "projection_screen"
+    material: projection_screen
+
+  Slab: SL-AUD-TIER-01
+    boundary: [(49.481, -0.813), (50.6, -1.056), (55.717, 24.332), (54.719, 24.213)]
+    thickness: 0.36 m
+    z_offset: 0.36 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-01L
+    boundary: [(49.841, -0.485), (50.176, -0.557), (52.522, 10.886), (52.204, 10.908)]
+    height: 0.75 m
+    z_offset: 0.36 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-01R
+    boundary: [(52.526, 12.461), (52.842, 12.446), (55.188, 23.888), (54.888, 23.854)]
+    height: 0.75 m
+    z_offset: 0.36 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-02
+    boundary: [(50.6, -1.056), (51.719, -1.3), (56.715, 24.451), (55.717, 24.332)]
+    thickness: 0.72 m
+    z_offset: 0.72 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-02L
+    boundary: [(50.958, -0.723), (51.294, -0.795), (53.585, 10.812), (53.266, 10.834)]
+    height: 0.75 m
+    z_offset: 0.72 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-02R
+    boundary: [(53.581, 12.41), (53.897, 12.395), (56.188, 24.002), (55.888, 23.968)]
+    height: 0.75 m
+    z_offset: 0.72 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-03
+    boundary: [(51.719, -1.3), (52.838, -1.543), (57.714, 24.57), (56.715, 24.451)]
+    thickness: 1.08 m
+    z_offset: 1.08 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-03L
+    boundary: [(52.076, -0.961), (52.411, -1.033), (54.647, 10.739), (54.328, 10.761)]
+    height: 0.75 m
+    z_offset: 1.08 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-03R
+    boundary: [(54.636, 12.359), (54.952, 12.344), (57.188, 24.115), (56.888, 24.081)]
+    height: 0.75 m
+    z_offset: 1.08 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-04
+    boundary: [(52.838, -1.543), (53.957, -1.787), (58.712, 24.689), (57.714, 24.57)]
+    thickness: 1.44 m
+    z_offset: 1.44 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-04L
+    boundary: [(53.193, -1.199), (53.528, -1.27), (55.709, 10.665), (55.391, 10.687)]
+    height: 0.75 m
+    z_offset: 1.44 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-04R
+    boundary: [(55.69, 12.308), (56.007, 12.293), (58.188, 24.228), (57.888, 24.194)]
+    height: 0.75 m
+    z_offset: 1.44 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-05
+    boundary: [(53.957, -1.787), (55.076, -2.03), (59.71, 24.808), (58.712, 24.689)]
+    thickness: 1.8 m
+    z_offset: 1.8 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-05L
+    boundary: [(54.31, -1.437), (54.645, -1.508), (56.772, 10.592), (56.453, 10.614)]
+    height: 0.75 m
+    z_offset: 1.8 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-05R
+    boundary: [(56.745, 12.257), (57.062, 12.242), (59.188, 24.342), (58.888, 24.308)]
+    height: 0.75 m
+    z_offset: 1.8 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-06
+    boundary: [(55.076, -2.03), (56.195, -2.274), (60.708, 24.927), (59.71, 24.808)]
+    thickness: 2.16 m
+    z_offset: 2.16 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-06L
+    boundary: [(55.427, -1.675), (55.762, -1.746), (57.834, 10.518), (57.515, 10.54)]
+    height: 0.75 m
+    z_offset: 2.16 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-06R
+    boundary: [(57.8, 12.206), (58.117, 12.191), (60.189, 24.455), (59.889, 24.421)]
+    height: 0.75 m
+    z_offset: 2.16 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-07
+    boundary: [(56.195, -2.274), (57.314, -2.517), (61.707, 25.046), (60.708, 24.927)]
+    thickness: 2.52 m
+    z_offset: 2.52 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-07L
+    boundary: [(56.544, -1.913), (56.879, -1.984), (58.897, 10.445), (58.578, 10.467)]
+    height: 0.75 m
+    z_offset: 2.52 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-07R
+    boundary: [(58.855, 12.155), (59.172, 12.14), (61.189, 24.568), (60.889, 24.534)]
+    height: 0.75 m
+    z_offset: 2.52 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-08
+    boundary: [(57.314, -2.517), (58.433, -2.761), (62.705, 25.165), (61.707, 25.046)]
+    thickness: 2.88 m
+    z_offset: 2.88 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-08L
+    boundary: [(57.662, -2.151), (57.997, -2.222), (59.959, 10.371), (59.64, 10.393)]
+    height: 0.75 m
+    z_offset: 2.88 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-08R
+    boundary: [(59.91, 12.104), (60.226, 12.088), (62.189, 24.682), (61.889, 24.648)]
+    height: 0.75 m
+    z_offset: 2.88 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-09
+    boundary: [(58.433, -2.761), (59.552, -3.004), (63.703, 25.283), (62.705, 25.165)]
+    thickness: 3.24 m
+    z_offset: 3.24 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-09L
+    boundary: [(58.779, -2.389), (59.114, -2.46), (61.021, 10.298), (60.703, 10.32)]
+    height: 0.75 m
+    z_offset: 3.24 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-09R
+    boundary: [(60.965, 12.053), (61.281, 12.037), (63.189, 24.795), (62.889, 24.761)]
+    height: 0.75 m
+    z_offset: 3.24 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-10
+    boundary: [(59.552, -3.004), (60.671, -3.248), (64.701, 25.402), (63.703, 25.283)]
+    thickness: 3.6 m
+    z_offset: 3.6 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-10L
+    boundary: [(59.896, -2.626), (60.231, -2.698), (62.084, 10.224), (61.765, 10.246)]
+    height: 0.75 m
+    z_offset: 3.6 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-10R
+    boundary: [(62.02, 12.002), (62.336, 11.986), (64.189, 24.908), (63.889, 24.874)]
+    height: 0.75 m
+    z_offset: 3.6 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Slab: SL-AUD-TIER-11
+    boundary: [(60.671, -3.248), (61.79, -3.491), (65.7, 25.521), (64.701, 25.402)]
+    thickness: 3.96 m
+    z_offset: 3.96 m
+    material: oak
+    slab_type: landing
+
+  Proxy: PX-AUD-DESK-11L
+    boundary: [(61.013, -2.864), (61.348, -2.936), (63.146, 10.151), (62.827, 10.173)]
+    height: 0.75 m
+    z_offset: 3.96 m
+    type: "lecture_desk_row"
+    material: oak
+
+  Proxy: PX-AUD-DESK-11R
+    boundary: [(63.075, 11.951), (63.391, 11.935), (65.189, 25.022), (64.889, 24.988)]
+    height: 0.75 m
+    z_offset: 3.96 m
+    type: "lecture_desk_row"
+    material: oak
+
+#### Space: West Core L0
+  usage: staircase
+  area: 80 m2
+  zone: circulation
+  boundary: [(0, 14), (8, 14), (8, 24), (0, 24)]
+
+#### Space: East Core L0
+  usage: staircase
+  area: 64 m2
+  zone: circulation
+  boundary: [(38, 16), (46, 16), (46, 24), (38, 24)]

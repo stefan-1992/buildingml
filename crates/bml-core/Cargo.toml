@@ -1,0 +1,23 @@
+[package]
+name = "bml-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Core library for BuildingML — parser, semantic analysis, and code generation"
+
+[dependencies]
+tree-sitter.workspace = true
+tree-sitter-buildingml = { path = "../tree-sitter-buildingml" }
+thiserror.workspace = true
+miette.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+toml.workspace = true
+ifc_rs.workspace = true
+bevy_math.workspace = true
+earcutr = "0.5"
+i_overlay = "8.1"
+
+[dev-dependencies]
+insta.workspace = true

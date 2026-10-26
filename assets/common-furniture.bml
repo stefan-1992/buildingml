@@ -1,0 +1,681 @@
+/// Official BuildingML Common Furniture Asset Library
+/// Contains standardized, real-world scaled furniture components for immediate use.
+
+# AssetLibrary: Common Furniture
+  description: "BuildingML Standard Common Furniture Collection"
+  version: "1.0"
+
+## Asset: SingleBed
+  description: "Standard Single Bed"
+  category: bed
+  width: 1.0 m
+  depth: 2.0 m
+  height: 0.6 m
+
+### Part: Frame
+  geometry: box(1.0, 2.0, 0.2)
+  position: (0, 0, 0.1)
+  material: wood_light
+
+### Part: Mattress
+  geometry: box(0.96, 1.96, 0.2)
+  position: (0.02, 0.02, 0.3)
+  material: fabric_white
+
+### Part: Pillow
+  geometry: box(0.6, 0.4, 0.1)
+  position: (0.2, 1.5, 0.5)
+  material: fabric_white
+
+## Asset: DoubleBed
+  description: "Standard Double Bed"
+  category: bed
+  width: 1.5 m
+  depth: 2.0 m
+  height: 0.6 m
+
+### Part: Frame
+  geometry: box(1.5, 2.0, 0.2)
+  position: (0, 0, 0.1)
+  material: wood_dark
+
+### Part: Mattress
+  geometry: box(1.46, 1.96, 0.2)
+  position: (0.02, 0.02, 0.3)
+  material: fabric_white
+
+### Part: PillowLeft
+  geometry: box(0.5, 0.4, 0.1)
+  position: (0.2, 1.5, 0.5)
+  material: fabric_white
+
+### Part: PillowRight
+  geometry: box(0.5, 0.4, 0.1)
+  position: (0.8, 1.5, 0.5)
+  material: fabric_white
+
+## Asset: Wardrobe
+  description: "Standard 2-door Wardrobe"
+  category: storage
+  width: 1.0 m
+  depth: 0.6 m
+  height: 2.2 m
+
+### Part: Body
+  geometry: box(1.0, 0.58, 2.2)
+  position: (0, 0, 0)
+  material: wood_light
+
+### Part: DoorLeft
+  geometry: box(0.49, 0.02, 2.1)
+  position: (0, 0.58, 0.05)
+  material: wood_light
+
+### Part: DoorRight
+  geometry: box(0.49, 0.02, 2.1)
+  position: (0.51, 0.58, 0.05)
+  material: wood_light
+
+## Asset: Sofa
+  description: "Modern 3-Seater Sofa"
+  category: seating
+  width: 2.2 m
+  depth: 0.9 m
+  height: 0.8 m
+
+### Part: LegFL
+  geometry: box(0.06, 0.06, 0.15)
+  position: (0.08, 0.08, 0)
+  material: wood_dark
+
+### Part: LegFR
+  geometry: box(0.06, 0.06, 0.15)
+  position: (2.06, 0.08, 0)
+  material: wood_dark
+
+### Part: LegBL
+  geometry: box(0.06, 0.06, 0.15)
+  position: (0.08, 0.66, 0)
+  material: wood_dark
+
+### Part: LegBR
+  geometry: box(0.06, 0.06, 0.15)
+  position: (2.06, 0.66, 0)
+  material: wood_dark
+
+### Part: Frame
+  geometry: box(2.2, 0.75, 0.27)
+  position: (0, 0, 0.15)
+  material: fabric_grey
+
+
+### Part: Backrest
+  geometry: box(2.0, 0.18, 0.55)
+  position: (0.1, 0.57, 0.15)
+  material: fabric_grey
+
+### Part: ArmrestLeft
+  geometry: box(0.2, 0.75, 0.3)
+  position: (0, 0, 0.15)
+  material: fabric_grey
+
+### Part: ArmrestRight
+  geometry: box(0.2, 0.75, 0.3)
+  position: (2.0, 0, 0.15)
+  material: fabric_grey
+
+## Asset: DiningTable
+  description: "Rectangular Dining Table"
+  category: table
+  width: 1.8 m
+  depth: 0.9 m
+  height: 0.75 m
+
+### Part: TableTop
+  geometry: box(1.8, 0.9, 0.05)
+  position: (0, 0, 0.7)
+  material: wood_oak
+
+### Part: LegFL
+  geometry: cylinder(0.04, 0.7)
+  position: (0.1, 0.1, 0)
+  material: steel_black
+
+### Part: LegFR
+  geometry: cylinder(0.04, 0.7)
+  position: (1.7, 0.1, 0)
+  material: steel_black
+
+### Part: LegBL
+  geometry: cylinder(0.04, 0.7)
+  position: (0.1, 0.8, 0)
+  material: steel_black
+
+### Part: LegBR
+  geometry: cylinder(0.04, 0.7)
+  position: (1.7, 0.8, 0)
+  material: steel_black
+
+## Asset: DiningChair
+  description: "Standard Dining Chair"
+  category: seating
+  width: 0.45 m
+  depth: 0.5 m
+  height: 0.9 m
+
+### Part: Seat
+  geometry: box(0.45, 0.45, 0.05)
+  position: (0, 0.05, 0.45)
+  material: wood_oak
+
+### Part: Backrest
+  geometry: box(0.45, 0.05, 0.4)
+  position: (0, 0.45, 0.5)
+  material: wood_oak
+
+### Part: LegFL
+  geometry: cylinder(0.02, 0.45)
+  position: (0.05, 0.1, 0)
+  material: steel_black
+
+### Part: LegFR
+  geometry: cylinder(0.02, 0.45)
+  position: (0.4, 0.1, 0)
+  material: steel_black
+
+### Part: LegBL
+  geometry: cylinder(0.02, 0.9)
+  position: (0.05, 0.45, 0)
+  material: steel_black
+
+### Part: LegBR
+  geometry: cylinder(0.02, 0.9)
+  position: (0.4, 0.45, 0)
+  material: steel_black
+
+## Asset: KitchenCounter
+  description: "Standard Kitchen Base Cabinet with Countertop"
+  category: kitchen
+  width: 0.6 m
+  depth: 0.6 m
+  height: 0.9 m
+
+### Part: Cabinet
+  geometry: box(0.6, 0.58, 0.86)
+  position: (0, 0.02, 0)
+  material: wood_white
+
+### Part: Countertop
+  geometry: box(0.6, 0.6, 0.04)
+  position: (0, 0, 0.86)
+  material: stone_granite
+
+## Asset: Refrigerator
+  description: "Freestanding Refrigerator"
+  category: kitchen
+  width: 0.7 m
+  depth: 0.7 m
+  height: 1.9 m
+
+### Part: Body
+  geometry: box(0.7, 0.7, 1.9)
+  position: (0, 0, 0)
+  material: metal_steel
+  
+### Part: FreezerDoor
+  geometry: box(0.7, 0.05, 0.6)
+  position: (0, 0, 0)
+  material: metal_steel
+
+### Part: FridgeDoor
+  geometry: box(0.7, 0.05, 1.25)
+  position: (0, 0, 0.65)
+  material: metal_steel
+
+## Asset: Toilet
+  description: "Floor-mounted Toilet"
+  category: bathroom
+  width: 0.4 m
+  depth: 0.7 m
+  height: 0.8 m
+
+### Part: Bowl
+  geometry: box(0.38, 0.46, 0.38)
+  position: (0.01, 0.06, 0)
+  material: ceramic_white
+
+### Part: Seat
+  geometry: box(0.38, 0.46, 0.03)
+  position: (0.01, 0.06, 0.36)
+  material: ceramic_off_white
+
+### Part: Tank
+  geometry: box(0.38, 0.18, 0.38)
+  position: (0.01, 0.50, 0.40)
+  material: ceramic_white
+
+## Asset: Bathtub
+  description: "Standard Built-in Bathtub"
+  category: bathroom
+  width: 1.8 m
+  depth: 0.8 m
+  height: 0.6 m
+
+### Part: Exterior
+  geometry: box(1.8, 0.8, 0.6)
+  position: (0, 0, 0)
+  material: ceramic_white
+
+### Part: InteriorVoid
+  geometry: box(1.6, 0.6, 0.4)
+  position: (0.1, 0.1, 0.2)
+  material: water_blue
+
+## Asset: OfficeDesk
+  description: "Standard office desk with drawer unit"
+  category: desk
+  width: 1.6 m
+  depth: 0.8 m
+  height: 0.75 m
+
+### Part: Desktop
+  geometry: box(1.6, 0.8, 0.03)
+  position: (0, 0, 0.72)
+  material: oak_veneer
+
+### Part: LeftLeg
+  geometry: box(0.04, 0.6, 0.72)
+  position: (0.02, 0.1, 0)
+  material: steel_chrome
+
+### Part: RightLeg
+  geometry: box(0.04, 0.6, 0.72)
+  position: (1.54, 0.1, 0)
+  material: steel_chrome
+
+### Part: DrawerUnit
+  geometry: box(0.4, 0.5, 0.5)
+  position: (1.1, 0.15, 0.22)
+  material: oak_veneer
+
+## Asset: OfficeChair
+  category: seating
+  width: 0.65 m
+  depth: 0.65 m
+  height: 1.2 m
+
+### Part: StarBase
+  geometry: cylinder(0.28, 0.04)
+  position: (0.045, 0.045, 0)
+  material: steel_chrome
+
+### Part: Column
+  geometry: cylinder(0.03, 0.42)
+  position: (0.295, 0.295, 0.04)
+  material: steel_chrome
+
+### Part: Seat
+  geometry: box(0.45, 0.45, 0.05)
+  position: (0.1, 0.1, 0.45)
+  material: fabric_black
+
+### Part: Backrest
+  geometry: box(0.45, 0.03, 0.45)
+  position: (0.1, 0.07, 0.50)
+  material: fabric_black
+
+## Asset: KingBed
+  description: "King Size Bed"
+  category: bed
+  width: 1.8 m
+  depth: 2.0 m
+  height: 0.8 m
+
+### Part: Frame
+  geometry: box(1.8, 2.0, 0.2)
+  position: (0, 0, 0.1)
+  material: wood_dark
+
+### Part: Headboard
+  geometry: box(1.8, 0.08, 0.6)
+  position: (0, 1.92, 0.2)
+  material: wood_dark
+
+### Part: Mattress
+  geometry: box(1.76, 1.96, 0.2)
+  position: (0.02, 0.02, 0.3)
+  material: fabric_white
+
+### Part: PillowLeft
+  geometry: box(0.6, 0.4, 0.1)
+  position: (0.15, 1.5, 0.5)
+  material: fabric_white
+
+### Part: PillowRight
+  geometry: box(0.6, 0.4, 0.1)
+  position: (1.05, 1.5, 0.5)
+  material: fabric_white
+
+## Asset: Nightstand
+  description: "Bedside Nightstand with Drawer"
+  category: storage
+  width: 0.5 m
+  depth: 0.4 m
+  height: 0.6 m
+
+### Part: Body
+  geometry: box(0.5, 0.4, 0.55)
+  position: (0, 0, 0)
+  material: wood_light
+
+### Part: Top
+  geometry: box(0.5, 0.4, 0.05)
+  position: (0, 0, 0.55)
+  material: wood_light
+
+### Part: DrawerFront
+  geometry: box(0.44, 0.02, 0.18)
+  position: (0.03, 0, 0.2)
+  material: wood_light
+
+## Asset: CoffeeTable
+  description: "Rectangular Coffee Table"
+  category: table
+  width: 1.2 m
+  depth: 0.6 m
+  height: 0.45 m
+
+### Part: TableTop
+  geometry: box(1.2, 0.6, 0.05)
+  position: (0, 0, 0.4)
+  material: wood_oak
+
+### Part: LegFL
+  geometry: box(0.05, 0.05, 0.4)
+  position: (0.05, 0.05, 0)
+  material: steel_black
+
+### Part: LegFR
+  geometry: box(0.05, 0.05, 0.4)
+  position: (1.1, 0.05, 0)
+  material: steel_black
+
+### Part: LegBL
+  geometry: box(0.05, 0.05, 0.4)
+  position: (0.05, 0.5, 0)
+  material: steel_black
+
+### Part: LegBR
+  geometry: box(0.05, 0.05, 0.4)
+  position: (1.1, 0.5, 0)
+  material: steel_black
+
+## Asset: Bookshelf
+  description: "Freestanding Bookshelf"
+  category: storage
+  width: 0.8 m
+  depth: 0.3 m
+  height: 1.8 m
+
+### Part: Body
+  geometry: box(0.8, 0.3, 1.8)
+  position: (0, 0, 0)
+  material: wood_light
+
+### Part: Shelf1
+  geometry: box(0.76, 0.28, 0.02)
+  position: (0.02, 0.01, 0.44)
+  material: wood_light
+
+### Part: Shelf2
+  geometry: box(0.76, 0.28, 0.02)
+  position: (0.02, 0.01, 0.9)
+  material: wood_light
+
+### Part: Shelf3
+  geometry: box(0.76, 0.28, 0.02)
+  position: (0.02, 0.01, 1.36)
+  material: wood_light
+
+## Asset: SinkUnit
+  description: "Kitchen Sink Base Cabinet"
+  category: kitchen
+  width: 0.6 m
+  depth: 0.6 m
+  height: 1.05 m
+
+### Part: Cabinet
+  geometry: box(0.6, 0.58, 0.86)
+  position: (0, 0.02, 0)
+  material: wood_white
+
+### Part: Countertop
+  geometry: box(0.6, 0.6, 0.04)
+  position: (0, 0, 0.86)
+  material: stone_granite
+
+### Part: Basin
+  geometry: box(0.4, 0.35, 0.18)
+  position: (0.1, 0.1, 0.7)
+  material: metal_steel
+
+### Part: Faucet
+  geometry: cylinder(0.02, 0.15)
+  position: (0.28, 0.13, 0.9)
+  material: metal_steel
+
+## Asset: StoveOven
+  description: "Freestanding Stove with Oven"
+  category: kitchen
+  width: 0.6 m
+  depth: 0.6 m
+  height: 0.92 m
+
+### Part: Body
+  geometry: box(0.6, 0.6, 0.9)
+  position: (0, 0, 0)
+  material: metal_steel
+
+### Part: Cooktop
+  geometry: box(0.58, 0.58, 0.02)
+  position: (0.01, 0.01, 0.88)
+  material: glass_black
+
+### Part: BurnerFL
+  geometry: cylinder(0.08, 0.02)
+  position: (0.18, 0.18, 0.9)
+  material: metal_dark
+
+### Part: BurnerFR
+  geometry: cylinder(0.08, 0.02)
+  position: (0.42, 0.18, 0.9)
+  material: metal_dark
+
+### Part: BurnerBL
+  geometry: cylinder(0.06, 0.02)
+  position: (0.18, 0.42, 0.9)
+  material: metal_dark
+
+### Part: BurnerBR
+  geometry: cylinder(0.06, 0.02)
+  position: (0.42, 0.42, 0.9)
+  material: metal_dark
+
+## Asset: ShowerTray
+  description: "Square Shower Tray"
+  category: bathroom
+  width: 0.9 m
+  depth: 0.9 m
+  height: 0.15 m
+
+### Part: Tray
+  geometry: box(0.9, 0.9, 0.15)
+  position: (0, 0, 0)
+  material: ceramic_white
+
+### Part: Drain
+  geometry: cylinder(0.04, 0.15)
+  position: (0.41, 0.41, 0)
+  material: metal_steel
+
+## Asset: Washbasin
+  description: "Pedestal Washbasin"
+  category: bathroom
+  width: 0.6 m
+  depth: 0.5 m
+  height: 0.95 m
+
+### Part: Pedestal
+  geometry: cylinder(0.1, 0.62)
+  position: (0.2, 0.15, 0)
+  material: ceramic_white
+
+### Part: Basin
+  geometry: box(0.55, 0.45, 0.18)
+  position: (0.025, 0.025, 0.64)
+  material: ceramic_white
+
+### Part: Faucet
+  geometry: cylinder(0.02, 0.12)
+  position: (0.28, 0.08, 0.82)
+  material: metal_steel
+
+## Asset: MeetingTable
+  description: "Large Rectangular Meeting Table"
+  category: table
+  width: 3.0 m
+  depth: 1.2 m
+  height: 0.75 m
+
+### Part: TableTop
+  geometry: box(3.0, 1.2, 0.05)
+  position: (0, 0, 0.7)
+  material: wood_oak
+
+### Part: LegFL
+  geometry: cylinder(0.05, 0.7)
+  position: (0.15, 0.15, 0)
+  material: steel_black
+
+### Part: LegFR
+  geometry: cylinder(0.05, 0.7)
+  position: (2.85, 0.15, 0)
+  material: steel_black
+
+### Part: LegBL
+  geometry: cylinder(0.05, 0.7)
+  position: (0.15, 1.05, 0)
+  material: steel_black
+
+### Part: LegBR
+  geometry: cylinder(0.05, 0.7)
+  position: (2.85, 1.05, 0)
+  material: steel_black
+
+## Asset: FilingCabinet
+  description: "4-Drawer Filing Cabinet"
+  category: storage
+  width: 0.5 m
+  depth: 0.6 m
+  height: 1.3 m
+
+### Part: Body
+  geometry: box(0.5, 0.6, 1.3)
+  position: (0, 0, 0)
+  material: metal_grey
+
+### Part: Drawer1
+  geometry: box(0.46, 0.02, 0.26)
+  position: (0.02, 0, 0.07)
+  material: metal_light
+
+### Part: Drawer2
+  geometry: box(0.46, 0.02, 0.26)
+  position: (0.02, 0, 0.40)
+  material: metal_light
+
+### Part: Drawer3
+  geometry: box(0.46, 0.02, 0.26)
+  position: (0.02, 0, 0.73)
+  material: metal_light
+
+### Part: Drawer4
+  geometry: box(0.46, 0.02, 0.26)
+  position: (0.02, 0, 1.02)
+  material: metal_light
+
+## Asset: MonitorStand
+  description: "Desktop Monitor with Stand"
+  category: desk
+  width: 0.6 m
+  depth: 0.25 m
+  height: 0.4 m
+
+### Part: Base
+  geometry: box(0.24, 0.24, 0.02)
+  position: (0.18, 0.005, 0)
+  material: metal_steel
+
+### Part: Neck
+  geometry: box(0.04, 0.04, 0.25)
+  position: (0.28, 0.1, 0.02)
+  material: metal_steel
+
+### Part: Screen
+  geometry: box(0.55, 0.03, 0.32)
+  position: (0.025, 0.11, 0.08)
+  material: glass_black
+
+## Asset: Bench
+  description: "Simple Outdoor/Indoor Bench"
+  category: seating
+  width: 1.2 m
+  depth: 0.4 m
+  height: 0.45 m
+
+### Part: Seat
+  geometry: box(1.2, 0.4, 0.05)
+  position: (0, 0, 0.4)
+  material: wood_oak
+
+### Part: LegFL
+  geometry: box(0.05, 0.05, 0.4)
+  position: (0.05, 0.05, 0)
+  material: steel_black
+
+### Part: LegFR
+  geometry: box(0.05, 0.05, 0.4)
+  position: (1.1, 0.05, 0)
+  material: steel_black
+
+### Part: LegBL
+  geometry: box(0.05, 0.05, 0.4)
+  position: (0.05, 0.3, 0)
+  material: steel_black
+
+### Part: LegBR
+  geometry: box(0.05, 0.05, 0.4)
+  position: (1.1, 0.3, 0)
+  material: steel_black
+
+## Asset: Planter
+  description: "Square Floor Planter"
+  category: decor
+  width: 0.4 m
+  depth: 0.4 m
+  height: 0.6 m
+
+### Part: Pot
+  geometry: box(0.4, 0.4, 0.4)
+  position: (0, 0, 0)
+  material: ceramic_terracotta
+
+### Part: Soil
+  geometry: box(0.34, 0.34, 0.08)
+  position: (0.03, 0.03, 0.32)
+  material: soil_brown
+
+### Part: Plant
+  geometry: box(0.3, 0.3, 0.2)
+  position: (0.05, 0.05, 0.4)
+  material: plant_green

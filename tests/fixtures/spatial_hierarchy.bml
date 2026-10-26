@@ -1,0 +1,53 @@
+// Full spatial hierarchy test
+# Site: Residential Complex Alpha
+  location: 49.4521, 12.1803
+  address: "Marktplatz 1, 92507 Nabburg, Germany"
+
+## Building: House A
+  type: residential
+  year: 2025
+
+### Storey: Ground Floor
+  elevation: 0.0 m
+  height: 2.80 m
+
+#### Space: Living Room
+  usage: living
+  area: 35.0 m2
+
+  Wall: W-GF-01
+    from: (0, 0) to: (6, 0)
+    height: 2.80 m
+    thickness: 0.24 m
+    is_external: true
+
+    Window: WIN-01
+      offset: 1.5 m
+      width: 1.2 m
+      height: 1.4 m
+      sill_height: 0.9 m
+      type: double_glazed
+
+  Wall: W-GF-02
+    from: (6, 0) to: (6, 5)
+    height: 2.80 m
+    thickness: 0.24 m
+    is_external: true
+
+    Door: D-01
+      offset: 1.0 m
+      width: 0.9 m
+      height: 2.1 m
+      type: single_leaf
+
+#### Space: Kitchen
+  usage: kitchen
+  area: 12.0 m2
+
+### Storey: First Floor
+  elevation: 3.20 m
+  height: 2.60 m
+
+#### Space: Bedroom
+  usage: bedroom
+  area: 18.0 m2

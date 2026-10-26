@@ -1,0 +1,209 @@
+// Test fixture with all Phase 2 element types
+Material: concrete_c30
+  category: concrete
+  grade: C30
+  density: 2400 kg/m3
+
+Material: glass_double
+  category: glass
+
+# Site: Phase2TestSite
+  location: 52.52, 13.405
+
+## Building: Phase2TestBuilding
+
+### Storey: Ground Floor
+  elevation: 0 m
+  height: 3.2 m
+
+  Wall: W-GF-01
+    from: (0, 0) to: (10, 0)
+    height: 3.0 m
+    thickness: 0.24 m
+    material: concrete_c30
+    is_external: true
+    load_bearing: true
+
+    Window: WIN-01
+      offset: 2 m
+      width: 1.2 m
+      height: 1.4 m
+      sill_height: 0.9 m
+
+    Door: D-01
+      offset: 5 m
+      width: 0.9 m
+      height: 2.1 m
+
+    Opening: OP-01
+      offset: 8 m
+      width: 0.6 m
+      height: 1.0 m
+
+  Wall: W-GF-02
+    from: (10, 0) to: (10, 8)
+    height: 3.0 m
+    thickness: 0.24 m
+    is_external: true
+
+  Wall: W-GF-03
+    from: (10, 8) to: (0, 8)
+    height: 3.0 m
+    thickness: 0.24 m
+    is_external: true
+
+  Wall: W-GF-04
+    from: (0, 8) to: (0, 0)
+    height: 3.0 m
+    thickness: 0.24 m
+    is_external: true
+
+  Slab: S-GF-01
+    boundary: [(0,0), (10,0), (10,8), (0,8)]
+    thickness: 0.2 m
+
+  Column: COL-01
+    position: (5, 4)
+    height: 3.2 m
+    profile: rectangle(0.3, 0.3)
+    load_bearing: true
+
+  Beam: B-01
+    from: (0, 4) to: (10, 4)
+    profile: rectangle(0.3, 0.5)
+    load_bearing: true
+
+  Stair: ST-01
+    position: (8, 1)
+    width: 1.2 m
+    riser_count: 18
+    riser_height: 0.178 m
+    tread_depth: 0.27 m
+
+  Railing: RL-01
+    height: 1.0 m
+    length: 3.6 m
+
+  Ramp: RM-01
+    width: 1.5 m
+    slope: 0.08
+
+  Furniture: FUR-01
+    position: (3, 6)
+
+  Proxy: PX-01
+    position: (1, 6)
+    width: 0.5 m
+    depth: 0.5 m
+    height: 0.8 m
+
+  Member: MB-01
+    from: (0, 0) to: (5, 4)
+    profile: rectangle(0.08, 0.04)
+
+  Plate: PL-01
+    boundary: [(4,6), (6,6), (6,8), (4,8)]
+    thickness: 10 mm
+
+  // Curtain wall: mullions at the listed distances, one transom row, a door
+  // in the second bay.
+  Wall: CW-01
+    from: (2, -3) to: (8, -3)
+    height: 3.0 m
+    thickness: 30 mm
+    mullions: [0 m, 1.5 m, 3 m, 4.5 m, 6 m]
+    transoms: [2.2 m]
+    panel_material: glass_double
+    is_external: true
+
+    Door: D-CW-01
+      offset: 1.5 m
+      width: 1.5 m
+      height: 2.2 m
+
+  Grid: GR-01
+    position: (0, 0)
+    x_spacing: 5 m
+    y_spacing: 4 m
+    x_count: 3
+    y_count: 3
+
+  Footing: FT-01
+    predefined_type: strip_footing
+    under: [W-GF-01, W-GF-02, W-GF-03, W-GF-04]
+    width: 0.6 m
+    depth: 0.4 m
+    z_offset: -0.2 m
+
+  Footing: FT-02
+    predefined_type: pad_footing
+    position: (5, 4)
+    width: 1.2 m
+    depth: 0.5 m
+    z_offset: -0.2 m
+
+  System: SYS-SA
+    predefined_type: ventilation
+    ifc_name: "Supply air"
+
+  Equipment: EQ-01
+    type: fan
+    system: SYS-SA
+    position: (1, 6)
+    z_offset: 2.2 m
+
+  Duct: DU-01
+    system: SYS-SA
+    width: 0.3 m
+    height: 0.2 m
+    path: [(1.5, 6, 2.6), (8, 6, 2.6), (8, 6, 2.1)]
+
+  Duct: DU-02
+    system: SYS-SA
+    diameter: 0.16 m
+    path: [(4, 6, 2.6), (4, 3, 2.6)]
+
+  Terminal: TM-01
+    type: air_supply
+    system: SYS-SA
+    position: (8, 6)
+    z_offset: 2.05 m
+
+  Pipe: PI-01
+    diameter: 0.032 m
+    from: (9, 1, 0.1) to: (9, 1, 2.8)
+
+  CableTray: CT-01
+    width: 0.2 m
+    height: 0.06 m
+    from: (0.5, 7, 2.9) to: (9, 7, 2.9)
+
+  Accessory: AC-01
+    type: hanger
+    position: (5, 7)
+    z_offset: 2.87 m
+    width: 0.2 m
+    height: 0.33 m
+    rotation: 90
+
+  Accessory: AC-02
+    type: base_plate
+    position: (5, 4)
+    connects: [COL-01, S-GF-01]
+
+#### Space: Living Room
+  area: 40 m2
+
+  Covering: CV-01
+    predefined_type: ceiling
+    boundary: [(0.1, 0.1), (5.9, 0.1), (5.9, 3.9), (0.1, 3.9)]
+    z_offset: 2.6 m
+    thickness: 15 mm
+
+### Storey: First Floor
+  elevation: 3.2 m
+
+  Roof: RF-01
+    type: gable
+    ridge_height: 2.5 m
+    boundary: [(-0.5, -0.5), (10.5, -0.5), (10.5, 8.5), (-0.5, 8.5)]

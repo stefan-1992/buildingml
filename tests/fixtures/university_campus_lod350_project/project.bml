@@ -1,0 +1,60 @@
+// Forum Nord - fictitious university building (multi-file project), LOD 350 version
+//
+// Same building as university_campus_lod300_project/, with the LOD 300 content:
+//   - layered wall, slab and roof build-ups with property sets (U-value, fire, acoustic)
+//   - wall junctions closed without overlaps, walls split around columns
+//   - curtain walls as mullion/transom grids (aluminium members, glazing panels)
+//   - u-shaped concrete stairs with steel handrails, glulam beams under the Audimax roof
+//   - suspended acoustic ceilings (Covering), strip and pad footings (Footing)
+// detailed to LOD 350 (services/, one file per level, systems in services/systems.bml):
+//   - supply and extract air, sprinkler, heating, domestic cold water, waste water,
+//     rain water, power and lighting as routed runs with bends, tees and connected
+//     ports, grouped into distribution systems
+//   - plant: air handling unit on the roof, district heat transfer station, alarm
+//     valve station, water meter, distribution boards
+//   - terminals: diffusers, grilles, sprinkler heads, sanitary fixtures, floor drains,
+//     lights, smoke detectors
+//   - generated openings and sleeves where runs pass walls and slabs, trapeze
+//     hangers up to the slab above
+//   - steel shoes under the glulam beam ends and brackets from the curtain wall
+//     mullions to the slab edges, as connections (connects:)
+//   - no clashes between elements, furniture included
+//
+// Five levels plus roof, gross floor area about 6,900 m2:
+//   Level 0  Mensa with curved glazed bulge, foyer, kitchen, Audimax (double height)
+//   Level 1  Lecture rooms, seminar rooms, gallery around the atrium
+//   Level 2  Offices (template OfficeFloor), cantilever 4 m west
+//   Level 3  Offices (template OfficeFloor)
+//   Level 4  Twisted glazed library pavilion + roof terrace
+//   Roof     Flat roof, skylight lantern over the atrium, PV array
+//
+// Layout key:
+//   x-axis: west -> east, y-axis: south (campus square) -> north
+//   Main block (0,0)-(44,0)-(50,24)-(0,24); east facade slanted
+//   Office floors extend to x = -4 (cantilever)
+//   Atrium void: (24,9) (35,8.5) (34.5,15) (23,14.5), levels 1-4, skylight on the roof
+//   West core x 0..8, y 14..24; east core x 38..46, y 16..24
+//   Audimax: fan-shaped hall (44,0) (62,-4) (66,26) (50,24)
+
+import materials from "./materials.bml"
+import level0 from "./storeys/level-0.bml"
+import level1 from "./storeys/level-1.bml"
+import offices from "./storeys/level-2-3-offices.bml"
+import level4 from "./storeys/level-4.bml"
+import roof from "./storeys/roof.bml"
+import checks from "./checks/university.bml"
+import assets from "./assets/furniture.bml"
+import systems from "./services/systems.bml"
+import services_l23 from "./services/level-2-3.bml"
+import services_l0 from "./services/level-0.bml"
+import services_l1 from "./services/level-1.bml"
+import services_l4 from "./services/level-4.bml"
+import services_roof from "./services/roof.bml"
+
+# Site: Campus Nord
+  location: 48.2650, 11.6710
+  address: "Forumsplatz 1, 85748 Garching (fictitious)"
+
+## Building: Forum Nord
+  type: educational
+  year: 2028

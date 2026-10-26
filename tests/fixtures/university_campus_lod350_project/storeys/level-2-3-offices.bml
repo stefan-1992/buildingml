@@ -1,0 +1,1873 @@
+// Levels 2-3 - Offices (template OfficeFloor, applied twice)
+// elevation 8.5 m / 12.1 m, height 3.6 m
+// The office floors cantilever 4 m west over the entrance plaza and sit above
+// the Audimax roof. Anthracite metal facade with ribbon windows and aluminium
+// sun fins to the south; full-height glazing on the west end and slanted east facade.
+// Variable: {f} = level code (L2, L3).
+//
+// Template must be in the same file as its apply_template directives.
+
+import materials from "../materials.bml"
+import assets from "../assets/furniture.bml"
+
+Template: OfficeFloor
+
+  // ------------------------------------------------------------------
+  // Floor slab (cantilever x = -4..0) with atrium, stair and lift voids
+  // ------------------------------------------------------------------
+
+  // ------------------------------------------------------------------
+  // Facades
+  // ------------------------------------------------------------------
+
+  Wall: W-{f}-S
+    from: (-4.04, 0) to: (44.041, 0)
+    height: 3.6 m
+    thickness: 0.3 m
+    material: ew_metal
+    is_external: true
+    load_bearing: false
+    fire_rating: EI30
+    thermal_transmittance: 0.2
+    acoustic_rating: 45
+
+    Window: WIN-{f}-S01
+      offset: 0.34 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-S02
+      offset: 4.34 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-S03
+      offset: 8.34 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-S04
+      offset: 12.34 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-S05
+      offset: 16.34 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-S06
+      offset: 20.34 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-S07
+      offset: 24.34 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-S08
+      offset: 28.34 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-S09
+      offset: 32.34 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-S10
+      offset: 36.34 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-S11
+      offset: 40.34 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-S12
+      offset: 44.34 m
+      width: 3.4 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+  Member: FIN-{f}-S-01
+    boundary: [(-3.54, -0.66), (-3.46, -0.66), (-3.46, -0.16), (-3.54, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-02
+    boundary: [(-2.54, -0.66), (-2.46, -0.66), (-2.46, -0.16), (-2.54, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-03
+    boundary: [(-1.54, -0.66), (-1.46, -0.66), (-1.46, -0.16), (-1.54, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-04
+    boundary: [(-0.54, -0.66), (-0.46, -0.66), (-0.46, -0.16), (-0.54, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-05
+    boundary: [(0.46, -0.66), (0.54, -0.66), (0.54, -0.16), (0.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-06
+    boundary: [(1.46, -0.66), (1.54, -0.66), (1.54, -0.16), (1.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-07
+    boundary: [(2.46, -0.66), (2.54, -0.66), (2.54, -0.16), (2.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-08
+    boundary: [(3.46, -0.66), (3.54, -0.66), (3.54, -0.16), (3.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-09
+    boundary: [(4.46, -0.66), (4.54, -0.66), (4.54, -0.16), (4.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-10
+    boundary: [(5.46, -0.66), (5.54, -0.66), (5.54, -0.16), (5.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-11
+    boundary: [(6.46, -0.66), (6.54, -0.66), (6.54, -0.16), (6.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-12
+    boundary: [(7.46, -0.66), (7.54, -0.66), (7.54, -0.16), (7.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-13
+    boundary: [(8.46, -0.66), (8.54, -0.66), (8.54, -0.16), (8.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-14
+    boundary: [(9.46, -0.66), (9.54, -0.66), (9.54, -0.16), (9.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-15
+    boundary: [(10.46, -0.66), (10.54, -0.66), (10.54, -0.16), (10.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-16
+    boundary: [(11.46, -0.66), (11.54, -0.66), (11.54, -0.16), (11.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-17
+    boundary: [(12.46, -0.66), (12.54, -0.66), (12.54, -0.16), (12.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-18
+    boundary: [(13.46, -0.66), (13.54, -0.66), (13.54, -0.16), (13.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-19
+    boundary: [(14.46, -0.66), (14.54, -0.66), (14.54, -0.16), (14.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-20
+    boundary: [(15.46, -0.66), (15.54, -0.66), (15.54, -0.16), (15.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-21
+    boundary: [(16.46, -0.66), (16.54, -0.66), (16.54, -0.16), (16.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-22
+    boundary: [(17.46, -0.66), (17.54, -0.66), (17.54, -0.16), (17.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-23
+    boundary: [(18.46, -0.66), (18.54, -0.66), (18.54, -0.16), (18.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-24
+    boundary: [(19.46, -0.66), (19.54, -0.66), (19.54, -0.16), (19.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-25
+    boundary: [(20.46, -0.66), (20.54, -0.66), (20.54, -0.16), (20.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-26
+    boundary: [(21.46, -0.66), (21.54, -0.66), (21.54, -0.16), (21.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-27
+    boundary: [(22.46, -0.66), (22.54, -0.66), (22.54, -0.16), (22.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-28
+    boundary: [(23.46, -0.66), (23.54, -0.66), (23.54, -0.16), (23.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-29
+    boundary: [(24.46, -0.66), (24.54, -0.66), (24.54, -0.16), (24.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-30
+    boundary: [(25.46, -0.66), (25.54, -0.66), (25.54, -0.16), (25.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-31
+    boundary: [(26.46, -0.66), (26.54, -0.66), (26.54, -0.16), (26.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-32
+    boundary: [(27.46, -0.66), (27.54, -0.66), (27.54, -0.16), (27.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-33
+    boundary: [(28.46, -0.66), (28.54, -0.66), (28.54, -0.16), (28.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-34
+    boundary: [(29.46, -0.66), (29.54, -0.66), (29.54, -0.16), (29.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-35
+    boundary: [(30.46, -0.66), (30.54, -0.66), (30.54, -0.16), (30.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-36
+    boundary: [(31.46, -0.66), (31.54, -0.66), (31.54, -0.16), (31.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-37
+    boundary: [(32.46, -0.66), (32.54, -0.66), (32.54, -0.16), (32.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-38
+    boundary: [(33.46, -0.66), (33.54, -0.66), (33.54, -0.16), (33.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-39
+    boundary: [(34.46, -0.66), (34.54, -0.66), (34.54, -0.16), (34.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-40
+    boundary: [(35.46, -0.66), (35.54, -0.66), (35.54, -0.16), (35.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-41
+    boundary: [(36.46, -0.66), (36.54, -0.66), (36.54, -0.16), (36.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-42
+    boundary: [(37.46, -0.66), (37.54, -0.66), (37.54, -0.16), (37.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-43
+    boundary: [(38.46, -0.66), (38.54, -0.66), (38.54, -0.16), (38.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-44
+    boundary: [(39.46, -0.66), (39.54, -0.66), (39.54, -0.16), (39.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-45
+    boundary: [(40.46, -0.66), (40.54, -0.66), (40.54, -0.16), (40.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-46
+    boundary: [(41.46, -0.66), (41.54, -0.66), (41.54, -0.16), (41.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-47
+    boundary: [(42.46, -0.66), (42.54, -0.66), (42.54, -0.16), (42.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Member: FIN-{f}-S-48
+    boundary: [(43.46, -0.66), (43.54, -0.66), (43.54, -0.16), (43.46, -0.16)]
+    height: 3.6 m
+    type: "sun_fin"
+    material: aluminium_mullion
+
+  Wall: CW-{f}-E
+    from: (44.038, 0.151) to: (49.951, 23.802)
+    height: 3.6 m
+    thickness: 0.08 m
+    mullions: 1.5 m
+    brackets: true
+    transoms: [2.8 m]
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+  Wall: W-{f}-N
+    from: (50.041, 24) to: (-4.04, 24)
+    height: 3.6 m
+    thickness: 0.3 m
+    material: ew_metal
+    is_external: true
+    load_bearing: false
+    fire_rating: EI30
+    thermal_transmittance: 0.2
+    acoustic_rating: 45
+
+    Window: WIN-{f}-N00
+      offset: 1.041 m
+      width: 2 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-N01
+      offset: 38.691 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-N02
+      offset: 34.941 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-N03
+      offset: 31.191 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-N04
+      offset: 27.441 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-N05
+      offset: 23.691 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-N06
+      offset: 19.941 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-N07
+      offset: 16.191 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+    Window: WIN-{f}-N08
+      offset: 12.441 m
+      width: 2.95 m
+      height: 2.4 m
+      sill_height: 0.7 m
+      type: triple_glazed
+      thermal_transmittance: 0.9
+      depth: 0.12 m
+      lateral_offset: -0.065 m
+
+  Wall: CW-{f}-W
+    from: (-4, 23.85) to: (-4, 0.15)
+    height: 3.6 m
+    thickness: 0.08 m
+    mullions: 1.5 m
+    brackets: true
+    transoms: [2.8 m]
+    material: aluminium_mullion
+    panel_material: glazing
+    is_external: true
+    load_bearing: false
+    thermal_transmittance: 1.1
+
+  // ------------------------------------------------------------------
+  // South office row (4 m modules) and corridor
+  // ------------------------------------------------------------------
+
+  Wall: W-{f}-SP01
+    from: (0, 0.15) to: (0, 5.44)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-SP02
+    from: (4, 0.15) to: (4, 5.44)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-SP03
+    from: (8, 0.15) to: (8, 5.44)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-SP04
+    from: (12, 0.15) to: (12, 5.44)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-SP05
+    from: (16, 0.15) to: (16, 5.44)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-SP06
+    from: (20, 0.15) to: (20, 5.44)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-SP07
+    from: (24, 0.15) to: (24, 5.44)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-SP08
+    from: (28, 0.15) to: (28, 5.44)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-SP09
+    from: (32, 0.15) to: (32, 5.44)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-SP10
+    from: (36, 0.15) to: (36, 5.44)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-SP11
+    from: (40, 0.15) to: (40, 5.44)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-CORR-S
+    from: (-3.8, 5.5) to: (45.154, 5.5)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+    Door: D-{f}-S01
+      offset: 2.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-S02
+      offset: 6.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-S03
+      offset: 10.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-S04
+      offset: 14.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-S05
+      offset: 18.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-S06
+      offset: 22.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-S07
+      offset: 26.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-S08
+      offset: 30.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-S09
+      offset: 34.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-S10
+      offset: 38.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-S11
+      offset: 42.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-S12
+      offset: 46.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+  // ------------------------------------------------------------------
+  // North office row (3.75 m modules)
+  // ------------------------------------------------------------------
+
+  Wall: W-{f}-CORR-N
+    from: (8.125, 17) to: (37.875, 17)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+    Door: D-{f}-N01
+      offset: 2.275 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-N02
+      offset: 6.025 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-N03
+      offset: 9.775 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-N04
+      offset: 13.525 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-N05
+      offset: 17.275 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-N06
+      offset: 21.025 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-N07
+      offset: 24.775 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+    Door: D-{f}-N08
+      offset: 28.525 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+  Wall: W-{f}-NP01
+    from: (11.75, 17.06) to: (11.75, 23.85)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-NP02
+    from: (15.5, 17.06) to: (15.5, 23.85)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-NP03
+    from: (19.25, 17.06) to: (19.25, 23.85)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-NP04
+    from: (23, 17.06) to: (23, 23.85)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-NP05
+    from: (26.75, 17.06) to: (26.75, 23.85)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-NP06
+    from: (30.5, 17.06) to: (30.5, 23.85)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  Wall: W-{f}-NP07
+    from: (34.25, 17.06) to: (34.25, 23.85)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+  // ------------------------------------------------------------------
+  // Glazed meeting rooms and copy room
+  // ------------------------------------------------------------------
+
+  Wall: W-{f}-MA1
+    from: (-3.8, 7.5) to: (4.04, 7.5)
+    height: 3.19 m
+    thickness: 0.08 m
+    material: glass_partition
+    load_bearing: false
+    acoustic_rating: 37
+
+    Door: D-{f}-MA
+      offset: 6 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+  Wall: W-{f}-MA2
+    from: (4, 7.54) to: (4, 12.96)
+    height: 3.19 m
+    thickness: 0.08 m
+    material: glass_partition
+    load_bearing: false
+    acoustic_rating: 37
+
+  Wall: W-{f}-MA3
+    from: (4.04, 13) to: (-3.8, 13)
+    height: 3.19 m
+    thickness: 0.08 m
+    material: glass_partition
+    load_bearing: false
+    acoustic_rating: 37
+
+  Wall: W-{f}-PANO
+    from: (-3.8, 14) to: (-0.15, 14)
+    height: 3.19 m
+    thickness: 0.08 m
+    material: glass_partition
+    load_bearing: false
+    acoustic_rating: 37
+
+    Door: D-{f}-PANO
+      offset: 2.4 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+  Wall: W-{f}-COPY
+    from: (46.125, 16) to: (47.779, 16)
+    height: 3.19 m
+    thickness: 0.12 m
+    material: dw_120
+    load_bearing: false
+    fire_rating: EI30
+    acoustic_rating: 45
+
+    Door: D-{f}-COPY
+      offset: 0.375 m
+      width: 1 m
+      height: 2.2 m
+      type: single_leaf
+
+  // ------------------------------------------------------------------
+  // West core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-{f}-CW1
+    from: (0.15, 14) to: (7.875, 14)
+    height: 3.19 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-{f}-CW-LOBBY
+      offset: 4.85 m
+      width: 1.8 m
+      height: 2.3 m
+      fire_rating: T30
+      type: double_leaf
+
+  Wall: W-{f}-CW2
+    from: (3.8, 14.125) to: (3.8, 23.85)
+    height: 3.19 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-{f}-CW-STAIR
+      offset: 0.375 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+      type: single_leaf
+
+  Wall: W-{f}-CW3
+    from: (3.925, 20.8) to: (7.875, 20.8)
+    height: 3.19 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-{f}-CW-LIFT
+      offset: 1.475 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: EI30
+      type: single_leaf
+
+  Wall: W-{f}-CW4
+    from: (8, 13.875) to: (8, 23.85)
+    height: 3.19 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-{f}-CW5
+    from: (0, 23.85) to: (0, 13.96)
+    height: 3.19 m
+    thickness: 0.3 m
+    material: iw_rc_300
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 57
+
+  // ------------------------------------------------------------------
+  // East core: stair, lift, lobby
+  // ------------------------------------------------------------------
+
+  Wall: W-{f}-CE1
+    from: (37.875, 16) to: (46.125, 16)
+    height: 3.19 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-{f}-CE-LOBBY
+      offset: 1.025 m
+      width: 1.6 m
+      height: 2.3 m
+      fire_rating: T30
+      type: double_leaf
+
+  Wall: W-{f}-CE2
+    from: (46, 16.125) to: (46, 23.85)
+    height: 3.19 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-{f}-CE3
+    from: (38, 16.125) to: (38, 23.85)
+    height: 3.19 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Wall: W-{f}-CE4
+    from: (41.6, 16.125) to: (41.6, 23.85)
+    height: 3.19 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-{f}-CE-STAIR
+      offset: 0.375 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: T30
+      type: single_leaf
+
+  Wall: W-{f}-CE5
+    from: (38.125, 20.8) to: (41.475, 20.8)
+    height: 3.19 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+    Door: D-{f}-CE-LIFT
+      offset: 1.075 m
+      width: 1.1 m
+      height: 2.2 m
+      fire_rating: EI30
+      type: single_leaf
+
+  Railing: RL-{f}-ATR-1
+    from: (24, 9) to: (35, 8.5)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-{f}-ATR-2
+    from: (35, 8.5) to: (34.5, 15)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-{f}-ATR-3
+    from: (34.5, 15) to: (23, 14.5)
+    height: 1.1 m
+    material: glazing
+
+  Railing: RL-{f}-ATR-4
+    from: (23, 14.5) to: (24, 9)
+    height: 1.1 m
+    material: glazing
+
+#### Space: Office {f}.S01
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(-4, 0), (0, 0), (0, 5.5), (-4, 5.5)]
+
+  Covering: CL-OFFICE-{f}-S01
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-S01A
+    asset: OfficeWorkstation
+    position: (-3.6, 1)
+
+  Furniture: FU-{f}-S01B
+    asset: OfficeWorkstation
+    position: (-2, 1)
+
+#### Space: Office {f}.S02
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(0, 0), (4, 0), (4, 5.5), (0, 5.5)]
+
+  Covering: CL-OFFICE-{f}-S02
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-S02A
+    asset: OfficeWorkstation
+    position: (0.4, 1)
+
+  Furniture: FU-{f}-S02B
+    asset: OfficeWorkstation
+    position: (2, 1)
+
+#### Space: Office {f}.S03
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(4, 0), (8, 0), (8, 5.5), (4, 5.5)]
+
+  Covering: CL-OFFICE-{f}-S03
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-S03A
+    asset: OfficeWorkstation
+    position: (4.4, 1)
+
+  Furniture: FU-{f}-S03B
+    asset: OfficeWorkstation
+    position: (6, 1)
+
+#### Space: Office {f}.S04
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(8, 0), (12, 0), (12, 5.5), (8, 5.5)]
+
+  Covering: CL-OFFICE-{f}-S04
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-S04A
+    asset: OfficeWorkstation
+    position: (8.4, 1)
+
+  Furniture: FU-{f}-S04B
+    asset: OfficeWorkstation
+    position: (10, 1)
+
+#### Space: Office {f}.S05
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(12, 0), (16, 0), (16, 5.5), (12, 5.5)]
+
+  Covering: CL-OFFICE-{f}-S05
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-S05A
+    asset: OfficeWorkstation
+    position: (12.4, 1)
+
+  Furniture: FU-{f}-S05B
+    asset: OfficeWorkstation
+    position: (14, 1)
+
+#### Space: Office {f}.S06
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(16, 0), (20, 0), (20, 5.5), (16, 5.5)]
+
+  Covering: CL-OFFICE-{f}-S06
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-S06A
+    asset: OfficeWorkstation
+    position: (16.4, 1)
+
+  Furniture: FU-{f}-S06B
+    asset: OfficeWorkstation
+    position: (18, 1)
+
+#### Space: Office {f}.S07
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(20, 0), (24, 0), (24, 5.5), (20, 5.5)]
+
+  Covering: CL-OFFICE-{f}-S07
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-S07A
+    asset: OfficeWorkstation
+    position: (20.4, 1)
+
+  Furniture: FU-{f}-S07B
+    asset: OfficeWorkstation
+    position: (22, 1)
+
+#### Space: Office {f}.S08
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(24, 0), (28, 0), (28, 5.5), (24, 5.5)]
+
+  Covering: CL-OFFICE-{f}-S08
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-S08A
+    asset: OfficeWorkstation
+    position: (24.4, 1)
+
+  Furniture: FU-{f}-S08B
+    asset: OfficeWorkstation
+    position: (26, 1)
+
+#### Space: Office {f}.S09
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(28, 0), (32, 0), (32, 5.5), (28, 5.5)]
+
+  Covering: CL-OFFICE-{f}-S09
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-S09A
+    asset: OfficeWorkstation
+    position: (28.4, 1)
+
+  Furniture: FU-{f}-S09B
+    asset: OfficeWorkstation
+    position: (30, 1)
+
+#### Space: Office {f}.S10
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(32, 0), (36, 0), (36, 5.5), (32, 5.5)]
+
+  Covering: CL-OFFICE-{f}-S10
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-S10A
+    asset: OfficeWorkstation
+    position: (32.4, 1)
+
+  Furniture: FU-{f}-S10B
+    asset: OfficeWorkstation
+    position: (34, 1)
+
+#### Space: Office {f}.S11
+  usage: office
+  area: 22 m2
+  zone: administration
+  boundary: [(36, 0), (40, 0), (40, 5.5), (36, 5.5)]
+
+  Covering: CL-OFFICE-{f}-S11
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-S11A
+    asset: OfficeWorkstation
+    position: (36.4, 1)
+
+  Furniture: FU-{f}-S11B
+    asset: OfficeWorkstation
+    position: (38, 1)
+
+#### Space: Office {f}.S12
+  usage: office
+  area: 25.8 m2
+  zone: administration
+  boundary: [(40, 0), (44, 0), (45.375, 5.5), (40, 5.5)]
+
+  Covering: CL-OFFICE-{f}-S12
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-S12A
+    asset: OfficeWorkstation
+    position: (40.4, 1)
+
+  Furniture: FU-{f}-S12B
+    asset: OfficeWorkstation
+    position: (42, 1)
+
+#### Space: Office {f}.N01
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(8, 17), (11.75, 17), (11.75, 24), (8, 24)]
+
+  Covering: CL-OFFICE-{f}-N01
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-N01
+    asset: OfficeWorkstation
+    position: (9.73, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N02
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(11.75, 17), (15.5, 17), (15.5, 24), (11.75, 24)]
+
+  Covering: CL-OFFICE-{f}-N02
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-N02
+    asset: OfficeWorkstation
+    position: (13.41, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N03
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(15.5, 17), (19.25, 17), (19.25, 24), (15.5, 24)]
+
+  Covering: CL-OFFICE-{f}-N03
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-N03
+    asset: OfficeWorkstation
+    position: (17.16, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N04
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(19.25, 17), (23, 17), (23, 24), (19.25, 24)]
+
+  Covering: CL-OFFICE-{f}-N04
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-N04
+    asset: OfficeWorkstation
+    position: (20.91, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N05
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(23, 17), (26.75, 17), (26.75, 24), (23, 24)]
+
+  Covering: CL-OFFICE-{f}-N05
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-N05
+    asset: OfficeWorkstation
+    position: (24.66, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N06
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(26.75, 17), (30.5, 17), (30.5, 24), (26.75, 24)]
+
+  Covering: CL-OFFICE-{f}-N06
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-N06
+    asset: OfficeWorkstation
+    position: (28.41, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N07
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(30.5, 17), (34.25, 17), (34.25, 24), (30.5, 24)]
+
+  Covering: CL-OFFICE-{f}-N07
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-N07
+    asset: OfficeWorkstation
+    position: (32.16, 22.4)
+    rotation: 180
+
+#### Space: Office {f}.N08
+  usage: office
+  area: 26.2 m2
+  zone: administration
+  boundary: [(34.25, 17), (38, 17), (38, 24), (34.25, 24)]
+
+  Covering: CL-OFFICE-{f}-N08
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-N08
+    asset: OfficeWorkstation
+    position: (35.91, 22.4)
+    rotation: 180
+
+#### Space: Meeting Room {f}.01
+  usage: office
+  area: 44 m2
+  zone: administration
+  boundary: [(-4, 7.5), (4, 7.5), (4, 13), (-4, 13)]
+
+  Covering: CL-MEETING-ROOM-{f}-01
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-MA
+    asset: MeetingTable
+    position: (-1.5, 9)
+
+#### Space: Panorama Room {f}.02
+  usage: office
+  area: 40 m2
+  zone: administration
+  boundary: [(-4, 14), (0, 14), (0, 24), (-4, 24)]
+
+  Covering: CL-PANORAMA-ROOM-{f}-02
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-PANO
+    asset: MeetingTable
+    position: (-1.61, 17.015)
+    rotation: 90
+
+#### Space: Copy Room {f}
+  usage: utility
+  area: 24 m2
+  zone: services
+  boundary: [(46, 16), (48, 16), (50, 24), (46, 24)]
+
+  Covering: CL-COPY-ROOM-{f}
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+#### Space: Open Workspace {f}
+  usage: office
+  area: 426.7 m2
+  zone: administration
+  boundary: { outer: [(-4, 5.5), (45.375, 5.5), (48, 16), (38, 16), (38, 17), (8, 17), (8, 14), (-4, 14), (-4, 13), (4, 13), (4, 7.5), (-4, 7.5)], holes: [[(24, 9), (35, 8.5), (34.5, 15), (23, 14.5)]] }
+
+  Covering: CL-OPEN-WORKSPACE-{f}
+    predefined_type: ceiling
+    z_offset: 2.76 m
+    thickness: 30 mm
+    material: acoustic_ceiling
+
+  Furniture: FU-{f}-OW01
+    asset: OfficeWorkstation
+    position: (9, 8.6)
+
+  Furniture: FU-{f}-OW02
+    asset: OfficeWorkstation
+    position: (9, 12.2)
+    rotation: 180
+
+  Furniture: FU-{f}-OW03
+    asset: OfficeWorkstation
+    position: (11, 8.6)
+
+  Furniture: FU-{f}-OW04
+    asset: OfficeWorkstation
+    position: (11, 12.2)
+    rotation: 180
+
+  Furniture: FU-{f}-OW05
+    asset: OfficeWorkstation
+    position: (13, 8.6)
+
+  Furniture: FU-{f}-OW06
+    asset: OfficeWorkstation
+    position: (13, 12.2)
+    rotation: 180
+
+  Furniture: FU-{f}-OW07
+    asset: OfficeWorkstation
+    position: (15, 8.6)
+
+  Furniture: FU-{f}-OW08
+    asset: OfficeWorkstation
+    position: (15, 12.2)
+    rotation: 180
+
+  Furniture: FU-{f}-OW09
+    asset: OfficeWorkstation
+    position: (17, 8.6)
+
+  Furniture: FU-{f}-OW10
+    asset: OfficeWorkstation
+    position: (17, 12.2)
+    rotation: 180
+
+  Furniture: FU-{f}-OW11
+    asset: OfficeWorkstation
+    position: (19, 8.6)
+
+  Furniture: FU-{f}-OW12
+    asset: OfficeWorkstation
+    position: (19, 12.2)
+    rotation: 180
+
+  Furniture: FU-{f}-LOUNGE-1
+    asset: LoungeBench
+    position: (38, 9)
+
+  Furniture: FU-{f}-LOUNGE-2
+    asset: CafeTable
+    position: (40.5, 11.5)
+
+#### Space: West Core {f}
+  usage: staircase
+  area: 80 m2
+  zone: circulation
+  boundary: [(0, 14), (8, 14), (8, 24), (0, 24)]
+
+#### Space: East Core {f}
+  usage: staircase
+  area: 64 m2
+  zone: circulation
+  boundary: [(38, 16), (46, 16), (46, 24), (38, 24)]
+
+# Site: Campus Nord
+
+## Building: Forum Nord
+
+### Storey: Level 2
+  elevation: 8.5 m
+  height: 3.6 m
+  apply_template: OfficeFloor
+  f: L2
+
+  Slab: SL-L2
+    boundary: { outer: [(49.648, 24), (49.626, 24), (49.626, 23.825), (45.875, 23.825), (45.875, 19.155), (43.925, 19.155), (43.925, 18.905), (43.675, 18.905), (43.675, 19.475), (41.725, 19.475), (41.725, 23.825), (3.675, 23.825), (3.675, 19.48), (2.05, 19.48), (2.05, 19.23), (1.8, 19.23), (1.8, 19.8), (0.175, 19.8), (0.175, 23.825), (-0.175, 23.825), (-0.175, 24), (-4, 24), (-4, 0), (0.175, 0), (0.175, 0.175), (22.125, 0.175), (22.125, 0.2), (43.909, 0.2), (43.909, 0), (43.971, 0.237), (44.055, 0.218), (44.057, 0.23), (43.887, 0.272), (49.755, 23.743), (49.681, 23.734)], holes: [[(38.2, 23.8), (40.9, 23.8), (40.9, 21), (38.2, 21)], [(23, 14.5), (34.5, 15), (35, 8.5), (24, 9)], [(5, 23.8), (7.7, 23.8), (7.7, 21), (5, 21)]] }
+    thickness: 0.41 m
+    material: floor_410
+    slab_type: floor
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Stair: ST-L2-W
+    from_storey: Level 2
+    to_storey: Level 3
+    type: u_shaped
+    position: (0.175, 19.5)
+    width: 1.625 m
+    riser_count: 21
+    tread_depth: 0.25 m
+    landing_depth: 1.575 m
+    turn: right
+    gap: 0.25 m
+    material: exposed_concrete
+    fire_rating: R90
+
+  Member: ST-L2-W-H1
+    from: (0.245, 19.5, 1.071) to: (0.245, 22, 2.786)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L2-W
+    material: stainless_steel
+
+  Member: ST-L2-W-H2
+    from: (1.73, 19.5, 1.071) to: (1.73, 22, 2.786)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L2-W
+    material: stainless_steel
+
+  Member: ST-L2-W-H3
+    from: (2.12, 22.25, 2.957) to: (2.12, 20, 4.5)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L2-W
+    material: stainless_steel
+
+  Member: ST-L2-W-H4
+    from: (3.605, 22.25, 2.957) to: (3.605, 20, 4.5)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L2-W
+    material: stainless_steel
+
+  Wall: W-L2-W-EYE
+    from: (1.925, 19.5) to: (1.925, 22.25)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    is_external: false
+    load_bearing: true
+    fire_rating: REI90
+
+  Stair: ST-L2-E
+    from_storey: Level 2
+    to_storey: Level 3
+    type: u_shaped
+    position: (41.725, 19.175)
+    width: 1.95 m
+    riser_count: 21
+    tread_depth: 0.25 m
+    landing_depth: 1.9 m
+    turn: right
+    gap: 0.25 m
+    material: exposed_concrete
+    fire_rating: R90
+
+  Member: ST-L2-E-H1
+    from: (41.795, 19.175, 1.071) to: (41.795, 21.675, 2.786)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L2-E
+    material: stainless_steel
+
+  Member: ST-L2-E-H2
+    from: (43.605, 19.175, 1.071) to: (43.605, 21.675, 2.786)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L2-E
+    material: stainless_steel
+
+  Member: ST-L2-E-H3
+    from: (43.995, 21.925, 2.957) to: (43.995, 19.675, 4.5)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L2-E
+    material: stainless_steel
+
+  Member: ST-L2-E-H4
+    from: (45.805, 21.925, 2.957) to: (45.805, 19.675, 4.5)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L2-E
+    material: stainless_steel
+
+  Wall: W-L2-E-EYE
+    from: (43.8, 19.175) to: (43.8, 21.925)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    is_external: false
+    load_bearing: true
+    fire_rating: REI90
+
+  // ------------------------------------------------------------------
+  // Audimax roof (green roof at the level 2 floor line)
+  // ------------------------------------------------------------------
+
+  Slab: RF-AUD
+    boundary: [(44.2, -0.6), (62.6, -4.7), (66.8, 26.8), (50.2, 24.4)]
+    thickness: 0.45 m
+    z_offset: 0.45 m
+    material: roof_aud
+    slab_type: roof
+    load_bearing: true
+    fire_rating: REI90
+    thermal_transmittance: 0.18
+
+### Storey: Level 3
+  elevation: 12.1 m
+  height: 3.6 m
+  apply_template: OfficeFloor
+  f: L3
+
+  Slab: SL-L3
+    boundary: { outer: [(43.955, 0.15), (49.88, 23.85), (-3.92, 23.85), (-3.92, 0.15)], holes: [[(45.875, 19.425), (43.925, 19.425), (43.925, 19.175), (43.675, 19.175), (43.675, 19.475), (41.725, 19.475), (41.725, 23.825), (45.875, 23.825)], [(38.2, 23.8), (40.9, 23.8), (40.9, 21), (38.2, 21)], [(23, 14.5), (34.5, 15), (35, 8.5), (24, 9)], [(5, 23.8), (7.7, 23.8), (7.7, 21), (5, 21)], [(3.675, 23.825), (3.675, 19.75), (2.05, 19.75), (2.05, 19.5), (1.8, 19.5), (1.8, 19.8), (0.175, 19.8), (0.175, 23.825)]] }
+    thickness: 0.41 m
+    material: floor_410
+    slab_type: floor
+    load_bearing: true
+    fire_rating: REI90
+    acoustic_rating: 55
+
+  Stair: ST-L3-W
+    from_storey: Level 3
+    to_storey: Level 4
+    type: u_shaped
+    position: (0.175, 19.5)
+    width: 1.625 m
+    riser_count: 21
+    tread_depth: 0.25 m
+    landing_depth: 1.575 m
+    turn: right
+    gap: 0.25 m
+    material: exposed_concrete
+    fire_rating: R90
+
+  Member: ST-L3-W-H1
+    from: (0.245, 19.5, 1.071) to: (0.245, 22, 2.786)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L3-W
+    material: stainless_steel
+
+  Member: ST-L3-W-H2
+    from: (1.73, 19.5, 1.071) to: (1.73, 22, 2.786)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L3-W
+    material: stainless_steel
+
+  Member: ST-L3-W-H3
+    from: (2.12, 22.25, 2.957) to: (2.12, 20, 4.5)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L3-W
+    material: stainless_steel
+
+  Member: ST-L3-W-H4
+    from: (3.605, 22.25, 2.957) to: (3.605, 20, 4.5)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L3-W
+    material: stainless_steel
+
+  Wall: W-L3-W-EYE
+    from: (1.925, 19.5) to: (1.925, 22.25)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    is_external: false
+    load_bearing: true
+    fire_rating: REI90
+
+  Stair: ST-L3-E
+    from_storey: Level 3
+    to_storey: Level 4
+    type: u_shaped
+    position: (41.725, 19.175)
+    width: 1.95 m
+    riser_count: 21
+    tread_depth: 0.25 m
+    landing_depth: 1.9 m
+    turn: right
+    gap: 0.25 m
+    material: exposed_concrete
+    fire_rating: R90
+
+  Member: ST-L3-E-H1
+    from: (41.795, 19.175, 1.071) to: (41.795, 21.675, 2.786)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L3-E
+    material: stainless_steel
+
+  Member: ST-L3-E-H2
+    from: (43.605, 19.175, 1.071) to: (43.605, 21.675, 2.786)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L3-E
+    material: stainless_steel
+
+  Member: ST-L3-E-H3
+    from: (43.995, 21.925, 2.957) to: (43.995, 19.675, 4.5)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L3-E
+    material: stainless_steel
+
+  Member: ST-L3-E-H4
+    from: (45.805, 21.925, 2.957) to: (45.805, 19.675, 4.5)
+    profile: circle(0.021)
+    ifc_class: "IfcRailing"
+    predefined_type: handrail
+    part_of: ST-L3-E
+    material: stainless_steel
+
+  Wall: W-L3-E-EYE
+    from: (43.8, 19.175) to: (43.8, 21.925)
+    height: 3.6 m
+    thickness: 0.25 m
+    material: iw_rc_250
+    is_external: false
+    load_bearing: true
+    fire_rating: REI90

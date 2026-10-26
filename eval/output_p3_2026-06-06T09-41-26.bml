@@ -1,0 +1,200 @@
+# Site: ResidentialSite
+
+## Building: SingleStoryHouse
+
+### Storey: GroundFloor
+  elevation: 0 m
+  height: 3 m
+
+#### Space: LivingRoom
+  usage: living
+  Wall: W-LR-S
+    from: (0, 0) to: (7, 0)
+    height: 3 m
+    thickness: 0.24 m
+    material: concrete
+    Door: D-01
+      offset: 2.5 m
+      width: 0.9 m
+      height: 2.1 m
+    Window: WIN-01
+      offset: 4.8 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-LR-W
+    from: (0, 0) to: (0, 4.5)
+    height: 3 m
+    thickness: 0.24 m
+    material: concrete
+    Window: WIN-02
+      offset: 1.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-LR-N
+    from: (0, 4.5) to: (7, 4.5)
+    height: 3 m
+    thickness: 0.15 m
+    material: concrete
+  Wall: W-LR-E
+    from: (7, 0) to: (7, 4.5)
+    height: 3 m
+    thickness: 0.15 m
+    material: concrete
+  Slab: SL-LR
+    boundary: [(0, 0), (7, 0), (7, 4.5), (0, 4.5)]
+    thickness: 0.2 m
+
+#### Space: Kitchen
+  usage: kitchen
+  Wall: W-KT-S
+    from: (7, 0) to: (12, 0)
+    height: 3 m
+    thickness: 0.24 m
+    material: concrete
+    Window: WIN-03
+      offset: 1.5 m
+      width: 1.0 m
+      height: 0.9 m
+      sill_height: 1.0 m
+  Wall: W-KT-E
+    from: (12, 0) to: (12, 4.5)
+    height: 3 m
+    thickness: 0.24 m
+    material: concrete
+  Wall: W-KT-N
+    from: (7, 4.5) to: (12, 4.5)
+    height: 3 m
+    thickness: 0.15 m
+    material: concrete
+  Slab: SL-KT
+    boundary: [(7, 0), (12, 0), (12, 4.5), (7, 4.5)]
+    thickness: 0.2 m
+
+#### Space: Bedroom1
+  usage: bedroom
+  Wall: W-B1-W
+    from: (0, 4.5) to: (0, 10)
+    height: 3 m
+    thickness: 0.24 m
+    material: concrete
+    Window: WIN-04
+      offset: 2.0 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-B1-N
+    from: (0, 10) to: (4, 10)
+    height: 3 m
+    thickness: 0.24 m
+    material: concrete
+  Wall: W-B1-E
+    from: (4, 4.5) to: (4, 10)
+    height: 3 m
+    thickness: 0.15 m
+    material: concrete
+  Slab: SL-B1
+    boundary: [(0, 4.5), (4, 4.5), (4, 10), (0, 10)]
+    thickness: 0.2 m
+
+#### Space: Bedroom2
+  usage: bedroom
+  Wall: W-B2-N
+    from: (4, 10) to: (8, 10)
+    height: 3 m
+    thickness: 0.24 m
+    material: concrete
+    Window: WIN-05
+      offset: 1.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-B2-E
+    from: (8, 4.5) to: (8, 10)
+    height: 3 m
+    thickness: 0.15 m
+    material: concrete
+  Slab: SL-B2
+    boundary: [(4, 4.5), (8, 4.5), (8, 10), (4, 10)]
+    thickness: 0.2 m
+
+#### Space: Bedroom3
+  usage: bedroom
+  Wall: W-B3-N
+    from: (8, 10) to: (12, 10)
+    height: 3 m
+    thickness: 0.24 m
+    material: concrete
+    Window: WIN-06
+      offset: 1.5 m
+      width: 1.2 m
+      height: 1.2 m
+      sill_height: 0.9 m
+  Wall: W-B3-E
+    from: (12, 6) to: (12, 10)
+    height: 3 m
+    thickness: 0.24 m
+    material: concrete
+  Wall: W-B3-S
+    from: (8, 6) to: (12, 6)
+    height: 3 m
+    thickness: 0.15 m
+    material: concrete
+  Slab: SL-B3
+    boundary: [(8, 6), (12, 6), (12, 10), (8, 10)]
+    thickness: 0.2 m
+
+#### Space: Bathroom1
+  usage: bathroom
+  Wall: W-BA1-W
+    from: (8, 4.5) to: (8, 6)
+    height: 3 m
+    thickness: 0.15 m
+    material: concrete
+  Wall: W-BA1-N
+    from: (8, 6) to: (10, 6)
+    height: 3 m
+    thickness: 0.15 m
+    material: concrete
+  Wall: W-BA1-E
+    from: (10, 4.5) to: (10, 6)
+    height: 3 m
+    thickness: 0.15 m
+    material: concrete
+  Slab: SL-BA1
+    boundary: [(8, 4.5), (10, 4.5), (10, 6), (8, 6)]
+    thickness: 0.2 m
+
+#### Space: Bathroom2
+  usage: bathroom
+  Wall: W-BA2-N
+    from: (10, 6) to: (12, 6)
+    height: 3 m
+    thickness: 0.15 m
+    material: concrete
+  Wall: W-BA2-E
+    from: (12, 4.5) to: (12, 6)
+    height: 3 m
+    thickness: 0.24 m
+    material: concrete
+  Wall: W-BA2-S
+    from: (10, 4.5) to: (12, 4.5)
+    height: 3 m
+    thickness: 0.15 m
+    material: concrete
+  Slab: SL-BA2
+    boundary: [(10, 4.5), (12, 4.5), (12, 6), (10, 6)]
+    thickness: 0.2 m
+
+### Storey: RoofLevel
+  elevation: 3 m
+  height: 0 m
+
+#### Space: AtticSpace
+  usage: storage
+  Roof: RF-01
+    boundary: [(0, 0), (12, 0), (12, 10), (0, 10)]
+    type: gable
+    ridge_height: 2.5 m
+    material: wood
